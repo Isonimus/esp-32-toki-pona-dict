@@ -1,0 +1,21 @@
+{
+  "_comment": "The canonical normalization contract (ADR-0002). The Node generator (tools/generate.mjs) and the C++ device core (core/normalize.*) MUST both turn every 'in' into its 'out'. Both sides run these fixtures as a test; divergence is a build failure, because a query folded one way cannot match an index folded the other.",
+  "cases": [
+    ["Hola", "hola"],
+    ["olá", "ola"],
+    ["língua", "lingua"],
+    ["groß", "gross"],
+    ["schön", "schon"],
+    ["pequeño", "pequeno"],
+    ["água", "agua"],
+    ["líquido", "liquido"],
+    ["alguém", "alguem"],
+    ["Français", "francais"],
+    ["ÀÉÎÕÜ", "aeiou"],
+    ["müssen", "mussen"],
+    ["Flüssigkeit", "flussigkeit"],
+    ["avoir besoin", "avoir besoin"],
+    ["  spaced   out  ", "spaced out"],
+    ["café!", "cafe"]
+  ]
+}

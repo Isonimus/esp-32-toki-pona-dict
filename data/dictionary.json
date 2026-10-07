@@ -1,0 +1,69 @@
+{
+  "_comment": "Source of truth for the dictionary. One record per Toki Pona headword. 'sitelen' is the sitelen pona glyph id and defaults to the headword when omitted. Per-language gloss arrays are optional; a missing language means no gloss in that language yet. Glosses are stored with CORRECT spelling (diacritics intact) for display; diacritic folding happens only in the generated search index (ADR-0002). This is a SAMPLE corpus for bring-up; the full ~137-word corpus is tracked in LEDGER.md.",
+  "entries": [
+    {
+      "tp": "toki",
+      "en": ["talk", "speak", "say", "language", "communication", "hello"],
+      "es": ["hablar", "decir", "idioma", "lengua", "hola"],
+      "fr": ["parler", "dire", "langue", "bonjour"],
+      "de": ["sprechen", "sagen", "Sprache", "hallo"],
+      "pt": ["falar", "dizer", "língua", "olá"]
+    },
+    {
+      "tp": "pona",
+      "en": ["good", "simple", "positive", "nice", "to fix", "to improve"],
+      "es": ["bueno", "simple", "bien", "arreglar"],
+      "fr": ["bon", "simple", "bien", "réparer"],
+      "de": ["gut", "einfach"],
+      "pt": ["bom", "simples", "bem", "consertar"]
+    },
+    {
+      "tp": "suli",
+      "en": ["big", "large", "important", "tall", "long", "adult"],
+      "es": ["grande", "importante", "alto", "largo"],
+      "fr": ["grand", "important", "long"],
+      "de": ["groß", "wichtig", "lang"],
+      "pt": ["grande", "importante", "longo"]
+    },
+    {
+      "tp": "lili",
+      "en": ["small", "little", "few", "young"],
+      "es": ["pequeño", "poco", "joven"],
+      "fr": ["petit", "peu", "jeune"],
+      "de": ["klein", "wenig", "jung"],
+      "pt": ["pequeno", "pouco", "jovem"]
+    },
+    {
+      "tp": "jan",
+      "en": ["person", "people", "human", "somebody"],
+      "es": ["persona", "gente", "humano", "alguien"],
+      "fr": ["personne", "gens", "humain"],
+      "de": ["Person", "Mensch", "Leute", "jemand"],
+      "pt": ["pessoa", "gente", "humano", "alguém"]
+    },
+    {
+      "tp": "moku",
+      "en": ["food", "eat", "drink", "to consume"],
+      "es": ["comida", "comer", "beber"],
+      "fr": ["nourriture", "manger", "boire"],
+      "de": ["Essen", "essen", "trinken"],
+      "pt": ["comida", "comer", "beber"]
+    },
+    {
+      "tp": "telo",
+      "en": ["water", "liquid", "fluid"],
+      "es": ["agua", "líquido"],
+      "fr": ["eau", "liquide"],
+      "de": ["Wasser", "Flüssigkeit"],
+      "pt": ["água", "líquido"]
+    },
+    {
+      "tp": "wile",
+      "en": ["want", "need", "must", "desire", "to wish"],
+      "es": ["querer", "necesitar", "deber", "desear"],
+      "fr": ["vouloir", "avoir besoin", "devoir"],
+      "de": ["wollen", "müssen", "brauchen"],
+      "pt": ["querer", "precisar", "dever"]
+    }
+  ]
+}

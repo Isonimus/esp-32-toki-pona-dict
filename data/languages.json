@@ -1,0 +1,11 @@
+{
+  "query_order": ["tp", "en", "es", "fr", "de", "pt"],
+  "languages": {
+    "tp": { "name": "Toki Pona", "native": "toki pona" },
+    "en": { "name": "English", "native": "English" },
+    "es": { "name": "Spanish", "native": "Espanol" },
+    "fr": { "name": "French", "native": "Francais" },
+    "de": { "name": "German", "native": "Deutsch" },
+    "pt": { "name": "Portuguese", "native": "Portugues" }
+  }
+}
