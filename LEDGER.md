@@ -17,7 +17,8 @@ Facts about *decisions* go in `adr/`, not here.
 ## HAL / app (ADR-0001)
 - [ ] Keyboard input driver (first reference board) and a button/encoder driver.
 - [ ] LovyanGFX display driver behind `DisplaySurface`, panel auto-detect per board.
-- [ ] App UI state machine: search+result-list view and entry-detail view (with glyph).
+- [ ] Wire the sitelen glyph blit into the detail view's reserved slot once
+      `core/sitelen_gen` exists (`app/render.cpp` renderDetail; depends on ADR-0003 slice).
 - [ ] `platformio.ini`: real build profiles per board; first reference board bring-up proof.
 
 ## Project

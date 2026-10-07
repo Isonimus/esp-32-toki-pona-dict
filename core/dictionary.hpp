@@ -38,4 +38,8 @@ extern const uint16_t ENTRY_COUNT;
 extern const IndexRow* const INDEX_BY_LANG[LangCount];
 extern const uint16_t INDEX_SIZE_BY_LANG[LangCount];
 
+// Display label per language, in Lang order (e.g. "English"). Sourced from
+// data/languages.json; used by the app's detail view to head each gloss line.
+extern const char* const LANG_LABEL[LangCount];
+
 }  // namespace tp

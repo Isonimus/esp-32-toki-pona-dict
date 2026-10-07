@@ -2881,5 +2881,6 @@ static const IndexRow idx_pt[] = {
 
 const IndexRow* const INDEX_BY_LANG[LangCount] = { idx_tp, idx_en, idx_es, idx_fr, idx_de, idx_pt };
 const uint16_t INDEX_SIZE_BY_LANG[LangCount] = { 120, 384, 379, 379, 379, 377 };
+const char* const LANG_LABEL[LangCount] = { "toki pona", "English", "Espanol", "Francais", "Deutsch", "Portugues" };
 
 }  // namespace tp

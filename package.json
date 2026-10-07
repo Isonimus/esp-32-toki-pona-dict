@@ -6,6 +6,6 @@
   "type": "module",
   "scripts": {
     "generate": "node tools/generate.mjs",
-    "test:host": "node tools/generate.mjs && mkdir -p build && g++ -std=c++17 -Wall -Wextra -I core test/test_search.cpp core/normalize.cpp core/search.cpp core/dictionary_gen.cpp -o build/test_search && ./build/test_search && g++ -std=c++17 -Wall -Wextra -I core -I hal test/test_input_event.cpp -o build/test_input_event && ./build/test_input_event"
+    "test:host": "node tools/generate.mjs && mkdir -p build && g++ -std=c++17 -Wall -Wextra -I core test/test_search.cpp core/normalize.cpp core/search.cpp core/dictionary_gen.cpp -o build/test_search && ./build/test_search && g++ -std=c++17 -Wall -Wextra -I core -I hal test/test_input_event.cpp -o build/test_input_event && ./build/test_input_event && g++ -std=c++17 -Wall -Wextra -I core -I hal -I app test/test_ui.cpp app/ui_controller.cpp app/render.cpp core/normalize.cpp core/search.cpp core/dictionary_gen.cpp -o build/test_ui && ./build/test_ui"
   }
 }

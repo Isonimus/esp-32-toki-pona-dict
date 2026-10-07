@@ -120,6 +120,15 @@ for (const lang of order) {
 
 out += `\nconst IndexRow* const INDEX_BY_LANG[LangCount] = { ${indexNames.map((x) => x.name).join(", ")} };\n`;
 out += `const uint16_t INDEX_SIZE_BY_LANG[LangCount] = { ${indexNames.map((x) => x.size).join(", ")} };\n`;
+
+// Human-readable language labels for the detail view, in cycle order. Sourced from
+// languages.json so the language set stays a data change, never an app-code edit (ADR-0001).
+const labels = order.map((l) => {
+  const meta = langMeta.languages[l];
+  if (!meta || !meta.native) throw new Error(`languages.json: '${l}' missing a 'native' label`);
+  return cstr(meta.native);
+});
+out += `const char* const LANG_LABEL[LangCount] = { ${labels.join(", ")} };\n`;
 out += "\n}  // namespace tp\n";
 
 writeFileSync(join(ROOT, "core/dictionary_gen.cpp"), out);
