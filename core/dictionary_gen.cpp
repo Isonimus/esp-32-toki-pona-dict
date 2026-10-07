@@ -3,230 +3,2883 @@
 
 namespace tp {
 
-static const char* const g0_tp[] = { "toki", nullptr };
-static const char* const g0_en[] = { "talk", "speak", "say", "language", "communication", "hello", nullptr };
-static const char* const g0_es[] = { "hablar", "decir", "idioma", "lengua", "hola", nullptr };
-static const char* const g0_fr[] = { "parler", "dire", "langue", "bonjour", nullptr };
-static const char* const g0_de[] = { "sprechen", "sagen", "Sprache", "hallo", nullptr };
-static const char* const g0_pt[] = { "falar", "dizer", "língua", "olá", nullptr };
-static const char* const g1_tp[] = { "pona", nullptr };
-static const char* const g1_en[] = { "good", "simple", "positive", "nice", "to fix", "to improve", nullptr };
-static const char* const g1_es[] = { "bueno", "simple", "bien", "arreglar", nullptr };
-static const char* const g1_fr[] = { "bon", "simple", "bien", "réparer", nullptr };
-static const char* const g1_de[] = { "gut", "einfach", nullptr };
-static const char* const g1_pt[] = { "bom", "simples", "bem", "consertar", nullptr };
-static const char* const g2_tp[] = { "suli", nullptr };
-static const char* const g2_en[] = { "big", "large", "important", "tall", "long", "adult", nullptr };
-static const char* const g2_es[] = { "grande", "importante", "alto", "largo", nullptr };
-static const char* const g2_fr[] = { "grand", "important", "long", nullptr };
-static const char* const g2_de[] = { "groß", "wichtig", "lang", nullptr };
-static const char* const g2_pt[] = { "grande", "importante", "longo", nullptr };
-static const char* const g3_tp[] = { "lili", nullptr };
-static const char* const g3_en[] = { "small", "little", "few", "young", nullptr };
-static const char* const g3_es[] = { "pequeño", "poco", "joven", nullptr };
-static const char* const g3_fr[] = { "petit", "peu", "jeune", nullptr };
-static const char* const g3_de[] = { "klein", "wenig", "jung", nullptr };
-static const char* const g3_pt[] = { "pequeno", "pouco", "jovem", nullptr };
-static const char* const g4_tp[] = { "jan", nullptr };
-static const char* const g4_en[] = { "person", "people", "human", "somebody", nullptr };
-static const char* const g4_es[] = { "persona", "gente", "humano", "alguien", nullptr };
-static const char* const g4_fr[] = { "personne", "gens", "humain", nullptr };
-static const char* const g4_de[] = { "Person", "Mensch", "Leute", "jemand", nullptr };
-static const char* const g4_pt[] = { "pessoa", "gente", "humano", "alguém", nullptr };
-static const char* const g5_tp[] = { "moku", nullptr };
-static const char* const g5_en[] = { "food", "eat", "drink", "to consume", nullptr };
-static const char* const g5_es[] = { "comida", "comer", "beber", nullptr };
-static const char* const g5_fr[] = { "nourriture", "manger", "boire", nullptr };
-static const char* const g5_de[] = { "Essen", "essen", "trinken", nullptr };
-static const char* const g5_pt[] = { "comida", "comer", "beber", nullptr };
-static const char* const g6_tp[] = { "telo", nullptr };
-static const char* const g6_en[] = { "water", "liquid", "fluid", nullptr };
-static const char* const g6_es[] = { "agua", "líquido", nullptr };
-static const char* const g6_fr[] = { "eau", "liquide", nullptr };
-static const char* const g6_de[] = { "Wasser", "Flüssigkeit", nullptr };
-static const char* const g6_pt[] = { "água", "líquido", nullptr };
-static const char* const g7_tp[] = { "wile", nullptr };
-static const char* const g7_en[] = { "want", "need", "must", "desire", "to wish", nullptr };
-static const char* const g7_es[] = { "querer", "necesitar", "deber", "desear", nullptr };
-static const char* const g7_fr[] = { "vouloir", "avoir besoin", "devoir", nullptr };
-static const char* const g7_de[] = { "wollen", "müssen", "brauchen", nullptr };
-static const char* const g7_pt[] = { "querer", "precisar", "dever", nullptr };
+static const char* const g0_tp[] = { "a", nullptr };
+static const char* const g0_en[] = { "(interjection: emphasis, emotion, or confirmation)", nullptr };
+static const char* const g0_es[] = { "interjección de énfasis, emoción o confirmación", nullptr };
+static const char* const g0_fr[] = { "interjection d'emphase, d'émotion ou de confirmation", nullptr };
+static const char* const g0_de[] = { "Interjektion für Betonung, Gefühl oder Bestätigung", nullptr };
+static const char* const g0_pt[] = { "interjeção de ênfase, emoção ou confirmação", nullptr };
+static const char* const g1_tp[] = { "akesi", nullptr };
+static const char* const g1_en[] = { "reptile", "amphibian", nullptr };
+static const char* const g1_es[] = { "reptil", "anfibio", nullptr };
+static const char* const g1_fr[] = { "reptile", "amphibien", nullptr };
+static const char* const g1_de[] = { "Reptil", "Amphibie", nullptr };
+static const char* const g1_pt[] = { "réptil", "anfíbio", nullptr };
+static const char* const g2_tp[] = { "ala", nullptr };
+static const char* const g2_en[] = { "no", "not", "zero", "none", nullptr };
+static const char* const g2_es[] = { "no", "cero", "ninguno", "nada", nullptr };
+static const char* const g2_fr[] = { "non", "ne pas", "zéro", "aucun", nullptr };
+static const char* const g2_de[] = { "nein", "nicht", "null", "kein", nullptr };
+static const char* const g2_pt[] = { "não", "zero", "nenhum", nullptr };
+static const char* const g3_tp[] = { "alasa", nullptr };
+static const char* const g3_en[] = { "to hunt", "forage", "gather", nullptr };
+static const char* const g3_es[] = { "cazar", "buscar alimento", "recolectar", nullptr };
+static const char* const g3_fr[] = { "chasser", "cueillir", "récolter", nullptr };
+static const char* const g3_de[] = { "jagen", "sammeln", "nach Nahrung suchen", nullptr };
+static const char* const g3_pt[] = { "caçar", "coletar", "forragear", nullptr };
+static const char* const g4_tp[] = { "ale", nullptr };
+static const char* const g4_en[] = { "all", "everything", "universe", "hundred", nullptr };
+static const char* const g4_es[] = { "todo", "universo", "cien", nullptr };
+static const char* const g4_fr[] = { "tout", "univers", "cent", nullptr };
+static const char* const g4_de[] = { "alles", "Universum", "hundert", nullptr };
+static const char* const g4_pt[] = { "tudo", "universo", "cem", nullptr };
+static const char* const g5_tp[] = { "anpa", nullptr };
+static const char* const g5_en[] = { "bottom", "lower", "down", "humble", nullptr };
+static const char* const g5_es[] = { "fondo", "bajo", "abajo", "humilde", nullptr };
+static const char* const g5_fr[] = { "fond", "bas", "dessous", "humble", nullptr };
+static const char* const g5_de[] = { "Boden", "unten", "niedrig", "demütig", nullptr };
+static const char* const g5_pt[] = { "fundo", "baixo", "embaixo", "humilde", nullptr };
+static const char* const g6_tp[] = { "ante", nullptr };
+static const char* const g6_en[] = { "different", "changed", "other", nullptr };
+static const char* const g6_es[] = { "diferente", "cambiado", "otro", nullptr };
+static const char* const g6_fr[] = { "différent", "changé", "autre", nullptr };
+static const char* const g6_de[] = { "verschieden", "verändert", "andere", nullptr };
+static const char* const g6_pt[] = { "diferente", "mudado", "outro", nullptr };
+static const char* const g7_tp[] = { "anu", nullptr };
+static const char* const g7_en[] = { "or", nullptr };
+static const char* const g7_es[] = { "o", nullptr };
+static const char* const g7_fr[] = { "ou", nullptr };
+static const char* const g7_de[] = { "oder", nullptr };
+static const char* const g7_pt[] = { "ou", nullptr };
+static const char* const g8_tp[] = { "awen", nullptr };
+static const char* const g8_en[] = { "to stay", "wait", "remain", "keep", nullptr };
+static const char* const g8_es[] = { "quedarse", "esperar", "permanecer", "mantener", nullptr };
+static const char* const g8_fr[] = { "rester", "attendre", "demeurer", "garder", nullptr };
+static const char* const g8_de[] = { "bleiben", "warten", "verharren", "behalten", nullptr };
+static const char* const g8_pt[] = { "ficar", "esperar", "permanecer", "manter", nullptr };
+static const char* const g9_tp[] = { "e", nullptr };
+static const char* const g9_en[] = { "(particle: introduces a direct object)", nullptr };
+static const char* const g9_es[] = { "partícula de objeto directo", nullptr };
+static const char* const g9_fr[] = { "particule de complément d'objet direct", nullptr };
+static const char* const g9_de[] = { "Partikel für das direkte Objekt", nullptr };
+static const char* const g9_pt[] = { "partícula de objeto direto", nullptr };
+static const char* const g10_tp[] = { "en", nullptr };
+static const char* const g10_en[] = { "(particle: joins subjects, and)", nullptr };
+static const char* const g10_es[] = { "partícula que une sujetos", nullptr };
+static const char* const g10_fr[] = { "particule reliant des sujets", nullptr };
+static const char* const g10_de[] = { "Partikel zur Verbindung von Subjekten", nullptr };
+static const char* const g10_pt[] = { "partícula que une sujeitos", nullptr };
+static const char* const g11_tp[] = { "esun", nullptr };
+static const char* const g11_en[] = { "market", "shop", "trade", "barter", nullptr };
+static const char* const g11_es[] = { "mercado", "tienda", "comercio", "trueque", nullptr };
+static const char* const g11_fr[] = { "marché", "boutique", "commerce", "troc", nullptr };
+static const char* const g11_de[] = { "Markt", "Laden", "Handel", "Tauschhandel", nullptr };
+static const char* const g11_pt[] = { "mercado", "loja", "comércio", "troca", nullptr };
+static const char* const g12_tp[] = { "ijo", nullptr };
+static const char* const g12_en[] = { "thing", "object", "matter", nullptr };
+static const char* const g12_es[] = { "cosa", "objeto", "asunto", nullptr };
+static const char* const g12_fr[] = { "chose", "objet", "affaire", nullptr };
+static const char* const g12_de[] = { "Ding", "Gegenstand", "Angelegenheit", nullptr };
+static const char* const g12_pt[] = { "coisa", "objeto", "assunto", nullptr };
+static const char* const g13_tp[] = { "ike", nullptr };
+static const char* const g13_en[] = { "bad", "negative", "evil", "complicated", nullptr };
+static const char* const g13_es[] = { "malo", "negativo", "maligno", "complicado", nullptr };
+static const char* const g13_fr[] = { "mauvais", "négatif", "mal", "compliqué", nullptr };
+static const char* const g13_de[] = { "schlecht", "negativ", "böse", "kompliziert", nullptr };
+static const char* const g13_pt[] = { "mau", "negativo", "maligno", "complicado", nullptr };
+static const char* const g14_tp[] = { "ilo", nullptr };
+static const char* const g14_en[] = { "tool", "device", "machine", nullptr };
+static const char* const g14_es[] = { "herramienta", "dispositivo", "máquina", nullptr };
+static const char* const g14_fr[] = { "outil", "appareil", "machine", nullptr };
+static const char* const g14_de[] = { "Werkzeug", "Gerät", "Maschine", nullptr };
+static const char* const g14_pt[] = { "ferramenta", "dispositivo", "máquina", nullptr };
+static const char* const g15_tp[] = { "insa", nullptr };
+static const char* const g15_en[] = { "inside", "center", "stomach", "contents", nullptr };
+static const char* const g15_es[] = { "interior", "centro", "estómago", "contenido", nullptr };
+static const char* const g15_fr[] = { "intérieur", "centre", "estomac", "contenu", nullptr };
+static const char* const g15_de[] = { "Inneres", "Mitte", "Magen", "Inhalt", nullptr };
+static const char* const g15_pt[] = { "interior", "centro", "estômago", "conteúdo", nullptr };
+static const char* const g16_tp[] = { "jaki", nullptr };
+static const char* const g16_en[] = { "dirty", "gross", "disgusting", "waste", nullptr };
+static const char* const g16_es[] = { "sucio", "asqueroso", "repugnante", "desecho", nullptr };
+static const char* const g16_fr[] = { "sale", "dégoûtant", "répugnant", "déchet", nullptr };
+static const char* const g16_de[] = { "schmutzig", "eklig", "widerlich", "Abfall", nullptr };
+static const char* const g16_pt[] = { "sujo", "nojento", "repugnante", "lixo", nullptr };
+static const char* const g17_tp[] = { "jan", nullptr };
+static const char* const g17_en[] = { "person", "people", "human", "somebody", nullptr };
+static const char* const g17_es[] = { "persona", "gente", "humano", "alguien", nullptr };
+static const char* const g17_fr[] = { "personne", "gens", "humain", "quelqu'un", nullptr };
+static const char* const g17_de[] = { "Person", "Leute", "Mensch", "jemand", nullptr };
+static const char* const g17_pt[] = { "pessoa", "gente", "humano", "alguém", nullptr };
+static const char* const g18_tp[] = { "jelo", nullptr };
+static const char* const g18_en[] = { "yellow", nullptr };
+static const char* const g18_es[] = { "amarillo", nullptr };
+static const char* const g18_fr[] = { "jaune", nullptr };
+static const char* const g18_de[] = { "gelb", nullptr };
+static const char* const g18_pt[] = { "amarelo", nullptr };
+static const char* const g19_tp[] = { "jo", nullptr };
+static const char* const g19_en[] = { "to have", "carry", "contain", "hold", nullptr };
+static const char* const g19_es[] = { "tener", "llevar", "contener", "sostener", nullptr };
+static const char* const g19_fr[] = { "avoir", "porter", "contenir", "tenir", nullptr };
+static const char* const g19_de[] = { "haben", "tragen", "enthalten", "halten", nullptr };
+static const char* const g19_pt[] = { "ter", "carregar", "conter", "segurar", nullptr };
+static const char* const g20_tp[] = { "kala", nullptr };
+static const char* const g20_en[] = { "fish", "sea creature", nullptr };
+static const char* const g20_es[] = { "pez", "criatura marina", nullptr };
+static const char* const g20_fr[] = { "poisson", "créature marine", nullptr };
+static const char* const g20_de[] = { "Fisch", "Meerestier", nullptr };
+static const char* const g20_pt[] = { "peixe", "criatura marinha", nullptr };
+static const char* const g21_tp[] = { "kalama", nullptr };
+static const char* const g21_en[] = { "sound", "noise", "to make noise", nullptr };
+static const char* const g21_es[] = { "sonido", "ruido", "hacer ruido", nullptr };
+static const char* const g21_fr[] = { "son", "bruit", "faire du bruit", nullptr };
+static const char* const g21_de[] = { "Klang", "Lärm", "Geräusch machen", nullptr };
+static const char* const g21_pt[] = { "som", "ruído", "fazer barulho", nullptr };
+static const char* const g22_tp[] = { "kama", nullptr };
+static const char* const g22_en[] = { "to come", "arrive", "become", "future", nullptr };
+static const char* const g22_es[] = { "venir", "llegar", "volverse", "futuro", nullptr };
+static const char* const g22_fr[] = { "venir", "arriver", "devenir", "futur", nullptr };
+static const char* const g22_de[] = { "kommen", "ankommen", "werden", "Zukunft", nullptr };
+static const char* const g22_pt[] = { "vir", "chegar", "tornar-se", "futuro", nullptr };
+static const char* const g23_tp[] = { "kasi", nullptr };
+static const char* const g23_en[] = { "plant", "vegetation", "herb", "leaf", nullptr };
+static const char* const g23_es[] = { "planta", "vegetación", "hierba", "hoja", nullptr };
+static const char* const g23_fr[] = { "plante", "végétation", "herbe", "feuille", nullptr };
+static const char* const g23_de[] = { "Pflanze", "Vegetation", "Kraut", "Blatt", nullptr };
+static const char* const g23_pt[] = { "planta", "vegetação", "erva", "folha", nullptr };
+static const char* const g24_tp[] = { "ken", nullptr };
+static const char* const g24_en[] = { "can", "able to", "possible", "may", nullptr };
+static const char* const g24_es[] = { "poder", "capaz de", "posible", nullptr };
+static const char* const g24_fr[] = { "pouvoir", "capable de", "possible", nullptr };
+static const char* const g24_de[] = { "können", "fähig", "möglich", "dürfen", nullptr };
+static const char* const g24_pt[] = { "poder", "capaz de", "possível", nullptr };
+static const char* const g25_tp[] = { "kepeken", nullptr };
+static const char* const g25_en[] = { "to use", "with", "using", nullptr };
+static const char* const g25_es[] = { "usar", "con", "utilizando", nullptr };
+static const char* const g25_fr[] = { "utiliser", "avec", "au moyen de", nullptr };
+static const char* const g25_de[] = { "benutzen", "mit", "mittels", nullptr };
+static const char* const g25_pt[] = { "usar", "com", "utilizando", nullptr };
+static const char* const g26_tp[] = { "kili", nullptr };
+static const char* const g26_en[] = { "fruit", "vegetable", "mushroom", nullptr };
+static const char* const g26_es[] = { "fruta", "verdura", "hongo", nullptr };
+static const char* const g26_fr[] = { "fruit", "légume", "champignon", nullptr };
+static const char* const g26_de[] = { "Frucht", "Gemüse", "Pilz", nullptr };
+static const char* const g26_pt[] = { "fruta", "legume", "cogumelo", nullptr };
+static const char* const g27_tp[] = { "kiwen", nullptr };
+static const char* const g27_en[] = { "hard object", "stone", "metal", "rock", nullptr };
+static const char* const g27_es[] = { "objeto duro", "piedra", "metal", "roca", nullptr };
+static const char* const g27_fr[] = { "objet dur", "pierre", "métal", "roche", nullptr };
+static const char* const g27_de[] = { "harter Gegenstand", "Stein", "Metall", "Fels", nullptr };
+static const char* const g27_pt[] = { "objeto duro", "pedra", "metal", "rocha", nullptr };
+static const char* const g28_tp[] = { "ko", nullptr };
+static const char* const g28_en[] = { "semi-solid", "paste", "powder", "clay", nullptr };
+static const char* const g28_es[] = { "semisólido", "pasta", "polvo", "arcilla", nullptr };
+static const char* const g28_fr[] = { "semi-solide", "pâte", "poudre", "argile", nullptr };
+static const char* const g28_de[] = { "halbfest", "Paste", "Pulver", "Ton", nullptr };
+static const char* const g28_pt[] = { "semissólido", "pasta", "pó", "argila", nullptr };
+static const char* const g29_tp[] = { "kon", nullptr };
+static const char* const g29_en[] = { "air", "breath", "spirit", "essence", nullptr };
+static const char* const g29_es[] = { "aire", "aliento", "espíritu", "esencia", nullptr };
+static const char* const g29_fr[] = { "air", "souffle", "esprit", "essence", nullptr };
+static const char* const g29_de[] = { "Luft", "Atem", "Geist", "Wesen", nullptr };
+static const char* const g29_pt[] = { "ar", "fôlego", "espírito", "essência", nullptr };
+static const char* const g30_tp[] = { "kule", nullptr };
+static const char* const g30_en[] = { "color", "colorful", "category", nullptr };
+static const char* const g30_es[] = { "color", "colorido", "categoría", nullptr };
+static const char* const g30_fr[] = { "couleur", "coloré", "catégorie", nullptr };
+static const char* const g30_de[] = { "Farbe", "farbig", "Kategorie", nullptr };
+static const char* const g30_pt[] = { "cor", "colorido", "categoria", nullptr };
+static const char* const g31_tp[] = { "kulupu", nullptr };
+static const char* const g31_en[] = { "group", "community", "society", nullptr };
+static const char* const g31_es[] = { "grupo", "comunidad", "sociedad", nullptr };
+static const char* const g31_fr[] = { "groupe", "communauté", "société", nullptr };
+static const char* const g31_de[] = { "Gruppe", "Gemeinschaft", "Gesellschaft", nullptr };
+static const char* const g31_pt[] = { "grupo", "comunidade", "sociedade", nullptr };
+static const char* const g32_tp[] = { "kute", nullptr };
+static const char* const g32_en[] = { "to hear", "listen", "ear", nullptr };
+static const char* const g32_es[] = { "oír", "escuchar", "oreja", nullptr };
+static const char* const g32_fr[] = { "entendre", "écouter", "oreille", nullptr };
+static const char* const g32_de[] = { "hören", "zuhören", "Ohr", nullptr };
+static const char* const g32_pt[] = { "ouvir", "escutar", "orelha", nullptr };
+static const char* const g33_tp[] = { "la", nullptr };
+static const char* const g33_en[] = { "(particle: marks context or condition)", nullptr };
+static const char* const g33_es[] = { "partícula de contexto o condición", nullptr };
+static const char* const g33_fr[] = { "particule de contexte ou de condition", nullptr };
+static const char* const g33_de[] = { "Partikel für Kontext oder Bedingung", nullptr };
+static const char* const g33_pt[] = { "partícula de contexto ou condição", nullptr };
+static const char* const g34_tp[] = { "lape", nullptr };
+static const char* const g34_en[] = { "to sleep", "rest", nullptr };
+static const char* const g34_es[] = { "dormir", "descansar", nullptr };
+static const char* const g34_fr[] = { "dormir", "se reposer", nullptr };
+static const char* const g34_de[] = { "schlafen", "ruhen", nullptr };
+static const char* const g34_pt[] = { "dormir", "descansar", nullptr };
+static const char* const g35_tp[] = { "laso", nullptr };
+static const char* const g35_en[] = { "blue", "green", nullptr };
+static const char* const g35_es[] = { "azul", "verde", nullptr };
+static const char* const g35_fr[] = { "bleu", "vert", nullptr };
+static const char* const g35_de[] = { "blau", "grün", nullptr };
+static const char* const g35_pt[] = { "azul", "verde", nullptr };
+static const char* const g36_tp[] = { "lawa", nullptr };
+static const char* const g36_en[] = { "head", "mind", "to lead", "to control", nullptr };
+static const char* const g36_es[] = { "cabeza", "mente", "dirigir", "controlar", nullptr };
+static const char* const g36_fr[] = { "tête", "esprit", "diriger", "contrôler", nullptr };
+static const char* const g36_de[] = { "Kopf", "Verstand", "führen", "kontrollieren", nullptr };
+static const char* const g36_pt[] = { "cabeça", "mente", "liderar", "controlar", nullptr };
+static const char* const g37_tp[] = { "len", nullptr };
+static const char* const g37_en[] = { "cloth", "clothing", "fabric", "layer", nullptr };
+static const char* const g37_es[] = { "tela", "ropa", "tejido", "capa", nullptr };
+static const char* const g37_fr[] = { "tissu", "vêtement", "étoffe", "couche", nullptr };
+static const char* const g37_de[] = { "Stoff", "Kleidung", "Gewebe", "Schicht", nullptr };
+static const char* const g37_pt[] = { "pano", "roupa", "tecido", "camada", nullptr };
+static const char* const g38_tp[] = { "lete", nullptr };
+static const char* const g38_en[] = { "cold", "cool", "raw", nullptr };
+static const char* const g38_es[] = { "frío", "fresco", "crudo", nullptr };
+static const char* const g38_fr[] = { "froid", "frais", "cru", nullptr };
+static const char* const g38_de[] = { "kalt", "kühl", "roh", nullptr };
+static const char* const g38_pt[] = { "frio", "fresco", "cru", nullptr };
+static const char* const g39_tp[] = { "li", nullptr };
+static const char* const g39_en[] = { "(particle: separates subject from verb)", nullptr };
+static const char* const g39_es[] = { "partícula de predicado", nullptr };
+static const char* const g39_fr[] = { "particule de prédicat", nullptr };
+static const char* const g39_de[] = { "Prädikatpartikel", nullptr };
+static const char* const g39_pt[] = { "partícula de predicado", nullptr };
+static const char* const g40_tp[] = { "lili", nullptr };
+static const char* const g40_en[] = { "small", "little", "few", "young", nullptr };
+static const char* const g40_es[] = { "pequeño", "poco", "joven", nullptr };
+static const char* const g40_fr[] = { "petit", "peu", "jeune", nullptr };
+static const char* const g40_de[] = { "klein", "wenig", "jung", nullptr };
+static const char* const g40_pt[] = { "pequeno", "pouco", "jovem", nullptr };
+static const char* const g41_tp[] = { "linja", nullptr };
+static const char* const g41_en[] = { "long flexible thing", "string", "hair", "rope", nullptr };
+static const char* const g41_es[] = { "cosa larga y flexible", "cuerda", "cabello", "soga", nullptr };
+static const char* const g41_fr[] = { "objet long et souple", "ficelle", "cheveu", "corde", nullptr };
+static const char* const g41_de[] = { "langes biegsames Ding", "Schnur", "Haar", "Seil", nullptr };
+static const char* const g41_pt[] = { "coisa longa e flexível", "fio", "cabelo", "corda", nullptr };
+static const char* const g42_tp[] = { "lipu", nullptr };
+static const char* const g42_en[] = { "flat object", "paper", "document", "book", nullptr };
+static const char* const g42_es[] = { "objeto plano", "papel", "documento", "libro", nullptr };
+static const char* const g42_fr[] = { "objet plat", "papier", "document", "livre", nullptr };
+static const char* const g42_de[] = { "flacher Gegenstand", "Papier", "Dokument", "Buch", nullptr };
+static const char* const g42_pt[] = { "objeto plano", "papel", "documento", "livro", nullptr };
+static const char* const g43_tp[] = { "loje", nullptr };
+static const char* const g43_en[] = { "red", nullptr };
+static const char* const g43_es[] = { "rojo", nullptr };
+static const char* const g43_fr[] = { "rouge", nullptr };
+static const char* const g43_de[] = { "rot", nullptr };
+static const char* const g43_pt[] = { "vermelho", nullptr };
+static const char* const g44_tp[] = { "lon", nullptr };
+static const char* const g44_en[] = { "to be present", "real", "true", "at", "in", nullptr };
+static const char* const g44_es[] = { "estar presente", "real", "verdadero", "en", nullptr };
+static const char* const g44_fr[] = { "être présent", "réel", "vrai", "à", "dans", nullptr };
+static const char* const g44_de[] = { "anwesend sein", "real", "wahr", "an", "in", nullptr };
+static const char* const g44_pt[] = { "estar presente", "real", "verdadeiro", "em", nullptr };
+static const char* const g45_tp[] = { "luka", nullptr };
+static const char* const g45_en[] = { "hand", "arm", "five", nullptr };
+static const char* const g45_es[] = { "mano", "brazo", "cinco", nullptr };
+static const char* const g45_fr[] = { "main", "bras", "cinq", nullptr };
+static const char* const g45_de[] = { "Hand", "Arm", "fünf", nullptr };
+static const char* const g45_pt[] = { "mão", "braço", "cinco", nullptr };
+static const char* const g46_tp[] = { "lukin", nullptr };
+static const char* const g46_en[] = { "to see", "look", "eye", "to seek", nullptr };
+static const char* const g46_es[] = { "ver", "mirar", "ojo", "buscar", nullptr };
+static const char* const g46_fr[] = { "voir", "regarder", "œil", "chercher", nullptr };
+static const char* const g46_de[] = { "sehen", "schauen", "Auge", "suchen", nullptr };
+static const char* const g46_pt[] = { "ver", "olhar", "olho", "procurar", nullptr };
+static const char* const g47_tp[] = { "lupa", nullptr };
+static const char* const g47_en[] = { "hole", "door", "opening", "window", nullptr };
+static const char* const g47_es[] = { "agujero", "puerta", "abertura", "ventana", nullptr };
+static const char* const g47_fr[] = { "trou", "porte", "ouverture", "fenêtre", nullptr };
+static const char* const g47_de[] = { "Loch", "Tür", "Öffnung", "Fenster", nullptr };
+static const char* const g47_pt[] = { "buraco", "porta", "abertura", "janela", nullptr };
+static const char* const g48_tp[] = { "ma", nullptr };
+static const char* const g48_en[] = { "land", "earth", "country", "outdoors", nullptr };
+static const char* const g48_es[] = { "tierra", "país", "terreno", "exterior", nullptr };
+static const char* const g48_fr[] = { "terre", "pays", "territoire", "extérieur", nullptr };
+static const char* const g48_de[] = { "Land", "Erde", "Gelände", "draußen", nullptr };
+static const char* const g48_pt[] = { "terra", "país", "terreno", "ar livre", nullptr };
+static const char* const g49_tp[] = { "mama", nullptr };
+static const char* const g49_en[] = { "parent", "origin", "caretaker", nullptr };
+static const char* const g49_es[] = { "padre o madre", "origen", "cuidador", nullptr };
+static const char* const g49_fr[] = { "parent", "origine", "soignant", nullptr };
+static const char* const g49_de[] = { "Elternteil", "Ursprung", "Bezugsperson", nullptr };
+static const char* const g49_pt[] = { "pai ou mãe", "origem", "cuidador", nullptr };
+static const char* const g50_tp[] = { "mani", nullptr };
+static const char* const g50_en[] = { "money", "wealth", "large domestic animal", nullptr };
+static const char* const g50_es[] = { "dinero", "riqueza", "animal doméstico grande", nullptr };
+static const char* const g50_fr[] = { "argent", "richesse", "grand animal domestique", nullptr };
+static const char* const g50_de[] = { "Geld", "Reichtum", "großes Haustier", nullptr };
+static const char* const g50_pt[] = { "dinheiro", "riqueza", "animal doméstico grande", nullptr };
+static const char* const g51_tp[] = { "meli", nullptr };
+static const char* const g51_en[] = { "woman", "female", "wife", nullptr };
+static const char* const g51_es[] = { "mujer", "hembra", "esposa", nullptr };
+static const char* const g51_fr[] = { "femme", "femelle", "épouse", nullptr };
+static const char* const g51_de[] = { "Frau", "weiblich", "Ehefrau", nullptr };
+static const char* const g51_pt[] = { "mulher", "fêmea", "esposa", nullptr };
+static const char* const g52_tp[] = { "mi", nullptr };
+static const char* const g52_en[] = { "I", "me", "we", "us", nullptr };
+static const char* const g52_es[] = { "yo", "mí", "nosotros", nullptr };
+static const char* const g52_fr[] = { "je", "moi", "nous", nullptr };
+static const char* const g52_de[] = { "ich", "mich", "wir", "uns", nullptr };
+static const char* const g52_pt[] = { "eu", "mim", "nós", nullptr };
+static const char* const g53_tp[] = { "mije", nullptr };
+static const char* const g53_en[] = { "man", "male", "husband", nullptr };
+static const char* const g53_es[] = { "hombre", "varón", "esposo", nullptr };
+static const char* const g53_fr[] = { "homme", "mâle", "époux", nullptr };
+static const char* const g53_de[] = { "Mann", "männlich", "Ehemann", nullptr };
+static const char* const g53_pt[] = { "homem", "macho", "marido", nullptr };
+static const char* const g54_tp[] = { "moku", nullptr };
+static const char* const g54_en[] = { "food", "to eat", "to drink", nullptr };
+static const char* const g54_es[] = { "comida", "comer", "beber", nullptr };
+static const char* const g54_fr[] = { "nourriture", "manger", "boire", nullptr };
+static const char* const g54_de[] = { "Essen", "essen", "trinken", nullptr };
+static const char* const g54_pt[] = { "comida", "comer", "beber", nullptr };
+static const char* const g55_tp[] = { "moli", nullptr };
+static const char* const g55_en[] = { "death", "to die", "dead", nullptr };
+static const char* const g55_es[] = { "muerte", "morir", "muerto", nullptr };
+static const char* const g55_fr[] = { "mort", "mourir", "décédé", nullptr };
+static const char* const g55_de[] = { "Tod", "sterben", "tot", nullptr };
+static const char* const g55_pt[] = { "morte", "morrer", "morto", nullptr };
+static const char* const g56_tp[] = { "monsi", nullptr };
+static const char* const g56_en[] = { "back", "behind", "rear", nullptr };
+static const char* const g56_es[] = { "espalda", "detrás", "parte trasera", nullptr };
+static const char* const g56_fr[] = { "dos", "derrière", "arrière", nullptr };
+static const char* const g56_de[] = { "Rücken", "hinten", "Rückseite", nullptr };
+static const char* const g56_pt[] = { "costas", "atrás", "parte traseira", nullptr };
+static const char* const g57_tp[] = { "mu", nullptr };
+static const char* const g57_en[] = { "(animal noise, nonverbal sound)", nullptr };
+static const char* const g57_es[] = { "sonido de animal", "sonido no verbal", nullptr };
+static const char* const g57_fr[] = { "cri d'animal", "son non verbal", nullptr };
+static const char* const g57_de[] = { "Tierlaut", "nonverbaler Laut", nullptr };
+static const char* const g57_pt[] = { "som de animal", "som não verbal", nullptr };
+static const char* const g58_tp[] = { "mun", nullptr };
+static const char* const g58_en[] = { "moon", "star", "night sky object", nullptr };
+static const char* const g58_es[] = { "luna", "estrella", "objeto del cielo nocturno", nullptr };
+static const char* const g58_fr[] = { "lune", "étoile", "objet du ciel nocturne", nullptr };
+static const char* const g58_de[] = { "Mond", "Stern", "Nachthimmelobjekt", nullptr };
+static const char* const g58_pt[] = { "lua", "estrela", "objeto do céu noturno", nullptr };
+static const char* const g59_tp[] = { "musi", nullptr };
+static const char* const g59_en[] = { "fun", "play", "art", "entertainment", nullptr };
+static const char* const g59_es[] = { "diversión", "juego", "arte", "entretenimiento", nullptr };
+static const char* const g59_fr[] = { "amusement", "jeu", "art", "divertissement", nullptr };
+static const char* const g59_de[] = { "Spaß", "Spiel", "Kunst", "Unterhaltung", nullptr };
+static const char* const g59_pt[] = { "diversão", "jogo", "arte", "entretenimento", nullptr };
+static const char* const g60_tp[] = { "mute", nullptr };
+static const char* const g60_en[] = { "many", "much", "several", "quantity", nullptr };
+static const char* const g60_es[] = { "muchos", "mucho", "varios", "cantidad", nullptr };
+static const char* const g60_fr[] = { "beaucoup", "nombreux", "plusieurs", "quantité", nullptr };
+static const char* const g60_de[] = { "viele", "viel", "mehrere", "Menge", nullptr };
+static const char* const g60_pt[] = { "muitos", "muito", "vários", "quantidade", nullptr };
+static const char* const g61_tp[] = { "nanpa", nullptr };
+static const char* const g61_en[] = { "number", "(ordinal marker)", nullptr };
+static const char* const g61_es[] = { "número", "marcador ordinal", nullptr };
+static const char* const g61_fr[] = { "nombre", "marqueur ordinal", nullptr };
+static const char* const g61_de[] = { "Zahl", "Ordinalzahlmarker", nullptr };
+static const char* const g61_pt[] = { "número", "marcador ordinal", nullptr };
+static const char* const g62_tp[] = { "nasa", nullptr };
+static const char* const g62_en[] = { "strange", "silly", "drunk", "crazy", nullptr };
+static const char* const g62_es[] = { "extraño", "tonto", "borracho", "loco", nullptr };
+static const char* const g62_fr[] = { "étrange", "idiot", "ivre", "fou", nullptr };
+static const char* const g62_de[] = { "seltsam", "albern", "betrunken", "verrückt", nullptr };
+static const char* const g62_pt[] = { "estranho", "bobo", "bêbado", "louco", nullptr };
+static const char* const g63_tp[] = { "nasin", nullptr };
+static const char* const g63_en[] = { "way", "path", "method", "doctrine", nullptr };
+static const char* const g63_es[] = { "camino", "senda", "método", "doctrina", nullptr };
+static const char* const g63_fr[] = { "chemin", "voie", "méthode", "doctrine", nullptr };
+static const char* const g63_de[] = { "Weg", "Pfad", "Methode", "Lehre", nullptr };
+static const char* const g63_pt[] = { "caminho", "trilha", "método", "doutrina", nullptr };
+static const char* const g64_tp[] = { "nena", nullptr };
+static const char* const g64_en[] = { "bump", "hill", "mountain", "button", "nose", nullptr };
+static const char* const g64_es[] = { "bulto", "colina", "montaña", "botón", "nariz", nullptr };
+static const char* const g64_fr[] = { "bosse", "colline", "montagne", "bouton", "nez", nullptr };
+static const char* const g64_de[] = { "Beule", "Hügel", "Berg", "Knopf", "Nase", nullptr };
+static const char* const g64_pt[] = { "protuberância", "colina", "montanha", "botão", "nariz", nullptr };
+static const char* const g65_tp[] = { "ni", nullptr };
+static const char* const g65_en[] = { "this", "that", nullptr };
+static const char* const g65_es[] = { "este", "ese", "eso", nullptr };
+static const char* const g65_fr[] = { "ce", "cela", "ceci", nullptr };
+static const char* const g65_de[] = { "dies", "das", "diese", nullptr };
+static const char* const g65_pt[] = { "este", "esse", "isso", nullptr };
+static const char* const g66_tp[] = { "nimi", nullptr };
+static const char* const g66_en[] = { "name", "word", nullptr };
+static const char* const g66_es[] = { "nombre", "palabra", nullptr };
+static const char* const g66_fr[] = { "nom", "mot", nullptr };
+static const char* const g66_de[] = { "Name", "Wort", nullptr };
+static const char* const g66_pt[] = { "nome", "palavra", nullptr };
+static const char* const g67_tp[] = { "noka", nullptr };
+static const char* const g67_en[] = { "foot", "leg", "bottom", nullptr };
+static const char* const g67_es[] = { "pie", "pierna", "parte inferior", nullptr };
+static const char* const g67_fr[] = { "pied", "jambe", "bas", nullptr };
+static const char* const g67_de[] = { "Fuß", "Bein", "Unterseite", nullptr };
+static const char* const g67_pt[] = { "pé", "perna", "parte inferior", nullptr };
+static const char* const g68_tp[] = { "o", nullptr };
+static const char* const g68_en[] = { "(particle: vocative or imperative)", nullptr };
+static const char* const g68_es[] = { "partícula vocativa o imperativa", nullptr };
+static const char* const g68_fr[] = { "particule vocative ou impérative", nullptr };
+static const char* const g68_de[] = { "Vokativ- oder Imperativpartikel", nullptr };
+static const char* const g68_pt[] = { "partícula vocativa ou imperativa", nullptr };
+static const char* const g69_tp[] = { "olin", nullptr };
+static const char* const g69_en[] = { "love", "affection", "respect", nullptr };
+static const char* const g69_es[] = { "amor", "cariño", "respeto", nullptr };
+static const char* const g69_fr[] = { "amour", "affection", "respect", nullptr };
+static const char* const g69_de[] = { "Liebe", "Zuneigung", "Respekt", nullptr };
+static const char* const g69_pt[] = { "amor", "carinho", "respeito", nullptr };
+static const char* const g70_tp[] = { "ona", nullptr };
+static const char* const g70_en[] = { "he", "she", "it", "they", nullptr };
+static const char* const g70_es[] = { "él", "ella", "ello", "ellos", nullptr };
+static const char* const g70_fr[] = { "il", "elle", "ils", "elles", nullptr };
+static const char* const g70_de[] = { "er", "sie", "es", nullptr };
+static const char* const g70_pt[] = { "ele", "ela", "eles", nullptr };
+static const char* const g71_tp[] = { "open", nullptr };
+static const char* const g71_en[] = { "to open", "begin", "turn on", nullptr };
+static const char* const g71_es[] = { "abrir", "comenzar", "encender", nullptr };
+static const char* const g71_fr[] = { "ouvrir", "commencer", "allumer", nullptr };
+static const char* const g71_de[] = { "öffnen", "beginnen", "einschalten", nullptr };
+static const char* const g71_pt[] = { "abrir", "começar", "ligar", nullptr };
+static const char* const g72_tp[] = { "pakala", nullptr };
+static const char* const g72_en[] = { "mistake", "damage", "broken", nullptr };
+static const char* const g72_es[] = { "error", "daño", "roto", nullptr };
+static const char* const g72_fr[] = { "erreur", "dommage", "cassé", nullptr };
+static const char* const g72_de[] = { "Fehler", "Schaden", "kaputt", nullptr };
+static const char* const g72_pt[] = { "erro", "dano", "quebrado", nullptr };
+static const char* const g73_tp[] = { "pali", nullptr };
+static const char* const g73_en[] = { "to do", "make", "work", "build", nullptr };
+static const char* const g73_es[] = { "hacer", "trabajar", "construir", nullptr };
+static const char* const g73_fr[] = { "faire", "travailler", "construire", nullptr };
+static const char* const g73_de[] = { "tun", "machen", "arbeiten", "bauen", nullptr };
+static const char* const g73_pt[] = { "fazer", "trabalhar", "construir", nullptr };
+static const char* const g74_tp[] = { "palisa", nullptr };
+static const char* const g74_en[] = { "long hard thing", "rod", "stick", "branch", nullptr };
+static const char* const g74_es[] = { "cosa larga y dura", "varilla", "palo", "rama", nullptr };
+static const char* const g74_fr[] = { "objet long et dur", "tige", "bâton", "branche", nullptr };
+static const char* const g74_de[] = { "langes hartes Ding", "Stab", "Stock", "Ast", nullptr };
+static const char* const g74_pt[] = { "coisa longa e dura", "haste", "vara", "galho", nullptr };
+static const char* const g75_tp[] = { "pan", nullptr };
+static const char* const g75_en[] = { "grain", "bread", "rice", "pasta", nullptr };
+static const char* const g75_es[] = { "grano", "pan", "arroz", "pasta", nullptr };
+static const char* const g75_fr[] = { "céréale", "pain", "riz", "pâtes", nullptr };
+static const char* const g75_de[] = { "Getreide", "Brot", "Reis", "Nudeln", nullptr };
+static const char* const g75_pt[] = { "grão", "pão", "arroz", "massa", nullptr };
+static const char* const g76_tp[] = { "pana", nullptr };
+static const char* const g76_en[] = { "to give", "send", "emit", "provide", nullptr };
+static const char* const g76_es[] = { "dar", "enviar", "emitir", "proporcionar", nullptr };
+static const char* const g76_fr[] = { "donner", "envoyer", "émettre", "fournir", nullptr };
+static const char* const g76_de[] = { "geben", "senden", "ausstoßen", "bereitstellen", nullptr };
+static const char* const g76_pt[] = { "dar", "enviar", "emitir", "fornecer", nullptr };
+static const char* const g77_tp[] = { "pi", nullptr };
+static const char* const g77_en[] = { "(particle: regroups modifiers)", nullptr };
+static const char* const g77_es[] = { "partícula que reagrupa modificadores", nullptr };
+static const char* const g77_fr[] = { "particule de regroupement des modificateurs", nullptr };
+static const char* const g77_de[] = { "Partikel zur Gruppierung von Modifikatoren", nullptr };
+static const char* const g77_pt[] = { "partícula que reagrupa modificadores", nullptr };
+static const char* const g78_tp[] = { "pilin", nullptr };
+static const char* const g78_en[] = { "heart", "feeling", "to feel", "to think", nullptr };
+static const char* const g78_es[] = { "corazón", "sentimiento", "sentir", "pensar", nullptr };
+static const char* const g78_fr[] = { "cœur", "sentiment", "ressentir", "penser", nullptr };
+static const char* const g78_de[] = { "Herz", "Gefühl", "fühlen", "denken", nullptr };
+static const char* const g78_pt[] = { "coração", "sentimento", "sentir", "pensar", nullptr };
+static const char* const g79_tp[] = { "pimeja", nullptr };
+static const char* const g79_en[] = { "black", "dark", nullptr };
+static const char* const g79_es[] = { "negro", "oscuro", nullptr };
+static const char* const g79_fr[] = { "noir", "sombre", nullptr };
+static const char* const g79_de[] = { "schwarz", "dunkel", nullptr };
+static const char* const g79_pt[] = { "preto", "escuro", nullptr };
+static const char* const g80_tp[] = { "pini", nullptr };
+static const char* const g80_en[] = { "end", "finished", "past", "completed", nullptr };
+static const char* const g80_es[] = { "fin", "terminado", "pasado", "completado", nullptr };
+static const char* const g80_fr[] = { "fin", "fini", "passé", "achevé", nullptr };
+static const char* const g80_de[] = { "Ende", "beendet", "vergangen", "abgeschlossen", nullptr };
+static const char* const g80_pt[] = { "fim", "terminado", "passado", "concluído", nullptr };
+static const char* const g81_tp[] = { "pipi", nullptr };
+static const char* const g81_en[] = { "insect", "bug", "spider", nullptr };
+static const char* const g81_es[] = { "insecto", "bicho", "araña", nullptr };
+static const char* const g81_fr[] = { "insecte", "bestiole", "araignée", nullptr };
+static const char* const g81_de[] = { "Insekt", "Käfer", "Spinne", nullptr };
+static const char* const g81_pt[] = { "inseto", "bicho", "aranha", nullptr };
+static const char* const g82_tp[] = { "poka", nullptr };
+static const char* const g82_en[] = { "side", "hip", "next to", "vicinity", nullptr };
+static const char* const g82_es[] = { "lado", "cadera", "junto a", "proximidad", nullptr };
+static const char* const g82_fr[] = { "côté", "hanche", "à côté de", "environs", nullptr };
+static const char* const g82_de[] = { "Seite", "Hüfte", "neben", "Umgebung", nullptr };
+static const char* const g82_pt[] = { "lado", "quadril", "ao lado de", "proximidade", nullptr };
+static const char* const g83_tp[] = { "poki", nullptr };
+static const char* const g83_en[] = { "container", "box", "bowl", "cup", nullptr };
+static const char* const g83_es[] = { "recipiente", "caja", "cuenco", "taza", nullptr };
+static const char* const g83_fr[] = { "récipient", "boîte", "bol", "tasse", nullptr };
+static const char* const g83_de[] = { "Behälter", "Kiste", "Schüssel", "Tasse", nullptr };
+static const char* const g83_pt[] = { "recipiente", "caixa", "tigela", "xícara", nullptr };
+static const char* const g84_tp[] = { "pona", nullptr };
+static const char* const g84_en[] = { "good", "simple", "positive", "to fix", nullptr };
+static const char* const g84_es[] = { "bueno", "simple", "positivo", "arreglar", nullptr };
+static const char* const g84_fr[] = { "bon", "simple", "positif", "réparer", nullptr };
+static const char* const g84_de[] = { "gut", "einfach", "positiv", "reparieren", nullptr };
+static const char* const g84_pt[] = { "bom", "simples", "positivo", "consertar", nullptr };
+static const char* const g85_tp[] = { "pu", nullptr };
+static const char* const g85_en[] = { "interacting with the official Toki Pona book", nullptr };
+static const char* const g85_es[] = { "interactuar con el libro oficial de Toki Pona", nullptr };
+static const char* const g85_fr[] = { "interagir avec le livre officiel du Toki Pona", nullptr };
+static const char* const g85_de[] = { "Umgang mit dem offiziellen Toki-Pona-Buch", nullptr };
+static const char* const g85_pt[] = { "interagir com o livro oficial de Toki Pona", nullptr };
+static const char* const g86_tp[] = { "sama", nullptr };
+static const char* const g86_en[] = { "same", "similar", "as", "like", nullptr };
+static const char* const g86_es[] = { "mismo", "similar", "como", nullptr };
+static const char* const g86_fr[] = { "même", "semblable", "comme", nullptr };
+static const char* const g86_de[] = { "gleich", "ähnlich", "wie", nullptr };
+static const char* const g86_pt[] = { "mesmo", "semelhante", "como", nullptr };
+static const char* const g87_tp[] = { "seli", nullptr };
+static const char* const g87_en[] = { "fire", "heat", "warmth", "cooking", nullptr };
+static const char* const g87_es[] = { "fuego", "calor", "calidez", "cocción", nullptr };
+static const char* const g87_fr[] = { "feu", "chaleur", "tiédeur", "cuisson", nullptr };
+static const char* const g87_de[] = { "Feuer", "Hitze", "Wärme", "Kochen", nullptr };
+static const char* const g87_pt[] = { "fogo", "calor", "aquecimento", "cozimento", nullptr };
+static const char* const g88_tp[] = { "selo", nullptr };
+static const char* const g88_en[] = { "outer form", "skin", "shell", "bark", nullptr };
+static const char* const g88_es[] = { "forma exterior", "piel", "caparazón", "corteza", nullptr };
+static const char* const g88_fr[] = { "forme extérieure", "peau", "coquille", "écorce", nullptr };
+static const char* const g88_de[] = { "äußere Form", "Haut", "Schale", "Rinde", nullptr };
+static const char* const g88_pt[] = { "forma exterior", "pele", "casca", "carapaça", nullptr };
+static const char* const g89_tp[] = { "seme", nullptr };
+static const char* const g89_en[] = { "what", "which (question word)", nullptr };
+static const char* const g89_es[] = { "qué", "cuál", "palabra interrogativa", nullptr };
+static const char* const g89_fr[] = { "quoi", "quel", "mot interrogatif", nullptr };
+static const char* const g89_de[] = { "was", "welcher", "Fragewort", nullptr };
+static const char* const g89_pt[] = { "o quê", "qual", "palavra interrogativa", nullptr };
+static const char* const g90_tp[] = { "sewi", nullptr };
+static const char* const g90_en[] = { "high", "up", "above", "sky", "divine", "sacred", nullptr };
+static const char* const g90_es[] = { "alto", "arriba", "cielo", "divino", "sagrado", nullptr };
+static const char* const g90_fr[] = { "haut", "dessus", "ciel", "divin", "sacré", nullptr };
+static const char* const g90_de[] = { "hoch", "oben", "Himmel", "göttlich", "heilig", nullptr };
+static const char* const g90_pt[] = { "alto", "acima", "céu", "divino", "sagrado", nullptr };
+static const char* const g91_tp[] = { "sijelo", nullptr };
+static const char* const g91_en[] = { "body", "physical state", "torso", nullptr };
+static const char* const g91_es[] = { "cuerpo", "estado físico", "torso", nullptr };
+static const char* const g91_fr[] = { "corps", "état physique", "torse", nullptr };
+static const char* const g91_de[] = { "Körper", "körperlicher Zustand", "Rumpf", nullptr };
+static const char* const g91_pt[] = { "corpo", "estado físico", "torso", nullptr };
+static const char* const g92_tp[] = { "sike", nullptr };
+static const char* const g92_en[] = { "circle", "round thing", "ball", "cycle", nullptr };
+static const char* const g92_es[] = { "círculo", "cosa redonda", "bola", "ciclo", nullptr };
+static const char* const g92_fr[] = { "cercle", "objet rond", "balle", "cycle", nullptr };
+static const char* const g92_de[] = { "Kreis", "rundes Ding", "Ball", "Zyklus", nullptr };
+static const char* const g92_pt[] = { "círculo", "coisa redonda", "bola", "ciclo", nullptr };
+static const char* const g93_tp[] = { "sin", nullptr };
+static const char* const g93_en[] = { "new", "fresh", "additional", "another", nullptr };
+static const char* const g93_es[] = { "nuevo", "fresco", "adicional", "otro", nullptr };
+static const char* const g93_fr[] = { "nouveau", "frais", "supplémentaire", "autre", nullptr };
+static const char* const g93_de[] = { "neu", "frisch", "zusätzlich", "noch ein", nullptr };
+static const char* const g93_pt[] = { "novo", "fresco", "adicional", "outro", nullptr };
+static const char* const g94_tp[] = { "sina", nullptr };
+static const char* const g94_en[] = { "you", nullptr };
+static const char* const g94_es[] = { "tú", "usted", nullptr };
+static const char* const g94_fr[] = { "tu", "vous", nullptr };
+static const char* const g94_de[] = { "du", "Sie", nullptr };
+static const char* const g94_pt[] = { "você", "tu", nullptr };
+static const char* const g95_tp[] = { "sinpin", nullptr };
+static const char* const g95_en[] = { "front", "face", "wall", nullptr };
+static const char* const g95_es[] = { "frente", "cara", "pared", nullptr };
+static const char* const g95_fr[] = { "devant", "visage", "mur", nullptr };
+static const char* const g95_de[] = { "Vorderseite", "Gesicht", "Wand", nullptr };
+static const char* const g95_pt[] = { "frente", "rosto", "parede", nullptr };
+static const char* const g96_tp[] = { "sitelen", nullptr };
+static const char* const g96_en[] = { "image", "picture", "writing", "symbol", "to write", nullptr };
+static const char* const g96_es[] = { "imagen", "dibujo", "escritura", "símbolo", "escribir", nullptr };
+static const char* const g96_fr[] = { "image", "dessin", "écriture", "symbole", "écrire", nullptr };
+static const char* const g96_de[] = { "Bild", "Zeichnung", "Schrift", "Symbol", "schreiben", nullptr };
+static const char* const g96_pt[] = { "imagem", "desenho", "escrita", "símbolo", "escrever", nullptr };
+static const char* const g97_tp[] = { "sona", nullptr };
+static const char* const g97_en[] = { "knowledge", "to know", "wisdom", nullptr };
+static const char* const g97_es[] = { "conocimiento", "saber", "sabiduría", nullptr };
+static const char* const g97_fr[] = { "connaissance", "savoir", "sagesse", nullptr };
+static const char* const g97_de[] = { "Wissen", "wissen", "Weisheit", nullptr };
+static const char* const g97_pt[] = { "conhecimento", "saber", "sabedoria", nullptr };
+static const char* const g98_tp[] = { "soweli", nullptr };
+static const char* const g98_en[] = { "animal", "land mammal", nullptr };
+static const char* const g98_es[] = { "animal", "mamífero terrestre", nullptr };
+static const char* const g98_fr[] = { "animal", "mammifère terrestre", nullptr };
+static const char* const g98_de[] = { "Tier", "Landsäugetier", nullptr };
+static const char* const g98_pt[] = { "animal", "mamífero terrestre", nullptr };
+static const char* const g99_tp[] = { "suli", nullptr };
+static const char* const g99_en[] = { "big", "large", "important", "tall", "long", nullptr };
+static const char* const g99_es[] = { "grande", "importante", "alto", "largo", nullptr };
+static const char* const g99_fr[] = { "grand", "important", "haut", "long", nullptr };
+static const char* const g99_de[] = { "groß", "wichtig", "hoch", "lang", nullptr };
+static const char* const g99_pt[] = { "grande", "importante", "alto", "longo", nullptr };
+static const char* const g100_tp[] = { "suno", nullptr };
+static const char* const g100_en[] = { "sun", "light", "brightness", nullptr };
+static const char* const g100_es[] = { "sol", "luz", "brillo", nullptr };
+static const char* const g100_fr[] = { "soleil", "lumière", "luminosité", nullptr };
+static const char* const g100_de[] = { "Sonne", "Licht", "Helligkeit", nullptr };
+static const char* const g100_pt[] = { "sol", "luz", "brilho", nullptr };
+static const char* const g101_tp[] = { "supa", nullptr };
+static const char* const g101_en[] = { "horizontal surface", "table", "floor", nullptr };
+static const char* const g101_es[] = { "superficie horizontal", "mesa", "suelo", nullptr };
+static const char* const g101_fr[] = { "surface horizontale", "table", "sol", nullptr };
+static const char* const g101_de[] = { "waagerechte Fläche", "Tisch", "Boden", nullptr };
+static const char* const g101_pt[] = { "superfície horizontal", "mesa", "chão", nullptr };
+static const char* const g102_tp[] = { "suwi", nullptr };
+static const char* const g102_en[] = { "sweet", "cute", "adorable", nullptr };
+static const char* const g102_es[] = { "dulce", "lindo", "adorable", nullptr };
+static const char* const g102_fr[] = { "doux", "mignon", "adorable", nullptr };
+static const char* const g102_de[] = { "süß", "niedlich", "liebenswert", nullptr };
+static const char* const g102_pt[] = { "doce", "fofo", "adorável", nullptr };
+static const char* const g103_tp[] = { "tan", nullptr };
+static const char* const g103_en[] = { "from", "because of", "origin", "cause", nullptr };
+static const char* const g103_es[] = { "de", "a causa de", "origen", "causa", nullptr };
+static const char* const g103_fr[] = { "de", "à cause de", "origine", "cause", nullptr };
+static const char* const g103_de[] = { "von", "wegen", "Ursprung", "Ursache", nullptr };
+static const char* const g103_pt[] = { "de", "por causa de", "origem", "causa", nullptr };
+static const char* const g104_tp[] = { "taso", nullptr };
+static const char* const g104_en[] = { "but", "however", "only", nullptr };
+static const char* const g104_es[] = { "pero", "sin embargo", "solo", nullptr };
+static const char* const g104_fr[] = { "mais", "cependant", "seulement", nullptr };
+static const char* const g104_de[] = { "aber", "jedoch", "nur", nullptr };
+static const char* const g104_pt[] = { "mas", "porém", "apenas", nullptr };
+static const char* const g105_tp[] = { "tawa", nullptr };
+static const char* const g105_en[] = { "to", "toward", "moving", "for", nullptr };
+static const char* const g105_es[] = { "a", "hacia", "moverse", "para", nullptr };
+static const char* const g105_fr[] = { "à", "vers", "en mouvement", "pour", nullptr };
+static const char* const g105_de[] = { "zu", "hin", "sich bewegen", "für", nullptr };
+static const char* const g105_pt[] = { "a", "em direção a", "mover-se", "para", nullptr };
+static const char* const g106_tp[] = { "telo", nullptr };
+static const char* const g106_en[] = { "water", "liquid", "fluid", nullptr };
+static const char* const g106_es[] = { "agua", "líquido", "fluido", nullptr };
+static const char* const g106_fr[] = { "eau", "liquide", "fluide", nullptr };
+static const char* const g106_de[] = { "Wasser", "Flüssigkeit", "Fluid", nullptr };
+static const char* const g106_pt[] = { "água", "líquido", "fluido", nullptr };
+static const char* const g107_tp[] = { "tenpo", nullptr };
+static const char* const g107_en[] = { "time", "moment", "period", "duration", nullptr };
+static const char* const g107_es[] = { "tiempo", "momento", "período", "duración", nullptr };
+static const char* const g107_fr[] = { "temps", "moment", "période", "durée", nullptr };
+static const char* const g107_de[] = { "Zeit", "Moment", "Zeitraum", "Dauer", nullptr };
+static const char* const g107_pt[] = { "tempo", "momento", "período", "duração", nullptr };
+static const char* const g108_tp[] = { "toki", nullptr };
+static const char* const g108_en[] = { "to talk", "speak", "language", "hello", nullptr };
+static const char* const g108_es[] = { "hablar", "idioma", "lenguaje", "hola", nullptr };
+static const char* const g108_fr[] = { "parler", "langue", "langage", "bonjour", nullptr };
+static const char* const g108_de[] = { "sprechen", "Sprache", "hallo", nullptr };
+static const char* const g108_pt[] = { "falar", "língua", "linguagem", "olá", nullptr };
+static const char* const g109_tp[] = { "tomo", nullptr };
+static const char* const g109_en[] = { "house", "building", "room", "home", nullptr };
+static const char* const g109_es[] = { "casa", "edificio", "habitación", "hogar", nullptr };
+static const char* const g109_fr[] = { "maison", "bâtiment", "pièce", "foyer", nullptr };
+static const char* const g109_de[] = { "Haus", "Gebäude", "Zimmer", "Zuhause", nullptr };
+static const char* const g109_pt[] = { "casa", "edifício", "quarto", "lar", nullptr };
+static const char* const g110_tp[] = { "tu", nullptr };
+static const char* const g110_en[] = { "two", nullptr };
+static const char* const g110_es[] = { "dos", nullptr };
+static const char* const g110_fr[] = { "deux", nullptr };
+static const char* const g110_de[] = { "zwei", nullptr };
+static const char* const g110_pt[] = { "dois", nullptr };
+static const char* const g111_tp[] = { "unpa", nullptr };
+static const char* const g111_en[] = { "sex", "sexual", "to have sex", nullptr };
+static const char* const g111_es[] = { "sexo", "sexual", "tener sexo", nullptr };
+static const char* const g111_fr[] = { "sexe", "sexuel", "avoir des rapports sexuels", nullptr };
+static const char* const g111_de[] = { "Sex", "sexuell", "Sex haben", nullptr };
+static const char* const g111_pt[] = { "sexo", "sexual", "fazer sexo", nullptr };
+static const char* const g112_tp[] = { "uta", nullptr };
+static const char* const g112_en[] = { "mouth", "lips", nullptr };
+static const char* const g112_es[] = { "boca", "labios", nullptr };
+static const char* const g112_fr[] = { "bouche", "lèvres", nullptr };
+static const char* const g112_de[] = { "Mund", "Lippen", nullptr };
+static const char* const g112_pt[] = { "boca", "lábios", nullptr };
+static const char* const g113_tp[] = { "utala", nullptr };
+static const char* const g113_en[] = { "to fight", "battle", "struggle", "conflict", nullptr };
+static const char* const g113_es[] = { "luchar", "batalla", "lucha", "conflicto", nullptr };
+static const char* const g113_fr[] = { "combattre", "bataille", "lutte", "conflit", nullptr };
+static const char* const g113_de[] = { "kämpfen", "Schlacht", "Kampf", "Konflikt", nullptr };
+static const char* const g113_pt[] = { "lutar", "batalha", "luta", "conflito", nullptr };
+static const char* const g114_tp[] = { "walo", nullptr };
+static const char* const g114_en[] = { "white", "light-colored", "pale", nullptr };
+static const char* const g114_es[] = { "blanco", "claro", "pálido", nullptr };
+static const char* const g114_fr[] = { "blanc", "clair", "pâle", nullptr };
+static const char* const g114_de[] = { "weiß", "hell", "blass", nullptr };
+static const char* const g114_pt[] = { "branco", "claro", "pálido", nullptr };
+static const char* const g115_tp[] = { "wan", nullptr };
+static const char* const g115_en[] = { "one", "united", "single", nullptr };
+static const char* const g115_es[] = { "uno", "unido", "único", nullptr };
+static const char* const g115_fr[] = { "un", "uni", "seul", nullptr };
+static const char* const g115_de[] = { "eins", "vereint", "einzeln", nullptr };
+static const char* const g115_pt[] = { "um", "unido", "único", nullptr };
+static const char* const g116_tp[] = { "waso", nullptr };
+static const char* const g116_en[] = { "bird", "flying creature", nullptr };
+static const char* const g116_es[] = { "pájaro", "ave", "criatura voladora", nullptr };
+static const char* const g116_fr[] = { "oiseau", "créature volante", nullptr };
+static const char* const g116_de[] = { "Vogel", "fliegendes Wesen", nullptr };
+static const char* const g116_pt[] = { "pássaro", "ave", "criatura voadora", nullptr };
+static const char* const g117_tp[] = { "wawa", nullptr };
+static const char* const g117_en[] = { "strong", "powerful", "energy", "intense", nullptr };
+static const char* const g117_es[] = { "fuerte", "poderoso", "energía", "intenso", nullptr };
+static const char* const g117_fr[] = { "fort", "puissant", "énergie", "intense", nullptr };
+static const char* const g117_de[] = { "stark", "mächtig", "Energie", "intensiv", nullptr };
+static const char* const g117_pt[] = { "forte", "poderoso", "energia", "intenso", nullptr };
+static const char* const g118_tp[] = { "weka", nullptr };
+static const char* const g118_en[] = { "away", "absent", "far", "to remove", nullptr };
+static const char* const g118_es[] = { "lejos", "ausente", "quitar", nullptr };
+static const char* const g118_fr[] = { "loin", "absent", "enlever", nullptr };
+static const char* const g118_de[] = { "weg", "abwesend", "fern", "entfernen", nullptr };
+static const char* const g118_pt[] = { "longe", "ausente", "remover", nullptr };
+static const char* const g119_tp[] = { "wile", nullptr };
+static const char* const g119_en[] = { "to want", "need", "must", "desire", nullptr };
+static const char* const g119_es[] = { "querer", "necesitar", "deber", "desear", nullptr };
+static const char* const g119_fr[] = { "vouloir", "avoir besoin de", "devoir", "désirer", nullptr };
+static const char* const g119_de[] = { "wollen", "brauchen", "müssen", "begehren", nullptr };
+static const char* const g119_pt[] = { "querer", "precisar", "dever", "desejar", nullptr };
 
 const Entry ENTRIES[] = {
-  { "toki", "toki", { g0_tp, g0_en, g0_es, g0_fr, g0_de, g0_pt } },
-  { "pona", "pona", { g1_tp, g1_en, g1_es, g1_fr, g1_de, g1_pt } },
-  { "suli", "suli", { g2_tp, g2_en, g2_es, g2_fr, g2_de, g2_pt } },
-  { "lili", "lili", { g3_tp, g3_en, g3_es, g3_fr, g3_de, g3_pt } },
-  { "jan", "jan", { g4_tp, g4_en, g4_es, g4_fr, g4_de, g4_pt } },
-  { "moku", "moku", { g5_tp, g5_en, g5_es, g5_fr, g5_de, g5_pt } },
-  { "telo", "telo", { g6_tp, g6_en, g6_es, g6_fr, g6_de, g6_pt } },
-  { "wile", "wile", { g7_tp, g7_en, g7_es, g7_fr, g7_de, g7_pt } },
+  { "a", "a", { g0_tp, g0_en, g0_es, g0_fr, g0_de, g0_pt } },
+  { "akesi", "akesi", { g1_tp, g1_en, g1_es, g1_fr, g1_de, g1_pt } },
+  { "ala", "ala", { g2_tp, g2_en, g2_es, g2_fr, g2_de, g2_pt } },
+  { "alasa", "alasa", { g3_tp, g3_en, g3_es, g3_fr, g3_de, g3_pt } },
+  { "ale", "ale", { g4_tp, g4_en, g4_es, g4_fr, g4_de, g4_pt } },
+  { "anpa", "anpa", { g5_tp, g5_en, g5_es, g5_fr, g5_de, g5_pt } },
+  { "ante", "ante", { g6_tp, g6_en, g6_es, g6_fr, g6_de, g6_pt } },
+  { "anu", "anu", { g7_tp, g7_en, g7_es, g7_fr, g7_de, g7_pt } },
+  { "awen", "awen", { g8_tp, g8_en, g8_es, g8_fr, g8_de, g8_pt } },
+  { "e", "e", { g9_tp, g9_en, g9_es, g9_fr, g9_de, g9_pt } },
+  { "en", "en", { g10_tp, g10_en, g10_es, g10_fr, g10_de, g10_pt } },
+  { "esun", "esun", { g11_tp, g11_en, g11_es, g11_fr, g11_de, g11_pt } },
+  { "ijo", "ijo", { g12_tp, g12_en, g12_es, g12_fr, g12_de, g12_pt } },
+  { "ike", "ike", { g13_tp, g13_en, g13_es, g13_fr, g13_de, g13_pt } },
+  { "ilo", "ilo", { g14_tp, g14_en, g14_es, g14_fr, g14_de, g14_pt } },
+  { "insa", "insa", { g15_tp, g15_en, g15_es, g15_fr, g15_de, g15_pt } },
+  { "jaki", "jaki", { g16_tp, g16_en, g16_es, g16_fr, g16_de, g16_pt } },
+  { "jan", "jan", { g17_tp, g17_en, g17_es, g17_fr, g17_de, g17_pt } },
+  { "jelo", "jelo", { g18_tp, g18_en, g18_es, g18_fr, g18_de, g18_pt } },
+  { "jo", "jo", { g19_tp, g19_en, g19_es, g19_fr, g19_de, g19_pt } },
+  { "kala", "kala", { g20_tp, g20_en, g20_es, g20_fr, g20_de, g20_pt } },
+  { "kalama", "kalama", { g21_tp, g21_en, g21_es, g21_fr, g21_de, g21_pt } },
+  { "kama", "kama", { g22_tp, g22_en, g22_es, g22_fr, g22_de, g22_pt } },
+  { "kasi", "kasi", { g23_tp, g23_en, g23_es, g23_fr, g23_de, g23_pt } },
+  { "ken", "ken", { g24_tp, g24_en, g24_es, g24_fr, g24_de, g24_pt } },
+  { "kepeken", "kepeken", { g25_tp, g25_en, g25_es, g25_fr, g25_de, g25_pt } },
+  { "kili", "kili", { g26_tp, g26_en, g26_es, g26_fr, g26_de, g26_pt } },
+  { "kiwen", "kiwen", { g27_tp, g27_en, g27_es, g27_fr, g27_de, g27_pt } },
+  { "ko", "ko", { g28_tp, g28_en, g28_es, g28_fr, g28_de, g28_pt } },
+  { "kon", "kon", { g29_tp, g29_en, g29_es, g29_fr, g29_de, g29_pt } },
+  { "kule", "kule", { g30_tp, g30_en, g30_es, g30_fr, g30_de, g30_pt } },
+  { "kulupu", "kulupu", { g31_tp, g31_en, g31_es, g31_fr, g31_de, g31_pt } },
+  { "kute", "kute", { g32_tp, g32_en, g32_es, g32_fr, g32_de, g32_pt } },
+  { "la", "la", { g33_tp, g33_en, g33_es, g33_fr, g33_de, g33_pt } },
+  { "lape", "lape", { g34_tp, g34_en, g34_es, g34_fr, g34_de, g34_pt } },
+  { "laso", "laso", { g35_tp, g35_en, g35_es, g35_fr, g35_de, g35_pt } },
+  { "lawa", "lawa", { g36_tp, g36_en, g36_es, g36_fr, g36_de, g36_pt } },
+  { "len", "len", { g37_tp, g37_en, g37_es, g37_fr, g37_de, g37_pt } },
+  { "lete", "lete", { g38_tp, g38_en, g38_es, g38_fr, g38_de, g38_pt } },
+  { "li", "li", { g39_tp, g39_en, g39_es, g39_fr, g39_de, g39_pt } },
+  { "lili", "lili", { g40_tp, g40_en, g40_es, g40_fr, g40_de, g40_pt } },
+  { "linja", "linja", { g41_tp, g41_en, g41_es, g41_fr, g41_de, g41_pt } },
+  { "lipu", "lipu", { g42_tp, g42_en, g42_es, g42_fr, g42_de, g42_pt } },
+  { "loje", "loje", { g43_tp, g43_en, g43_es, g43_fr, g43_de, g43_pt } },
+  { "lon", "lon", { g44_tp, g44_en, g44_es, g44_fr, g44_de, g44_pt } },
+  { "luka", "luka", { g45_tp, g45_en, g45_es, g45_fr, g45_de, g45_pt } },
+  { "lukin", "lukin", { g46_tp, g46_en, g46_es, g46_fr, g46_de, g46_pt } },
+  { "lupa", "lupa", { g47_tp, g47_en, g47_es, g47_fr, g47_de, g47_pt } },
+  { "ma", "ma", { g48_tp, g48_en, g48_es, g48_fr, g48_de, g48_pt } },
+  { "mama", "mama", { g49_tp, g49_en, g49_es, g49_fr, g49_de, g49_pt } },
+  { "mani", "mani", { g50_tp, g50_en, g50_es, g50_fr, g50_de, g50_pt } },
+  { "meli", "meli", { g51_tp, g51_en, g51_es, g51_fr, g51_de, g51_pt } },
+  { "mi", "mi", { g52_tp, g52_en, g52_es, g52_fr, g52_de, g52_pt } },
+  { "mije", "mije", { g53_tp, g53_en, g53_es, g53_fr, g53_de, g53_pt } },
+  { "moku", "moku", { g54_tp, g54_en, g54_es, g54_fr, g54_de, g54_pt } },
+  { "moli", "moli", { g55_tp, g55_en, g55_es, g55_fr, g55_de, g55_pt } },
+  { "monsi", "monsi", { g56_tp, g56_en, g56_es, g56_fr, g56_de, g56_pt } },
+  { "mu", "mu", { g57_tp, g57_en, g57_es, g57_fr, g57_de, g57_pt } },
+  { "mun", "mun", { g58_tp, g58_en, g58_es, g58_fr, g58_de, g58_pt } },
+  { "musi", "musi", { g59_tp, g59_en, g59_es, g59_fr, g59_de, g59_pt } },
+  { "mute", "mute", { g60_tp, g60_en, g60_es, g60_fr, g60_de, g60_pt } },
+  { "nanpa", "nanpa", { g61_tp, g61_en, g61_es, g61_fr, g61_de, g61_pt } },
+  { "nasa", "nasa", { g62_tp, g62_en, g62_es, g62_fr, g62_de, g62_pt } },
+  { "nasin", "nasin", { g63_tp, g63_en, g63_es, g63_fr, g63_de, g63_pt } },
+  { "nena", "nena", { g64_tp, g64_en, g64_es, g64_fr, g64_de, g64_pt } },
+  { "ni", "ni", { g65_tp, g65_en, g65_es, g65_fr, g65_de, g65_pt } },
+  { "nimi", "nimi", { g66_tp, g66_en, g66_es, g66_fr, g66_de, g66_pt } },
+  { "noka", "noka", { g67_tp, g67_en, g67_es, g67_fr, g67_de, g67_pt } },
+  { "o", "o", { g68_tp, g68_en, g68_es, g68_fr, g68_de, g68_pt } },
+  { "olin", "olin", { g69_tp, g69_en, g69_es, g69_fr, g69_de, g69_pt } },
+  { "ona", "ona", { g70_tp, g70_en, g70_es, g70_fr, g70_de, g70_pt } },
+  { "open", "open", { g71_tp, g71_en, g71_es, g71_fr, g71_de, g71_pt } },
+  { "pakala", "pakala", { g72_tp, g72_en, g72_es, g72_fr, g72_de, g72_pt } },
+  { "pali", "pali", { g73_tp, g73_en, g73_es, g73_fr, g73_de, g73_pt } },
+  { "palisa", "palisa", { g74_tp, g74_en, g74_es, g74_fr, g74_de, g74_pt } },
+  { "pan", "pan", { g75_tp, g75_en, g75_es, g75_fr, g75_de, g75_pt } },
+  { "pana", "pana", { g76_tp, g76_en, g76_es, g76_fr, g76_de, g76_pt } },
+  { "pi", "pi", { g77_tp, g77_en, g77_es, g77_fr, g77_de, g77_pt } },
+  { "pilin", "pilin", { g78_tp, g78_en, g78_es, g78_fr, g78_de, g78_pt } },
+  { "pimeja", "pimeja", { g79_tp, g79_en, g79_es, g79_fr, g79_de, g79_pt } },
+  { "pini", "pini", { g80_tp, g80_en, g80_es, g80_fr, g80_de, g80_pt } },
+  { "pipi", "pipi", { g81_tp, g81_en, g81_es, g81_fr, g81_de, g81_pt } },
+  { "poka", "poka", { g82_tp, g82_en, g82_es, g82_fr, g82_de, g82_pt } },
+  { "poki", "poki", { g83_tp, g83_en, g83_es, g83_fr, g83_de, g83_pt } },
+  { "pona", "pona", { g84_tp, g84_en, g84_es, g84_fr, g84_de, g84_pt } },
+  { "pu", "pu", { g85_tp, g85_en, g85_es, g85_fr, g85_de, g85_pt } },
+  { "sama", "sama", { g86_tp, g86_en, g86_es, g86_fr, g86_de, g86_pt } },
+  { "seli", "seli", { g87_tp, g87_en, g87_es, g87_fr, g87_de, g87_pt } },
+  { "selo", "selo", { g88_tp, g88_en, g88_es, g88_fr, g88_de, g88_pt } },
+  { "seme", "seme", { g89_tp, g89_en, g89_es, g89_fr, g89_de, g89_pt } },
+  { "sewi", "sewi", { g90_tp, g90_en, g90_es, g90_fr, g90_de, g90_pt } },
+  { "sijelo", "sijelo", { g91_tp, g91_en, g91_es, g91_fr, g91_de, g91_pt } },
+  { "sike", "sike", { g92_tp, g92_en, g92_es, g92_fr, g92_de, g92_pt } },
+  { "sin", "sin", { g93_tp, g93_en, g93_es, g93_fr, g93_de, g93_pt } },
+  { "sina", "sina", { g94_tp, g94_en, g94_es, g94_fr, g94_de, g94_pt } },
+  { "sinpin", "sinpin", { g95_tp, g95_en, g95_es, g95_fr, g95_de, g95_pt } },
+  { "sitelen", "sitelen", { g96_tp, g96_en, g96_es, g96_fr, g96_de, g96_pt } },
+  { "sona", "sona", { g97_tp, g97_en, g97_es, g97_fr, g97_de, g97_pt } },
+  { "soweli", "soweli", { g98_tp, g98_en, g98_es, g98_fr, g98_de, g98_pt } },
+  { "suli", "suli", { g99_tp, g99_en, g99_es, g99_fr, g99_de, g99_pt } },
+  { "suno", "suno", { g100_tp, g100_en, g100_es, g100_fr, g100_de, g100_pt } },
+  { "supa", "supa", { g101_tp, g101_en, g101_es, g101_fr, g101_de, g101_pt } },
+  { "suwi", "suwi", { g102_tp, g102_en, g102_es, g102_fr, g102_de, g102_pt } },
+  { "tan", "tan", { g103_tp, g103_en, g103_es, g103_fr, g103_de, g103_pt } },
+  { "taso", "taso", { g104_tp, g104_en, g104_es, g104_fr, g104_de, g104_pt } },
+  { "tawa", "tawa", { g105_tp, g105_en, g105_es, g105_fr, g105_de, g105_pt } },
+  { "telo", "telo", { g106_tp, g106_en, g106_es, g106_fr, g106_de, g106_pt } },
+  { "tenpo", "tenpo", { g107_tp, g107_en, g107_es, g107_fr, g107_de, g107_pt } },
+  { "toki", "toki", { g108_tp, g108_en, g108_es, g108_fr, g108_de, g108_pt } },
+  { "tomo", "tomo", { g109_tp, g109_en, g109_es, g109_fr, g109_de, g109_pt } },
+  { "tu", "tu", { g110_tp, g110_en, g110_es, g110_fr, g110_de, g110_pt } },
+  { "unpa", "unpa", { g111_tp, g111_en, g111_es, g111_fr, g111_de, g111_pt } },
+  { "uta", "uta", { g112_tp, g112_en, g112_es, g112_fr, g112_de, g112_pt } },
+  { "utala", "utala", { g113_tp, g113_en, g113_es, g113_fr, g113_de, g113_pt } },
+  { "walo", "walo", { g114_tp, g114_en, g114_es, g114_fr, g114_de, g114_pt } },
+  { "wan", "wan", { g115_tp, g115_en, g115_es, g115_fr, g115_de, g115_pt } },
+  { "waso", "waso", { g116_tp, g116_en, g116_es, g116_fr, g116_de, g116_pt } },
+  { "wawa", "wawa", { g117_tp, g117_en, g117_es, g117_fr, g117_de, g117_pt } },
+  { "weka", "weka", { g118_tp, g118_en, g118_es, g118_fr, g118_de, g118_pt } },
+  { "wile", "wile", { g119_tp, g119_en, g119_es, g119_fr, g119_de, g119_pt } },
 };
-const uint16_t ENTRY_COUNT = 8;
+const uint16_t ENTRY_COUNT = 120;
 
 static const IndexRow idx_tp[] = {
-  { "jan", 4 },
-  { "lili", 3 },
-  { "moku", 5 },
-  { "pona", 1 },
-  { "suli", 2 },
-  { "telo", 6 },
-  { "toki", 0 },
-  { "wile", 7 },
+  { "a", 0 },
+  { "akesi", 1 },
+  { "ala", 2 },
+  { "alasa", 3 },
+  { "ale", 4 },
+  { "anpa", 5 },
+  { "ante", 6 },
+  { "anu", 7 },
+  { "awen", 8 },
+  { "e", 9 },
+  { "en", 10 },
+  { "esun", 11 },
+  { "ijo", 12 },
+  { "ike", 13 },
+  { "ilo", 14 },
+  { "insa", 15 },
+  { "jaki", 16 },
+  { "jan", 17 },
+  { "jelo", 18 },
+  { "jo", 19 },
+  { "kala", 20 },
+  { "kalama", 21 },
+  { "kama", 22 },
+  { "kasi", 23 },
+  { "ken", 24 },
+  { "kepeken", 25 },
+  { "kili", 26 },
+  { "kiwen", 27 },
+  { "ko", 28 },
+  { "kon", 29 },
+  { "kule", 30 },
+  { "kulupu", 31 },
+  { "kute", 32 },
+  { "la", 33 },
+  { "lape", 34 },
+  { "laso", 35 },
+  { "lawa", 36 },
+  { "len", 37 },
+  { "lete", 38 },
+  { "li", 39 },
+  { "lili", 40 },
+  { "linja", 41 },
+  { "lipu", 42 },
+  { "loje", 43 },
+  { "lon", 44 },
+  { "luka", 45 },
+  { "lukin", 46 },
+  { "lupa", 47 },
+  { "ma", 48 },
+  { "mama", 49 },
+  { "mani", 50 },
+  { "meli", 51 },
+  { "mi", 52 },
+  { "mije", 53 },
+  { "moku", 54 },
+  { "moli", 55 },
+  { "monsi", 56 },
+  { "mu", 57 },
+  { "mun", 58 },
+  { "musi", 59 },
+  { "mute", 60 },
+  { "nanpa", 61 },
+  { "nasa", 62 },
+  { "nasin", 63 },
+  { "nena", 64 },
+  { "ni", 65 },
+  { "nimi", 66 },
+  { "noka", 67 },
+  { "o", 68 },
+  { "olin", 69 },
+  { "ona", 70 },
+  { "open", 71 },
+  { "pakala", 72 },
+  { "pali", 73 },
+  { "palisa", 74 },
+  { "pan", 75 },
+  { "pana", 76 },
+  { "pi", 77 },
+  { "pilin", 78 },
+  { "pimeja", 79 },
+  { "pini", 80 },
+  { "pipi", 81 },
+  { "poka", 82 },
+  { "poki", 83 },
+  { "pona", 84 },
+  { "pu", 85 },
+  { "sama", 86 },
+  { "seli", 87 },
+  { "selo", 88 },
+  { "seme", 89 },
+  { "sewi", 90 },
+  { "sijelo", 91 },
+  { "sike", 92 },
+  { "sin", 93 },
+  { "sina", 94 },
+  { "sinpin", 95 },
+  { "sitelen", 96 },
+  { "sona", 97 },
+  { "soweli", 98 },
+  { "suli", 99 },
+  { "suno", 100 },
+  { "supa", 101 },
+  { "suwi", 102 },
+  { "tan", 103 },
+  { "taso", 104 },
+  { "tawa", 105 },
+  { "telo", 106 },
+  { "tenpo", 107 },
+  { "toki", 108 },
+  { "tomo", 109 },
+  { "tu", 110 },
+  { "unpa", 111 },
+  { "uta", 112 },
+  { "utala", 113 },
+  { "walo", 114 },
+  { "wan", 115 },
+  { "waso", 116 },
+  { "wawa", 117 },
+  { "weka", 118 },
+  { "wile", 119 },
 };
 static const IndexRow idx_en[] = {
-  { "adult", 2 },
-  { "big", 2 },
-  { "communication", 0 },
-  { "desire", 7 },
-  { "drink", 5 },
-  { "eat", 5 },
-  { "few", 3 },
-  { "fluid", 6 },
-  { "food", 5 },
-  { "good", 1 },
-  { "hello", 0 },
-  { "human", 4 },
-  { "important", 2 },
-  { "language", 0 },
-  { "large", 2 },
-  { "liquid", 6 },
-  { "little", 3 },
-  { "long", 2 },
-  { "must", 7 },
-  { "need", 7 },
-  { "nice", 1 },
-  { "people", 4 },
-  { "person", 4 },
-  { "positive", 1 },
-  { "say", 0 },
-  { "simple", 1 },
-  { "small", 3 },
-  { "somebody", 4 },
-  { "speak", 0 },
-  { "talk", 0 },
-  { "tall", 2 },
-  { "to consume", 5 },
-  { "to fix", 1 },
-  { "to improve", 1 },
-  { "to wish", 7 },
-  { "want", 7 },
-  { "water", 6 },
-  { "young", 3 },
+  { "able to", 24 },
+  { "above", 90 },
+  { "absent", 118 },
+  { "additional", 93 },
+  { "adorable", 102 },
+  { "affection", 69 },
+  { "air", 29 },
+  { "all", 4 },
+  { "amphibian", 1 },
+  { "animal", 98 },
+  { "animal noise nonverbal sound", 57 },
+  { "another", 93 },
+  { "arm", 45 },
+  { "arrive", 22 },
+  { "art", 59 },
+  { "as", 86 },
+  { "at", 44 },
+  { "away", 118 },
+  { "back", 56 },
+  { "bad", 13 },
+  { "ball", 92 },
+  { "bark", 88 },
+  { "barter", 11 },
+  { "battle", 113 },
+  { "because of", 103 },
+  { "become", 22 },
+  { "begin", 71 },
+  { "behind", 56 },
+  { "big", 99 },
+  { "bird", 116 },
+  { "black", 79 },
+  { "blue", 35 },
+  { "body", 91 },
+  { "book", 42 },
+  { "bottom", 5 },
+  { "bottom", 67 },
+  { "bowl", 83 },
+  { "box", 83 },
+  { "branch", 74 },
+  { "bread", 75 },
+  { "breath", 29 },
+  { "brightness", 100 },
+  { "broken", 72 },
+  { "bug", 81 },
+  { "build", 73 },
+  { "building", 109 },
+  { "bump", 64 },
+  { "but", 104 },
+  { "button", 64 },
+  { "can", 24 },
+  { "caretaker", 49 },
+  { "carry", 19 },
+  { "category", 30 },
+  { "cause", 103 },
+  { "center", 15 },
+  { "changed", 6 },
+  { "circle", 92 },
+  { "clay", 28 },
+  { "cloth", 37 },
+  { "clothing", 37 },
+  { "cold", 38 },
+  { "color", 30 },
+  { "colorful", 30 },
+  { "community", 31 },
+  { "completed", 80 },
+  { "complicated", 13 },
+  { "conflict", 113 },
+  { "contain", 19 },
+  { "container", 83 },
+  { "contents", 15 },
+  { "cooking", 87 },
+  { "cool", 38 },
+  { "country", 48 },
+  { "crazy", 62 },
+  { "cup", 83 },
+  { "cute", 102 },
+  { "cycle", 92 },
+  { "damage", 72 },
+  { "dark", 79 },
+  { "dead", 55 },
+  { "death", 55 },
+  { "desire", 119 },
+  { "device", 14 },
+  { "different", 6 },
+  { "dirty", 16 },
+  { "disgusting", 16 },
+  { "divine", 90 },
+  { "doctrine", 63 },
+  { "document", 42 },
+  { "door", 47 },
+  { "down", 5 },
+  { "drunk", 62 },
+  { "duration", 107 },
+  { "ear", 32 },
+  { "earth", 48 },
+  { "emit", 76 },
+  { "end", 80 },
+  { "energy", 117 },
+  { "entertainment", 59 },
+  { "essence", 29 },
+  { "everything", 4 },
+  { "evil", 13 },
+  { "eye", 46 },
+  { "fabric", 37 },
+  { "face", 95 },
+  { "far", 118 },
+  { "feeling", 78 },
+  { "female", 51 },
+  { "few", 40 },
+  { "finished", 80 },
+  { "fire", 87 },
+  { "fish", 20 },
+  { "five", 45 },
+  { "flat object", 42 },
+  { "floor", 101 },
+  { "fluid", 106 },
+  { "flying creature", 116 },
+  { "food", 54 },
+  { "foot", 67 },
+  { "for", 105 },
+  { "forage", 3 },
+  { "fresh", 93 },
+  { "from", 103 },
+  { "front", 95 },
+  { "fruit", 26 },
+  { "fun", 59 },
+  { "future", 22 },
+  { "gather", 3 },
+  { "good", 84 },
+  { "grain", 75 },
+  { "green", 35 },
+  { "gross", 16 },
+  { "group", 31 },
+  { "hair", 41 },
+  { "hand", 45 },
+  { "hard object", 27 },
+  { "he", 70 },
+  { "head", 36 },
+  { "heart", 78 },
+  { "heat", 87 },
+  { "hello", 108 },
+  { "herb", 23 },
+  { "high", 90 },
+  { "hill", 64 },
+  { "hip", 82 },
+  { "hold", 19 },
+  { "hole", 47 },
+  { "home", 109 },
+  { "horizontal surface", 101 },
+  { "house", 109 },
+  { "however", 104 },
+  { "human", 17 },
+  { "humble", 5 },
+  { "hundred", 4 },
+  { "husband", 53 },
+  { "i", 52 },
+  { "image", 96 },
+  { "important", 99 },
+  { "in", 44 },
+  { "insect", 81 },
+  { "inside", 15 },
+  { "intense", 117 },
+  { "interacting with the official toki pona book", 85 },
+  { "interjection emphasis emotion or confirmation", 0 },
+  { "it", 70 },
+  { "keep", 8 },
+  { "knowledge", 97 },
+  { "land", 48 },
+  { "land mammal", 98 },
+  { "language", 108 },
+  { "large", 99 },
+  { "large domestic animal", 50 },
+  { "layer", 37 },
+  { "leaf", 23 },
+  { "leg", 67 },
+  { "light", 100 },
+  { "light-colored", 114 },
+  { "like", 86 },
+  { "lips", 112 },
+  { "liquid", 106 },
+  { "listen", 32 },
+  { "little", 40 },
+  { "long", 99 },
+  { "long flexible thing", 41 },
+  { "long hard thing", 74 },
+  { "look", 46 },
+  { "love", 69 },
+  { "lower", 5 },
+  { "machine", 14 },
+  { "make", 73 },
+  { "male", 53 },
+  { "man", 53 },
+  { "many", 60 },
+  { "market", 11 },
+  { "matter", 12 },
+  { "may", 24 },
+  { "me", 52 },
+  { "metal", 27 },
+  { "method", 63 },
+  { "mind", 36 },
+  { "mistake", 72 },
+  { "moment", 107 },
+  { "money", 50 },
+  { "moon", 58 },
+  { "mountain", 64 },
+  { "mouth", 112 },
+  { "moving", 105 },
+  { "much", 60 },
+  { "mushroom", 26 },
+  { "must", 119 },
+  { "name", 66 },
+  { "need", 119 },
+  { "negative", 13 },
+  { "new", 93 },
+  { "next to", 82 },
+  { "night sky object", 58 },
+  { "no", 2 },
+  { "noise", 21 },
+  { "none", 2 },
+  { "nose", 64 },
+  { "not", 2 },
+  { "number", 61 },
+  { "object", 12 },
+  { "one", 115 },
+  { "only", 104 },
+  { "opening", 47 },
+  { "or", 7 },
+  { "ordinal marker", 61 },
+  { "origin", 49 },
+  { "origin", 103 },
+  { "other", 6 },
+  { "outdoors", 48 },
+  { "outer form", 88 },
+  { "pale", 114 },
+  { "paper", 42 },
+  { "parent", 49 },
+  { "particle introduces a direct object", 9 },
+  { "particle joins subjects and", 10 },
+  { "particle marks context or condition", 33 },
+  { "particle regroups modifiers", 77 },
+  { "particle separates subject from verb", 39 },
+  { "particle vocative or imperative", 68 },
+  { "past", 80 },
+  { "pasta", 75 },
+  { "paste", 28 },
+  { "path", 63 },
+  { "people", 17 },
+  { "period", 107 },
+  { "person", 17 },
+  { "physical state", 91 },
+  { "picture", 96 },
+  { "plant", 23 },
+  { "play", 59 },
+  { "positive", 84 },
+  { "possible", 24 },
+  { "powder", 28 },
+  { "powerful", 117 },
+  { "provide", 76 },
+  { "quantity", 60 },
+  { "raw", 38 },
+  { "real", 44 },
+  { "rear", 56 },
+  { "red", 43 },
+  { "remain", 8 },
+  { "reptile", 1 },
+  { "respect", 69 },
+  { "rest", 34 },
+  { "rice", 75 },
+  { "rock", 27 },
+  { "rod", 74 },
+  { "room", 109 },
+  { "rope", 41 },
+  { "round thing", 92 },
+  { "sacred", 90 },
+  { "same", 86 },
+  { "sea creature", 20 },
+  { "semi-solid", 28 },
+  { "send", 76 },
+  { "several", 60 },
+  { "sex", 111 },
+  { "sexual", 111 },
+  { "she", 70 },
+  { "shell", 88 },
+  { "shop", 11 },
+  { "side", 82 },
+  { "silly", 62 },
+  { "similar", 86 },
+  { "simple", 84 },
+  { "single", 115 },
+  { "skin", 88 },
+  { "sky", 90 },
+  { "small", 40 },
+  { "society", 31 },
+  { "somebody", 17 },
+  { "sound", 21 },
+  { "speak", 108 },
+  { "spider", 81 },
+  { "spirit", 29 },
+  { "star", 58 },
+  { "stick", 74 },
+  { "stomach", 15 },
+  { "stone", 27 },
+  { "strange", 62 },
+  { "string", 41 },
+  { "strong", 117 },
+  { "struggle", 113 },
+  { "sun", 100 },
+  { "sweet", 102 },
+  { "symbol", 96 },
+  { "table", 101 },
+  { "tall", 99 },
+  { "that", 65 },
+  { "they", 70 },
+  { "thing", 12 },
+  { "this", 65 },
+  { "time", 107 },
+  { "to", 105 },
+  { "to be present", 44 },
+  { "to come", 22 },
+  { "to control", 36 },
+  { "to die", 55 },
+  { "to do", 73 },
+  { "to drink", 54 },
+  { "to eat", 54 },
+  { "to feel", 78 },
+  { "to fight", 113 },
+  { "to fix", 84 },
+  { "to give", 76 },
+  { "to have", 19 },
+  { "to have sex", 111 },
+  { "to hear", 32 },
+  { "to hunt", 3 },
+  { "to know", 97 },
+  { "to lead", 36 },
+  { "to make noise", 21 },
+  { "to open", 71 },
+  { "to remove", 118 },
+  { "to see", 46 },
+  { "to seek", 46 },
+  { "to sleep", 34 },
+  { "to stay", 8 },
+  { "to talk", 108 },
+  { "to think", 78 },
+  { "to use", 25 },
+  { "to want", 119 },
+  { "to write", 96 },
+  { "tool", 14 },
+  { "torso", 91 },
+  { "toward", 105 },
+  { "trade", 11 },
+  { "true", 44 },
+  { "turn on", 71 },
+  { "two", 110 },
+  { "united", 115 },
+  { "universe", 4 },
+  { "up", 90 },
+  { "us", 52 },
+  { "using", 25 },
+  { "vegetable", 26 },
+  { "vegetation", 23 },
+  { "vicinity", 82 },
+  { "wait", 8 },
+  { "wall", 95 },
+  { "warmth", 87 },
+  { "waste", 16 },
+  { "water", 106 },
+  { "way", 63 },
+  { "we", 52 },
+  { "wealth", 50 },
+  { "what", 89 },
+  { "which question word", 89 },
+  { "white", 114 },
+  { "wife", 51 },
+  { "window", 47 },
+  { "wisdom", 97 },
+  { "with", 25 },
+  { "woman", 51 },
+  { "word", 66 },
+  { "work", 73 },
+  { "writing", 96 },
+  { "yellow", 18 },
+  { "you", 94 },
+  { "young", 40 },
+  { "zero", 2 },
 };
 static const IndexRow idx_es[] = {
-  { "agua", 6 },
-  { "alguien", 4 },
-  { "alto", 2 },
-  { "arreglar", 1 },
-  { "beber", 5 },
-  { "bien", 1 },
-  { "bueno", 1 },
-  { "comer", 5 },
-  { "comida", 5 },
-  { "deber", 7 },
-  { "decir", 0 },
-  { "desear", 7 },
-  { "gente", 4 },
-  { "grande", 2 },
-  { "hablar", 0 },
-  { "hola", 0 },
-  { "humano", 4 },
-  { "idioma", 0 },
-  { "importante", 2 },
-  { "joven", 3 },
-  { "largo", 2 },
-  { "lengua", 0 },
-  { "liquido", 6 },
-  { "necesitar", 7 },
-  { "pequeno", 3 },
-  { "persona", 4 },
-  { "poco", 3 },
-  { "querer", 7 },
-  { "simple", 1 },
+  { "a", 105 },
+  { "a causa de", 103 },
+  { "abajo", 5 },
+  { "abertura", 47 },
+  { "abrir", 71 },
+  { "adicional", 93 },
+  { "adorable", 102 },
+  { "agua", 106 },
+  { "agujero", 47 },
+  { "aire", 29 },
+  { "alguien", 17 },
+  { "aliento", 29 },
+  { "alto", 90 },
+  { "alto", 99 },
+  { "amarillo", 18 },
+  { "amor", 69 },
+  { "anfibio", 1 },
+  { "animal", 98 },
+  { "animal domestico grande", 50 },
+  { "arana", 81 },
+  { "arcilla", 28 },
+  { "arreglar", 84 },
+  { "arriba", 90 },
+  { "arroz", 75 },
+  { "arte", 59 },
+  { "asqueroso", 16 },
+  { "asunto", 12 },
+  { "ausente", 118 },
+  { "ave", 116 },
+  { "azul", 35 },
+  { "bajo", 5 },
+  { "batalla", 113 },
+  { "beber", 54 },
+  { "bicho", 81 },
+  { "blanco", 114 },
+  { "boca", 112 },
+  { "bola", 92 },
+  { "borracho", 62 },
+  { "boton", 64 },
+  { "brazo", 45 },
+  { "brillo", 100 },
+  { "bueno", 84 },
+  { "bulto", 64 },
+  { "buscar", 46 },
+  { "buscar alimento", 3 },
+  { "cabello", 41 },
+  { "cabeza", 36 },
+  { "cadera", 82 },
+  { "caja", 83 },
+  { "calidez", 87 },
+  { "calor", 87 },
+  { "cambiado", 6 },
+  { "camino", 63 },
+  { "cantidad", 60 },
+  { "capa", 37 },
+  { "caparazon", 88 },
+  { "capaz de", 24 },
+  { "cara", 95 },
+  { "carino", 69 },
+  { "casa", 109 },
+  { "categoria", 30 },
+  { "causa", 103 },
+  { "cazar", 3 },
+  { "centro", 15 },
+  { "cero", 2 },
+  { "ciclo", 92 },
+  { "cielo", 90 },
+  { "cien", 4 },
+  { "cinco", 45 },
+  { "circulo", 92 },
+  { "claro", 114 },
+  { "coccion", 87 },
+  { "colina", 64 },
+  { "color", 30 },
+  { "colorido", 30 },
+  { "comenzar", 71 },
+  { "comer", 54 },
+  { "comercio", 11 },
+  { "comida", 54 },
+  { "como", 86 },
+  { "completado", 80 },
+  { "complicado", 13 },
+  { "comunidad", 31 },
+  { "con", 25 },
+  { "conflicto", 113 },
+  { "conocimiento", 97 },
+  { "construir", 73 },
+  { "contener", 19 },
+  { "contenido", 15 },
+  { "controlar", 36 },
+  { "corazon", 78 },
+  { "corteza", 88 },
+  { "cosa", 12 },
+  { "cosa larga y dura", 74 },
+  { "cosa larga y flexible", 41 },
+  { "cosa redonda", 92 },
+  { "criatura marina", 20 },
+  { "criatura voladora", 116 },
+  { "crudo", 38 },
+  { "cual", 89 },
+  { "cuenco", 83 },
+  { "cuerda", 41 },
+  { "cuerpo", 91 },
+  { "cuidador", 49 },
+  { "dano", 72 },
+  { "dar", 76 },
+  { "de", 103 },
+  { "deber", 119 },
+  { "descansar", 34 },
+  { "desear", 119 },
+  { "desecho", 16 },
+  { "detras", 56 },
+  { "dibujo", 96 },
+  { "diferente", 6 },
+  { "dinero", 50 },
+  { "dirigir", 36 },
+  { "dispositivo", 14 },
+  { "diversion", 59 },
+  { "divino", 90 },
+  { "doctrina", 63 },
+  { "documento", 42 },
+  { "dormir", 34 },
+  { "dos", 110 },
+  { "dulce", 102 },
+  { "duracion", 107 },
+  { "edificio", 109 },
+  { "el", 70 },
+  { "ella", 70 },
+  { "ello", 70 },
+  { "ellos", 70 },
+  { "emitir", 76 },
+  { "en", 44 },
+  { "encender", 71 },
+  { "energia", 117 },
+  { "entretenimiento", 59 },
+  { "enviar", 76 },
+  { "error", 72 },
+  { "escribir", 96 },
+  { "escritura", 96 },
+  { "escuchar", 32 },
+  { "ese", 65 },
+  { "esencia", 29 },
+  { "eso", 65 },
+  { "espalda", 56 },
+  { "esperar", 8 },
+  { "espiritu", 29 },
+  { "esposa", 51 },
+  { "esposo", 53 },
+  { "estado fisico", 91 },
+  { "estar presente", 44 },
+  { "este", 65 },
+  { "estomago", 15 },
+  { "estrella", 58 },
+  { "exterior", 48 },
+  { "extrano", 62 },
+  { "fin", 80 },
+  { "fluido", 106 },
+  { "fondo", 5 },
+  { "forma exterior", 88 },
+  { "frente", 95 },
+  { "fresco", 38 },
+  { "fresco", 93 },
+  { "frio", 38 },
+  { "fruta", 26 },
+  { "fuego", 87 },
+  { "fuerte", 117 },
+  { "futuro", 22 },
+  { "gente", 17 },
+  { "grande", 99 },
+  { "grano", 75 },
+  { "grupo", 31 },
+  { "habitacion", 109 },
+  { "hablar", 108 },
+  { "hacer", 73 },
+  { "hacer ruido", 21 },
+  { "hacia", 105 },
+  { "hembra", 51 },
+  { "herramienta", 14 },
+  { "hierba", 23 },
+  { "hogar", 109 },
+  { "hoja", 23 },
+  { "hola", 108 },
+  { "hombre", 53 },
+  { "hongo", 26 },
+  { "humano", 17 },
+  { "humilde", 5 },
+  { "idioma", 108 },
+  { "imagen", 96 },
+  { "importante", 99 },
+  { "insecto", 81 },
+  { "intenso", 117 },
+  { "interactuar con el libro oficial de toki pona", 85 },
+  { "interior", 15 },
+  { "interjeccion de enfasis emocion o confirmacion", 0 },
+  { "joven", 40 },
+  { "juego", 59 },
+  { "junto a", 82 },
+  { "labios", 112 },
+  { "lado", 82 },
+  { "largo", 99 },
+  { "lejos", 118 },
+  { "lenguaje", 108 },
+  { "libro", 42 },
+  { "lindo", 102 },
+  { "liquido", 106 },
+  { "llegar", 22 },
+  { "llevar", 19 },
+  { "loco", 62 },
+  { "lucha", 113 },
+  { "luchar", 113 },
+  { "luna", 58 },
+  { "luz", 100 },
+  { "maligno", 13 },
+  { "malo", 13 },
+  { "mamifero terrestre", 98 },
+  { "mano", 45 },
+  { "mantener", 8 },
+  { "maquina", 14 },
+  { "marcador ordinal", 61 },
+  { "mente", 36 },
+  { "mercado", 11 },
+  { "mesa", 101 },
+  { "metal", 27 },
+  { "metodo", 63 },
+  { "mi", 52 },
+  { "mirar", 46 },
+  { "mismo", 86 },
+  { "momento", 107 },
+  { "montana", 64 },
+  { "morir", 55 },
+  { "moverse", 105 },
+  { "mucho", 60 },
+  { "muchos", 60 },
+  { "muerte", 55 },
+  { "muerto", 55 },
+  { "mujer", 51 },
+  { "nada", 2 },
+  { "nariz", 64 },
+  { "necesitar", 119 },
+  { "negativo", 13 },
+  { "negro", 79 },
+  { "ninguno", 2 },
+  { "no", 2 },
+  { "nombre", 66 },
+  { "nosotros", 52 },
+  { "nuevo", 93 },
+  { "numero", 61 },
+  { "o", 7 },
+  { "objeto", 12 },
+  { "objeto del cielo nocturno", 58 },
+  { "objeto duro", 27 },
+  { "objeto plano", 42 },
+  { "oir", 32 },
+  { "ojo", 46 },
+  { "oreja", 32 },
+  { "origen", 49 },
+  { "origen", 103 },
+  { "oscuro", 79 },
+  { "otro", 6 },
+  { "otro", 93 },
+  { "padre o madre", 49 },
+  { "pais", 48 },
+  { "pajaro", 116 },
+  { "palabra", 66 },
+  { "palabra interrogativa", 89 },
+  { "palido", 114 },
+  { "palo", 74 },
+  { "pan", 75 },
+  { "papel", 42 },
+  { "para", 105 },
+  { "pared", 95 },
+  { "parte inferior", 67 },
+  { "parte trasera", 56 },
+  { "particula de contexto o condicion", 33 },
+  { "particula de objeto directo", 9 },
+  { "particula de predicado", 39 },
+  { "particula que reagrupa modificadores", 77 },
+  { "particula que une sujetos", 10 },
+  { "particula vocativa o imperativa", 68 },
+  { "pasado", 80 },
+  { "pasta", 28 },
+  { "pasta", 75 },
+  { "pensar", 78 },
+  { "pequeno", 40 },
+  { "periodo", 107 },
+  { "permanecer", 8 },
+  { "pero", 104 },
+  { "persona", 17 },
+  { "pez", 20 },
+  { "pie", 67 },
+  { "piedra", 27 },
+  { "piel", 88 },
+  { "pierna", 67 },
+  { "planta", 23 },
+  { "poco", 40 },
+  { "poder", 24 },
+  { "poderoso", 117 },
+  { "polvo", 28 },
+  { "posible", 24 },
+  { "positivo", 84 },
+  { "proporcionar", 76 },
+  { "proximidad", 82 },
+  { "puerta", 47 },
+  { "que", 89 },
+  { "quedarse", 8 },
+  { "querer", 119 },
+  { "quitar", 118 },
+  { "rama", 74 },
+  { "real", 44 },
+  { "recipiente", 83 },
+  { "recolectar", 3 },
+  { "reptil", 1 },
+  { "repugnante", 16 },
+  { "respeto", 69 },
+  { "riqueza", 50 },
+  { "roca", 27 },
+  { "rojo", 43 },
+  { "ropa", 37 },
+  { "roto", 72 },
+  { "ruido", 21 },
+  { "saber", 97 },
+  { "sabiduria", 97 },
+  { "sagrado", 90 },
+  { "semisolido", 28 },
+  { "senda", 63 },
+  { "sentimiento", 78 },
+  { "sentir", 78 },
+  { "sexo", 111 },
+  { "sexual", 111 },
+  { "simbolo", 96 },
+  { "similar", 86 },
+  { "simple", 84 },
+  { "sin embargo", 104 },
+  { "sociedad", 31 },
+  { "soga", 41 },
+  { "sol", 100 },
+  { "solo", 104 },
+  { "sonido", 21 },
+  { "sonido de animal", 57 },
+  { "sonido no verbal", 57 },
+  { "sostener", 19 },
+  { "sucio", 16 },
+  { "suelo", 101 },
+  { "superficie horizontal", 101 },
+  { "taza", 83 },
+  { "tejido", 37 },
+  { "tela", 37 },
+  { "tener", 19 },
+  { "tener sexo", 111 },
+  { "terminado", 80 },
+  { "terreno", 48 },
+  { "tiempo", 107 },
+  { "tienda", 11 },
+  { "tierra", 48 },
+  { "todo", 4 },
+  { "tonto", 62 },
+  { "torso", 91 },
+  { "trabajar", 73 },
+  { "trueque", 11 },
+  { "tu", 94 },
+  { "unico", 115 },
+  { "unido", 115 },
+  { "universo", 4 },
+  { "uno", 115 },
+  { "usar", 25 },
+  { "usted", 94 },
+  { "utilizando", 25 },
+  { "varilla", 74 },
+  { "varios", 60 },
+  { "varon", 53 },
+  { "vegetacion", 23 },
+  { "venir", 22 },
+  { "ventana", 47 },
+  { "ver", 46 },
+  { "verdadero", 44 },
+  { "verde", 35 },
+  { "verdura", 26 },
+  { "volverse", 22 },
+  { "yo", 52 },
 };
 static const IndexRow idx_fr[] = {
-  { "avoir besoin", 7 },
-  { "bien", 1 },
-  { "boire", 5 },
-  { "bon", 1 },
-  { "bonjour", 0 },
-  { "devoir", 7 },
-  { "dire", 0 },
-  { "eau", 6 },
-  { "gens", 4 },
-  { "grand", 2 },
-  { "humain", 4 },
-  { "important", 2 },
-  { "jeune", 3 },
-  { "langue", 0 },
-  { "liquide", 6 },
-  { "long", 2 },
-  { "manger", 5 },
-  { "nourriture", 5 },
-  { "parler", 0 },
-  { "personne", 4 },
-  { "petit", 3 },
-  { "peu", 3 },
-  { "reparer", 1 },
-  { "simple", 1 },
-  { "vouloir", 7 },
+  { "a", 44 },
+  { "a", 105 },
+  { "a cause de", 103 },
+  { "a cote de", 82 },
+  { "absent", 118 },
+  { "acheve", 80 },
+  { "adorable", 102 },
+  { "affaire", 12 },
+  { "affection", 69 },
+  { "air", 29 },
+  { "allumer", 71 },
+  { "amour", 69 },
+  { "amphibien", 1 },
+  { "amusement", 59 },
+  { "animal", 98 },
+  { "appareil", 14 },
+  { "araignee", 81 },
+  { "argent", 50 },
+  { "argile", 28 },
+  { "arriere", 56 },
+  { "arriver", 22 },
+  { "art", 59 },
+  { "attendre", 8 },
+  { "au moyen de", 25 },
+  { "aucun", 2 },
+  { "autre", 6 },
+  { "autre", 93 },
+  { "avec", 25 },
+  { "avoir", 19 },
+  { "avoir besoin de", 119 },
+  { "avoir des rapports sexuels", 111 },
+  { "balle", 92 },
+  { "bas", 5 },
+  { "bas", 67 },
+  { "bataille", 113 },
+  { "batiment", 109 },
+  { "baton", 74 },
+  { "beaucoup", 60 },
+  { "bestiole", 81 },
+  { "blanc", 114 },
+  { "bleu", 35 },
+  { "boire", 54 },
+  { "boite", 83 },
+  { "bol", 83 },
+  { "bon", 84 },
+  { "bonjour", 108 },
+  { "bosse", 64 },
+  { "bouche", 112 },
+  { "boutique", 11 },
+  { "bouton", 64 },
+  { "branche", 74 },
+  { "bras", 45 },
+  { "bruit", 21 },
+  { "capable de", 24 },
+  { "casse", 72 },
+  { "categorie", 30 },
+  { "cause", 103 },
+  { "ce", 65 },
+  { "ceci", 65 },
+  { "cela", 65 },
+  { "cent", 4 },
+  { "centre", 15 },
+  { "cependant", 104 },
+  { "cercle", 92 },
+  { "cereale", 75 },
+  { "chaleur", 87 },
+  { "champignon", 26 },
+  { "change", 6 },
+  { "chasser", 3 },
+  { "chemin", 63 },
+  { "chercher", 46 },
+  { "cheveu", 41 },
+  { "chose", 12 },
+  { "ciel", 90 },
+  { "cinq", 45 },
+  { "clair", 114 },
+  { "coeur", 78 },
+  { "colline", 64 },
+  { "colore", 30 },
+  { "combattre", 113 },
+  { "comme", 86 },
+  { "commencer", 71 },
+  { "commerce", 11 },
+  { "communaute", 31 },
+  { "complique", 13 },
+  { "conflit", 113 },
+  { "connaissance", 97 },
+  { "construire", 73 },
+  { "contenir", 19 },
+  { "contenu", 15 },
+  { "controler", 36 },
+  { "coquille", 88 },
+  { "corde", 41 },
+  { "corps", 91 },
+  { "cote", 82 },
+  { "couche", 37 },
+  { "couleur", 30 },
+  { "creature marine", 20 },
+  { "creature volante", 116 },
+  { "cri d'animal", 57 },
+  { "cru", 38 },
+  { "cueillir", 3 },
+  { "cuisson", 87 },
+  { "cycle", 92 },
+  { "dans", 44 },
+  { "de", 103 },
+  { "decede", 55 },
+  { "dechet", 16 },
+  { "degoutant", 16 },
+  { "demeurer", 8 },
+  { "derriere", 56 },
+  { "desirer", 119 },
+  { "dessin", 96 },
+  { "dessous", 5 },
+  { "dessus", 90 },
+  { "deux", 110 },
+  { "devant", 95 },
+  { "devenir", 22 },
+  { "devoir", 119 },
+  { "different", 6 },
+  { "diriger", 36 },
+  { "divertissement", 59 },
+  { "divin", 90 },
+  { "doctrine", 63 },
+  { "document", 42 },
+  { "dommage", 72 },
+  { "donner", 76 },
+  { "dormir", 34 },
+  { "dos", 56 },
+  { "doux", 102 },
+  { "duree", 107 },
+  { "eau", 106 },
+  { "ecorce", 88 },
+  { "ecouter", 32 },
+  { "ecrire", 96 },
+  { "ecriture", 96 },
+  { "elle", 70 },
+  { "elles", 70 },
+  { "emettre", 76 },
+  { "en mouvement", 105 },
+  { "energie", 117 },
+  { "enlever", 118 },
+  { "entendre", 32 },
+  { "environs", 82 },
+  { "envoyer", 76 },
+  { "epouse", 51 },
+  { "epoux", 53 },
+  { "erreur", 72 },
+  { "esprit", 29 },
+  { "esprit", 36 },
+  { "essence", 29 },
+  { "estomac", 15 },
+  { "etat physique", 91 },
+  { "etoffe", 37 },
+  { "etoile", 58 },
+  { "etrange", 62 },
+  { "etre present", 44 },
+  { "exterieur", 48 },
+  { "faire", 73 },
+  { "faire du bruit", 21 },
+  { "femelle", 51 },
+  { "femme", 51 },
+  { "fenetre", 47 },
+  { "feu", 87 },
+  { "feuille", 23 },
+  { "ficelle", 41 },
+  { "fin", 80 },
+  { "fini", 80 },
+  { "fluide", 106 },
+  { "fond", 5 },
+  { "forme exterieure", 88 },
+  { "fort", 117 },
+  { "fou", 62 },
+  { "fournir", 76 },
+  { "foyer", 109 },
+  { "frais", 38 },
+  { "frais", 93 },
+  { "froid", 38 },
+  { "fruit", 26 },
+  { "futur", 22 },
+  { "garder", 8 },
+  { "gens", 17 },
+  { "grand", 99 },
+  { "grand animal domestique", 50 },
+  { "groupe", 31 },
+  { "hanche", 82 },
+  { "haut", 90 },
+  { "haut", 99 },
+  { "herbe", 23 },
+  { "homme", 53 },
+  { "humain", 17 },
+  { "humble", 5 },
+  { "idiot", 62 },
+  { "il", 70 },
+  { "ils", 70 },
+  { "image", 96 },
+  { "important", 99 },
+  { "insecte", 81 },
+  { "intense", 117 },
+  { "interagir avec le livre officiel du toki pona", 85 },
+  { "interieur", 15 },
+  { "interjection d'emphase d'emotion ou de confirmation", 0 },
+  { "ivre", 62 },
+  { "jambe", 67 },
+  { "jaune", 18 },
+  { "je", 52 },
+  { "jeu", 59 },
+  { "jeune", 40 },
+  { "langage", 108 },
+  { "langue", 108 },
+  { "legume", 26 },
+  { "levres", 112 },
+  { "liquide", 106 },
+  { "livre", 42 },
+  { "loin", 118 },
+  { "long", 99 },
+  { "lumiere", 100 },
+  { "luminosite", 100 },
+  { "lune", 58 },
+  { "lutte", 113 },
+  { "machine", 14 },
+  { "main", 45 },
+  { "mais", 104 },
+  { "maison", 109 },
+  { "mal", 13 },
+  { "male", 53 },
+  { "mammifere terrestre", 98 },
+  { "manger", 54 },
+  { "marche", 11 },
+  { "marqueur ordinal", 61 },
+  { "mauvais", 13 },
+  { "meme", 86 },
+  { "metal", 27 },
+  { "methode", 63 },
+  { "mignon", 102 },
+  { "moi", 52 },
+  { "moment", 107 },
+  { "montagne", 64 },
+  { "mort", 55 },
+  { "mot", 66 },
+  { "mot interrogatif", 89 },
+  { "mourir", 55 },
+  { "mur", 95 },
+  { "ne pas", 2 },
+  { "negatif", 13 },
+  { "nez", 64 },
+  { "noir", 79 },
+  { "nom", 66 },
+  { "nombre", 61 },
+  { "nombreux", 60 },
+  { "non", 2 },
+  { "nourriture", 54 },
+  { "nous", 52 },
+  { "nouveau", 93 },
+  { "objet", 12 },
+  { "objet du ciel nocturne", 58 },
+  { "objet dur", 27 },
+  { "objet long et dur", 74 },
+  { "objet long et souple", 41 },
+  { "objet plat", 42 },
+  { "objet rond", 92 },
+  { "oeil", 46 },
+  { "oiseau", 116 },
+  { "oreille", 32 },
+  { "origine", 49 },
+  { "origine", 103 },
+  { "ou", 7 },
+  { "outil", 14 },
+  { "ouverture", 47 },
+  { "ouvrir", 71 },
+  { "pain", 75 },
+  { "pale", 114 },
+  { "papier", 42 },
+  { "parent", 49 },
+  { "parler", 108 },
+  { "particule de complement d'objet direct", 9 },
+  { "particule de contexte ou de condition", 33 },
+  { "particule de predicat", 39 },
+  { "particule de regroupement des modificateurs", 77 },
+  { "particule reliant des sujets", 10 },
+  { "particule vocative ou imperative", 68 },
+  { "passe", 80 },
+  { "pate", 28 },
+  { "pates", 75 },
+  { "pays", 48 },
+  { "peau", 88 },
+  { "penser", 78 },
+  { "periode", 107 },
+  { "personne", 17 },
+  { "petit", 40 },
+  { "peu", 40 },
+  { "piece", 109 },
+  { "pied", 67 },
+  { "pierre", 27 },
+  { "plante", 23 },
+  { "plusieurs", 60 },
+  { "poisson", 20 },
+  { "porte", 47 },
+  { "porter", 19 },
+  { "positif", 84 },
+  { "possible", 24 },
+  { "poudre", 28 },
+  { "pour", 105 },
+  { "pouvoir", 24 },
+  { "puissant", 117 },
+  { "quantite", 60 },
+  { "quel", 89 },
+  { "quelqu'un", 17 },
+  { "quoi", 89 },
+  { "recipient", 83 },
+  { "recolter", 3 },
+  { "reel", 44 },
+  { "regarder", 46 },
+  { "reparer", 84 },
+  { "reptile", 1 },
+  { "repugnant", 16 },
+  { "respect", 69 },
+  { "ressentir", 78 },
+  { "rester", 8 },
+  { "richesse", 50 },
+  { "riz", 75 },
+  { "roche", 27 },
+  { "rouge", 43 },
+  { "sacre", 90 },
+  { "sagesse", 97 },
+  { "sale", 16 },
+  { "savoir", 97 },
+  { "se reposer", 34 },
+  { "semblable", 86 },
+  { "semi-solide", 28 },
+  { "sentiment", 78 },
+  { "seul", 115 },
+  { "seulement", 104 },
+  { "sexe", 111 },
+  { "sexuel", 111 },
+  { "simple", 84 },
+  { "societe", 31 },
+  { "soignant", 49 },
+  { "sol", 101 },
+  { "soleil", 100 },
+  { "sombre", 79 },
+  { "son", 21 },
+  { "son non verbal", 57 },
+  { "souffle", 29 },
+  { "supplementaire", 93 },
+  { "surface horizontale", 101 },
+  { "symbole", 96 },
+  { "table", 101 },
+  { "tasse", 83 },
+  { "temps", 107 },
+  { "tenir", 19 },
+  { "terre", 48 },
+  { "territoire", 48 },
+  { "tete", 36 },
+  { "tiedeur", 87 },
+  { "tige", 74 },
+  { "tissu", 37 },
+  { "torse", 91 },
+  { "tout", 4 },
+  { "travailler", 73 },
+  { "troc", 11 },
+  { "trou", 47 },
+  { "tu", 94 },
+  { "un", 115 },
+  { "uni", 115 },
+  { "univers", 4 },
+  { "utiliser", 25 },
+  { "vegetation", 23 },
+  { "venir", 22 },
+  { "vers", 105 },
+  { "vert", 35 },
+  { "vetement", 37 },
+  { "visage", 95 },
+  { "voie", 63 },
+  { "voir", 46 },
+  { "vouloir", 119 },
+  { "vous", 94 },
+  { "vrai", 44 },
+  { "zero", 2 },
 };
 static const IndexRow idx_de[] = {
-  { "brauchen", 7 },
-  { "einfach", 1 },
-  { "essen", 5 },
-  { "flussigkeit", 6 },
-  { "gross", 2 },
-  { "gut", 1 },
-  { "hallo", 0 },
-  { "jemand", 4 },
-  { "jung", 3 },
-  { "klein", 3 },
-  { "lang", 2 },
-  { "leute", 4 },
-  { "mensch", 4 },
-  { "mussen", 7 },
-  { "person", 4 },
-  { "sagen", 0 },
-  { "sprache", 0 },
-  { "sprechen", 0 },
-  { "trinken", 5 },
-  { "wasser", 6 },
-  { "wenig", 3 },
-  { "wichtig", 2 },
-  { "wollen", 7 },
+  { "aber", 104 },
+  { "abfall", 16 },
+  { "abgeschlossen", 80 },
+  { "abwesend", 118 },
+  { "ahnlich", 86 },
+  { "albern", 62 },
+  { "alles", 4 },
+  { "amphibie", 1 },
+  { "an", 44 },
+  { "andere", 6 },
+  { "angelegenheit", 12 },
+  { "ankommen", 22 },
+  { "anwesend sein", 44 },
+  { "arbeiten", 73 },
+  { "arm", 45 },
+  { "ast", 74 },
+  { "atem", 29 },
+  { "auge", 46 },
+  { "aussere form", 88 },
+  { "ausstossen", 76 },
+  { "ball", 92 },
+  { "bauen", 73 },
+  { "beendet", 80 },
+  { "begehren", 119 },
+  { "beginnen", 71 },
+  { "behalten", 8 },
+  { "behalter", 83 },
+  { "bein", 67 },
+  { "benutzen", 25 },
+  { "bereitstellen", 76 },
+  { "berg", 64 },
+  { "betrunken", 62 },
+  { "beule", 64 },
+  { "bezugsperson", 49 },
+  { "bild", 96 },
+  { "blass", 114 },
+  { "blatt", 23 },
+  { "blau", 35 },
+  { "bleiben", 8 },
+  { "boden", 5 },
+  { "boden", 101 },
+  { "bose", 13 },
+  { "brauchen", 119 },
+  { "brot", 75 },
+  { "buch", 42 },
+  { "das", 65 },
+  { "dauer", 107 },
+  { "demutig", 5 },
+  { "denken", 78 },
+  { "dies", 65 },
+  { "diese", 65 },
+  { "ding", 12 },
+  { "dokument", 42 },
+  { "draussen", 48 },
+  { "du", 94 },
+  { "dunkel", 79 },
+  { "durfen", 24 },
+  { "ehefrau", 51 },
+  { "ehemann", 53 },
+  { "einfach", 84 },
+  { "eins", 115 },
+  { "einschalten", 71 },
+  { "einzeln", 115 },
+  { "eklig", 16 },
+  { "elternteil", 49 },
+  { "ende", 80 },
+  { "energie", 117 },
+  { "entfernen", 118 },
+  { "enthalten", 19 },
+  { "er", 70 },
+  { "erde", 48 },
+  { "es", 70 },
+  { "essen", 54 },
+  { "fahig", 24 },
+  { "farbe", 30 },
+  { "farbig", 30 },
+  { "fehler", 72 },
+  { "fels", 27 },
+  { "fenster", 47 },
+  { "fern", 118 },
+  { "feuer", 87 },
+  { "fisch", 20 },
+  { "flacher gegenstand", 42 },
+  { "fliegendes wesen", 116 },
+  { "fluid", 106 },
+  { "flussigkeit", 106 },
+  { "fragewort", 89 },
+  { "frau", 51 },
+  { "frisch", 93 },
+  { "frucht", 26 },
+  { "fuhlen", 78 },
+  { "fuhren", 36 },
+  { "funf", 45 },
+  { "fur", 105 },
+  { "fuss", 67 },
+  { "gebaude", 109 },
+  { "geben", 76 },
+  { "gefuhl", 78 },
+  { "gegenstand", 12 },
+  { "geist", 29 },
+  { "gelande", 48 },
+  { "gelb", 18 },
+  { "geld", 50 },
+  { "gemeinschaft", 31 },
+  { "gemuse", 26 },
+  { "gerat", 14 },
+  { "gerausch machen", 21 },
+  { "gesellschaft", 31 },
+  { "gesicht", 95 },
+  { "getreide", 75 },
+  { "gewebe", 37 },
+  { "gleich", 86 },
+  { "gottlich", 90 },
+  { "gross", 99 },
+  { "grosses haustier", 50 },
+  { "grun", 35 },
+  { "gruppe", 31 },
+  { "gut", 84 },
+  { "haar", 41 },
+  { "haben", 19 },
+  { "halbfest", 28 },
+  { "hallo", 108 },
+  { "halten", 19 },
+  { "hand", 45 },
+  { "handel", 11 },
+  { "harter gegenstand", 27 },
+  { "haus", 109 },
+  { "haut", 88 },
+  { "heilig", 90 },
+  { "hell", 114 },
+  { "helligkeit", 100 },
+  { "herz", 78 },
+  { "himmel", 90 },
+  { "hin", 105 },
+  { "hinten", 56 },
+  { "hitze", 87 },
+  { "hoch", 90 },
+  { "hoch", 99 },
+  { "horen", 32 },
+  { "hufte", 82 },
+  { "hugel", 64 },
+  { "hundert", 4 },
+  { "ich", 52 },
+  { "in", 44 },
+  { "inhalt", 15 },
+  { "inneres", 15 },
+  { "insekt", 81 },
+  { "intensiv", 117 },
+  { "interjektion fur betonung gefuhl oder bestatigung", 0 },
+  { "jagen", 3 },
+  { "jedoch", 104 },
+  { "jemand", 17 },
+  { "jung", 40 },
+  { "kafer", 81 },
+  { "kalt", 38 },
+  { "kampf", 113 },
+  { "kampfen", 113 },
+  { "kaputt", 72 },
+  { "kategorie", 30 },
+  { "kein", 2 },
+  { "kiste", 83 },
+  { "klang", 21 },
+  { "kleidung", 37 },
+  { "klein", 40 },
+  { "knopf", 64 },
+  { "kochen", 87 },
+  { "kommen", 22 },
+  { "kompliziert", 13 },
+  { "konflikt", 113 },
+  { "konnen", 24 },
+  { "kontrollieren", 36 },
+  { "kopf", 36 },
+  { "korper", 91 },
+  { "korperlicher zustand", 91 },
+  { "kraut", 23 },
+  { "kreis", 92 },
+  { "kuhl", 38 },
+  { "kunst", 59 },
+  { "laden", 11 },
+  { "land", 48 },
+  { "landsaugetier", 98 },
+  { "lang", 99 },
+  { "langes biegsames ding", 41 },
+  { "langes hartes ding", 74 },
+  { "larm", 21 },
+  { "lehre", 63 },
+  { "leute", 17 },
+  { "licht", 100 },
+  { "liebe", 69 },
+  { "liebenswert", 102 },
+  { "lippen", 112 },
+  { "loch", 47 },
+  { "luft", 29 },
+  { "machen", 73 },
+  { "machtig", 117 },
+  { "magen", 15 },
+  { "mann", 53 },
+  { "mannlich", 53 },
+  { "markt", 11 },
+  { "maschine", 14 },
+  { "meerestier", 20 },
+  { "mehrere", 60 },
+  { "menge", 60 },
+  { "mensch", 17 },
+  { "metall", 27 },
+  { "methode", 63 },
+  { "mich", 52 },
+  { "mit", 25 },
+  { "mitte", 15 },
+  { "mittels", 25 },
+  { "moglich", 24 },
+  { "moment", 107 },
+  { "mond", 58 },
+  { "mund", 112 },
+  { "mussen", 119 },
+  { "nach nahrung suchen", 3 },
+  { "nachthimmelobjekt", 58 },
+  { "name", 66 },
+  { "nase", 64 },
+  { "neben", 82 },
+  { "negativ", 13 },
+  { "nein", 2 },
+  { "neu", 93 },
+  { "nicht", 2 },
+  { "niedlich", 102 },
+  { "niedrig", 5 },
+  { "noch ein", 93 },
+  { "nonverbaler laut", 57 },
+  { "nudeln", 75 },
+  { "null", 2 },
+  { "nur", 104 },
+  { "oben", 90 },
+  { "oder", 7 },
+  { "offnen", 71 },
+  { "offnung", 47 },
+  { "ohr", 32 },
+  { "ordinalzahlmarker", 61 },
+  { "papier", 42 },
+  { "partikel fur das direkte objekt", 9 },
+  { "partikel fur kontext oder bedingung", 33 },
+  { "partikel zur gruppierung von modifikatoren", 77 },
+  { "partikel zur verbindung von subjekten", 10 },
+  { "paste", 28 },
+  { "person", 17 },
+  { "pfad", 63 },
+  { "pflanze", 23 },
+  { "pilz", 26 },
+  { "positiv", 84 },
+  { "pradikatpartikel", 39 },
+  { "pulver", 28 },
+  { "real", 44 },
+  { "reichtum", 50 },
+  { "reis", 75 },
+  { "reparieren", 84 },
+  { "reptil", 1 },
+  { "respekt", 69 },
+  { "rinde", 88 },
+  { "roh", 38 },
+  { "rot", 43 },
+  { "rucken", 56 },
+  { "ruckseite", 56 },
+  { "ruhen", 34 },
+  { "rumpf", 91 },
+  { "rundes ding", 92 },
+  { "sammeln", 3 },
+  { "schaden", 72 },
+  { "schale", 88 },
+  { "schauen", 46 },
+  { "schicht", 37 },
+  { "schlacht", 113 },
+  { "schlafen", 34 },
+  { "schlecht", 13 },
+  { "schmutzig", 16 },
+  { "schnur", 41 },
+  { "schreiben", 96 },
+  { "schrift", 96 },
+  { "schussel", 83 },
+  { "schwarz", 79 },
+  { "sehen", 46 },
+  { "seil", 41 },
+  { "seite", 82 },
+  { "seltsam", 62 },
+  { "senden", 76 },
+  { "sex", 111 },
+  { "sex haben", 111 },
+  { "sexuell", 111 },
+  { "sich bewegen", 105 },
+  { "sie", 70 },
+  { "sie", 94 },
+  { "sonne", 100 },
+  { "spass", 59 },
+  { "spiel", 59 },
+  { "spinne", 81 },
+  { "sprache", 108 },
+  { "sprechen", 108 },
+  { "stab", 74 },
+  { "stark", 117 },
+  { "stein", 27 },
+  { "sterben", 55 },
+  { "stern", 58 },
+  { "stock", 74 },
+  { "stoff", 37 },
+  { "suchen", 46 },
+  { "suss", 102 },
+  { "symbol", 96 },
+  { "tasse", 83 },
+  { "tauschhandel", 11 },
+  { "tier", 98 },
+  { "tierlaut", 57 },
+  { "tisch", 101 },
+  { "tod", 55 },
+  { "ton", 28 },
+  { "tot", 55 },
+  { "tragen", 19 },
+  { "trinken", 54 },
+  { "tun", 73 },
+  { "tur", 47 },
+  { "umgang mit dem offiziellen toki-pona-buch", 85 },
+  { "umgebung", 82 },
+  { "universum", 4 },
+  { "uns", 52 },
+  { "unten", 5 },
+  { "unterhaltung", 59 },
+  { "unterseite", 67 },
+  { "ursache", 103 },
+  { "ursprung", 49 },
+  { "ursprung", 103 },
+  { "vegetation", 23 },
+  { "verandert", 6 },
+  { "vereint", 115 },
+  { "vergangen", 80 },
+  { "verharren", 8 },
+  { "verruckt", 62 },
+  { "verschieden", 6 },
+  { "verstand", 36 },
+  { "viel", 60 },
+  { "viele", 60 },
+  { "vogel", 116 },
+  { "vokativ- oder imperativpartikel", 68 },
+  { "von", 103 },
+  { "vorderseite", 95 },
+  { "waagerechte flache", 101 },
+  { "wahr", 44 },
+  { "wand", 95 },
+  { "warme", 87 },
+  { "warten", 8 },
+  { "was", 89 },
+  { "wasser", 106 },
+  { "weg", 63 },
+  { "weg", 118 },
+  { "wegen", 103 },
+  { "weiblich", 51 },
+  { "weisheit", 97 },
+  { "weiss", 114 },
+  { "welcher", 89 },
+  { "wenig", 40 },
+  { "werden", 22 },
+  { "werkzeug", 14 },
+  { "wesen", 29 },
+  { "wichtig", 99 },
+  { "widerlich", 16 },
+  { "wie", 86 },
+  { "wir", 52 },
+  { "wissen", 97 },
+  { "wollen", 119 },
+  { "wort", 66 },
+  { "zahl", 61 },
+  { "zeichnung", 96 },
+  { "zeit", 107 },
+  { "zeitraum", 107 },
+  { "zimmer", 109 },
+  { "zu", 105 },
+  { "zuhause", 109 },
+  { "zuhoren", 32 },
+  { "zukunft", 22 },
+  { "zuneigung", 69 },
+  { "zusatzlich", 93 },
+  { "zwei", 110 },
+  { "zyklus", 92 },
 };
 static const IndexRow idx_pt[] = {
-  { "agua", 6 },
-  { "alguem", 4 },
-  { "beber", 5 },
-  { "bem", 1 },
-  { "bom", 1 },
-  { "comer", 5 },
-  { "comida", 5 },
-  { "consertar", 1 },
-  { "dever", 7 },
-  { "dizer", 0 },
-  { "falar", 0 },
-  { "gente", 4 },
-  { "grande", 2 },
-  { "humano", 4 },
-  { "importante", 2 },
-  { "jovem", 3 },
-  { "lingua", 0 },
-  { "liquido", 6 },
-  { "longo", 2 },
-  { "ola", 0 },
-  { "pequeno", 3 },
-  { "pessoa", 4 },
-  { "pouco", 3 },
-  { "precisar", 7 },
-  { "querer", 7 },
-  { "simples", 1 },
+  { "a", 105 },
+  { "abertura", 47 },
+  { "abrir", 71 },
+  { "acima", 90 },
+  { "adicional", 93 },
+  { "adoravel", 102 },
+  { "agua", 106 },
+  { "alguem", 17 },
+  { "alto", 90 },
+  { "alto", 99 },
+  { "amarelo", 18 },
+  { "amor", 69 },
+  { "anfibio", 1 },
+  { "animal", 98 },
+  { "animal domestico grande", 50 },
+  { "ao lado de", 82 },
+  { "apenas", 104 },
+  { "aquecimento", 87 },
+  { "ar", 29 },
+  { "ar livre", 48 },
+  { "aranha", 81 },
+  { "argila", 28 },
+  { "arroz", 75 },
+  { "arte", 59 },
+  { "assunto", 12 },
+  { "atras", 56 },
+  { "ausente", 118 },
+  { "ave", 116 },
+  { "azul", 35 },
+  { "baixo", 5 },
+  { "batalha", 113 },
+  { "bebado", 62 },
+  { "beber", 54 },
+  { "bicho", 81 },
+  { "bobo", 62 },
+  { "boca", 112 },
+  { "bola", 92 },
+  { "bom", 84 },
+  { "botao", 64 },
+  { "braco", 45 },
+  { "branco", 114 },
+  { "brilho", 100 },
+  { "buraco", 47 },
+  { "cabeca", 36 },
+  { "cabelo", 41 },
+  { "cacar", 3 },
+  { "caixa", 83 },
+  { "calor", 87 },
+  { "camada", 37 },
+  { "caminho", 63 },
+  { "capaz de", 24 },
+  { "carapaca", 88 },
+  { "carinho", 69 },
+  { "carregar", 19 },
+  { "casa", 109 },
+  { "casca", 88 },
+  { "categoria", 30 },
+  { "causa", 103 },
+  { "cem", 4 },
+  { "centro", 15 },
+  { "ceu", 90 },
+  { "chao", 101 },
+  { "chegar", 22 },
+  { "ciclo", 92 },
+  { "cinco", 45 },
+  { "circulo", 92 },
+  { "claro", 114 },
+  { "cogumelo", 26 },
+  { "coisa", 12 },
+  { "coisa longa e dura", 74 },
+  { "coisa longa e flexivel", 41 },
+  { "coisa redonda", 92 },
+  { "coletar", 3 },
+  { "colina", 64 },
+  { "colorido", 30 },
+  { "com", 25 },
+  { "comecar", 71 },
+  { "comer", 54 },
+  { "comercio", 11 },
+  { "comida", 54 },
+  { "como", 86 },
+  { "complicado", 13 },
+  { "comunidade", 31 },
+  { "concluido", 80 },
+  { "conflito", 113 },
+  { "conhecimento", 97 },
+  { "consertar", 84 },
+  { "construir", 73 },
+  { "conter", 19 },
+  { "conteudo", 15 },
+  { "controlar", 36 },
+  { "cor", 30 },
+  { "coracao", 78 },
+  { "corda", 41 },
+  { "corpo", 91 },
+  { "costas", 56 },
+  { "cozimento", 87 },
+  { "criatura marinha", 20 },
+  { "criatura voadora", 116 },
+  { "cru", 38 },
+  { "cuidador", 49 },
+  { "dano", 72 },
+  { "dar", 76 },
+  { "de", 103 },
+  { "descansar", 34 },
+  { "desejar", 119 },
+  { "desenho", 96 },
+  { "dever", 119 },
+  { "diferente", 6 },
+  { "dinheiro", 50 },
+  { "dispositivo", 14 },
+  { "diversao", 59 },
+  { "divino", 90 },
+  { "doce", 102 },
+  { "documento", 42 },
+  { "dois", 110 },
+  { "dormir", 34 },
+  { "doutrina", 63 },
+  { "duracao", 107 },
+  { "edificio", 109 },
+  { "ela", 70 },
+  { "ele", 70 },
+  { "eles", 70 },
+  { "em", 44 },
+  { "em direcao a", 105 },
+  { "embaixo", 5 },
+  { "emitir", 76 },
+  { "energia", 117 },
+  { "entretenimento", 59 },
+  { "enviar", 76 },
+  { "erro", 72 },
+  { "erva", 23 },
+  { "escrever", 96 },
+  { "escrita", 96 },
+  { "escuro", 79 },
+  { "escutar", 32 },
+  { "esperar", 8 },
+  { "espirito", 29 },
+  { "esposa", 51 },
+  { "esse", 65 },
+  { "essencia", 29 },
+  { "estado fisico", 91 },
+  { "estar presente", 44 },
+  { "este", 65 },
+  { "estomago", 15 },
+  { "estranho", 62 },
+  { "estrela", 58 },
+  { "eu", 52 },
+  { "falar", 108 },
+  { "fazer", 73 },
+  { "fazer barulho", 21 },
+  { "fazer sexo", 111 },
+  { "femea", 51 },
+  { "ferramenta", 14 },
+  { "ficar", 8 },
+  { "fim", 80 },
+  { "fio", 41 },
+  { "fluido", 106 },
+  { "fofo", 102 },
+  { "fogo", 87 },
+  { "folego", 29 },
+  { "folha", 23 },
+  { "forma exterior", 88 },
+  { "fornecer", 76 },
+  { "forragear", 3 },
+  { "forte", 117 },
+  { "frente", 95 },
+  { "fresco", 38 },
+  { "fresco", 93 },
+  { "frio", 38 },
+  { "fruta", 26 },
+  { "fundo", 5 },
+  { "futuro", 22 },
+  { "galho", 74 },
+  { "gente", 17 },
+  { "grande", 99 },
+  { "grao", 75 },
+  { "grupo", 31 },
+  { "haste", 74 },
+  { "homem", 53 },
+  { "humano", 17 },
+  { "humilde", 5 },
+  { "imagem", 96 },
+  { "importante", 99 },
+  { "inseto", 81 },
+  { "intenso", 117 },
+  { "interagir com o livro oficial de toki pona", 85 },
+  { "interior", 15 },
+  { "interjecao de enfase emocao ou confirmacao", 0 },
+  { "isso", 65 },
+  { "janela", 47 },
+  { "jogo", 59 },
+  { "jovem", 40 },
+  { "labios", 112 },
+  { "lado", 82 },
+  { "lar", 109 },
+  { "legume", 26 },
+  { "liderar", 36 },
+  { "ligar", 71 },
+  { "lingua", 108 },
+  { "linguagem", 108 },
+  { "liquido", 106 },
+  { "livro", 42 },
+  { "lixo", 16 },
+  { "loja", 11 },
+  { "longe", 118 },
+  { "longo", 99 },
+  { "louco", 62 },
+  { "lua", 58 },
+  { "luta", 113 },
+  { "lutar", 113 },
+  { "luz", 100 },
+  { "macho", 53 },
+  { "maligno", 13 },
+  { "mamifero terrestre", 98 },
+  { "manter", 8 },
+  { "mao", 45 },
+  { "maquina", 14 },
+  { "marcador ordinal", 61 },
+  { "marido", 53 },
+  { "mas", 104 },
+  { "massa", 75 },
+  { "mau", 13 },
+  { "mente", 36 },
+  { "mercado", 11 },
+  { "mesa", 101 },
+  { "mesmo", 86 },
+  { "metal", 27 },
+  { "metodo", 63 },
+  { "mim", 52 },
+  { "momento", 107 },
+  { "montanha", 64 },
+  { "morrer", 55 },
+  { "morte", 55 },
+  { "morto", 55 },
+  { "mover-se", 105 },
+  { "mudado", 6 },
+  { "muito", 60 },
+  { "muitos", 60 },
+  { "mulher", 51 },
+  { "nao", 2 },
+  { "nariz", 64 },
+  { "negativo", 13 },
+  { "nenhum", 2 },
+  { "nojento", 16 },
+  { "nome", 66 },
+  { "nos", 52 },
+  { "novo", 93 },
+  { "numero", 61 },
+  { "o que", 89 },
+  { "objeto", 12 },
+  { "objeto do ceu noturno", 58 },
+  { "objeto duro", 27 },
+  { "objeto plano", 42 },
+  { "ola", 108 },
+  { "olhar", 46 },
+  { "olho", 46 },
+  { "orelha", 32 },
+  { "origem", 49 },
+  { "origem", 103 },
+  { "ou", 7 },
+  { "outro", 6 },
+  { "outro", 93 },
+  { "ouvir", 32 },
+  { "pai ou mae", 49 },
+  { "pais", 48 },
+  { "palavra", 66 },
+  { "palavra interrogativa", 89 },
+  { "palido", 114 },
+  { "pano", 37 },
+  { "pao", 75 },
+  { "papel", 42 },
+  { "para", 105 },
+  { "parede", 95 },
+  { "parte inferior", 67 },
+  { "parte traseira", 56 },
+  { "particula de contexto ou condicao", 33 },
+  { "particula de objeto direto", 9 },
+  { "particula de predicado", 39 },
+  { "particula que reagrupa modificadores", 77 },
+  { "particula que une sujeitos", 10 },
+  { "particula vocativa ou imperativa", 68 },
+  { "passado", 80 },
+  { "passaro", 116 },
+  { "pasta", 28 },
+  { "pe", 67 },
+  { "pedra", 27 },
+  { "peixe", 20 },
+  { "pele", 88 },
+  { "pensar", 78 },
+  { "pequeno", 40 },
+  { "periodo", 107 },
+  { "permanecer", 8 },
+  { "perna", 67 },
+  { "pessoa", 17 },
+  { "planta", 23 },
+  { "po", 28 },
+  { "poder", 24 },
+  { "poderoso", 117 },
+  { "por causa de", 103 },
+  { "porem", 104 },
+  { "porta", 47 },
+  { "positivo", 84 },
+  { "possivel", 24 },
+  { "pouco", 40 },
+  { "precisar", 119 },
+  { "preto", 79 },
+  { "procurar", 46 },
+  { "protuberancia", 64 },
+  { "proximidade", 82 },
+  { "quadril", 82 },
+  { "qual", 89 },
+  { "quantidade", 60 },
+  { "quarto", 109 },
+  { "quebrado", 72 },
+  { "querer", 119 },
+  { "real", 44 },
+  { "recipiente", 83 },
+  { "remover", 118 },
+  { "reptil", 1 },
+  { "repugnante", 16 },
+  { "respeito", 69 },
+  { "riqueza", 50 },
+  { "rocha", 27 },
+  { "rosto", 95 },
+  { "roupa", 37 },
+  { "ruido", 21 },
+  { "sabedoria", 97 },
+  { "saber", 97 },
+  { "sagrado", 90 },
+  { "segurar", 19 },
+  { "semelhante", 86 },
+  { "semissolido", 28 },
+  { "sentimento", 78 },
+  { "sentir", 78 },
+  { "sexo", 111 },
+  { "sexual", 111 },
+  { "simbolo", 96 },
+  { "simples", 84 },
+  { "sociedade", 31 },
+  { "sol", 100 },
+  { "som", 21 },
+  { "som de animal", 57 },
+  { "som nao verbal", 57 },
+  { "sujo", 16 },
+  { "superficie horizontal", 101 },
+  { "tecido", 37 },
+  { "tempo", 107 },
+  { "ter", 19 },
+  { "terminado", 80 },
+  { "terra", 48 },
+  { "terreno", 48 },
+  { "tigela", 83 },
+  { "tornar-se", 22 },
+  { "torso", 91 },
+  { "trabalhar", 73 },
+  { "trilha", 63 },
+  { "troca", 11 },
+  { "tu", 94 },
+  { "tudo", 4 },
+  { "um", 115 },
+  { "unico", 115 },
+  { "unido", 115 },
+  { "universo", 4 },
+  { "usar", 25 },
+  { "utilizando", 25 },
+  { "vara", 74 },
+  { "varios", 60 },
+  { "vegetacao", 23 },
+  { "ver", 46 },
+  { "verdadeiro", 44 },
+  { "verde", 35 },
+  { "vermelho", 43 },
+  { "vir", 22 },
+  { "voce", 94 },
+  { "xicara", 83 },
+  { "zero", 2 },
 };
 
 const IndexRow* const INDEX_BY_LANG[LangCount] = { idx_tp, idx_en, idx_es, idx_fr, idx_de, idx_pt };
-const uint16_t INDEX_SIZE_BY_LANG[LangCount] = { 8, 38, 29, 25, 23, 26 };
+const uint16_t INDEX_SIZE_BY_LANG[LangCount] = { 120, 384, 379, 379, 379, 377 };
 
 }  // namespace tp

@@ -4,8 +4,8 @@ Open work: deferrals, defects, follow-ups. One line each; delete the line when c
 Facts about *decisions* go in `adr/`, not here.
 
 ## Core / data
-- [ ] Expand `data/dictionary.json` from the 8-word bring-up sample to the full ~137-word
-      Toki Pona corpus, with glosses reviewed per language.
+- [ ] Optional: extend the corpus beyond nimi pu (120) with common *nimi ku suli* words
+      (e.g. kijetesantakalu, tonsi, kipisi, monsuta) if the operator wants them.
 - [ ] Wire a CI lane that runs `npm run test:host` and fails if `node tools/generate.mjs`
       produces a diff against the committed `core/*_gen.*` (ADR-0002).
 
