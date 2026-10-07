@@ -15,7 +15,6 @@ Facts about *decisions* go in `adr/`, not here.
 - [ ] Write the rasterizer (`tools/`) that emits `core/sitelen_gen.*`.
 
 ## HAL / app (ADR-0001)
-- [ ] Define `hal/DisplaySurface` and `hal/InputSource` interfaces + the `InputEvent` type.
 - [ ] Keyboard input driver (first reference board) and a button/encoder driver.
 - [ ] LovyanGFX display driver behind `DisplaySurface`, panel auto-detect per board.
 - [ ] App UI state machine: search+result-list view and entry-detail view (with glyph).
