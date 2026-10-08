@@ -34,7 +34,8 @@ constexpr int kFifoDrainLimit = 16;
 // --- the Cardputer key grid (ADR-0005) ------------------------------------------------------
 // 4 rows x 14 columns, the silkscreen layout, identical on both variants (espp key_map_). We
 // fold case in the query path (ADR-0002), so only the unshifted value matters; `special` names
-// the fn-layer meaning we care about, so a plain key and its fn-arrow are one table entry.
+// the key's navigation/edit meaning, so a plain key and its arrow meaning are one table entry.
+// Up/Down act whether or not fn is held (ADR-0008); esc/delete need fn (see mapPress).
 enum class Special : uint8_t { None, Esc, Delete, Up, Down, Other };
 
 struct Key {
@@ -87,13 +88,16 @@ uint8_t readRegister(uint8_t reg) {
   return Wire.available() ? static_cast<uint8_t>(Wire.read()) : 0;
 }
 
-// Resolve a pressed key to the app event it means, or None (modifiers, ignored fn keys). fn
-// takes precedence so fn+`.` is Nav Down, never a typed '.'.
+// Resolve a pressed key to the app event it means, or None (modifiers, ignored fn keys).
 InputEvent mapPress(const Key& key, bool fnHeld) {
+  // Arrow-labelled keys navigate whether or not fn is held: their punctuation (; .) is folded
+  // out of every query by normalization, so it is never typed, and single-key nav is friendlier
+  // in both the result list and the detail language cycle (ADR-0008).
+  if (key.special == Special::Up) return InputEvent::navigate(NavDir::Up);
+  if (key.special == Special::Down) return InputEvent::navigate(NavDir::Down);
+
   if (fnHeld) {
     switch (key.special) {
-      case Special::Up: return InputEvent::navigate(NavDir::Up);
-      case Special::Down: return InputEvent::navigate(NavDir::Down);
       case Special::Esc:
       case Special::Delete: return InputEvent::back();
       default: return InputEvent::none();  // fn+(left/right/F-key) is not in our vocabulary.
