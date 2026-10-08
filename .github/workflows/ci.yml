@@ -1,0 +1,49 @@
+name: CI
+
+# Runs on every push and PR against the checked-out (pushed) tree. This is the backstop that
+# cannot be bypassed with a local `--no-verify` or a clone that never installed a git hook: the
+# host test suite, the third-party-notice obligation, and the generated-core drift guard all run
+# on a runner. There is no device build here yet — no `platformio.ini` exists (see LEDGER); a
+# board matrix is added with the first board profile, not invented as dead config now.
+on:
+  push:
+  pull_request:
+
+# Only the latest push to a given ref is worth building; cancel superseded runs.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  host:
+    name: host
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      # Needed only by the sitelen rasterizer's drift check (fontTools + Pillow). The committed
+      # table compiles and tests with no Python; this is purely to re-run the generator and prove
+      # core/sitelen_gen.cpp is current.
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: tools/requirements-sitelen.txt
+
+      - name: Install rasterizer dependencies
+        run: pip install -r tools/requirements-sitelen.txt
+
+      # Drift guard FIRST, on the pristine checkout: re-run both generators in --check mode and
+      # fail if the committed core/*_gen.* differ from a fresh render (ADR-0002, ADR-0003). This
+      # must precede `test:host`, which regenerates those files in place and would mask drift.
+      - name: Check generated core is up to date
+        run: npm run check:generated
+
+      # Notices obligation + normalization contract + symmetric search + sitelen table + UI state
+      # machine, compiled under -Wall -Wextra and run natively. No hardware, no Python.
+      - name: Host test suite
+        run: npm run test:host

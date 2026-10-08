@@ -6,8 +6,6 @@ Facts about *decisions* go in `adr/`, not here.
 ## Core / data
 - [ ] Optional: extend the corpus beyond nimi pu (120) with common *nimi ku suli* words
       (e.g. kijetesantakalu, tonsi, kipisi, monsuta) if the operator wants them.
-- [ ] Wire a CI lane that runs `npm run test:host` and fails if `node tools/generate.mjs`
-      produces a diff against the committed `core/*_gen.*` (ADR-0002).
 
 ## Sitelen pona (ADR-0003)
 - [ ] When an on-device About/credits view exists (needs the app/HAL work below), display the
@@ -21,6 +19,9 @@ Facts about *decisions* go in `adr/`, not here.
       implement `drawGlyph1bpp` to the packing in `core/sitelen.hpp` (MSB-first, row-major,
       byte-aligned rows); `app/render.cpp` already issues the blit, host-tested in `test_ui`.
 - [ ] `platformio.ini`: real build profiles per board; first reference board bring-up proof.
+      With the first profile, add a device-build leg to `.github/workflows/ci.yml` (the host
+      lane already runs `check:generated` + `test:host`); until a profile exists a board matrix
+      would be dead config.
 
 ## Project
 - [ ] Confirm the five-language set with the operator (currently en/es/fr/de/pt in
