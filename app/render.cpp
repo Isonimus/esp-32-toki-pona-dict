@@ -18,23 +18,10 @@ constexpr uint16_t kColorAccent = 0xFFE0;       // yellow — focused row, headw
 // Layout metrics in pixels at text size 1. Tuned per board at bring-up; the values here are
 // a sane default for a ~240x135 panel and do not affect host tests.
 constexpr int kMargin = 4;
-constexpr int kLineHeight = 12;
+constexpr int kLineHeight = 16;
 constexpr int kHeaderScale = 2;
 constexpr int kBodyScale = 1;
-
-// Join a nullptr-terminated gloss list into `out` (NUL-terminated, at most cap-1 chars),
-// senses separated by ", ". Truncates to fit — the detail line is display, not data.
-void joinGlosses(const char* const* glosses, char* out, int cap) {
-  int len = 0;
-  for (int i = 0; glosses[i] != nullptr && len < cap - 1; ++i) {
-    if (i > 0 && len < cap - 1) {
-      const char* sep = ", ";
-      for (int s = 0; sep[s] != '\0' && len < cap - 1; ++s) out[len++] = sep[s];
-    }
-    for (const char* p = glosses[i]; *p != '\0' && len < cap - 1; ++p) out[len++] = *p;
-  }
-  out[len] = '\0';
-}
+constexpr int kGlossIndent = 8;  // senses are indented under their language label
 
 void renderSearch(const UiState& state, DisplaySurface& display) {
   // Query line at the top; a leading '>' marks it as the edit field.
@@ -67,15 +54,21 @@ void renderDetail(const UiState& state, DisplaySurface& display) {
     display.drawGlyph1bpp(glyphX, kMargin, kSitelenWidth, kSitelenHeight, glyph, kColorAccent);
   }
 
-  // One line per gloss language (Toki Pona is the headword itself, so it is skipped here).
+  // One language at a time (ADR-0007): the all-languages lines overflowed the panel width and
+  // wrapped illegibly. The label doubles as a cycling affordance — `< English  1/5 >` — and
+  // the glosses sit one sense per line, each short enough never to overflow the width.
+  const int lang = state.detailLang;
   int y = kMargin + kLineHeight * kHeaderScale + kMargin;
-  char line[96];
-  for (int lang = 0; lang < LangCount; ++lang) {
-    if (static_cast<Lang>(lang) == Lang::Tp) continue;
-    char glosses[80];
-    joinGlosses(e.glossesByLang[lang], glosses, sizeof(glosses));
-    std::snprintf(line, sizeof(line), "%s: %s", LANG_LABEL[lang], glosses);
-    display.drawText(kMargin, y, line, kColorText, kBodyScale);
+
+  char label[32];
+  const int langPosition = lang - static_cast<int>(Lang::Tp);  // En -> 1 ... Pt -> LangCount-1
+  std::snprintf(label, sizeof(label), "< %s  %d/%d >", LANG_LABEL[lang], langPosition,
+                LangCount - 1);
+  display.drawText(kMargin, y, label, kColorAccent, kBodyScale);
+  y += kLineHeight;
+
+  for (const char* const* gloss = e.glossesByLang[lang]; *gloss != nullptr; ++gloss) {
+    display.drawText(kMargin + kGlossIndent, y, *gloss, kColorText, kBodyScale);
     y += kLineHeight;
   }
 }

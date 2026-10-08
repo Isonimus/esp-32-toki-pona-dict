@@ -16,7 +16,7 @@ constexpr int kMaxResults = 32;
 
 enum class View : uint8_t {
   Search,  // typing a query, browsing the merged result list
-  Detail,  // one entry's glosses in all languages + its sitelen glyph
+  Detail,  // one entry: its glosses in one language at a time (cycled) + its sitelen glyph
 };
 
 struct UiState {
@@ -30,6 +30,9 @@ struct UiState {
   int selected = 0;  // focused row, always in [0, resultCount) when resultCount > 0
 
   uint16_t detailEntry = 0;  // entry shown in Detail view; meaningful only when view==Detail
+  // Language shown in Detail, one at a time, cycled with Nav (ADR-0007). A Lang index in
+  // [En, Pt]; set when Detail opens, meaningful only when view==Detail.
+  uint8_t detailLang = static_cast<uint8_t>(Lang::En);
 };
 
 }  // namespace tp

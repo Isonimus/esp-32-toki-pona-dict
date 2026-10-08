@@ -87,6 +87,34 @@ int main() {
     CHECK(resultsContainHeadword(ui, "telo"));
   }
 
+  // Detail shows one language at a time, opening on the first cycle language; Nav cycles it
+  // (wrapping both ways), and each fresh open resets to the first language (ADR-0007).
+  {
+    UiController ui;
+    type(ui, "telo");
+    ui.handle(InputEvent::select());
+    CHECK(ui.state().view == View::Detail);
+    CHECK(ui.state().detailLang == static_cast<uint8_t>(Lang::En));
+
+    ui.handle(InputEvent::navigate(NavDir::Down));
+    CHECK(ui.state().detailLang == static_cast<uint8_t>(Lang::Es));
+    ui.handle(InputEvent::navigate(NavDir::Down));
+    ui.handle(InputEvent::navigate(NavDir::Down));
+    ui.handle(InputEvent::navigate(NavDir::Down));
+    CHECK(ui.state().detailLang == static_cast<uint8_t>(Lang::Pt));
+    ui.handle(InputEvent::navigate(NavDir::Down));
+    CHECK(ui.state().detailLang == static_cast<uint8_t>(Lang::En));  // wrapped past the end
+
+    ui.handle(InputEvent::navigate(NavDir::Up));
+    CHECK(ui.state().detailLang == static_cast<uint8_t>(Lang::Pt));  // wrapped past the start
+
+    // A fresh open resets to the first language (not "remember last"); Back still leaves.
+    ui.handle(InputEvent::back());
+    CHECK(ui.state().view == View::Search);
+    ui.handle(InputEvent::select());
+    CHECK(ui.state().detailLang == static_cast<uint8_t>(Lang::En));
+  }
+
   // Symmetric lookup: an English gloss finds the same Toki Pona entry (ADR-0004).
   {
     UiController ui;

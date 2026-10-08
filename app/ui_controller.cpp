@@ -3,6 +3,14 @@
 #include "search.hpp"
 
 namespace tp {
+namespace {
+
+// Detail cycles the non-Toki-Pona languages (Tp is the headword title itself), the contiguous
+// enum range [En, Count) in cycle order (ADR-0007). Opening Detail starts on the first of them.
+constexpr int kFirstDetailLang = static_cast<int>(Lang::En);
+constexpr int kDetailLangCount = LangCount - kFirstDetailLang;
+
+}  // namespace
 
 void UiController::runSearch() {
   state_.resultCount = 0;
@@ -37,9 +45,23 @@ void UiController::runSearch() {
 
 void UiController::handle(const InputEvent& event) {
   if (state_.view == View::Detail) {
-    // Detail is a leaf: only Back (return to the list) is meaningful; everything else is
-    // inert until the list drives navigation again.
-    if (event.kind == InputKind::Back) state_.view = View::Search;
+    // Detail shows one language at a time; Nav cycles it (wrapping, since a language selector is
+    // a ring), Back returns to the list, everything else is inert (ADR-0007).
+    switch (event.kind) {
+      case InputKind::Back:
+        state_.view = View::Search;
+        break;
+      case InputKind::Nav: {
+        // Walk the [En, Count) ring; Up is "-1" expressed as +(count-1) to avoid negative mod.
+        const int offset = state_.detailLang - kFirstDetailLang;
+        const int step = (event.nav == NavDir::Down) ? 1 : kDetailLangCount - 1;
+        state_.detailLang =
+            static_cast<uint8_t>(kFirstDetailLang + (offset + step) % kDetailLangCount);
+        break;
+      }
+      default:
+        break;
+    }
     return;
   }
 
@@ -80,6 +102,7 @@ void UiController::handle(const InputEvent& event) {
       // Open the focused result. No results means nothing to open.
       if (state_.resultCount > 0) {
         state_.detailEntry = state_.results[state_.selected];
+        state_.detailLang = static_cast<uint8_t>(kFirstDetailLang);  // open on the first language (ADR-0007)
         state_.view = View::Detail;
       }
       break;
