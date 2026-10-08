@@ -25,6 +25,17 @@ Facts about *decisions* go in `adr/`, not here.
       browse-the-whole-corpus mode + cyclic (wrapping) Nav, so a keyboard-less board can reach a
       word (an empty query yields nothing today).
 
+## UX / polish (ADR-0004)
+- [ ] Boot splash: a brief sitelen pona wordmark/title on startup before the search view.
+      Design it together with the on-device About/credits view (Sitelen pona item above) — the
+      splash is the natural home for the nasin nanpa MIT notice, so they are one screen's worth
+      of work, not two. Needs an ADR (amending ADR-0004's view set) when built.
+- [ ] Empty-search-view affordance: a short sitelen pona prompt sentence + a "look/search"
+      icon beside today's bare `>`, to signal type-to-search and the two-way lookup. The sitelen
+      sentence is free (glyphs already render, ADR-0003); the icon is the open question — either
+      a small bitmap asset or reuse the sitelen glyph `lukin` ("see/look") to avoid a new asset.
+      Cosmetic, no Latin-diacritic font dependency. ADR when built.
+
 ## Project
 - [ ] Confirm the five-language set with the operator (currently en/es/fr/de/pt in
       `data/languages.json`); swapping one is a data change.
