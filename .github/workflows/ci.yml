@@ -2,9 +2,11 @@ name: CI
 
 # Runs on every push and PR against the checked-out (pushed) tree. This is the backstop that
 # cannot be bypassed with a local `--no-verify` or a clone that never installed a git hook: the
-# host test suite, the third-party-notice obligation, and the generated-core drift guard all run
-# on a runner. There is no device build here yet — no `platformio.ini` exists (see LEDGER); a
-# board matrix is added with the first board profile, not invented as dead config now.
+# host test suite, the third-party-notice obligation, and the generated-core drift guard run on
+# a runner (the `host` job), and the firmware is compiled for the first board profile (the
+# `device` job). The device job proves the HAL + app + core link into a real image under the
+# ESP32-S3 toolchain; rendering and input themselves are a per-board bring-up proof, not CI's
+# job (ADR-0001, ADR-0005).
 on:
   push:
   pull_request:
@@ -47,3 +49,31 @@ jobs:
       # machine, compiled under -Wall -Wextra and run natively. No hardware, no Python.
       - name: Host test suite
         run: npm run test:host
+
+  device:
+    name: device (tp_cardputer)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+          cache: pip
+
+      # Cache the downloaded ESP32-S3 platform, toolchain, and libraries across runs — the first
+      # build fetches hundreds of MB; later ones reuse it. Keyed on platformio.ini so a platform
+      # or lib_deps bump busts the cache.
+      - name: Cache PlatformIO
+        uses: actions/cache@v4
+        with:
+          path: ~/.platformio
+          key: pio-${{ runner.os }}-${{ hashFiles('platformio.ini') }}
+
+      - name: Install PlatformIO
+        run: pip install platformio
+
+      # Compile the firmware for the Cardputer profile. A clean link proves the four layers build
+      # together under the real toolchain; the on-device render/input proof is tracked in LEDGER.
+      - name: Build firmware
+        run: pio run -e tp_cardputer

@@ -9,15 +9,19 @@ Facts about *decisions* go in `adr/`, not here.
       MIT obligation for the distributed release, enforced by `tools/check-notices.mjs`
       (run in `npm run test:host`); the firmware release must bundle that file.
 
-## HAL / app (ADR-0001)
-- [ ] Keyboard input driver (first reference board) and a button/encoder driver.
-- [ ] LovyanGFX display driver behind `DisplaySurface`, panel auto-detect per board. Must
-      implement `drawGlyph1bpp` to the packing in `core/sitelen.hpp` (MSB-first, row-major,
-      byte-aligned rows); `app/render.cpp` already issues the blit, host-tested in `test_ui`.
-- [ ] `platformio.ini`: real build profiles per board; first reference board bring-up proof.
-      With the first profile, add a device-build leg to `.github/workflows/ci.yml` (the host
-      lane already runs `check:generated` + `test:host`); until a profile exists a board matrix
-      would be dead config.
+## HAL / app (ADR-0001, ADR-0005)
+- [ ] Cardputer bring-up proof: flash `tp_cardputer` on the ADV and capture a screenshot + a
+      short input walk-through (the ADR-0001/0005 acceptance bar — CI only proves it links).
+- [ ] Original Cardputer: implement the 74HC138 matrix scan in `CardputerKeyboard` (today a
+      fail-loud stub; its decode is specified in ADR-0005) and add its bring-up proof. No new
+      env or app change — one image already serves both variants by runtime detection.
+- [ ] Latin-diacritic text font for `LgfxDisplaySurface::drawText`: the built-in LovyanGFX font
+      is ASCII, so accented es/fr/de/pt glosses render as placeholder boxes until a font with
+      Latin-1/extended coverage is wired (ADR-0005). TP + EN are fully legible meanwhile.
+- [ ] M5StickC Plus2 slice: its ST7789 135x240 panel class + a 3-button `InputSource`
+      (three-button cyclic, ADR-0005), **and** a new ADR amending ADR-0004 for a
+      browse-the-whole-corpus mode + cyclic (wrapping) Nav, so a keyboard-less board can reach a
+      word (an empty query yields nothing today).
 
 ## Project
 - [ ] Confirm the five-language set with the operator (currently en/es/fr/de/pt in
