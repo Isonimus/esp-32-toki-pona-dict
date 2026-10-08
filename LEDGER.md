@@ -10,11 +10,13 @@ Facts about *decisions* go in `adr/`, not here.
       (run in `npm run test:host`); the firmware release must bundle that file.
 
 ## HAL / app (ADR-0001, ADR-0005)
-- [ ] Cardputer bring-up proof: flash `tp_cardputer` on the ADV and capture a screenshot + a
-      short input walk-through (the ADR-0001/0005 acceptance bar — CI only proves it links).
 - [ ] Original Cardputer: implement the 74HC138 matrix scan in `CardputerKeyboard` (today a
       fail-loud stub; its decode is specified in ADR-0005) and add its bring-up proof. No new
-      env or app change — one image already serves both variants by runtime detection.
+      env or app change — one image already serves both variants by runtime detection. (The ADV
+      bring-up proof is done: `docs/bringup/cardputer-adv/`.)
+- [ ] Extract the Cardputer key→`InputEvent` mapping (`mapPress` + keymap) into a pure,
+      host-testable unit so the keymap — incl. bare-arrow nav (ADR-0008) — gets a host regression
+      test. Today the driver is device-only (ADR-0005), so the mapping is proven only on-device.
 - [ ] Latin-diacritic text font for `LgfxDisplaySurface::drawText`: the built-in LovyanGFX font
       is ASCII, so accented es/fr/de/pt glosses render as placeholder boxes until a font with
       Latin-1/extended coverage is wired (ADR-0005). TP + EN are fully legible meanwhile.
