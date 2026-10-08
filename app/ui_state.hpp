@@ -15,12 +15,14 @@ constexpr int kMaxQueryLen = 32;
 constexpr int kMaxResults = 32;
 
 enum class View : uint8_t {
+  Splash,  // transient boot wordmark (ADR-0009); dismissed by first input or a timeout
   Search,  // typing a query, browsing the merged result list
   Detail,  // one entry: its glosses in one language at a time (cycled) + its sitelen glyph
+  About,   // read-only colophon: the sitelen wordmark + third-party font credit (ADR-0009)
 };
 
 struct UiState {
-  View view = View::Search;
+  View view = View::Splash;  // boot shows the splash (ADR-0009), dismissed into Search
 
   char query[kMaxQueryLen + 1] = {};  // NUL-terminated typed query
   int queryLen = 0;

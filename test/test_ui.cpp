@@ -26,6 +26,14 @@ static void type(UiController& ui, const char* text) {
   for (const char* p = text; *p; ++p) ui.handle(InputEvent::character(*p));
 }
 
+// A controller advanced past the boot splash to the search root (ADR-0009) — the steady state
+// the pre-splash behaviour tests are written against.
+static UiController atSearch() {
+  UiController ui;
+  ui.dismissSplash();
+  return ui;
+}
+
 // Whether any result row is the entry whose headword is `tp`.
 static bool resultsContainHeadword(const UiController& ui, const char* tp) {
   const UiState& s = ui.state();
@@ -51,13 +59,30 @@ class FakeDisplay final : public DisplaySurface {
 };
 
 int main() {
-  // Fresh state: Search view, empty query, no results.
+  // Boot shows the splash; the first real input dismisses it to Search and is swallowed (not
+  // typed); None leaves it up; dismissSplash() is the timeout path main/ drives (ADR-0009).
   {
     UiController ui;
+    CHECK(ui.state().view == View::Splash);
+    ui.handle(InputEvent::none());
+    CHECK(ui.state().view == View::Splash);  // a bare poll must not skip the splash
+    ui.handle(InputEvent::character('x'));
+    CHECK(ui.state().view == View::Search);
+    CHECK(ui.state().queryLen == 0);  // the dismissing key was swallowed, not typed into the query
+
+    UiController timed;
+    timed.dismissSplash();
+    CHECK(timed.state().view == View::Search);  // the timed path, with no input at all
+    timed.dismissSplash();                      // idempotent once past the splash
+    CHECK(timed.state().view == View::Search);
+  }
+
+  // Fresh search root: empty query, no results; None and Nav/Select with no results are inert.
+  {
+    UiController ui = atSearch();
     CHECK(ui.state().view == View::Search);
     CHECK(ui.state().queryLen == 0);
     CHECK(ui.state().resultCount == 0);
-    // None and Nav/Select with no results are all inert.
     ui.handle(InputEvent::none());
     ui.handle(InputEvent::navigate(NavDir::Down));
     ui.handle(InputEvent::select());
@@ -65,9 +90,30 @@ int main() {
     CHECK(ui.state().resultCount == 0);
   }
 
+  // About colophon (ADR-0009): Back from the empty search root opens it (ADR-0004 left that
+  // inert); typing and Nav are inert while it is up; Back returns to Search. A non-empty query
+  // keeps Back as backspace, never opening About.
+  {
+    UiController ui = atSearch();
+    ui.handle(InputEvent::back());
+    CHECK(ui.state().view == View::About);
+    ui.handle(InputEvent::character('a'));
+    ui.handle(InputEvent::navigate(NavDir::Down));
+    CHECK(ui.state().view == View::About);
+    CHECK(ui.state().queryLen == 0);  // About swallows typing — the query stays empty
+    ui.handle(InputEvent::back());
+    CHECK(ui.state().view == View::Search);
+
+    UiController typed = atSearch();
+    typed.handle(InputEvent::character('t'));
+    typed.handle(InputEvent::back());  // backspace, not About
+    CHECK(typed.state().view == View::Search);
+    CHECK(typed.state().queryLen == 0);
+  }
+
   // Typing a Toki Pona headword finds it; Select opens Detail; Back returns, query intact.
   {
-    UiController ui;
+    UiController ui = atSearch();
     type(ui, "telo");
     CHECK(std::strcmp(ui.state().query, "telo") == 0);
     CHECK(ui.state().resultCount > 0);
@@ -90,7 +136,7 @@ int main() {
   // Detail shows one language at a time, opening on the first cycle language; Nav cycles it
   // (wrapping both ways), and each fresh open resets to the first language (ADR-0007).
   {
-    UiController ui;
+    UiController ui = atSearch();
     type(ui, "telo");
     ui.handle(InputEvent::select());
     CHECK(ui.state().view == View::Detail);
@@ -117,21 +163,21 @@ int main() {
 
   // Symmetric lookup: an English gloss finds the same Toki Pona entry (ADR-0004).
   {
-    UiController ui;
+    UiController ui = atSearch();
     type(ui, "water");
     CHECK(resultsContainHeadword(ui, "telo"));
   }
 
   // Diacritic-insensitive: "agua" finds "água"→telo (folding, ADR-0002).
   {
-    UiController ui;
+    UiController ui = atSearch();
     type(ui, "agua");
     CHECK(resultsContainHeadword(ui, "telo"));
   }
 
   // Merged results are deduplicated by entry id.
   {
-    UiController ui;
+    UiController ui = atSearch();
     type(ui, "a");
     const UiState& s = ui.state();
     for (int i = 0; i < s.resultCount; ++i) {
@@ -139,23 +185,19 @@ int main() {
     }
   }
 
-  // Backspace edits the query and re-runs the search.
+  // Backspace edits the query and re-runs the search. (Back on an *empty* query opens About,
+  // ADR-0009 — covered in the About block above, not repeated here.)
   {
-    UiController ui;
+    UiController ui = atSearch();
     type(ui, "telo");
     ui.handle(InputEvent::back());
     CHECK(std::strcmp(ui.state().query, "tel") == 0);
     CHECK(ui.state().resultCount > 0);  // "tel" still prefixes "telo"
-    // Back on an empty query is inert and never leaves the root view.
-    UiController empty;
-    empty.handle(InputEvent::back());
-    CHECK(empty.state().view == View::Search);
-    CHECK(empty.state().queryLen == 0);
   }
 
   // Nav clamps at both ends, never wrapping.
   {
-    UiController ui;
+    UiController ui = atSearch();
     type(ui, "a");
     CHECK(ui.state().resultCount > 1);
     ui.handle(InputEvent::navigate(NavDir::Up));  // already at 0
@@ -168,14 +210,14 @@ int main() {
 
   // Query length is bounded; typing past the cap is dropped, not an overflow.
   {
-    UiController ui;
+    UiController ui = atSearch();
     for (int i = 0; i < kMaxQueryLen + 10; ++i) ui.handle(InputEvent::character('a'));
     CHECK(ui.state().queryLen == kMaxQueryLen);
   }
 
-  // Renderer: both views issue draws against the seam without crashing.
+  // Renderer: every view issues draws against the seam without crashing.
   {
-    UiController ui;
+    UiController ui = atSearch();
     type(ui, "telo");
     FakeDisplay display;
     render(ui.state(), display);
@@ -189,6 +231,27 @@ int main() {
     CHECK(detail.fills == 1 && detail.presents == 1);
     CHECK(detail.texts >= 2);   // headword + gloss lines
     CHECK(detail.glyphs == 1);  // telo's sitelen glyph is blitted into the detail accent (ADR-0003)
+  }
+
+  // Renderer: the splash and About views draw the "toki pona" wordmark (two glyphs) plus their
+  // credit text, against the seam without crashing (ADR-0009).
+  {
+    UiController splashUi;  // fresh = boot splash
+    CHECK(splashUi.state().view == View::Splash);
+    FakeDisplay splash;
+    render(splashUi.state(), splash);
+    CHECK(splash.fills == 1 && splash.presents == 1);
+    CHECK(splash.glyphs == 2);  // the "toki pona" wordmark is two sitelen glyphs
+    CHECK(splash.texts >= 1);   // the font credit line
+
+    UiController aboutUi = atSearch();
+    aboutUi.handle(InputEvent::back());  // empty query -> About
+    CHECK(aboutUi.state().view == View::About);
+    FakeDisplay about;
+    render(aboutUi.state(), about);
+    CHECK(about.fills == 1 && about.presents == 1);
+    CHECK(about.glyphs == 2);  // same wordmark
+    CHECK(about.texts >= 3);   // font credit + copyright + notice-file pointer lines
   }
 
   if (failures == 0) {

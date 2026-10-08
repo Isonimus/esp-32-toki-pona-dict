@@ -27,6 +27,12 @@ tp::CardputerKeyboard gInput;
 namespace {
 tp::UiController gUi;
 
+// How long the boot splash (ADR-0009) stays up before auto-dismissing to the search view. The
+// controller is clockless (ADR-0004), so main/ owns this timeout; a keypress dismisses sooner
+// via handle(). Tuned at bring-up; long enough to read the wordmark, short enough not to annoy.
+constexpr uint32_t kSplashHoldMs = 1500;
+uint32_t gSplashShownAtMs = 0;
+
 #ifdef TP_DEBUG_SCREENSHOT
 // The host (tools/fb-capture.py) sends this one byte to request a framebuffer dump (ADR-0006).
 // DLE: not something a serial monitor emits by accident, and serial RX is otherwise unused
@@ -43,7 +49,8 @@ void setup() {
   if (!gDisplay.begin()) Serial.println("[FATAL] display init failed");
   if (!gInput.begin()) Serial.println("[FATAL] input init failed");
 
-  tp::render(gUi.state(), gDisplay);  // draw the empty search view once at boot.
+  gSplashShownAtMs = millis();
+  tp::render(gUi.state(), gDisplay);  // draw the boot splash once (ADR-0009); loop() dismisses it.
 }
 
 void loop() {
@@ -51,6 +58,15 @@ void loop() {
   // Service a screenshot request before input so a capture reflects the current frame (ADR-0006).
   if (Serial.available() && Serial.read() == kScreenshotCommand) gDisplay.writePpm(Serial);
 #endif
+
+  // Auto-dismiss the boot splash once its hold elapses (ADR-0009): the controller owns the
+  // transition, main/ owns the clock. Checking the view (not the time alone) means a keypress
+  // that dismissed the splash early below is not re-triggered here. Unsigned subtraction is
+  // millis()-rollover safe.
+  if (gUi.state().view == tp::View::Splash && millis() - gSplashShownAtMs >= kSplashHoldMs) {
+    gUi.dismissSplash();
+    tp::render(gUi.state(), gDisplay);
+  }
 
   // Redraw only when an event actually changed the state — no busy repaint, no tearing.
   const tp::InputEvent event = gInput.poll();

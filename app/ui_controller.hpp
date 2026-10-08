@@ -17,6 +17,11 @@ class UiController {
   // source and forward whatever it gets unconditionally.
   void handle(const InputEvent& event);
 
+  // Dismiss the boot splash into the search root (ADR-0009). The controller is clockless, so
+  // main/ calls this once the splash hold elapses; the first input dismisses it sooner via
+  // handle(). Idempotent: a no-op once the splash is already gone.
+  void dismissSplash();
+
  private:
   // Rebuild `results` from the current query by searching every language and merging the
   // hits (deduped, cycle order), then clamp `selected` into range. Mode-free symmetric

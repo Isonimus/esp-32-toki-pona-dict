@@ -4,12 +4,16 @@ Open work: deferrals, defects, follow-ups. One line each; delete the line when c
 Facts about *decisions* go in `adr/`, not here.
 
 ## Sitelen pona (ADR-0003)
-- [ ] When an on-device About/credits view exists (needs the app/HAL work below), display the
-      nasin nanpa MIT notice on-device too. Until then `THIRD_PARTY_NOTICES.md` discharges the
-      MIT obligation for the distributed release, enforced by `tools/check-notices.mjs`
-      (run in `npm run test:host`); the firmware release must bundle that file.
+- The on-device credit now exists: the About colophon (ADR-0009) shows the nasin nanpa font
+      credit on-device. The **verbatim** MIT text stays in `THIRD_PARTY_NOTICES.md`, which ships
+      with the firmware and discharges the obligation (enforced by `tools/check-notices.mjs` in
+      `npm run test:host`); the on-device view is a condensed courtesy credit, not the legal text.
 
 ## HAL / app (ADR-0001, ADR-0005)
+- [ ] Bring-up proof for the splash + About views (ADR-0009): extend `docs/bringup/cardputer-adv/`
+      with the boot splash frame and the `Back`-from-empty-search → About colophon frame.
+      Rendering is not host-assertable (ADR-0001); capture the splash within its hold window
+      (`kSplashHoldMs`), since it auto-dismisses.
 - [ ] Original Cardputer: implement the 74HC138 matrix scan in `CardputerKeyboard` (today a
       fail-loud stub; its decode is specified in ADR-0005) and add its bring-up proof. No new
       env or app change — one image already serves both variants by runtime detection. (The ADV

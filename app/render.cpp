@@ -22,6 +22,57 @@ constexpr int kLineHeight = 16;
 constexpr int kHeaderScale = 2;
 constexpr int kBodyScale = 1;
 constexpr int kGlossIndent = 8;  // senses are indented under their language label
+constexpr int kWordmarkGap = 8;  // pixels between the two wordmark glyphs
+
+// On-device colophon credit (ADR-0009). The legally-operative verbatim notice lives in
+// THIRD_PARTY_NOTICES.md (shipped with the firmware, enforced by tools/check-notices.mjs);
+// these lines are a human-readable courtesy credit, hand-kept in sync with that file's
+// attribution. "(c)" is ASCII on purpose — the built-in font has no "©" glyph.
+constexpr const char* kSplashCredit = "nasin nanpa";
+constexpr const char* kAboutFontCredit = "sitelen pona: nasin nanpa";
+constexpr const char* kAboutCopyright = "(c) 2022 jan Itan - MIT";
+constexpr const char* kAboutNoticeLead = "Full notices:";
+constexpr const char* kAboutNoticeFile = "THIRD_PARTY_NOTICES.md";
+
+// The "toki pona" wordmark: the product's name in its own script, drawn as two sitelen glyphs
+// centred horizontally at `top`. Shared by the splash and the About colophon (ADR-0009). A
+// glyph the font lacks is skipped (same contract as the detail view), so the wordmark degrades
+// gracefully rather than crashing. Returns the y just below the wordmark for the caller's text.
+int drawWordmark(DisplaySurface& display, int top) {
+  const uint8_t* toki = sitelenGlyph("toki");
+  const uint8_t* pona = sitelenGlyph("pona");
+  const int wordmarkWidth = kSitelenWidth * 2 + kWordmarkGap;
+  const int x = (static_cast<int>(display.width()) - wordmarkWidth) / 2;
+  if (toki) display.drawGlyph1bpp(x, top, kSitelenWidth, kSitelenHeight, toki, kColorAccent);
+  if (pona) {
+    const int ponaX = x + kSitelenWidth + kWordmarkGap;
+    display.drawGlyph1bpp(ponaX, top, kSitelenWidth, kSitelenHeight, pona, kColorAccent);
+  }
+  return top + kSitelenHeight + kMargin;
+}
+
+void renderSplash(DisplaySurface& display) {
+  // Wordmark roughly centred vertically, with the font credit beneath (ADR-0009). Text is
+  // left-aligned at the margin like every other view: the seam exposes no text-width metric to
+  // centre against, and the layout constants are retuned per board at bring-up anyway.
+  const int top = (static_cast<int>(display.height()) - kSitelenHeight) / 2 - kLineHeight;
+  const int creditY = drawWordmark(display, top);
+  display.drawText(kMargin, creditY, kSplashCredit, kColorText, kBodyScale);
+}
+
+void renderAbout(DisplaySurface& display) {
+  // Condensed colophon (ADR-0009): the wordmark, then the third-party font credit. The verbatim
+  // MIT text is intentionally absent — it ships in THIRD_PARTY_NOTICES.md (ADR-0003); this view
+  // is a human-readable courtesy credit, not the legal notice.
+  int y = drawWordmark(display, kMargin);
+  display.drawText(kMargin, y, kAboutFontCredit, kColorText, kBodyScale);
+  y += kLineHeight;
+  display.drawText(kMargin, y, kAboutCopyright, kColorText, kBodyScale);
+  y += kLineHeight + kMargin;
+  display.drawText(kMargin, y, kAboutNoticeLead, kColorText, kBodyScale);
+  y += kLineHeight;
+  display.drawText(kMargin + kGlossIndent, y, kAboutNoticeFile, kColorAccent, kBodyScale);
+}
 
 void renderSearch(const UiState& state, DisplaySurface& display) {
   // Query line at the top; a leading '>' marks it as the edit field.
@@ -77,10 +128,19 @@ void renderDetail(const UiState& state, DisplaySurface& display) {
 
 void render(const UiState& state, DisplaySurface& display) {
   display.fillScreen(kColorBackground);
-  if (state.view == View::Detail) {
-    renderDetail(state, display);
-  } else {
-    renderSearch(state, display);
+  switch (state.view) {
+    case View::Splash:
+      renderSplash(display);
+      break;
+    case View::Detail:
+      renderDetail(state, display);
+      break;
+    case View::About:
+      renderAbout(display);
+      break;
+    case View::Search:
+      renderSearch(state, display);
+      break;
   }
   display.present();
 }

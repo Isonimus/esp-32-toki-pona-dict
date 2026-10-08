@@ -43,7 +43,27 @@ void UiController::runSearch() {
   }
 }
 
+void UiController::dismissSplash() {
+  // The splash has no state of its own; dismissing it is just the move to the search root
+  // (ADR-0009). Guarded so the timeout path and a stray late call cannot clobber another view.
+  if (state_.view == View::Splash) state_.view = View::Search;
+}
+
 void UiController::handle(const InputEvent& event) {
+  if (state_.view == View::Splash) {
+    // Any real input dismisses the boot splash and is swallowed — not typed — so mashing a key
+    // during it cannot seed the query. None leaves it up, so a bare poll never skips it; the
+    // timed dismissal is main/'s job (ADR-0009).
+    if (!event.isNone()) dismissSplash();
+    return;
+  }
+
+  if (state_.view == View::About) {
+    // A read-only colophon (ADR-0009): Back returns to the search root, everything else inert.
+    if (event.kind == InputKind::Back) state_.view = View::Search;
+    return;
+  }
+
   if (state_.view == View::Detail) {
     // Detail shows one language at a time; Nav cycles it (wrapping, since a language selector is
     // a ring), Back returns to the list, everything else is inert (ADR-0007).
@@ -77,12 +97,15 @@ void UiController::handle(const InputEvent& event) {
       break;
 
     case InputKind::Back:
-      // Edit the query: drop the last character. With an empty query there is nothing to
-      // delete and no view to leave (Search is the root), so Back is inert (ADR-0004).
+      // With a non-empty query, Back edits it: drop the last character. With an empty query
+      // there is nothing to delete and Search is the root — ADR-0004 left this inert; ADR-0009
+      // repurposes that wasted event to open the About colophon ("nothing behind the root").
       if (state_.queryLen > 0) {
         state_.query[--state_.queryLen] = '\0';
         state_.selected = 0;
         runSearch();
+      } else {
+        state_.view = View::About;
       }
       break;
 
