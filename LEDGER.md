@@ -3,10 +3,6 @@
 Open work: deferrals, defects, follow-ups. One line each; delete the line when closed.
 Facts about *decisions* go in `adr/`, not here.
 
-## Core / data
-- [ ] Optional: extend the corpus beyond nimi pu (120) with common *nimi ku suli* words
-      (e.g. kijetesantakalu, tonsi, kipisi, monsuta) if the operator wants them.
-
 ## Sitelen pona (ADR-0003)
 - [ ] When an on-device About/credits view exists (needs the app/HAL work below), display the
       nasin nanpa MIT notice on-device too. Until then `THIRD_PARTY_NOTICES.md` discharges the

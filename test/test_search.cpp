@@ -82,6 +82,22 @@ int main() {
     check(tp::search(tp::Lang::En, "   ", ids, 32) == 0, "whitespace query returns 0");
   }
 
+  // 7. nimi ku suli corpus: the 17 words beyond nimi pu resolve two-way, keep diacritic
+  //    folding, and each carries a sitelen glyph (its headword id). Fails on the nimi-pu-only
+  //    corpus, so it guards the extension actually reaching the generated tables.
+  {
+    uint16_t ids[32];
+    int n = tp::search(tp::Lang::Tp, "tonsi", ids, 32);
+    check(n == 1, "tp 'tonsi' (nimi ku suli) resolves to exactly one entry");
+    if (n == 1) {
+      check(std::strcmp(tp::entry(ids[0]).sitelen, "tonsi") == 0,
+            "tonsi carries a sitelen glyph id (defaults to headword)");
+    }
+  }
+  check(finds(tp::Lang::En, "transgender", "tonsi"), "en 'transgender' -> tonsi");
+  check(finds(tp::Lang::Es, "mapache", "kijetesantakalu"), "es 'mapache' -> kijetesantakalu");
+  check(finds(tp::Lang::Es, "epico", "epiku"), "es 'epico' (no accent) -> epiku (épico)");
+
   if (g_failures == 0) {
     std::printf("PASS: all checks\n");
     return 0;
