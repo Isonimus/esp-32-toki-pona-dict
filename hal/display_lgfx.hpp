@@ -67,7 +67,40 @@ class LgfxDisplaySurface : public DisplaySurface {
 
   void present() override { canvas_.pushSprite(0, 0); }
 
+#ifdef TP_DEBUG_SCREENSHOT
+  // Stream the off-screen canvas as a binary PPM (P6) to `out` for a reproducible bring-up
+  // screenshot (ADR-0006). Debug-only: compiled out of production firmware. We read the canvas
+  // one row at a time (no ~100 KB frame buffer on a PSRAM-less board) into rgb888_t, letting
+  // readRect normalise each pixel — so the capture reflects the logical colour regardless of the
+  // sprite's internal byte order (a raw uint16_t read returns it byte-swapped). The begin-marker
+  // lets the host sync past boot/log lines before the P6 header.
+  void writePpm(Print& out) {
+    const int w = canvas_.width();
+    const int h = canvas_.height();
+    if (w > kMaxRowPixels) {  // fail loud: a wider panel needs a bigger row buffer (§3).
+      out.printf("\n--TP-PPM-ERROR-- width %d exceeds kMaxRowPixels %d\n", w, kMaxRowPixels);
+      return;
+    }
+    lgfx::rgb888_t row[kMaxRowPixels];
+    out.printf("\n--TP-PPM-BEGIN--\nP6\n%d %d\n255\n", w, h);
+    for (int y = 0; y < h; ++y) {
+      canvas_.readRect(0, y, w, 1, row);
+      for (int x = 0; x < w; ++x) {
+        const uint8_t rgb[3] = {row[x].r, row[x].g, row[x].b};  // PPM wants R,G,B in that order
+        out.write(rgb, sizeof(rgb));
+      }
+    }
+    out.print("\n--TP-PPM-END--\n");
+  }
+#endif  // TP_DEBUG_SCREENSHOT
+
  private:
+#ifdef TP_DEBUG_SCREENSHOT
+  // One scanline of RGB565, sized to the widest panel we target (the Cardputer and StickC are
+  // 240 wide); writePpm fails loud above this rather than overflowing (ADR-0006).
+  static constexpr int kMaxRowPixels = 320;
+#endif
+
   lgfx::LGFX_Device& panel_;
   lgfx::LGFX_Sprite canvas_;
   const uint8_t rotation_;

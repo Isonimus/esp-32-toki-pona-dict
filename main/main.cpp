@@ -26,6 +26,13 @@ tp::CardputerKeyboard gInput;
 
 namespace {
 tp::UiController gUi;
+
+#ifdef TP_DEBUG_SCREENSHOT
+// The host (tools/fb-capture.py) sends this one byte to request a framebuffer dump (ADR-0006).
+// DLE: not something a serial monitor emits by accident, and serial RX is otherwise unused
+// here (keys arrive on the TCA8418 I2C bus), so a stray match would at worst emit a frame.
+constexpr uint8_t kScreenshotCommand = 0x10;
+#endif
 }  // namespace
 
 void setup() {
@@ -40,6 +47,11 @@ void setup() {
 }
 
 void loop() {
+#ifdef TP_DEBUG_SCREENSHOT
+  // Service a screenshot request before input so a capture reflects the current frame (ADR-0006).
+  if (Serial.available() && Serial.read() == kScreenshotCommand) gDisplay.writePpm(Serial);
+#endif
+
   // Redraw only when an event actually changed the state — no busy repaint, no tearing.
   const tp::InputEvent event = gInput.poll();
   if (!event.isNone()) {
