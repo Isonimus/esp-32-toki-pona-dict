@@ -43,9 +43,11 @@ class FakeDisplay final : public DisplaySurface {
   uint16_t height() const override { return 135; }
   void fillScreen(uint16_t) override { ++fills; }
   void drawText(int32_t, int32_t, const char*, uint16_t, uint8_t) override { ++texts; }
-  void drawGlyph1bpp(int32_t, int32_t, uint16_t, uint16_t, const uint8_t*, uint16_t) override {}
+  void drawGlyph1bpp(int32_t, int32_t, uint16_t, uint16_t, const uint8_t*, uint16_t) override {
+    ++glyphs;
+  }
   void present() override { ++presents; }
-  int fills = 0, texts = 0, presents = 0;
+  int fills = 0, texts = 0, presents = 0, glyphs = 0;
 };
 
 int main() {
@@ -151,12 +153,14 @@ int main() {
     render(ui.state(), display);
     CHECK(display.fills == 1 && display.presents == 1);
     CHECK(display.texts >= 2);  // query line + at least one result row
+    CHECK(display.glyphs == 0);  // the search view draws no sitelen glyph
 
     ui.handle(InputEvent::select());
     FakeDisplay detail;
     render(ui.state(), detail);
     CHECK(detail.fills == 1 && detail.presents == 1);
-    CHECK(detail.texts >= 2);  // headword + gloss lines
+    CHECK(detail.texts >= 2);   // headword + gloss lines
+    CHECK(detail.glyphs == 1);  // telo's sitelen glyph is blitted into the detail accent (ADR-0003)
   }
 
   if (failures == 0) {

@@ -39,3 +39,62 @@ font engine aware of those codepoints on every board's display stack.
   lands.
 - The glyph bitmap size is a measured decision (legibility vs. flash), not an estimate;
   the probe result will be appended here as an amendment.
+
+## Amendment 2026-10-07 — font selected: nasin nanpa (MIT)
+
+Sourcing (the slice this ADR deferred to `LEDGER.md`) resolved to **nasin nanpa** by jan
+Itan, vendored at `third_party/nasin-nanpa/` (release n4.0.2, UCSUR variant). Provenance and
+reproduction steps live beside the file.
+
+Alternatives weighed: linja pona (OFL, geometric/monospace, the canonical face) and Fairfax
+HD (OFL, native bitmap — no FreeType needed). nasin nanpa won on breadth of coverage (nimi
+ku suli, not just nimi pu) and the lightest license. The operator considered shipping two
+fonts; rejected for now because both render the *same closed glyph set* (the difference is
+purely typeface), and an on-device switch would need an input verb the mode-free UI
+(ADR-0004) deliberately lacks. The rasterizer is written font-parameterized so adding or
+swapping a font is a build-input change, not a code change — a second set, if ever wanted,
+is its own decision.
+
+License: **MIT**, Copyright (c) 2022 jan Itan (verified from the repository's LICENSE blob).
+Note a correction to pre-selection research, which had reported nasin nanpa as CC0: it is
+not. MIT still permits rasterized derivatives in firmware and is lighter than OFL (no
+reserved-name rule); its one obligation — shipping the copyright + permission notice with the
+product — is tracked in `LEDGER.md`.
+
+Enumeration: the rasterizer iterates the UCSUR sitelen pona block **U+F1900–U+F1988 (137
+glyphs)**, confirmed present via `fc-query`, keyed by the codepoint derived from each
+headword. No parallel name→glyph table, preserving ADR-0002's single source of truth.
+
+The glyph **bitmap size** is still an open probe (legibility vs. flash); its result will be
+appended as a further amendment when the rasterizer measures it.
+
+## Amendment 2026-10-07 — glyph bitmap size measured: 32×32 (17.1 KB)
+
+The size probe (deferred above) is resolved to **32×32 1-bpp**, superseding the 48×48/40 KB
+*estimate* in the Decision. Measured, not guessed: the vendored nasin nanpa glyphs were
+rasterized at 24/32/40/48 px and inspected at each size against flash cost.
+
+- Flash for the full 137-glyph set: 24px ≈ 9.6 KB, **32px ≈ 17.1 KB**, 40px ≈ 26.8 KB,
+  48px ≈ 38.5 KB (1 bpp, row-major, rows byte-aligned: `stride = ceil(w/8)`).
+- Legibility: at 32px every glyph is distinct, including the densest in the *whole* script
+  (`kijetesantakalu`, `kokosila`, `misikeke` — the stress cases, beyond our current nimi pu
+  corpus). At 24px `kijetesantakalu`'s legs/tail blur together. 40/48px add sharpness this
+  closed, geometric glyph set does not need, at 1.6×–2.3× the flash.
+- Fit: on the ~240×135 reference panel a 32px glyph is a detail-view accent beside the
+  scale-2 headword, leaving room for the gloss lines; a 48px glyph would eat a third of the
+  panel height.
+
+A **rasterization-quality** finding also informs the pipeline: a hard 1-bpp rasterizer
+(FreeType/Pillow `mode='1'`) shreds the thin curved strokes into scanline artifacts at these
+sizes. The rasterizer therefore renders **antialiased grayscale and thresholds at 50%**,
+which keeps curves intact — recorded here because it is a correctness constraint on the
+tool, not a free choice.
+
+Pipeline note: the rasterizer derives each glyph's codepoint from the font's own cmap
+(glyph name `<headword>Tok` → PUA codepoint), so the headword→glyph mapping lives in the
+font, not in a hand-maintained table (ADR-0002 single-source upheld). Implemented in Python
++ Pillow (FreeType-backed), not Node: binary font rasterization is Pillow's native job and
+it ships FreeType, whereas the Node toolchain has no first-party rasterizer. The two
+generators stay decoupled — `generate.mjs` still emits the `sitelen` *string* per entry;
+`rasterize_sitelen.py` emits the string→bitmap table — so neither needs to know the other's
+internals.

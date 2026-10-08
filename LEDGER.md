@@ -10,15 +10,16 @@ Facts about *decisions* go in `adr/`, not here.
       produces a diff against the committed `core/*_gen.*` (ADR-0002).
 
 ## Sitelen pona (ADR-0003)
-- [ ] Source a sitelen pona font with a known, compatible license.
-- [ ] Probe the glyph bitmap size (legibility vs. flash) and amend ADR-0003 with the number.
-- [ ] Write the rasterizer (`tools/`) that emits `core/sitelen_gen.*`.
+- [ ] When an on-device About/credits view exists (needs the app/HAL work below), display the
+      nasin nanpa MIT notice on-device too. Until then `THIRD_PARTY_NOTICES.md` discharges the
+      MIT obligation for the distributed release, enforced by `tools/check-notices.mjs`
+      (run in `npm run test:host`); the firmware release must bundle that file.
 
 ## HAL / app (ADR-0001)
 - [ ] Keyboard input driver (first reference board) and a button/encoder driver.
-- [ ] LovyanGFX display driver behind `DisplaySurface`, panel auto-detect per board.
-- [ ] Wire the sitelen glyph blit into the detail view's reserved slot once
-      `core/sitelen_gen` exists (`app/render.cpp` renderDetail; depends on ADR-0003 slice).
+- [ ] LovyanGFX display driver behind `DisplaySurface`, panel auto-detect per board. Must
+      implement `drawGlyph1bpp` to the packing in `core/sitelen.hpp` (MSB-first, row-major,
+      byte-aligned rows); `app/render.cpp` already issues the blit, host-tested in `test_ui`.
 - [ ] `platformio.ini`: real build profiles per board; first reference board bring-up proof.
 
 ## Project

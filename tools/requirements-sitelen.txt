@@ -1,0 +1,11 @@
+# Build-time dependencies for tools/rasterize_sitelen.py (ADR-0003).
+# Only needed to REGENERATE core/sitelen_gen.cpp from the vendored font; the committed
+# generated table compiles and tests (npm run test:host) with no Python at all.
+#
+#   python3 -m venv .venv && . .venv/bin/activate
+#   pip install -r tools/requirements-sitelen.txt
+#   npm run generate:sitelen
+#
+# Pillow carries its own FreeType, so no system font engine is required.
+fonttools==4.66.1   # font cmap introspection (headword -> UCSUR codepoint)
+Pillow==12.3.0      # glyph rasterization (antialiased grayscale, then 50% threshold)

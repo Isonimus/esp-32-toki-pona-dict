@@ -4,6 +4,7 @@
 #include <cstring>
 
 #include "search.hpp"
+#include "sitelen.hpp"
 
 namespace tp {
 namespace {
@@ -55,9 +56,16 @@ void renderSearch(const UiState& state, DisplaySurface& display) {
 void renderDetail(const UiState& state, DisplaySurface& display) {
   const Entry& e = entry(state.detailEntry);
 
-  // Headword, large. The sitelen glyph is blitted beside it once the rasterised glyph table
-  // (core/sitelen_gen) lands — the seam and ADR-0003 reserve that; LEDGER tracks the slice.
+  // Headword, large.
   display.drawText(kMargin, kMargin, e.tp, kColorAccent, kHeaderScale);
+
+  // The sitelen pona glyph (ADR-0003), blitted top-right as a detail accent. Absent for any
+  // headword the font does not cover (sitelenGlyph -> nullptr), in which case we simply draw
+  // no glyph — the text entry stands on its own.
+  if (const uint8_t* glyph = sitelenGlyph(e.sitelen)) {
+    const int32_t glyphX = display.width() - kSitelenWidth - kMargin;
+    display.drawGlyph1bpp(glyphX, kMargin, kSitelenWidth, kSitelenHeight, glyph, kColorAccent);
+  }
 
   // One line per gloss language (Toki Pona is the headword itself, so it is skipped here).
   int y = kMargin + kLineHeight * kHeaderScale + kMargin;
