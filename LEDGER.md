@@ -10,10 +10,11 @@ Facts about *decisions* go in `adr/`, not here.
       `npm run test:host`); the on-device view is a condensed courtesy credit, not the legal text.
 
 ## HAL / app (ADR-0001, ADR-0005)
-- [ ] Bring-up proof for the splash + About views (ADR-0009): extend `docs/bringup/cardputer-adv/`
-      with the boot splash frame and the `Back`-from-empty-search → About colophon frame.
-      Rendering is not host-assertable (ADR-0001); capture the splash within its hold window
-      (`kSplashHoldMs`), since it auto-dismisses.
+- [ ] Bring-up proof for the splash, About, and empty-root prompt views (ADR-0009, ADR-0010):
+      extend `docs/bringup/cardputer-adv/` with the boot splash frame, the empty search root
+      showing the `lukin` + "o alasa e nimi" prompt, and the `Back`-from-empty-search → About
+      colophon frame. Rendering is not host-assertable (ADR-0001); capture the splash within its
+      hold window (`kSplashHoldMs`), since it auto-dismisses.
 - [ ] Original Cardputer: implement the 74HC138 matrix scan in `CardputerKeyboard` (today a
       fail-loud stub; its decode is specified in ADR-0005) and add its bring-up proof. No new
       env or app change — one image already serves both variants by runtime detection. (The ADV
@@ -28,17 +29,6 @@ Facts about *decisions* go in `adr/`, not here.
       (three-button cyclic, ADR-0005), **and** a new ADR amending ADR-0004 for a
       browse-the-whole-corpus mode + cyclic (wrapping) Nav, so a keyboard-less board can reach a
       word (an empty query yields nothing today).
-
-## UX / polish (ADR-0004)
-- [ ] Boot splash: a brief sitelen pona wordmark/title on startup before the search view.
-      Design it together with the on-device About/credits view (Sitelen pona item above) — the
-      splash is the natural home for the nasin nanpa MIT notice, so they are one screen's worth
-      of work, not two. Needs an ADR (amending ADR-0004's view set) when built.
-- [ ] Empty-search-view affordance: a short sitelen pona prompt sentence + a "look/search"
-      icon beside today's bare `>`, to signal type-to-search and the two-way lookup. The sitelen
-      sentence is free (glyphs already render, ADR-0003); the icon is the open question — either
-      a small bitmap asset or reuse the sitelen glyph `lukin` ("see/look") to avoid a new asset.
-      Cosmetic, no Latin-diacritic font dependency. ADR when built.
 
 ## Project
 - [ ] Confirm the five-language set with the operator (currently en/es/fr/de/pt in

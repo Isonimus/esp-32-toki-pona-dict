@@ -223,7 +223,7 @@ int main() {
     render(ui.state(), display);
     CHECK(display.fills == 1 && display.presents == 1);
     CHECK(display.texts >= 2);  // query line + at least one result row
-    CHECK(display.glyphs == 0);  // the search view draws no sitelen glyph
+    CHECK(display.glyphs == 0);  // a non-empty search list draws no sitelen glyph (ADR-0010)
 
     ui.handle(InputEvent::select());
     FakeDisplay detail;
@@ -231,6 +231,19 @@ int main() {
     CHECK(detail.fills == 1 && detail.presents == 1);
     CHECK(detail.texts >= 2);   // headword + gloss lines
     CHECK(detail.glyphs == 1);  // telo's sitelen glyph is blitted into the detail accent (ADR-0003)
+  }
+
+  // Renderer: the empty search root draws the type-to-search prompt — the lukin icon plus the
+  // "o alasa e nimi" sentence, five glyphs in all (ADR-0010). It replaces the bare screen only
+  // while the query is empty; a non-empty list draws no glyph (asserted above).
+  {
+    UiController ui = atSearch();
+    CHECK(ui.state().queryLen == 0);
+    FakeDisplay display;
+    render(ui.state(), display);
+    CHECK(display.fills == 1 && display.presents == 1);
+    CHECK(display.glyphs == 5);  // 1 lukin icon + 4 sentence glyphs
+    CHECK(display.texts == 1);   // only the '>' edit line; no result rows on the empty root
   }
 
   // Renderer: the splash and About views draw the "toki pona" wordmark (two glyphs) plus their

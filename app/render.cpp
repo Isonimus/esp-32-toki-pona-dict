@@ -34,20 +34,37 @@ constexpr const char* kAboutCopyright = "(c) 2022 jan Itan - MIT";
 constexpr const char* kAboutNoticeLead = "Full notices:";
 constexpr const char* kAboutNoticeFile = "THIRD_PARTY_NOTICES.md";
 
-// The "toki pona" wordmark: the product's name in its own script, drawn as two sitelen glyphs
-// centred horizontally at `top`. Shared by the splash and the About colophon (ADR-0009). A
-// glyph the font lacks is skipped (same contract as the detail view), so the wordmark degrades
-// gracefully rather than crashing. Returns the y just below the wordmark for the caller's text.
-int drawWordmark(DisplaySurface& display, int top) {
-  const uint8_t* toki = sitelenGlyph("toki");
-  const uint8_t* pona = sitelenGlyph("pona");
-  const int wordmarkWidth = kSitelenWidth * 2 + kWordmarkGap;
-  const int x = (static_cast<int>(display.width()) - wordmarkWidth) / 2;
-  if (toki) display.drawGlyph1bpp(x, top, kSitelenWidth, kSitelenHeight, toki, kColorAccent);
-  if (pona) {
-    const int ponaX = x + kSitelenWidth + kWordmarkGap;
-    display.drawGlyph1bpp(ponaX, top, kSitelenWidth, kSitelenHeight, pona, kColorAccent);
+// Empty-search-root prompt (ADR-0010): a "look/search" icon above a one-line sitelen sentence,
+// teaching type-to-search. Both reuse glyphs already in the bundled font (ADR-0003), so the
+// prompt needs no new asset. `alasa` ("hunt/seek/search") names the action, complementing the
+// `lukin` ("see/look") icon rather than restating it.
+constexpr const char* kPromptIcon[] = {"lukin"};
+constexpr const char* kPromptSentence[] = {"o", "alasa", "e", "nimi"};
+constexpr int kPromptIconGlyphs = 1;
+constexpr int kPromptSentenceGlyphs = 4;
+
+// Draw a row of sitelen glyphs centred horizontally across the display at `top`, each
+// kSitelenWidth wide, separated by kWordmarkGap. A glyph the font lacks is skipped but still
+// reserves its slot (the ADR-0003 degradation contract), so the row stays aligned rather than
+// crashing. Shared by the wordmark (ADR-0009) and the empty-root prompt (ADR-0010).
+void drawGlyphRowCentered(DisplaySurface& display, int top, const char* const* names, int count,
+                          uint16_t color) {
+  const int rowWidth = count * kSitelenWidth + (count - 1) * kWordmarkGap;
+  int x = (static_cast<int>(display.width()) - rowWidth) / 2;
+  for (int i = 0; i < count; ++i) {
+    if (const uint8_t* glyph = sitelenGlyph(names[i])) {
+      display.drawGlyph1bpp(x, top, kSitelenWidth, kSitelenHeight, glyph, color);
+    }
+    x += kSitelenWidth + kWordmarkGap;
   }
+}
+
+// The "toki pona" wordmark: the product's name in its own script, two sitelen glyphs centred at
+// `top`. Shared by the splash and the About colophon (ADR-0009). Returns the y just below the
+// wordmark for the caller's text.
+int drawWordmark(DisplaySurface& display, int top) {
+  static const char* const kWordmark[] = {"toki", "pona"};
+  drawGlyphRowCentered(display, top, kWordmark, 2, kColorAccent);
   return top + kSitelenHeight + kMargin;
 }
 
@@ -74,12 +91,32 @@ void renderAbout(DisplaySurface& display) {
   display.drawText(kMargin + kGlossIndent, y, kAboutNoticeFile, kColorAccent, kBodyScale);
 }
 
+// The passive prompt shown on the empty search root (ADR-0010): the `lukin` search icon above
+// the "o alasa e nimi" sentence, centred in the result area. Drawn only while the query is
+// empty; the first keystroke replaces it with the result list.
+void renderEmptyPrompt(DisplaySurface& display) {
+  const int areaTop = kMargin + kLineHeight + kMargin;  // where result rows would begin
+  const int blockHeight = kSitelenHeight * 2 + kMargin;  // icon row + sentence row
+  const int iconTop = areaTop + (static_cast<int>(display.height()) - areaTop - blockHeight) / 2;
+  drawGlyphRowCentered(display, iconTop, kPromptIcon, kPromptIconGlyphs, kColorAccent);
+  drawGlyphRowCentered(display, iconTop + kSitelenHeight + kMargin, kPromptSentence,
+                       kPromptSentenceGlyphs, kColorText);
+}
+
 void renderSearch(const UiState& state, DisplaySurface& display) {
   // Query line at the top; a leading '>' marks it as the edit field.
   char prompt[kMaxQueryLen + 2];
   prompt[0] = '>';
   std::strcpy(prompt + 1, state.query);
   display.drawText(kMargin, kMargin, prompt, kColorText, kBodyScale);
+
+  // The empty root teaches type-to-search with a sitelen prompt instead of a bare screen
+  // (ADR-0010). A non-empty query that finds nothing falls through to an empty list — the
+  // prompt is for the root, not a "no results" message.
+  if (state.queryLen == 0) {
+    renderEmptyPrompt(display);
+    return;
+  }
 
   // Result rows below, each the Toki Pona headword (the pivot, ADR-0004). The focused row
   // is drawn in the accent colour — no fill primitive needed on the seam.
