@@ -24,15 +24,16 @@ constexpr int kHeaderHeight = 26;    // headword line pitch: helvB14 (~18px) + a
 constexpr int kGlossIndent = 8;  // senses are indented under their language label
 constexpr int kWordmarkGap = 8;  // pixels between the two wordmark glyphs
 
-// On-device colophon credit (ADR-0009). The legally-operative verbatim notice lives in
-// THIRD_PARTY_NOTICES.md (shipped with the firmware, enforced by tools/check-notices.mjs);
-// these lines are a human-readable courtesy credit, hand-kept in sync with that file's
-// attribution. "(c)" is ASCII on purpose — the built-in font has no "©" glyph. The splash no
-// longer credits the font (ADR-0015); this on-device courtesy credit now lives only here.
-constexpr const char* kAboutFontCredit = "sitelen pona: nasin nanpa";
-constexpr const char* kAboutCopyright = "(c) 2022 jan Itan - MIT";
-constexpr const char* kAboutNoticeLead = "Full notices:";
-constexpr const char* kAboutNoticeFile = "THIRD_PARTY_NOTICES.md";
+// On-device colophon credit (ADR-0009, ADR-0016). The legally-operative notices live in
+// THIRD_PARTY_NOTICES.md (shipped with the firmware, enforced by tools/check-notices.mjs); these
+// lines are a human-readable courtesy credit, one per attributed work, hand-kept in sync with that
+// file. The device view is condensed to fit two attributions on the panel — the sitelen pona font
+// (nasin nanpa, MIT; ADR-0003) and the gloss data (lipu Linku, CC BY-SA; ADR-0016) — with the full
+// copyright, authorship and license text left to the notices file. The splash no longer credits
+// the font (ADR-0015); this courtesy credit now lives only here.
+constexpr const char* kAboutSitelenCredit = "sitelen pona: nasin nanpa (MIT)";
+constexpr const char* kAboutGlossCredit = "glosses: lipu Linku (CC BY-SA)";
+constexpr const char* kAboutNoticePointer = "see THIRD_PARTY_NOTICES.md";
 
 // Empty-search-root prompt (ADR-0010): a "look/search" icon above a one-line sitelen sentence,
 // teaching type-to-search. Both reuse glyphs already in the bundled font (ADR-0003), so the
@@ -80,17 +81,16 @@ void renderSplash(DisplaySurface& display) {
 }
 
 void renderAbout(DisplaySurface& display) {
-  // Condensed colophon (ADR-0009): the wordmark, then the third-party font credit. The verbatim
-  // MIT text is intentionally absent — it ships in THIRD_PARTY_NOTICES.md (ADR-0003); this view
-  // is a human-readable courtesy credit, not the legal notice.
+  // Condensed colophon (ADR-0009, ADR-0016): the wordmark, then one courtesy-credit line per
+  // attributed work — the sitelen pona font and the gloss data — and a pointer to the notices
+  // file. The verbatim legal text (full copyright, authorship, license bodies) is intentionally
+  // absent; it ships in THIRD_PARTY_NOTICES.md (ADR-0003/0016). This view is a courtesy credit.
   int y = drawWordmark(display, kMargin);
-  display.drawText(kMargin, y, kAboutFontCredit, kColorText, TextRole::Body);
+  display.drawText(kMargin, y, kAboutSitelenCredit, kColorText, TextRole::Body);
   y += kLineHeight;
-  display.drawText(kMargin, y, kAboutCopyright, kColorText, TextRole::Body);
+  display.drawText(kMargin, y, kAboutGlossCredit, kColorText, TextRole::Body);
   y += kLineHeight + kMargin;
-  display.drawText(kMargin, y, kAboutNoticeLead, kColorText, TextRole::Body);
-  y += kLineHeight;
-  display.drawText(kMargin + kGlossIndent, y, kAboutNoticeFile, kColorAccent, TextRole::Body);
+  display.drawText(kMargin, y, kAboutNoticePointer, kColorAccent, TextRole::Body);
 }
 
 // The passive prompt shown on the empty search root (ADR-0010): the `lukin` search icon above

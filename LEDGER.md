@@ -27,7 +27,17 @@ Facts about *decisions* go in `adr/`, not here.
       (three-button cyclic, ADR-0005), **and** a new ADR amending ADR-0004 for a
       browse-the-whole-corpus mode + cyclic (wrapping) Nav, so a keyboard-less board can reach a
       word (an empty query yields nothing today).
+- [ ] No-results affordance: when a *non-empty* query matches nothing, show the `ala`
+      ("none/zero/not") sitelen glyph (or a short TP phrase) in grey as a "nothing found" state,
+      instead of today's blank result area (`renderSearch` falls through to an empty list by
+      design). Distinct from the empty-root prompt (ADR-0010/0014), which is for an *empty* query.
+      Needs a small ADR amending ADR-0010 (new render state + a grey palette entry, the first
+      beyond black/white/yellow) and a host test asserting the glyph draws only for a non-empty
+      query with zero results.
 
 ## Project
 - [ ] Confirm the five-language set with the operator (currently en/es/fr/de/pt in
       `data/languages.json`); swapping one is a data change.
+- [ ] Declare the **firmware code** license. ADR-0016 licenses the dictionary *data* CC BY-SA 4.0,
+      but the code (`core/` logic, `hal/`, `app/`, `main/`) has no `LICENSE` file and no declared
+      license yet. Pick one and add a top-level `LICENSE`, keeping the data's BY-SA distinct.

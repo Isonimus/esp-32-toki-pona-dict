@@ -248,8 +248,8 @@ int main() {
   }
 
   // Renderer: the splash draws the single merged toki pona logo and no text (ADR-0015) — the
-  // font credit moved off the opening screen to the About colophon. About still draws the
-  // two-glyph wordmark plus its credit lines (ADR-0009), unchanged.
+  // font credit moved off the opening screen to the About colophon. About draws the two-glyph
+  // wordmark plus its condensed courtesy-credit lines (ADR-0009, ADR-0016).
   {
     UiController splashUi;  // fresh = boot splash
     CHECK(splashUi.state().view == View::Splash);
@@ -266,7 +266,7 @@ int main() {
     render(aboutUi.state(), about);
     CHECK(about.fills == 1 && about.presents == 1);
     CHECK(about.glyphs == 2);  // same wordmark
-    CHECK(about.texts >= 3);   // font credit + copyright + notice-file pointer lines
+    CHECK(about.texts >= 3);   // sitelen credit + gloss (lipu Linku) credit + notices pointer
   }
 
   if (failures == 0) {

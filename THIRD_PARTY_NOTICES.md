@@ -78,3 +78,22 @@ Digital Equipment Corporation make no representations about the
 suitability of this software for any purpose.  It is provided "as
 is" without express or implied warranty.
 ```
+
+---
+
+## lipu Linku (dictionary glosses)
+
+- Source: lipu Linku's `sona` data — https://github.com/lipu-linku/sona (the
+  `translations.*.definition` fields). lipu Linku is the Toki Pona community's multilingual
+  dictionary.
+- Used: the English, Spanish, French, German and Portuguese glosses in `data/dictionary.json`
+  derive from this data. They are embedded in the firmware through the generated
+  `core/dictionary_gen.cpp` (ADR-0002), so this notice accompanies the firmware.
+- License: **Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)** —
+  https://creativecommons.org/licenses/by-sa/4.0/. The dictionary data is redistributed under the
+  same license (ADR-0016). CC BY-SA 4.0 is satisfied by citing the license by URI; its full text
+  is not reproduced here, unlike the MIT/Adobe font notices above which require reproduction.
+- Changes made (per the CC BY "indicate if changes were made" term): each single `definition`
+  string was restructured into our per-language sense arrays; a diacritic-folded search index was
+  built from the glosses (ADR-0002); and the data was subset to the 137 headwords of the UCSUR
+  sitelen pona block (ADR-0003).
