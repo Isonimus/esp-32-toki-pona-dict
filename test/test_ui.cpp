@@ -235,7 +235,8 @@ int main() {
 
   // Renderer: the empty search root draws the type-to-search prompt — the lukin icon plus the
   // "o alasa e nimi" sentence, five glyphs in all (ADR-0010). It replaces the bare screen only
-  // while the query is empty; a non-empty list draws no glyph (asserted above).
+  // while the query is empty; a non-empty list draws no glyph (asserted above). The '>' edit line
+  // is suppressed on the empty root (ADR-0014), so the prompt draws no text at all.
   {
     UiController ui = atSearch();
     CHECK(ui.state().queryLen == 0);
@@ -243,7 +244,7 @@ int main() {
     render(ui.state(), display);
     CHECK(display.fills == 1 && display.presents == 1);
     CHECK(display.glyphs == 5);  // 1 lukin icon + 4 sentence glyphs
-    CHECK(display.texts == 1);   // only the '>' edit line; no result rows on the empty root
+    CHECK(display.texts == 0);   // no '>' line and no result rows while the query is empty
   }
 
   // Renderer: the splash and About views draw the "toki pona" wordmark (two glyphs) plus their

@@ -55,3 +55,17 @@ the vector font, so it is crisp at the larger size rather than an upscaled 32px 
 Compare `07` against `03-detail-en.png` (same view at 32×32): the glyph is visibly larger and
 sits crisply beside the ADR-0012 headword. The size change is global — the splash/About wordmark
 and the empty-root prompt glyphs also enlarge.
+
+## Centered empty-search root (ADR-0014), 2026-10-09
+
+With the glyphs enlarged, the empty search root was reworked to center the type-to-search prompt
+against the full panel and drop the lone edit caret. Captured on this build:
+
+| View | Result | Frame |
+|---|---|---|
+| Empty search root | `lukin` icon + `o alasa e nimi` centered in the panel; no `>` caret while empty | `09-empty-prompt.png` |
+
+What it confirms: the empty-root prompt is centered in the full panel and lifts off the bottom edge
+(it was previously centered only within the result-area slice, which pushed it against the bottom);
+and the bare `>` edit line is suppressed while the query is empty (ADR-0014), returning with the
+result list on the first keystroke.

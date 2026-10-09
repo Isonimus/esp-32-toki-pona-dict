@@ -94,28 +94,33 @@ void renderAbout(DisplaySurface& display) {
 // the "o alasa e nimi" sentence, centred in the result area. Drawn only while the query is
 // empty; the first keystroke replaces it with the result list.
 void renderEmptyPrompt(DisplaySurface& display) {
-  const int areaTop = kMargin + kLineHeight + kMargin;  // where result rows would begin
-  const int blockHeight = kSitelenHeight * 2 + kMargin;  // icon row + sentence row
-  const int iconTop = areaTop + (static_cast<int>(display.height()) - areaTop - blockHeight) / 2;
+  // The lukin icon above the "o alasa e nimi" sentence, the pair centred in the whole panel
+  // (ADR-0014). The bare '>' edit line is suppressed on the empty root (see renderSearch), so this
+  // prompt owns the screen and centres against the full height — not the old result-area slice,
+  // which pushed the block low against the bottom edge.
+  const int blockHeight = kSitelenHeight * 2 + kMargin;  // icon row + gap + sentence row
+  const int iconTop = (static_cast<int>(display.height()) - blockHeight) / 2;
   drawGlyphRowCentered(display, iconTop, kPromptIcon, kPromptIconGlyphs, kColorAccent);
   drawGlyphRowCentered(display, iconTop + kSitelenHeight + kMargin, kPromptSentence,
                        kPromptSentenceGlyphs, kColorText);
 }
 
 void renderSearch(const UiState& state, DisplaySurface& display) {
+  // The empty root teaches type-to-search with a centred sitelen prompt instead of a bare screen
+  // (ADR-0010). The '>' edit line is suppressed while the query is empty (ADR-0014), so no lonely
+  // caret floats in the corner beside the centred prompt; the first keystroke brings it back
+  // below. A non-empty query that finds nothing falls through to an empty list — the prompt is for
+  // the root, not a "no results" message.
+  if (state.queryLen == 0) {
+    renderEmptyPrompt(display);
+    return;
+  }
+
   // Query line at the top; a leading '>' marks it as the edit field.
   char prompt[kMaxQueryLen + 2];
   prompt[0] = '>';
   std::strcpy(prompt + 1, state.query);
   display.drawText(kMargin, kMargin, prompt, kColorText, TextRole::Body);
-
-  // The empty root teaches type-to-search with a sitelen prompt instead of a bare screen
-  // (ADR-0010). A non-empty query that finds nothing falls through to an empty list — the
-  // prompt is for the root, not a "no results" message.
-  if (state.queryLen == 0) {
-    renderEmptyPrompt(display);
-    return;
-  }
 
   // Result rows below, each the Toki Pona headword (the pivot, ADR-0004). The focused row
   // is drawn in the accent colour — no fill primitive needed on the seam.
