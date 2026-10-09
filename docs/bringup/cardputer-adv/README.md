@@ -42,7 +42,16 @@ What they confirm: accented letters (`ó`, `ñ`, `ç`) render as glyphs, not box
 lacks; the native language labels are restored (`Español`, `Français`); the headword is crisp (a
 real bold font, not the old blocky 2× scale); and there is a gap below the headword.
 
-## Known limitation visible here
+## Sitelen glyph enlarged to 44×44 (ADR-0013), 2026-10-09
 
-The sitelen pona glyph (top-right of the detail view) is the fixed 32×32 build-time raster
-(ADR-0003); enlarging it is tracked separately in `LEDGER.md`.
+The sitelen pona glyph was re-rasterized from 32×32 to **44×44** so it reads as a deliberate
+script accent, not a small mark (operator feedback at the ADR-0012 bring-up). Re-rendered from
+the vector font, so it is crisp at the larger size rather than an upscaled 32px bitmap.
+
+| Input | Result | Frame |
+|---|---|---|
+| `to` → Enter | `< English 1/5 >`: `to talk / speak / language / hello`, enlarged glyph top-right | `07-detail-sitelen-44.png` |
+
+Compare `07` against `03-detail-en.png` (same view at 32×32): the glyph is visibly larger and
+sits crisply beside the ADR-0012 headword. The size change is global — the splash/About wordmark
+and the empty-root prompt glyphs also enlarge.

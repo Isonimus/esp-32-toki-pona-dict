@@ -26,13 +26,14 @@ from fontTools.ttLib import TTFont
 from PIL import Image, ImageFont
 
 # --- the glyph contract (must match core/sitelen.hpp; the emitted static_assert guards it) -
-WIDTH = 32
-HEIGHT = 32
+WIDTH = 44
+HEIGHT = 44
 STRIDE = (WIDTH + 7) // 8          # bytes per row, byte-aligned
 GLYPH_BYTES = STRIDE * HEIGHT
 
-# Render at a slightly smaller em than the cell so the ink sits inside it with ~1px margin;
-# measured max ink at this em is 30x28, so no glyph is clipped and none needs rescaling.
+# Render at a slightly smaller em than the cell so the ink sits inside it with ~1px margin.
+# pack_glyph fails loud if any glyph's ink exceeds the cell, so a regenerate is itself the
+# clipping check — no glyph is silently cropped (re-verified at 44x44 for ADR-0013).
 EM_PX = HEIGHT - 2
 THRESHOLD = 128                    # grayscale value (0..255) at/above which a pixel is ink
 

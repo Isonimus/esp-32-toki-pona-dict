@@ -8,7 +8,7 @@
 // (ADR-0001): the HAL blits the bitmap, core only stores and finds it.
 //
 // Bitmap format (the contract a DisplaySurface::drawGlyph1bpp driver must honour):
-//   - kSitelenWidth x kSitelenHeight pixels, measured in ADR-0003 (32x32).
+//   - kSitelenWidth x kSitelenHeight pixels (ADR-0003, enlarged to 44x44 in ADR-0013).
 //   - 1 bit per pixel, row-major, top row first. Each row is byte-aligned: a row occupies
 //     kSitelenStride bytes and a glyph occupies kSitelenBytes bytes.
 //   - Within a byte the most significant bit is the leftmost pixel. A set bit is a
@@ -16,11 +16,13 @@
 
 namespace tp {
 
-// Measured in ADR-0003 (2026-10-07): 32x32 is legible for the densest glyph in the whole
-// script at the lightest flash. The generated table carries a static_assert on these, so
-// changing them here without re-running the rasterizer fails the build loudly.
-constexpr int kSitelenWidth = 32;
-constexpr int kSitelenHeight = 32;
+// Measured at 32x32 in ADR-0003 (legibility vs. flash), then enlarged to 44x44 in ADR-0013
+// (2026-10-09) so the detail-view glyph reads as a script accent rather than a tiny mark —
+// a visual-weight choice the original legibility probe did not optimize for. The generated
+// table carries a static_assert on these, so changing them here without re-running the
+// rasterizer fails the build loudly.
+constexpr int kSitelenWidth = 44;
+constexpr int kSitelenHeight = 44;
 constexpr int kSitelenStride = (kSitelenWidth + 7) / 8;   // bytes per row, byte-aligned
 constexpr int kSitelenBytes = kSitelenStride * kSitelenHeight;  // bytes per glyph
 

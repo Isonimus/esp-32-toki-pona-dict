@@ -30,8 +30,8 @@ static bool hasInk(const uint8_t* bitmap) {
 int main() {
   // The closed UCSUR sitelen pona block is 137 glyphs (ADR-0003); the generator emits them all.
   CHECK(SITELEN_GLYPH_COUNT == 137);
-  CHECK(kSitelenWidth == 32 && kSitelenHeight == 32);
-  CHECK(kSitelenStride == 4 && kSitelenBytes == 128);
+  CHECK(kSitelenWidth == 44 && kSitelenHeight == 44);  // ADR-0013 enlarged from 32x32
+  CHECK(kSitelenStride == 6 && kSitelenBytes == 264);  // ceil(44/8)=6 bytes/row * 44 rows
 
   // Table invariants the binary search depends on: sorted by name in byte order, every row
   // named and non-empty. A duplicate or out-of-order name would silently break lookups.
