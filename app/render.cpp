@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <cstring>
 
+#include "logo.hpp"
 #include "search.hpp"
 #include "sitelen.hpp"
 
@@ -26,8 +27,8 @@ constexpr int kWordmarkGap = 8;  // pixels between the two wordmark glyphs
 // On-device colophon credit (ADR-0009). The legally-operative verbatim notice lives in
 // THIRD_PARTY_NOTICES.md (shipped with the firmware, enforced by tools/check-notices.mjs);
 // these lines are a human-readable courtesy credit, hand-kept in sync with that file's
-// attribution. "(c)" is ASCII on purpose — the built-in font has no "©" glyph.
-constexpr const char* kSplashCredit = "nasin nanpa";
+// attribution. "(c)" is ASCII on purpose — the built-in font has no "©" glyph. The splash no
+// longer credits the font (ADR-0015); this on-device courtesy credit now lives only here.
 constexpr const char* kAboutFontCredit = "sitelen pona: nasin nanpa";
 constexpr const char* kAboutCopyright = "(c) 2022 jan Itan - MIT";
 constexpr const char* kAboutNoticeLead = "Full notices:";
@@ -68,12 +69,14 @@ int drawWordmark(DisplaySurface& display, int top) {
 }
 
 void renderSplash(DisplaySurface& display) {
-  // Wordmark roughly centred vertically, with the font credit beneath (ADR-0009). Text is
-  // left-aligned at the margin like every other view: the seam exposes no text-width metric to
-  // centre against, and the layout constants are retuned per board at bring-up anyway.
-  const int top = (static_cast<int>(display.height()) - kSitelenHeight) / 2 - kLineHeight;
-  const int creditY = drawWordmark(display, top);
-  display.drawText(kMargin, creditY, kSplashCredit, kColorText, TextRole::Body);
+  // Brand moment (ADR-0015): the toki pona logo — `toki` with the `pona` smile nested in its
+  // ring — as one centred hero. This supersedes ADR-0009's two separate wordmark glyphs plus a
+  // font credit here: the merged logo is the product's actual mark, and crediting the font on the
+  // opening screen made nasin nanpa too prominent for what is primarily a Toki Pona dictionary.
+  // The courtesy credit stays in the About colophon, the legal notice in THIRD_PARTY_NOTICES.md.
+  const int x = (static_cast<int>(display.width()) - TP_LOGO.width) / 2;
+  const int y = (static_cast<int>(display.height()) - TP_LOGO.height) / 2;
+  display.drawGlyph1bpp(x, y, TP_LOGO.width, TP_LOGO.height, TP_LOGO.bitmap, kColorAccent);
 }
 
 void renderAbout(DisplaySurface& display) {

@@ -247,16 +247,17 @@ int main() {
     CHECK(display.texts == 0);   // no '>' line and no result rows while the query is empty
   }
 
-  // Renderer: the splash and About views draw the "toki pona" wordmark (two glyphs) plus their
-  // credit text, against the seam without crashing (ADR-0009).
+  // Renderer: the splash draws the single merged toki pona logo and no text (ADR-0015) — the
+  // font credit moved off the opening screen to the About colophon. About still draws the
+  // two-glyph wordmark plus its credit lines (ADR-0009), unchanged.
   {
     UiController splashUi;  // fresh = boot splash
     CHECK(splashUi.state().view == View::Splash);
     FakeDisplay splash;
     render(splashUi.state(), splash);
     CHECK(splash.fills == 1 && splash.presents == 1);
-    CHECK(splash.glyphs == 2);  // the "toki pona" wordmark is two sitelen glyphs
-    CHECK(splash.texts >= 1);   // the font credit line
+    CHECK(splash.glyphs == 1);  // the merged logo is one 1-bpp blit, not two wordmark glyphs
+    CHECK(splash.texts == 0);   // no font credit on the splash anymore (it lives in About)
 
     UiController aboutUi = atSearch();
     aboutUi.handle(InputEvent::back());  // empty query -> About

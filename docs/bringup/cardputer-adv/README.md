@@ -69,3 +69,20 @@ What it confirms: the empty-root prompt is centered in the full panel and lifts 
 (it was previously centered only within the result-area slice, which pushed it against the bottom);
 and the bare `>` edit line is suppressed while the query is empty (ADR-0014), returning with the
 result list on the first keystroke.
+
+## Font-composed toki pona logo on the splash (ADR-0015), 2026-10-09
+
+The splash now leads with the merged toki pona logo — `toki` with the `pona` smile nested inside its
+ring — instead of the two separate wordmark glyphs, and the `nasin nanpa` font credit is dropped
+from it (it remains in the About colophon and `THIRD_PARTY_NOTICES.md`). The logo is composed from
+the vendored font via its sitelen pona scaling joiner and rasterized 1-bpp at 88×83 (ADR-0015).
+Captured on this build:
+
+| View | Result | Frame |
+|---|---|---|
+| Boot splash | The merged toki pona logo centered as a hero; no font credit | `08-splash.png` |
+
+What it confirms: the logo renders as the nested mark (three strokes above a circle with the smile
+inside), not two side-by-side glyphs; it is centered as a single hero; and no credit text appears.
+The frame was captured with `kSplashHoldMs` temporarily raised so the splash did not auto-dismiss
+mid-capture; the layout is identical at the shipped 1.5 s hold.

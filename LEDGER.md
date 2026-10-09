@@ -10,11 +10,11 @@ Facts about *decisions* go in `adr/`, not here.
       `npm run test:host`); the on-device view is a condensed courtesy credit, not the legal text.
 
 ## HAL / app (ADR-0001, ADR-0005)
-- [ ] Bring-up proof for the splash and About colophon (ADR-0009): extend
-      `docs/bringup/cardputer-adv/` with the boot splash frame and the `Back`-from-empty-search →
-      About colophon frame. The empty-root prompt (`09-empty-prompt.png`) frame is done (ADR-0014).
-      Rendering is not host-assertable (ADR-0001); capture the splash within its hold window
-      (`kSplashHoldMs`), since it auto-dismisses.
+- [ ] Bring-up proof for the About colophon (ADR-0009): capture the `Back`-from-empty-search →
+      About colophon frame into `docs/bringup/cardputer-adv/`. The boot splash (`08-splash.png`,
+      ADR-0015 logo) and empty-root prompt (`09-empty-prompt.png`, ADR-0014) frames are done;
+      About remains, and it still draws left-aligned (not centered), which is fine for a dense
+      colophon.
 - [ ] Original Cardputer: implement the 74HC138 matrix scan in `CardputerKeyboard` (today a
       fail-loud stub; its decode is specified in ADR-0005) and add its bring-up proof. No new
       env or app change — one image already serves both variants by runtime detection. (The ADV
