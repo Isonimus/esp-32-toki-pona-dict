@@ -3,3 +3,5 @@
 /.pio/
 /.venv/
 __pycache__/
+# Raw framebuffer dumps fb_capture.py writes beside each bring-up .png; only the .png is committed.
+*.ppm

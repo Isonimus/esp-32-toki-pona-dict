@@ -86,3 +86,40 @@ What it confirms: the logo renders as the nested mark (three strokes above a cir
 inside), not two side-by-side glyphs; it is centered as a single hero; and no credit text appears.
 The frame was captured with `kSplashHoldMs` temporarily raised so the splash did not auto-dismiss
 mid-capture; the layout is identical at the shipped 1.5 s hold.
+
+## Simplified Chinese detail view (ADR-0017/0018), 2026-10-09
+
+Chinese is a **display-only** language (ADR-0017): findable from a Toki Pona word, rendered in the
+detail cycle, but not typeable to search (the keyboard emits Latin only). Its glosses render through
+a **subset-rasterized 14×14 1-bpp CJK cell font** (ADR-0018), not the Latin text font — this is the
+first on-device proof that the real panel renders CJK legibly at the shipped 14px size.
+
+| Input | Result | Frame |
+|---|---|---|
+| `to` → Enter → Nav ×5 | `< 中文 6/6 >`: `沟通、说、讲、想、思考` / `对话、故事` / `语言`, sitelen glyph top-right | `10-detail-zh.png` |
+
+What it confirms: the label `中文` and all three gloss lines render as fixed CJK cells while the
+headword (`toki`) stays in the Latin font and the sitelen glyph is unchanged — the content-routed
+CJK path (ADR-0018) engages only on the label and glosses. The `；`-split senses land on three
+separate lines with `、` kept within each sense (ADR-0017). **14px is legible on the real panel** —
+the dense glyphs (`讲`, `思`, `考`) are tight but readable, so the recorded 16px fallback (ADR-0018)
+is not needed. The cycle label reads `6/6` (Chinese is the sixth language), its ASCII (`<`, `6`, `/`,
+`>`) rendered as CJK cells too, a touch wide as ADR-0018 predicted but clean. No real gloss overflows
+the 240px width (the longest line is nine cells ≈ 126px), so the right-edge clip is never reached.
+
+## Condensed About colophon (ADR-0016), 2026-10-09
+
+The About colophon was condensed when the gloss provenance was recorded (ADR-0016): it now shows the
+wordmark plus two courtesy-credit lines — one per attributed work — and a pointer to the notices file,
+replacing the longer per-work colophon. The verbatim legal text stays in `THIRD_PARTY_NOTICES.md`.
+This layout had not been shot since ADR-0016.
+
+| Input | Result | Frame |
+|---|---|---|
+| `Back` → `Back` (empty-search → About) | wordmark; `sitelen pona: nasin nanpa (MIT)` / `glosses: lipu Linku (CC BY-SA)` / `see THIRD_PARTY_NOTICES.md` | `11-about.png` |
+
+What it confirms: the two-glyph `toki pona` wordmark heads the view (the colophon kept it when the
+splash diverged to the merged logo in ADR-0015); both courtesy credits render on one line each and
+fit the 240px width; and the notices pointer renders in accent yellow below them. The colophon draws
+left-aligned, which is fine for a dense credit block (per the LEDGER note). The condensed layout is
+the shipped ADR-0016 form.

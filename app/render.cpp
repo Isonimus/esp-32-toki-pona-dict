@@ -62,8 +62,9 @@ void drawGlyphRowCentered(DisplaySurface& display, int top, const char* const* n
 }
 
 // The "toki pona" wordmark: the product's name in its own script, two sitelen glyphs centred at
-// `top`. Shared by the splash and the About colophon (ADR-0009). Returns the y just below the
-// wordmark for the caller's text.
+// `top`. The About colophon's header (ADR-0009). The splash once shared it but diverged to the
+// merged logo (ADR-0015), so this two-glyph form is now the colophon's alone. Returns the y just
+// below the wordmark for the caller's text.
 int drawWordmark(DisplaySurface& display, int top) {
   static const char* const kWordmark[] = {"toki", "pona"};
   drawGlyphRowCentered(display, top, kWordmark, 2, kColorAccent);
