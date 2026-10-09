@@ -123,3 +123,23 @@ splash diverged to the merged logo in ADR-0015); both courtesy credits render on
 fit the 240px width; and the notices pointer renders in accent yellow below them. The colophon draws
 left-aligned, which is fine for a dense credit block (per the LEDGER note). The condensed layout is
 the shipped ADR-0016 form.
+
+## No-results affordance (ADR-0019), 2026-10-09
+
+A non-empty query that matches nothing used to leave the result area blank (ADR-0010 deferred the
+case). ADR-0019 fills it: the grey `ala` ("none") glyph above the sitelen sentence `nimi li weka`
+("the word is absent"), centred below the query line. This also introduces the palette's first grey
+(`kColorMuted = 0x8410`), so the frame doubles as the proof that grey is legible on the panel.
+
+| Input | Result | Frame |
+|---|---|---|
+| type `zzzz` (matches nothing) | `>zzzz` on top; grey `ala` X over grey `nimi li weka`, centred | `12-no-results.png` |
+
+What it confirms: the no-match state is now clearly signalled rather than blank; the query line stays
+white on top while the affordance is grey; **the grey (`0x8410`) reads legibly against black** —
+distinctly dimmer than the white query line but not washed out — so no re-tune is needed. One thing
+the panel revealed that the headword alone could not: `weka`'s glyph is itself X-like, so the hero
+`ala` X and the sentence's `weka` X are two X-family shapes. They stay distinguishable (the hero is a
+clean thin X, centred and alone; `weka` is a denser X inside the three-glyph sentence), and `weka`
+remains the least-duplicative choice — the alternatives (`lon ala`, `lukin ala`) would stack a second
+*identical* `ala` under the hero. Accepted as shipped (ADR-0019).
