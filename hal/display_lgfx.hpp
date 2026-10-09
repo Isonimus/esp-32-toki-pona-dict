@@ -15,6 +15,7 @@
 #include <LovyanGFX.hpp>
 
 #include "display_surface.hpp"
+#include "display/fonts/text_fonts.h"  // vendored Latin-Extended body + header fonts (ADR-0012)
 #include "sitelen.hpp"  // the 1-bpp glyph packing contract drawGlyph1bpp must honour
 
 namespace tp {
@@ -42,9 +43,12 @@ class LgfxDisplaySurface : public DisplaySurface {
 
   void fillScreen(uint16_t color565) override { canvas_.fillScreen(color565); }
 
-  void drawText(int32_t x, int32_t y, const char* text, uint16_t color565, uint8_t size) override {
+  void drawText(int32_t x, int32_t y, const char* text, uint16_t color565,
+                TextRole role) override {
+    // A real font per role at native size (ADR-0012) — no setTextSize scaling, which is what made
+    // the old 2x headword blocky. UTF-8 is decoded by the U8g2 bridge, so diacritics render.
+    canvas_.setFont(role == TextRole::Header ? &headerFont_ : &bodyFont_);
     canvas_.setTextColor(color565);
-    canvas_.setTextSize(size);
     canvas_.setCursor(x, y);
     canvas_.print(text);
   }
@@ -103,6 +107,10 @@ class LgfxDisplaySurface : public DisplaySurface {
 
   lgfx::LGFX_Device& panel_;
   lgfx::LGFX_Sprite canvas_;
+  // The two vendored text fonts wrapped for LovyanGFX (ADR-0012), one per TextRole. 7x13 is a
+  // compact 13px body font; helvB14 is the ~18px bold headword font. Both drawn at native size.
+  lgfx::U8g2font bodyFont_{u8g2_font_7x13_te};
+  lgfx::U8g2font headerFont_{u8g2_font_helvB14_te};
   const uint8_t rotation_;
 };
 

@@ -40,7 +40,7 @@ class CountingDisplay final : public DisplaySurface {
   uint16_t width() const override { return 240; }
   uint16_t height() const override { return 135; }
   void fillScreen(uint16_t) override { ++fills; }
-  void drawText(int32_t, int32_t, const char*, uint16_t, uint8_t) override { ++texts; }
+  void drawText(int32_t, int32_t, const char*, uint16_t, TextRole) override { ++texts; }
   void drawGlyph1bpp(int32_t, int32_t, uint16_t, uint16_t, const uint8_t*, uint16_t) override {
     ++glyphs;
   }
@@ -85,7 +85,7 @@ int main() {
   CHECK(display.begin());
   CHECK(display.width() == 240);
   display.fillScreen(0x0000);
-  display.drawText(0, 0, "toki", 0xFFFF, 1);
+  display.drawText(0, 0, "toki", 0xFFFF, TextRole::Body);
   const uint8_t glyphBits[] = {0xFF};
   display.drawGlyph1bpp(0, 0, 1, 1, glyphBits, 0xFFFF);
   display.present();

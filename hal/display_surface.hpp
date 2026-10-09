@@ -15,6 +15,12 @@
 
 namespace tp {
 
+// Which text tier a string belongs to. The app expresses intent (a headword vs a gloss/list/query
+// line); the board maps each role to a concrete font (ADR-0012). This replaced an integer "size"
+// multiplier, which assumed one font scaled up — the headword then looked blocky, and two distinct
+// native fonts (a bold header, a compact body) read far better on the small panel.
+enum class TextRole : uint8_t { Body, Header };
+
 class DisplaySurface {
  public:
   virtual ~DisplaySurface() = default;
@@ -29,10 +35,11 @@ class DisplaySurface {
   // Fill the whole canvas with one colour (clears a frame before redraw).
   virtual void fillScreen(uint16_t color565) = 0;
 
-  // Draw NUL-terminated UTF-8 `text` with its top-left at (x, y), in `color565`, scaled by
-  // the integer `size` (1 = base font). UTF-8 because glosses keep their diacritics for
-  // display (ADR-0002); the font covers Latin + diacritics (ADR-0001).
-  virtual void drawText(int32_t x, int32_t y, const char* text, uint16_t color565, uint8_t size) = 0;
+  // Draw NUL-terminated UTF-8 `text` with its top-left at (x, y), in `color565`, in the font the
+  // board assigns to `role` (ADR-0012). UTF-8 because glosses keep their diacritics for display
+  // (ADR-0002); the fonts cover Latin + diacritics (ADR-0012).
+  virtual void drawText(int32_t x, int32_t y, const char* text, uint16_t color565,
+                        TextRole role) = 0;
 
   // Blit a sitelen pona glyph: a 1-bpp bitmap, `w`x`h`, MSB-first, row-major, top-left at
   // (x, y). Set bits draw in `fgColor565`; clear bits are left untouched (the glyph is

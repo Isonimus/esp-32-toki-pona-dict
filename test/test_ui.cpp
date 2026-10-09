@@ -50,7 +50,7 @@ class FakeDisplay final : public DisplaySurface {
   uint16_t width() const override { return 240; }
   uint16_t height() const override { return 135; }
   void fillScreen(uint16_t) override { ++fills; }
-  void drawText(int32_t, int32_t, const char*, uint16_t, uint8_t) override { ++texts; }
+  void drawText(int32_t, int32_t, const char*, uint16_t, TextRole) override { ++texts; }
   void drawGlyph1bpp(int32_t, int32_t, uint16_t, uint16_t, const uint8_t*, uint16_t) override {
     ++glyphs;
   }

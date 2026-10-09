@@ -18,9 +18,8 @@ constexpr uint16_t kColorAccent = 0xFFE0;       // yellow — focused row, headw
 // Layout metrics in pixels at text size 1. Tuned per board at bring-up; the values here are
 // a sane default for a ~240x135 panel and do not affect host tests.
 constexpr int kMargin = 4;
-constexpr int kLineHeight = 16;
-constexpr int kHeaderScale = 2;
-constexpr int kBodyScale = 1;
+constexpr int kLineHeight = 16;      // body text line pitch (7x13 font is ~13px tall, ADR-0012)
+constexpr int kHeaderHeight = 26;    // headword line pitch: helvB14 (~18px) + a gap below the title
 constexpr int kGlossIndent = 8;  // senses are indented under their language label
 constexpr int kWordmarkGap = 8;  // pixels between the two wordmark glyphs
 
@@ -74,7 +73,7 @@ void renderSplash(DisplaySurface& display) {
   // centre against, and the layout constants are retuned per board at bring-up anyway.
   const int top = (static_cast<int>(display.height()) - kSitelenHeight) / 2 - kLineHeight;
   const int creditY = drawWordmark(display, top);
-  display.drawText(kMargin, creditY, kSplashCredit, kColorText, kBodyScale);
+  display.drawText(kMargin, creditY, kSplashCredit, kColorText, TextRole::Body);
 }
 
 void renderAbout(DisplaySurface& display) {
@@ -82,13 +81,13 @@ void renderAbout(DisplaySurface& display) {
   // MIT text is intentionally absent — it ships in THIRD_PARTY_NOTICES.md (ADR-0003); this view
   // is a human-readable courtesy credit, not the legal notice.
   int y = drawWordmark(display, kMargin);
-  display.drawText(kMargin, y, kAboutFontCredit, kColorText, kBodyScale);
+  display.drawText(kMargin, y, kAboutFontCredit, kColorText, TextRole::Body);
   y += kLineHeight;
-  display.drawText(kMargin, y, kAboutCopyright, kColorText, kBodyScale);
+  display.drawText(kMargin, y, kAboutCopyright, kColorText, TextRole::Body);
   y += kLineHeight + kMargin;
-  display.drawText(kMargin, y, kAboutNoticeLead, kColorText, kBodyScale);
+  display.drawText(kMargin, y, kAboutNoticeLead, kColorText, TextRole::Body);
   y += kLineHeight;
-  display.drawText(kMargin + kGlossIndent, y, kAboutNoticeFile, kColorAccent, kBodyScale);
+  display.drawText(kMargin + kGlossIndent, y, kAboutNoticeFile, kColorAccent, TextRole::Body);
 }
 
 // The passive prompt shown on the empty search root (ADR-0010): the `lukin` search icon above
@@ -108,7 +107,7 @@ void renderSearch(const UiState& state, DisplaySurface& display) {
   char prompt[kMaxQueryLen + 2];
   prompt[0] = '>';
   std::strcpy(prompt + 1, state.query);
-  display.drawText(kMargin, kMargin, prompt, kColorText, kBodyScale);
+  display.drawText(kMargin, kMargin, prompt, kColorText, TextRole::Body);
 
   // The empty root teaches type-to-search with a sitelen prompt instead of a bare screen
   // (ADR-0010). A non-empty query that finds nothing falls through to an empty list — the
@@ -123,7 +122,7 @@ void renderSearch(const UiState& state, DisplaySurface& display) {
   int y = kMargin + kLineHeight + kMargin;
   for (int i = 0; i < state.resultCount; ++i) {
     const uint16_t color = (i == state.selected) ? kColorAccent : kColorText;
-    display.drawText(kMargin, y, entry(state.results[i]).tp, color, kBodyScale);
+    display.drawText(kMargin, y, entry(state.results[i]).tp, color, TextRole::Body);
     y += kLineHeight;
   }
 }
@@ -132,7 +131,7 @@ void renderDetail(const UiState& state, DisplaySurface& display) {
   const Entry& e = entry(state.detailEntry);
 
   // Headword, large.
-  display.drawText(kMargin, kMargin, e.tp, kColorAccent, kHeaderScale);
+  display.drawText(kMargin, kMargin, e.tp, kColorAccent, TextRole::Header);
 
   // The sitelen pona glyph (ADR-0003), blitted top-right as a detail accent. Absent for any
   // headword the font does not cover (sitelenGlyph -> nullptr), in which case we simply draw
@@ -146,17 +145,17 @@ void renderDetail(const UiState& state, DisplaySurface& display) {
   // wrapped illegibly. The label doubles as a cycling affordance — `< English  1/5 >` — and
   // the glosses sit one sense per line, each short enough never to overflow the width.
   const int lang = state.detailLang;
-  int y = kMargin + kLineHeight * kHeaderScale + kMargin;
+  int y = kMargin + kHeaderHeight + kMargin;
 
   char label[32];
   const int langPosition = lang - static_cast<int>(Lang::Tp);  // En -> 1 ... Pt -> LangCount-1
   std::snprintf(label, sizeof(label), "< %s  %d/%d >", LANG_LABEL[lang], langPosition,
                 LangCount - 1);
-  display.drawText(kMargin, y, label, kColorAccent, kBodyScale);
+  display.drawText(kMargin, y, label, kColorAccent, TextRole::Body);
   y += kLineHeight;
 
   for (const char* const* gloss = e.glossesByLang[lang]; *gloss != nullptr; ++gloss) {
-    display.drawText(kMargin + kGlossIndent, y, *gloss, kColorText, kBodyScale);
+    display.drawText(kMargin + kGlossIndent, y, *gloss, kColorText, TextRole::Body);
     y += kLineHeight;
   }
 }

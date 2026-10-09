@@ -17,6 +17,7 @@ const NOTICES_PATH = join(ROOT, "THIRD_PARTY_NOTICES.md");
 // Each vendored work whose LICENSE must appear verbatim in THIRD_PARTY_NOTICES.md.
 const VENDORED_LICENSES = [
   { name: "nasin nanpa", licensePath: join(ROOT, "third_party", "nasin-nanpa", "LICENSE") },
+  { name: "Adobe Helvetica (u8g2 font)", licensePath: join(ROOT, "third_party", "u8g2-fonts", "LICENSE") },
 ];
 
 // Normalize to compare license bodies regardless of surrounding Markdown, indentation, or

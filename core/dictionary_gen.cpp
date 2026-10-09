@@ -208,7 +208,7 @@ static const char* const g33_fr[] = { "semi-solide", "pâte", "poudre", "argile"
 static const char* const g33_de[] = { "halbfest", "Paste", "Pulver", "Ton", nullptr };
 static const char* const g33_pt[] = { "semissólido", "pasta", "pó", "argila", nullptr };
 static const char* const g34_tp[] = { "kokosila", nullptr };
-static const char* const g34_en[] = { "to speak a non–Toki Pona language among Toki Pona speakers", nullptr };
+static const char* const g34_en[] = { "to speak a non-Toki Pona language among Toki Pona speakers", nullptr };
 static const char* const g34_es[] = { "hablar un idioma que no es toki pona en un entorno de toki pona", nullptr };
 static const char* const g34_fr[] = { "parler une langue autre que le toki pona dans un milieu toki pona", nullptr };
 static const char* const g34_de[] = { "in einer Toki-Pona-Umgebung eine Nicht-Toki-Pona-Sprache sprechen", nullptr };
@@ -1491,7 +1491,7 @@ static const IndexRow idx_en[] = {
   { "to seek", 55 },
   { "to seize", 41 },
   { "to sleep", 42 },
-  { "to speak a nontoki pona language among toki pona speakers", 34 },
+  { "to speak a non-toki pona language among toki pona speakers", 34 },
   { "to split", 31 },
   { "to stay", 8 },
   { "to steal", 41 },
@@ -3254,6 +3254,6 @@ static const IndexRow idx_pt[] = {
 
 const IndexRow* const INDEX_BY_LANG[LangCount] = { idx_tp, idx_en, idx_es, idx_fr, idx_de, idx_pt };
 const uint16_t INDEX_SIZE_BY_LANG[LangCount] = { 137, 434, 427, 425, 425, 424 };
-const char* const LANG_LABEL[LangCount] = { "toki pona", "English", "Espanol", "Francais", "Deutsch", "Portugues" };
+const char* const LANG_LABEL[LangCount] = { "toki pona", "English", "Español", "Français", "Deutsch", "Português" };
 
 }  // namespace tp

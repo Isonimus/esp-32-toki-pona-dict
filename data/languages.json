@@ -3,9 +3,9 @@
   "languages": {
     "tp": { "name": "Toki Pona", "native": "toki pona" },
     "en": { "name": "English", "native": "English" },
-    "es": { "name": "Spanish", "native": "Espanol" },
-    "fr": { "name": "French", "native": "Francais" },
+    "es": { "name": "Spanish", "native": "Español" },
+    "fr": { "name": "French", "native": "Français" },
     "de": { "name": "German", "native": "Deutsch" },
-    "pt": { "name": "Portuguese", "native": "Portugues" }
+    "pt": { "name": "Portuguese", "native": "Português" }
   }
 }
