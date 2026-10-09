@@ -197,17 +197,64 @@ int main() {
     CHECK(ui.state().resultCount > 0);  // "tel" still prefixes "telo"
   }
 
-  // Nav clamps at both ends, never wrapping.
+  // The result list is a ring: Nav wraps at both ends (ADR-0020, superseding ADR-0004's clamp),
+  // so a one-Nav-button board can traverse it with Down alone.
   {
     UiController ui = atSearch();
     type(ui, "a");
-    CHECK(ui.state().resultCount > 1);
-    ui.handle(InputEvent::navigate(NavDir::Up));  // already at 0
+    const int count = ui.state().resultCount;
+    CHECK(count > 1);
     CHECK(ui.state().selected == 0);
-    for (int i = 0; i < kMaxResults + 5; ++i) ui.handle(InputEvent::navigate(NavDir::Down));
-    CHECK(ui.state().selected == ui.state().resultCount - 1);  // clamped at the last row
-    ui.handle(InputEvent::navigate(NavDir::Down));
-    CHECK(ui.state().selected == ui.state().resultCount - 1);
+    ui.handle(InputEvent::navigate(NavDir::Up));  // from the first row, wrap to the last
+    CHECK(ui.state().selected == count - 1);
+    ui.handle(InputEvent::navigate(NavDir::Down));  // from the last row, wrap to the first
+    CHECK(ui.state().selected == 0);
+    for (int i = 0; i < count; ++i) ui.handle(InputEvent::navigate(NavDir::Down));
+    CHECK(ui.state().selected == 0);  // a full lap of Downs returns to the start
+  }
+
+  // A Buttons board (StickC Plus2, ADR-0020) browses the whole corpus from the empty root: the
+  // list is every entry, Nav wraps over it with Down alone, and Select opens the focused entry.
+  // A Keyboard board's empty root browses nothing (it shows the ADR-0010 prompt instead).
+  {
+    UiController keyboard = atSearch();  // default style
+    CHECK(keyboard.state().queryLen == 0);
+    CHECK(listCount(keyboard.state()) == 0);  // no browse without a query on a keyboard board
+
+    UiController buttons(InputStyle::Buttons);
+    buttons.dismissSplash();
+    CHECK(buttons.state().queryLen == 0);
+    CHECK(listCount(buttons.state()) == static_cast<int>(ENTRY_COUNT));  // the whole corpus
+    CHECK(buttons.state().selected == 0);
+
+    // A browse row's index is its entry id, so Select on row 0 opens entry 0.
+    buttons.handle(InputEvent::navigate(NavDir::Up));  // Down-only board still reaches the end: wrap
+    CHECK(buttons.state().selected == static_cast<int>(ENTRY_COUNT) - 1);
+    buttons.handle(InputEvent::navigate(NavDir::Down));  // and wraps back to the first
+    CHECK(buttons.state().selected == 0);
+    buttons.handle(InputEvent::navigate(NavDir::Down));
+    CHECK(buttons.state().selected == 1);
+    buttons.handle(InputEvent::select());
+    CHECK(buttons.state().view == View::Detail);
+    CHECK(buttons.state().detailEntry == entryIdAt(buttons.state(), 1));
+    CHECK(buttons.state().detailEntry == 1);
+    buttons.handle(InputEvent::back());  // Back returns to the browse list, not About
+    CHECK(buttons.state().view == View::Search);
+  }
+
+  // Renderer: a Buttons board's empty root draws the windowed browse list — headword rows, no
+  // query '>' line and no prompt glyphs (ADR-0020) — filling the panel height. The window is
+  // capped at the rows that fit, so the 137-entry corpus draws a bounded handful, not all of them.
+  {
+    UiController buttons(InputStyle::Buttons);
+    buttons.dismissSplash();
+    FakeDisplay browse;
+    render(buttons.state(), browse);
+    CHECK(browse.fills == 1 && browse.presents == 1);
+    CHECK(browse.glyphs == 0);  // browse lists headword text, no sitelen prompt
+    const int capacity = (135 - 4) / 16;  // panel height / line height from listTop = kMargin
+    CHECK(browse.texts == capacity);  // exactly the window's worth of rows, not ENTRY_COUNT
+    CHECK(static_cast<int>(ENTRY_COUNT) > capacity);  // the cap actually bit
   }
 
   // Query length is bounded; typing past the cap is dropped, not an overflow.

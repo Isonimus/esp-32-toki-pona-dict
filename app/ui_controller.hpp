@@ -11,6 +11,11 @@ namespace tp {
 
 class UiController {
  public:
+  // The board's input style (ADR-0020) decides what the empty search root does. Defaults to
+  // Keyboard so a default-constructed controller behaves exactly as before; a Buttons board
+  // (StickC Plus2) passes InputStyle::Buttons to browse the corpus from the empty root.
+  explicit UiController(InputStyle style = InputStyle::Keyboard) { state_.inputStyle = style; }
+
   const UiState& state() const { return state_; }
 
   // Advance the state machine by one event. None is ignored, so the app can poll the input

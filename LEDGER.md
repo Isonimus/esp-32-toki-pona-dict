@@ -18,10 +18,12 @@ Facts about *decisions* go in `adr/`, not here.
       `CardputerKeyboard::drainTca8418`). ADR-0011 left it in the device shell as ADV-I/O-specific,
       so this arithmetic is still proven only on-device; extract it alongside the 74HC138 scan when
       that variant lands, so both decodes feed the host-tested `applyKey` through a tested boundary.
-- [ ] M5StickC Plus2 slice: its ST7789 135x240 panel class + a 3-button `InputSource`
-      (three-button cyclic, ADR-0005), **and** a new ADR amending ADR-0004 for a
-      browse-the-whole-corpus mode + cyclic (wrapping) Nav, so a keyboard-less board can reach a
-      word (an empty query yields nothing today).
+- [ ] M5StickC Plus2 bring-up proof: capture the browse list, Select->Detail, and Back on real
+      hardware (screenshot + 3-button walk-through, ADR-0005/0006), and verify the M5GFX-sourced
+      panel pins/offsets on the panel. The slice (ADR-0020: browse mode + wrapping Nav + the
+      `tp_stickc_plus2` env, panel class, 3-button `InputSource`) is landed and links clean; this
+      is the on-device evidence that remains. Run landscape (rotation 1) to reuse the Cardputer's
+      proven 240x135 layout; a wrong pin fails here, not a host test.
 
 ## Project
 - [ ] Declare the **firmware code** license. ADR-0016 licenses the dictionary *data* CC BY-SA 4.0,

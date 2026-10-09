@@ -36,10 +36,11 @@ void UiController::runSearch() {
     }
   }
 
-  // Keep the focus valid: on the first row of a fresh list, clamped to the last row if the
-  // list shrank below the old selection.
-  if (state_.selected >= state_.resultCount) {
-    state_.selected = state_.resultCount > 0 ? state_.resultCount - 1 : 0;
+  // Keep the focus valid against the derived list (ADR-0020): clamped to the last row if the
+  // list shrank below the old selection, else left where it is.
+  const int count = listCount(state_);
+  if (state_.selected >= count) {
+    state_.selected = count > 0 ? count - 1 : 0;
   }
 }
 
@@ -109,22 +110,24 @@ void UiController::handle(const InputEvent& event) {
       }
       break;
 
-    case InputKind::Nav:
-      // Move the focus without wrapping — predictable on both a keyboard's arrows and an
-      // encoder's detents. Clamped at both ends.
-      if (state_.resultCount > 0) {
-        if (event.nav == NavDir::Down && state_.selected < state_.resultCount - 1) {
-          ++state_.selected;
-        } else if (event.nav == NavDir::Up && state_.selected > 0) {
-          --state_.selected;
-        }
+    case InputKind::Nav: {
+      // Move the focus over the derived list as a ring — Nav wraps (ADR-0020), superseding
+      // ADR-0004's clamp, because a one-Nav-button board (StickC: only Down) must wrap to come
+      // back around, and this matches the detail-language ring (ADR-0007). Up is "-1" expressed
+      // as +(count-1) to avoid a negative modulo. No-ops on an empty list.
+      const int count = listCount(state_);
+      if (count > 0) {
+        const int step = (event.nav == NavDir::Down) ? 1 : count - 1;
+        state_.selected = (state_.selected + step) % count;
       }
       break;
+    }
 
     case InputKind::Select:
-      // Open the focused result. No results means nothing to open.
-      if (state_.resultCount > 0) {
-        state_.detailEntry = state_.results[state_.selected];
+      // Open the focused entry, resolved through the derived list (a merged result or, when
+      // browsing, the entry whose id is the row index — ADR-0020). An empty list is inert.
+      if (listCount(state_) > 0) {
+        state_.detailEntry = entryIdAt(state_, state_.selected);
         state_.detailLang = static_cast<uint8_t>(kFirstDetailLang);  // open on the first language (ADR-0007)
         state_.view = View::Detail;
       }

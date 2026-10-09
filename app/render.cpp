@@ -132,12 +132,40 @@ void renderNoResults(DisplaySurface& display) {
                        kNoResultSentenceGlyphs, kColorMuted);
 }
 
+// Draw the derived browsable list (merged results, or the whole corpus when browsing — ADR-0020)
+// as a vertical window starting at `listTop`. Each row is the Toki Pona headword (the pivot,
+// ADR-0004); the focused row is accent, the rest white — no fill primitive needed on the seam.
+// Windowed to keep the focused row visible: the browse corpus (137 rows) and any over-tall result
+// set would otherwise draw past the panel bottom. The focused row is centred in the window, clamped
+// at the list ends; this scroll policy is a bring-up concern (eyeballed), not a host assertion.
+void renderList(const UiState& state, DisplaySurface& display, int listTop) {
+  const int count = listCount(state);
+  const int capacity = (static_cast<int>(display.height()) - listTop) / kLineHeight;
+  if (capacity <= 0 || count == 0) return;
+
+  int first = state.selected - capacity / 2;
+  if (first > count - capacity) first = count - capacity;
+  if (first < 0) first = 0;
+
+  int y = listTop;
+  for (int i = first; i < first + capacity && i < count; ++i) {
+    const uint16_t color = (i == state.selected) ? kColorAccent : kColorText;
+    display.drawText(kMargin, y, entry(entryIdAt(state, i)).tp, color, TextRole::Body);
+    y += kLineHeight;
+  }
+}
+
 void renderSearch(const UiState& state, DisplaySurface& display) {
-  // The empty root teaches type-to-search with a centred sitelen prompt instead of a bare screen
-  // (ADR-0010). The '>' edit line is suppressed while the query is empty (ADR-0014), so no lonely
-  // caret floats in the corner beside the centred prompt; the first keystroke brings it back below.
+  // The empty root differs by board capability (ADR-0020). A Keyboard board teaches type-to-search
+  // with a centred sitelen prompt (ADR-0010); the '>' edit line is suppressed while empty (ADR-0014)
+  // so no lonely caret floats beside it. A Buttons board cannot type, so its empty root browses the
+  // whole corpus instead — the list owns the full panel height, with no query line above it.
   if (state.queryLen == 0) {
-    renderEmptyPrompt(display);
+    if (state.inputStyle == InputStyle::Buttons) {
+      renderList(state, display, kMargin);
+    } else {
+      renderEmptyPrompt(display);
+    }
     return;
   }
 
@@ -154,14 +182,8 @@ void renderSearch(const UiState& state, DisplaySurface& display) {
     return;
   }
 
-  // Result rows below, each the Toki Pona headword (the pivot, ADR-0004). The focused row
-  // is drawn in the accent colour — no fill primitive needed on the seam.
-  int y = kMargin + kLineHeight + kMargin;
-  for (int i = 0; i < state.resultCount; ++i) {
-    const uint16_t color = (i == state.selected) ? kColorAccent : kColorText;
-    display.drawText(kMargin, y, entry(state.results[i]).tp, color, TextRole::Body);
-    y += kLineHeight;
-  }
+  // Result rows below the query line (ADR-0004).
+  renderList(state, display, kMargin + kLineHeight + kMargin);
 }
 
 // Decode one UTF-8 code point at `s` and advance `s` past it. The displayed strings are

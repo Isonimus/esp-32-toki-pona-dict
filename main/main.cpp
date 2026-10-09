@@ -18,6 +18,27 @@ constexpr uint8_t kCardputerRotation = 1;
 tp::LGFX_Cardputer gPanel;
 tp::LgfxDisplaySurface gDisplay(gPanel, kCardputerRotation);
 tp::CardputerKeyboard gInput;
+// A keyboard board: the empty root teaches type-to-search (ADR-0010/0020).
+constexpr tp::InputStyle kInputStyle = tp::InputStyle::Keyboard;
+}  // namespace
+
+#elif defined(TP_BOARD_STICKC_PLUS2)
+#include "display/lgfx_stickc_plus2.hpp"
+#include "display_lgfx.hpp"
+#include "input/stickc_buttons.hpp"
+
+namespace {
+// The StickC Plus2's 135x240 panel driven as 240x135 landscape (LovyanGFX rotation 1), reusing the
+// Cardputer's already-proven layout exactly — ADR-0007's one-sense-per-line is tuned for 240px.
+constexpr uint8_t kStickCRotation = 1;
+tp::LGFX_StickCPlus2 gPanel;
+tp::LgfxDisplaySurface gDisplay(gPanel, kStickCRotation);
+tp::StickCButtons gInput;
+// A keyboard-less board: the empty root browses the whole corpus (ADR-0020).
+constexpr tp::InputStyle kInputStyle = tp::InputStyle::Buttons;
+// GPIO4 (HOLD) must be driven HIGH early in setup() or the Stick powers itself off when running on
+// battery (M5StickC Plus2 power latch). Harmless over USB, essential off USB.
+constexpr int kPowerHoldPin = 4;
 }  // namespace
 
 #else
@@ -25,7 +46,7 @@ tp::CardputerKeyboard gInput;
 #endif
 
 namespace {
-tp::UiController gUi;
+tp::UiController gUi(kInputStyle);
 
 // How long the boot splash (ADR-0009) stays up before auto-dismissing to the search view. The
 // controller is clockless (ADR-0004), so main/ owns this timeout; a keypress dismisses sooner
@@ -42,6 +63,13 @@ constexpr uint8_t kScreenshotCommand = 0x10;
 }  // namespace
 
 void setup() {
+#ifdef TP_BOARD_STICKC_PLUS2
+  // Latch power on before anything else (ADR-0020): on battery the Stick cuts power unless HOLD is
+  // held HIGH through startup.
+  pinMode(kPowerHoldPin, OUTPUT);
+  digitalWrite(kPowerHoldPin, HIGH);
+#endif
+
   Serial.begin(115200);
 
   // Fail loud on a dead surface (§3): a dictionary is its screen and its input, so a failure is
