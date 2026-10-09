@@ -19,9 +19,10 @@ Facts about *decisions* go in `adr/`, not here.
       fail-loud stub; its decode is specified in ADR-0005) and add its bring-up proof. No new
       env or app change — one image already serves both variants by runtime detection. (The ADV
       bring-up proof is done: `docs/bringup/cardputer-adv/`.)
-- [ ] Extract the Cardputer key→`InputEvent` mapping (`mapPress` + keymap) into a pure,
-      host-testable unit so the keymap — incl. bare-arrow nav (ADR-0008) — gets a host regression
-      test. Today the driver is device-only (ADR-0005), so the mapping is proven only on-device.
+- [ ] Host-test the TCA8418 raw-byte→`(row, col)` decode (the 7x8→4x14 mapping in
+      `CardputerKeyboard::drainTca8418`). ADR-0011 left it in the device shell as ADV-I/O-specific,
+      so this arithmetic is still proven only on-device; extract it alongside the 74HC138 scan when
+      that variant lands, so both decodes feed the host-tested `applyKey` through a tested boundary.
 - [ ] Latin-diacritic text font for `LgfxDisplaySurface::drawText`: the built-in LovyanGFX font
       is ASCII, so accented es/fr/de/pt glosses render as placeholder boxes until a font with
       Latin-1/extended coverage is wired (ADR-0005). TP + EN are fully legible meanwhile.
