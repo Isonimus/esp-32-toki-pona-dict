@@ -109,11 +109,23 @@ entries.forEach((e, id) => {
 out += "};\n";
 out += `const uint16_t ENTRY_COUNT = ${entries.length};\n\n`;
 
+// A language can be display-only (ADR-0017): it ships glosses for the detail view but is excluded
+// from search, because it cannot be typed on the keyboard. `searchable: false` in languages.json
+// marks it; its index is emitted as a null pointer of size 0 — never a zero-length array, which is
+// non-standard C++ — and the search path (core/search.cpp) never scans an index of size 0.
+const isSearchable = (l) => l === "tp" || langMeta.languages[l]?.searchable !== false;
+
 const indexNames = [];
 for (const lang of order) {
-  const rows = lang === "tp"
-    ? buildIndex(entries, (e) => [e.tp])
-    : buildIndex(entries, (e) => e[lang] ?? []);
+  const rows = !isSearchable(lang)
+    ? []
+    : lang === "tp"
+      ? buildIndex(entries, (e) => [e.tp])
+      : buildIndex(entries, (e) => e[lang] ?? []);
+  if (rows.length === 0) {
+    indexNames.push({ name: "nullptr", size: 0 });
+    continue;
+  }
   const name = `idx_${lang}`;
   indexNames.push({ name, size: rows.length });
   out += `static const IndexRow ${name}[] = {\n`;

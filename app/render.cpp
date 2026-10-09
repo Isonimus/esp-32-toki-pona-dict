@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <cstring>
 
+#include "cjk.hpp"
 #include "logo.hpp"
 #include "search.hpp"
 #include "sitelen.hpp"
@@ -135,6 +136,64 @@ void renderSearch(const UiState& state, DisplaySurface& display) {
   }
 }
 
+// Decode one UTF-8 code point at `s` and advance `s` past it. The displayed strings are
+// build-time-validated UTF-8 (tools/check-font-coverage.mjs), so this is a decoder, not a
+// validator; it still advances at least one byte on a malformed lead so a caller loop cannot hang.
+uint32_t nextCodepoint(const char*& s) {
+  const unsigned char c0 = static_cast<unsigned char>(*s++);
+  if (c0 < 0x80) return c0;
+  int extra;
+  uint32_t cp;
+  if ((c0 & 0xE0) == 0xC0) { extra = 1; cp = c0 & 0x1F; }
+  else if ((c0 & 0xF0) == 0xE0) { extra = 2; cp = c0 & 0x0F; }
+  else if ((c0 & 0xF8) == 0xF0) { extra = 3; cp = c0 & 0x07; }
+  else return 0xFFFD;
+  for (int i = 0; i < extra; ++i) {
+    const unsigned char cc = static_cast<unsigned char>(*s);
+    if ((cc & 0xC0) != 0x80) return 0xFFFD;  // truncated; leave s at the offending byte
+    cp = (cp << 6) | (cc & 0x3F);
+    ++s;
+  }
+  return cp;
+}
+
+// Any CJK code point marks a line the Latin text font cannot draw. 0x2E80 is the first CJK block
+// (Radicals Supplement); everything Latin-1/Extended sits below it, so this never misfires on the
+// accented European glosses.
+bool containsCjk(const char* text) {
+  for (const char* p = text; *p;) {
+    if (nextCodepoint(p) >= 0x2E80) return true;
+  }
+  return false;
+}
+
+// Draw a string as a row of fixed CJK cells (ADR-0018), one per code point, left to right. CJK is
+// monospaced, so the advance is a constant kCjkWidth; a code point the font lacks reserves its slot
+// but draws nothing (the ADR-0003 degradation contract). Stops at the panel's right edge rather
+// than drawing off-screen — a long gloss is clipped, never wrapped (a bring-up concern, ADR-0018).
+void drawCjkCells(DisplaySurface& display, int x, int y, const char* text, uint16_t color) {
+  const int maxX = static_cast<int>(display.width()) - kCjkWidth;
+  for (const char* p = text; *p && x <= maxX;) {
+    const uint32_t cp = nextCodepoint(p);
+    if (const uint8_t* cell = cjkGlyph(cp)) {
+      display.drawGlyph1bpp(x, y, kCjkWidth, kCjkHeight, cell, color);
+    }
+    x += kCjkWidth;
+  }
+}
+
+// One detail-view line (label or gloss). A display-only language (ADR-0017) renders through the CJK
+// cell font; every other language uses the Latin text font. Routed by content — any CJK code point
+// in the line — so the renderer needs no language table and a mixed ASCII/CJK line (the cycle
+// label, parenthetical tags) draws uniformly as cells.
+void drawDetailLine(DisplaySurface& display, int x, int y, const char* text, uint16_t color) {
+  if (containsCjk(text)) {
+    drawCjkCells(display, x, y, text, color);
+  } else {
+    display.drawText(x, y, text, color, TextRole::Body);
+  }
+}
+
 void renderDetail(const UiState& state, DisplaySurface& display) {
   const Entry& e = entry(state.detailEntry);
 
@@ -159,11 +218,11 @@ void renderDetail(const UiState& state, DisplaySurface& display) {
   const int langPosition = lang - static_cast<int>(Lang::Tp);  // En -> 1 ... Pt -> LangCount-1
   std::snprintf(label, sizeof(label), "< %s  %d/%d >", LANG_LABEL[lang], langPosition,
                 LangCount - 1);
-  display.drawText(kMargin, y, label, kColorAccent, TextRole::Body);
+  drawDetailLine(display, kMargin, y, label, kColorAccent);
   y += kLineHeight;
 
   for (const char* const* gloss = e.glossesByLang[lang]; *gloss != nullptr; ++gloss) {
-    display.drawText(kMargin + kGlossIndent, y, *gloss, kColorText, TextRole::Body);
+    drawDetailLine(display, kMargin + kGlossIndent, y, *gloss, kColorText);
     y += kLineHeight;
   }
 }

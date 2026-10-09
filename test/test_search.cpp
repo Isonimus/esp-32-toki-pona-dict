@@ -98,6 +98,24 @@ int main() {
   check(finds(tp::Lang::Es, "mapache", "kijetesantakalu"), "es 'mapache' -> kijetesantakalu");
   check(finds(tp::Lang::Es, "epico", "epiku"), "es 'epico' (no accent) -> epiku (épico)");
 
+  // 8. Display-only language (ADR-0017): Chinese ships glosses for the detail view but is excluded
+  //    from the search index — it cannot be typed on the keyboard. Its index is null and empty, a
+  //    query in zh finds nothing, yet the glosses remain on the entry for display.
+  {
+    const int zh = static_cast<int>(tp::Lang::Zh);
+    check(tp::INDEX_SIZE_BY_LANG[zh] == 0, "zh carries no search index (display-only)");
+    check(tp::INDEX_BY_LANG[zh] == nullptr, "zh index pointer is null (display-only)");
+
+    uint16_t ids[32];
+    check(tp::search(tp::Lang::Zh, "沟通", ids, 32) == 0, "a zh query finds nothing (not searchable)");
+
+    int n = tp::search(tp::Lang::Tp, "moku", ids, 32);
+    check(n == 1, "tp 'moku' resolves");
+    if (n == 1) {
+      check(tp::entry(ids[0]).glossesByLang[zh][0] != nullptr, "moku carries a zh gloss for display");
+    }
+  }
+
   if (g_failures == 0) {
     std::printf("PASS: all checks\n");
     return 0;

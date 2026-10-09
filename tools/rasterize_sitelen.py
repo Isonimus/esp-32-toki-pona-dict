@@ -5,15 +5,18 @@
     python3 tools/rasterize_sitelen.py --check    # verify the committed files are up to date,
                                                   # exit 1 on drift, write nothing (CI guard)
 
-Reads the vendored nasin nanpa font (third_party/) and emits two generated files:
+Reads the vendored fonts (third_party/) and emits three generated files:
 
   - core/sitelen_gen.cpp: for every codepoint in the UCSUR sitelen pona block, the glyph
     rendered to a WIDTH x HEIGHT 1-bpp bitmap (consumed through core/sitelen.hpp).
   - core/logo_gen.cpp: the toki pona logo — `toki` with the `pona` smile nested inside its
     ring — shaped from three codepoints through the font and rasterized to its own tight
     bounding box (consumed through core/logo.hpp, ADR-0015).
+  - core/cjk_gen.cpp: the CJK gloss font — each codepoint a display-only language (ADR-0017)
+    needs, rendered to a CJK_WIDTH x CJK_HEIGHT 1-bpp cell from the vendored Noto Sans CJK SC
+    subset, keyed by codepoint (consumed through core/cjk.hpp, ADR-0018).
 
-The font is NOT shipped to the device and nothing parses it on-device; these bitmaps are the
+Neither font is shipped to the device and nothing parses them on-device; these bitmaps are the
 whole of the font dependency.
 
 Why the headword->codepoint mapping needs no hand-maintained table (ADR-0002 single-source):
@@ -62,6 +65,24 @@ DICT_PATH = ROOT / "data" / "dictionary.json"
 # bounding box, separate from the WIDTH x HEIGHT SITELEN_GLYPHS cell.
 LOGO_CODEPOINTS = "\U000F196C\U000F1996\U000F1954"  # toki + joinScale (U+F1996) + pona
 LOGO_EM_PX = 88   # renders to an ~88x83 hero — 2x the sitelen cell height (measured, ADR-0015)
+
+# --- the CJK gloss font (ADR-0018): fixed-cell 1-bpp glyphs for display-only languages --------
+# Simplified Chinese (and any future display-only language, ADR-0017) renders its detail label and
+# glosses as fixed-size cells blitted one per codepoint (app/render.cpp), because CJK is square and
+# monospaced — the same 1-bpp pattern as sitelen, keyed by codepoint instead of by headword. Only
+# the codepoints the data actually uses are rasterized, from the vendored Noto Sans CJK SC subset;
+# a whole CJK font would cost 10x-600x the flash (ADR-0018).
+CJK_WIDTH = 14
+CJK_HEIGHT = 14
+CJK_STRIDE = (CJK_WIDTH + 7) // 8               # bytes per row, byte-aligned
+CJK_GLYPH_BYTES = CJK_STRIDE * CJK_HEIGHT
+CJK_EM_PX = CJK_HEIGHT - 1  # render 1px under the cell so the tallest ink (ASCII parens) fits
+# The detail-cycle label "< %s  %d/%d >" is drawn through the CJK cells for a display-only language
+# (app/render.cpp), so its ASCII furniture must be rasterized into the same set.
+CJK_LABEL_CHARS = "<>/ 0123456789"
+CJK_FONT_PATH = ROOT / "third_party" / "noto-sans-cjk-subset" / "NotoSansCJKsc-Regular-subset.ttf"
+CJK_OUT_PATH = ROOT / "core" / "cjk_gen.cpp"
+LANG_PATH = ROOT / "data" / "languages.json"
 
 
 def headword_for(codepoint, glyph_name):
@@ -126,6 +147,57 @@ def build_logo():
     return gw, gh, packed
 
 
+def cjk_codepoints():
+    """The exact codepoint set the CJK cell font must cover (ADR-0018): for every display-only
+    (non-searchable) language, its native label and all its glosses, plus the detail-cycle label
+    charset. Computed from the data so it stays a data-driven set, never a hand-kept list, and
+    sorted so the emitted table is binary-searchable by codepoint."""
+    import json
+
+    languages = json.loads(LANG_PATH.read_text())["languages"]
+    entries = json.loads(DICT_PATH.read_text())["entries"]
+    display_only = [l for l, m in languages.items() if m.get("searchable", True) is False]
+    if not display_only:
+        raise ValueError("no display-only language found; the CJK font exists to serve one (ADR-0017)")
+    cps = {ord(c) for c in CJK_LABEL_CHARS}
+    for lang in display_only:
+        cps.update(ord(c) for c in languages[lang]["native"])
+        for e in entries:
+            for sense in e.get(lang, []):
+                cps.update(ord(c) for c in sense)
+    for cp in cps:
+        if cp > 0xFFFF:
+            raise ValueError(f"U+{cp:X} is outside the BMP; core/cjk.hpp keys codepoints as uint16")
+    return sorted(cps)
+
+
+def build_cjk():
+    """Rasterize every CJK-font codepoint to a packed CJK_WIDTH x CJK_HEIGHT 1-bpp cell from the
+    vendored Noto subset (ADR-0018). Returns [(codepoint, packed_bytes)], codepoint-sorted. Fails
+    loud if the subset lacks a glyph for a needed codepoint — a signal to re-subset (PROVENANCE).
+    A codepoint present but with no ink (e.g. space) packs to an empty cell, which only advances."""
+    tt = TTFont(str(CJK_FONT_PATH))
+    cmap = tt.getBestCmap()
+    font = ImageFont.truetype(str(CJK_FONT_PATH), CJK_EM_PX)
+    out = []
+    for cp in cjk_codepoints():
+        if cp not in cmap:
+            raise ValueError(
+                f"U+{cp:04X} ({chr(cp)!r}) is missing from the vendored Noto subset; re-subset the "
+                f"font per third_party/noto-sans-cjk-subset/PROVENANCE.md"
+            )
+        mask = font.getmask(chr(cp), mode="L")
+        if mask.size == (0, 0):
+            packed = bytes(CJK_GLYPH_BYTES)  # whitespace: an empty cell
+        else:
+            try:
+                packed, _ink = pack_mask(mask, CJK_WIDTH, CJK_HEIGHT)
+            except ValueError as exc:
+                raise ValueError(f"U+{cp:04X}: {exc} at CJK_EM_PX={CJK_EM_PX}") from exc
+        out.append((cp, packed))
+    return out
+
+
 def c_identifier(headword):
     """A valid C identifier for a per-glyph array name. Headwords are lowercase ASCII, but
     sanitize defensively; uniqueness is asserted by the caller so a collision fails loud."""
@@ -186,10 +258,13 @@ def main():
     sitelen_text = render(glyphs, idents)
     logo_w, logo_h, logo_bytes = build_logo()
     logo_text = render_logo(logo_w, logo_h, logo_bytes)
+    cjk_glyphs = build_cjk()
+    cjk_text = render_cjk(cjk_glyphs)
     report_dictionary_coverage({h for h, _ in glyphs})
 
     wrote_sitelen = emit(OUT_PATH, sitelen_text, check_only)
     wrote_logo = emit(LOGO_OUT_PATH, logo_text, check_only)
+    wrote_cjk = emit(CJK_OUT_PATH, cjk_text, check_only)
     if check_only:
         return
 
@@ -203,6 +278,12 @@ def main():
         print(
             f"generated the toki pona logo at {logo_w}x{logo_h} "
             f"({len(logo_bytes)} bytes) -> {LOGO_OUT_PATH.relative_to(ROOT)}"
+        )
+    if wrote_cjk:
+        total = len(cjk_glyphs) * CJK_GLYPH_BYTES
+        print(
+            f"generated {len(cjk_glyphs)} CJK glyphs at {CJK_WIDTH}x{CJK_HEIGHT} "
+            f"({total} bytes = {total / 1024:.1f} KB) -> {CJK_OUT_PATH.relative_to(ROOT)}"
         )
 
 
@@ -256,6 +337,37 @@ def render_logo(width, height, packed):
         "}  // namespace tp",
         "",
     ]
+    return "\n".join(lines)
+
+
+def render_cjk(glyphs):
+    """Build the full core/cjk_gen.cpp text in memory (ADR-0018). Pure, like render(). Per-glyph
+    arrays are named cjk_<hex> and the table rows are `{ 0x<hex>, cjk_<hex> }`, so the covered
+    codepoint set is greppable — tools/check-font-coverage.mjs reads it straight from this file."""
+    lines = [
+        "// GENERATED by tools/rasterize_sitelen.py from the vendored Noto Sans CJK SC subset — DO NOT EDIT.",
+        '#include "cjk.hpp"',
+        "",
+        "namespace tp {",
+        "",
+        "// Guards the cell dimensions against cjk.hpp: a header change without a regenerate fails",
+        "// the build rather than desyncing the bitmap stride.",
+        f"static_assert(kCjkWidth == {CJK_WIDTH} && kCjkHeight == {CJK_HEIGHT},",
+        '              "CJK cell size changed; re-run tools/rasterize_sitelen.py");',
+        "",
+    ]
+    for cp, packed in glyphs:
+        body = ", ".join(f"0x{b:02x}" for b in packed)
+        lines.append(f"static const uint8_t cjk_{cp:04x}[kCjkBytes] = {{ {body} }};")
+    lines.append("")
+    lines.append("const CjkGlyph CJK_GLYPHS[] = {")
+    for cp, _ in glyphs:
+        lines.append(f"  {{ 0x{cp:04x}, cjk_{cp:04x} }},")
+    lines.append("};")
+    lines.append(f"const uint16_t CJK_GLYPH_COUNT = {len(glyphs)};")
+    lines.append("")
+    lines.append("}  // namespace tp")
+    lines.append("")
     return "\n".join(lines)
 
 

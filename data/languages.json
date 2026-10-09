@@ -1,11 +1,12 @@
 {
-  "query_order": ["tp", "en", "es", "fr", "de", "pt"],
+  "query_order": ["tp", "en", "es", "fr", "de", "pt", "zh"],
   "languages": {
     "tp": { "name": "Toki Pona", "native": "toki pona" },
     "en": { "name": "English", "native": "English" },
     "es": { "name": "Spanish", "native": "Español" },
     "fr": { "name": "French", "native": "Français" },
     "de": { "name": "German", "native": "Deutsch" },
-    "pt": { "name": "Portuguese", "native": "Português" }
+    "pt": { "name": "Portuguese", "native": "Português" },
+    "zh": { "name": "Chinese", "native": "中文", "searchable": false }
   }
 }

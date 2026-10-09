@@ -23,6 +23,7 @@ const NOTICES_PATH = join(ROOT, "THIRD_PARTY_NOTICES.md");
 const VENDORED_LICENSES = [
   { name: "nasin nanpa", licensePath: join(ROOT, "third_party", "nasin-nanpa", "LICENSE") },
   { name: "Adobe Helvetica (u8g2 font)", licensePath: join(ROOT, "third_party", "u8g2-fonts", "LICENSE") },
+  { name: "Noto Sans CJK SC (subset)", licensePath: join(ROOT, "third_party", "noto-sans-cjk-subset", "LICENSE") },
 ];
 
 // Works whose license is cited by reference rather than reproduced in full (ADR-0016). For each,

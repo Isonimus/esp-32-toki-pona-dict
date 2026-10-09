@@ -11,8 +11,10 @@
 namespace tp {
 
 // Query/display languages, in the order the UI cycles them. Keep in sync with
-// data/languages.json "query_order"; the generator asserts the match.
-enum class Lang : uint8_t { Tp = 0, En, Es, Fr, De, Pt, Count };
+// data/languages.json "query_order"; the generated tables initialize fixed-size arrays of
+// LangCount, so a mismatch fails the C++ build. Zh (Chinese) is display-only (ADR-0017): it has
+// glosses and a label but a null, zero-length search index (it cannot be typed on the keyboard).
+enum class Lang : uint8_t { Tp = 0, En, Es, Fr, De, Pt, Zh, Count };
 constexpr int LangCount = static_cast<int>(Lang::Count);
 
 // One headword and its glosses. The glosses for a language are a nullptr-terminated

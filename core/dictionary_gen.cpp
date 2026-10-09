@@ -9,961 +9,1098 @@ static const char* const g0_es[] = { "interjección de énfasis, emoción o conf
 static const char* const g0_fr[] = { "interjection d'emphase, d'émotion ou de confirmation", nullptr };
 static const char* const g0_de[] = { "Interjektion für Betonung, Gefühl oder Bestätigung", nullptr };
 static const char* const g0_pt[] = { "interjeção de ênfase, emoção ou confirmação", nullptr };
+static const char* const g0_zh[] = { "(感叹词) 啊、噢、嘿、哈", "(助词) [置于单词后，表示强调或激情]", nullptr };
 static const char* const g1_tp[] = { "akesi", nullptr };
 static const char* const g1_en[] = { "reptile", "amphibian", nullptr };
 static const char* const g1_es[] = { "reptil", "anfibio", nullptr };
 static const char* const g1_fr[] = { "reptile", "amphibien", nullptr };
 static const char* const g1_de[] = { "Reptil", "Amphibie", nullptr };
 static const char* const g1_pt[] = { "réptil", "anfíbio", nullptr };
+static const char* const g1_zh[] = { "爬行动物、两栖类动物、鳞片动物", nullptr };
 static const char* const g2_tp[] = { "ala", nullptr };
 static const char* const g2_en[] = { "no", "not", "zero", "none", nullptr };
 static const char* const g2_es[] = { "no", "cero", "ninguno", "nada", nullptr };
 static const char* const g2_fr[] = { "non", "ne pas", "zéro", "aucun", nullptr };
 static const char* const g2_de[] = { "nein", "nicht", "null", "kein", nullptr };
 static const char* const g2_pt[] = { "não", "zero", "nenhum", nullptr };
+static const char* const g2_zh[] = { "不、无、非", "(助词) [否定单词或短语]", "(助词) [构成是非问句]", "（数词）零", nullptr };
 static const char* const g3_tp[] = { "alasa", nullptr };
 static const char* const g3_en[] = { "to hunt", "forage", "gather", nullptr };
 static const char* const g3_es[] = { "cazar", "buscar alimento", "recolectar", nullptr };
 static const char* const g3_fr[] = { "chasser", "cueillir", "récolter", nullptr };
 static const char* const g3_de[] = { "jagen", "sammeln", "nach Nahrung suchen", nullptr };
 static const char* const g3_pt[] = { "caçar", "coletar", "forragear", nullptr };
+static const char* const g3_zh[] = { "狩猎、搜寻、搜索、尝试", "（前动词）尝试、试图", nullptr };
 static const char* const g4_tp[] = { "ale", nullptr };
 static const char* const g4_en[] = { "all", "everything", "universe", "hundred", nullptr };
 static const char* const g4_es[] = { "todo", "universo", "cien", nullptr };
 static const char* const g4_fr[] = { "tout", "univers", "cent", nullptr };
 static const char* const g4_de[] = { "alles", "Universum", "hundert", nullptr };
 static const char* const g4_pt[] = { "tudo", "universo", "cem", nullptr };
+static const char* const g4_zh[] = { "所有、一切、全部、万物、宇宙", "（数词）一百", nullptr };
 static const char* const g5_tp[] = { "anpa", nullptr };
 static const char* const g5_en[] = { "bottom", "lower", "down", "humble", nullptr };
 static const char* const g5_es[] = { "fondo", "bajo", "abajo", "humilde", nullptr };
 static const char* const g5_fr[] = { "fond", "bas", "dessous", "humble", nullptr };
 static const char* const g5_de[] = { "Boden", "unten", "niedrig", "demütig", nullptr };
 static const char* const g5_pt[] = { "fundo", "baixo", "embaixo", "humilde", nullptr };
+static const char* const g5_zh[] = { "底部", "下面、底下", "落败的、卑微的、低下的", nullptr };
 static const char* const g6_tp[] = { "ante", nullptr };
 static const char* const g6_en[] = { "different", "changed", "other", nullptr };
 static const char* const g6_es[] = { "diferente", "cambiado", "otro", nullptr };
 static const char* const g6_fr[] = { "différent", "changé", "autre", nullptr };
 static const char* const g6_de[] = { "verschieden", "verändert", "andere", nullptr };
 static const char* const g6_pt[] = { "diferente", "mudado", "outro", nullptr };
+static const char* const g6_zh[] = { "不同的、改变的", "改变、改造、变动", "其他的、别的", "不同之处", nullptr };
 static const char* const g7_tp[] = { "anu", nullptr };
 static const char* const g7_en[] = { "or", nullptr };
 static const char* const g7_es[] = { "o", nullptr };
 static const char* const g7_fr[] = { "ou", nullptr };
 static const char* const g7_de[] = { "oder", nullptr };
 static const char* const g7_pt[] = { "ou", nullptr };
+static const char* const g7_zh[] = { "（助词）[置于多个可能性之间，并取代其他助词]、或", nullptr };
 static const char* const g8_tp[] = { "awen", nullptr };
 static const char* const g8_en[] = { "to stay", "wait", "remain", "keep", nullptr };
 static const char* const g8_es[] = { "quedarse", "esperar", "permanecer", "mantener", nullptr };
 static const char* const g8_fr[] = { "rester", "attendre", "demeurer", "garder", nullptr };
 static const char* const g8_de[] = { "bleiben", "warten", "verharren", "behalten", nullptr };
 static const char* const g8_pt[] = { "ficar", "esperar", "permanecer", "manter", nullptr };
+static const char* const g8_zh[] = { "留下、停驻、等待、停止、暂停", "保护、守护、使安全", "继续", "（前动词）继续", nullptr };
 static const char* const g9_tp[] = { "e", nullptr };
 static const char* const g9_en[] = { "(particle: introduces a direct object)", nullptr };
 static const char* const g9_es[] = { "partícula de objeto directo", nullptr };
 static const char* const g9_fr[] = { "particule de complément d'objet direct", nullptr };
 static const char* const g9_de[] = { "Partikel für das direkte Objekt", nullptr };
 static const char* const g9_pt[] = { "partícula de objeto direto", nullptr };
+static const char* const g9_zh[] = { "（助词）[标示直接宾语的开头]", nullptr };
 static const char* const g10_tp[] = { "en", nullptr };
 static const char* const g10_en[] = { "(particle: joins subjects, and)", nullptr };
 static const char* const g10_es[] = { "partícula que une sujetos", nullptr };
 static const char* const g10_fr[] = { "particule reliant des sujets", nullptr };
 static const char* const g10_de[] = { "Partikel zur Verbindung von Subjekten", nullptr };
 static const char* const g10_pt[] = { "partícula que une sujeitos", nullptr };
+static const char* const g10_zh[] = { "（助词）[置于多个主语之间]", nullptr };
 static const char* const g11_tp[] = { "epiku", nullptr };
 static const char* const g11_en[] = { "epic", "awesome", "cool", nullptr };
 static const char* const g11_es[] = { "épico", "genial", "increíble", nullptr };
 static const char* const g11_fr[] = { "épique", "génial", "super", nullptr };
 static const char* const g11_de[] = { "episch", "großartig", "super", nullptr };
 static const char* const g11_pt[] = { "épico", "incrível", "genial", nullptr };
+static const char* const g11_zh[] = { "史诗级的、很棒的、极好的、惊人的", nullptr };
 static const char* const g12_tp[] = { "esun", nullptr };
 static const char* const g12_en[] = { "market", "shop", "trade", "barter", nullptr };
 static const char* const g12_es[] = { "mercado", "tienda", "comercio", "trueque", nullptr };
 static const char* const g12_fr[] = { "marché", "boutique", "commerce", "troc", nullptr };
 static const char* const g12_de[] = { "Markt", "Laden", "Handel", "Tauschhandel", nullptr };
 static const char* const g12_pt[] = { "mercado", "loja", "comércio", "troca", nullptr };
+static const char* const g12_zh[] = { "交易、贸易、交换、买、卖", "市场、商店、市集、买卖场合", nullptr };
 static const char* const g13_tp[] = { "ijo", nullptr };
 static const char* const g13_en[] = { "thing", "object", "matter", nullptr };
 static const char* const g13_es[] = { "cosa", "objeto", "asunto", nullptr };
 static const char* const g13_fr[] = { "chose", "objet", "affaire", nullptr };
 static const char* const g13_de[] = { "Ding", "Gegenstand", "Angelegenheit", nullptr };
 static const char* const g13_pt[] = { "coisa", "objeto", "assunto", nullptr };
+static const char* const g13_zh[] = { "物体、物件、实体、物质、现象", nullptr };
 static const char* const g14_tp[] = { "ike", nullptr };
 static const char* const g14_en[] = { "bad", "negative", "evil", "complicated", nullptr };
 static const char* const g14_es[] = { "malo", "negativo", "maligno", "complicado", nullptr };
 static const char* const g14_fr[] = { "mauvais", "négatif", "mal", "compliqué", nullptr };
 static const char* const g14_de[] = { "schlecht", "negativ", "böse", "kompliziert", nullptr };
 static const char* const g14_pt[] = { "mau", "negativo", "maligno", "complicado", nullptr };
+static const char* const g14_zh[] = { "负面性质，如坏的、不好的、有害的、不必要的", nullptr };
 static const char* const g15_tp[] = { "ilo", nullptr };
 static const char* const g15_en[] = { "tool", "device", "machine", nullptr };
 static const char* const g15_es[] = { "herramienta", "dispositivo", "máquina", nullptr };
 static const char* const g15_fr[] = { "outil", "appareil", "machine", nullptr };
 static const char* const g15_de[] = { "Werkzeug", "Gerät", "Maschine", nullptr };
 static const char* const g15_pt[] = { "ferramenta", "dispositivo", "máquina", nullptr };
+static const char* const g15_zh[] = { "工具、机器、机械、器具", nullptr };
 static const char* const g16_tp[] = { "insa", nullptr };
 static const char* const g16_en[] = { "inside", "center", "stomach", "contents", nullptr };
 static const char* const g16_es[] = { "interior", "centro", "estómago", "contenido", nullptr };
 static const char* const g16_fr[] = { "intérieur", "centre", "estomac", "contenu", nullptr };
 static const char* const g16_de[] = { "Inneres", "Mitte", "Magen", "Inhalt", nullptr };
 static const char* const g16_pt[] = { "interior", "centro", "estômago", "conteúdo", nullptr };
+static const char* const g16_zh[] = { "内部、里面、中间、中心、之间、中点", nullptr };
 static const char* const g17_tp[] = { "jaki", nullptr };
 static const char* const g17_en[] = { "dirty", "gross", "disgusting", "waste", nullptr };
 static const char* const g17_es[] = { "sucio", "asqueroso", "repugnante", "desecho", nullptr };
 static const char* const g17_fr[] = { "sale", "dégoûtant", "répugnant", "déchet", nullptr };
 static const char* const g17_de[] = { "schmutzig", "eklig", "widerlich", "Abfall", nullptr };
 static const char* const g17_pt[] = { "sujo", "nojento", "repugnante", "lixo", nullptr };
+static const char* const g17_zh[] = { "恶心的、肮脏的、污秽的、不卫生的、有毒的、令人反感的、腐烂的", nullptr };
 static const char* const g18_tp[] = { "jan", nullptr };
 static const char* const g18_en[] = { "person", "people", "human", "somebody", nullptr };
 static const char* const g18_es[] = { "persona", "gente", "humano", "alguien", nullptr };
 static const char* const g18_fr[] = { "personne", "gens", "humain", "quelqu'un", nullptr };
 static const char* const g18_de[] = { "Person", "Leute", "Mensch", "jemand", nullptr };
 static const char* const g18_pt[] = { "pessoa", "gente", "humano", "alguém", nullptr };
+static const char* const g18_zh[] = { "人、人类、某人", nullptr };
 static const char* const g19_tp[] = { "jasima", nullptr };
 static const char* const g19_en[] = { "mirror", "to reflect", "opposite", "reverse", nullptr };
 static const char* const g19_es[] = { "espejo", "reflejar", "opuesto", "invertir", nullptr };
 static const char* const g19_fr[] = { "miroir", "refléter", "opposé", "inverser", nullptr };
 static const char* const g19_de[] = { "Spiegel", "spiegeln", "Gegenteil", "umkehren", nullptr };
 static const char* const g19_pt[] = { "espelho", "refletir", "oposto", "inverter", nullptr };
+static const char* const g19_zh[] = { "反射、映射、回响", "反映、复制、模仿", nullptr };
 static const char* const g20_tp[] = { "jelo", nullptr };
 static const char* const g20_en[] = { "yellow", nullptr };
 static const char* const g20_es[] = { "amarillo", nullptr };
 static const char* const g20_fr[] = { "jaune", nullptr };
 static const char* const g20_de[] = { "gelb", nullptr };
 static const char* const g20_pt[] = { "amarelo", nullptr };
+static const char* const g20_zh[] = { "黄色的、琥珀色的、金黄色的、黄绿色的、橙黄色的", nullptr };
 static const char* const g21_tp[] = { "jo", nullptr };
 static const char* const g21_en[] = { "to have", "carry", "contain", "hold", nullptr };
 static const char* const g21_es[] = { "tener", "llevar", "contener", "sostener", nullptr };
 static const char* const g21_fr[] = { "avoir", "porter", "contenir", "tenir", nullptr };
 static const char* const g21_de[] = { "haben", "tragen", "enthalten", "halten", nullptr };
 static const char* const g21_pt[] = { "ter", "carregar", "conter", "segurar", nullptr };
+static const char* const g21_zh[] = { "有、拥有、持有、含有、包含", nullptr };
 static const char* const g22_tp[] = { "kala", nullptr };
 static const char* const g22_en[] = { "fish", "sea creature", nullptr };
 static const char* const g22_es[] = { "pez", "criatura marina", nullptr };
 static const char* const g22_fr[] = { "poisson", "créature marine", nullptr };
 static const char* const g22_de[] = { "Fisch", "Meerestier", nullptr };
 static const char* const g22_pt[] = { "peixe", "criatura marinha", nullptr };
+static const char* const g22_zh[] = { "鱼、海洋生物、游泳动物", nullptr };
 static const char* const g23_tp[] = { "kalama", nullptr };
 static const char* const g23_en[] = { "sound", "noise", "to make noise", nullptr };
 static const char* const g23_es[] = { "sonido", "ruido", "hacer ruido", nullptr };
 static const char* const g23_fr[] = { "son", "bruit", "faire du bruit", nullptr };
 static const char* const g23_de[] = { "Klang", "Lärm", "Geräusch machen", nullptr };
 static const char* const g23_pt[] = { "som", "ruído", "fazer barulho", nullptr };
+static const char* const g23_zh[] = { "发音、出声", "声音，如歌声、雷声、打鼓声、拍手声、笑声、哔哔响", nullptr };
 static const char* const g24_tp[] = { "kama", nullptr };
 static const char* const g24_en[] = { "to come", "arrive", "become", "future", nullptr };
 static const char* const g24_es[] = { "venir", "llegar", "volverse", "futuro", nullptr };
 static const char* const g24_fr[] = { "venir", "arriver", "devenir", "futur", nullptr };
 static const char* const g24_de[] = { "kommen", "ankommen", "werden", "Zukunft", nullptr };
 static const char* const g24_pt[] = { "vir", "chegar", "tornar-se", "futuro", nullptr };
+static const char* const g24_zh[] = { "来、临近、召唤", "将来、未来", "事件、（前动词）成为、变成", nullptr };
 static const char* const g25_tp[] = { "kasi", nullptr };
 static const char* const g25_en[] = { "plant", "vegetation", "herb", "leaf", nullptr };
 static const char* const g25_es[] = { "planta", "vegetación", "hierba", "hoja", nullptr };
 static const char* const g25_fr[] = { "plante", "végétation", "herbe", "feuille", nullptr };
 static const char* const g25_de[] = { "Pflanze", "Vegetation", "Kraut", "Blatt", nullptr };
 static const char* const g25_pt[] = { "planta", "vegetação", "erva", "folha", nullptr };
+static const char* const g25_zh[] = { "植物、草木", "香草、叶子", nullptr };
 static const char* const g26_tp[] = { "ken", nullptr };
 static const char* const g26_en[] = { "can", "able to", "possible", "may", nullptr };
 static const char* const g26_es[] = { "poder", "capaz de", "posible", nullptr };
 static const char* const g26_fr[] = { "pouvoir", "capable de", "possible", nullptr };
 static const char* const g26_de[] = { "können", "fähig", "möglich", "dürfen", nullptr };
 static const char* const g26_pt[] = { "poder", "capaz de", "possível", nullptr };
+static const char* const g26_zh[] = { "可以、可能、能力、许可、批准", "可能性、或许、也许", "允许、准许、使可能", "（前动词）可以", nullptr };
 static const char* const g27_tp[] = { "kepeken", nullptr };
 static const char* const g27_en[] = { "to use", "with", "using", nullptr };
 static const char* const g27_es[] = { "usar", "con", "utilizando", nullptr };
 static const char* const g27_fr[] = { "utiliser", "avec", "au moyen de", nullptr };
 static const char* const g27_de[] = { "benutzen", "mit", "mittels", nullptr };
 static const char* const g27_pt[] = { "usar", "com", "utilizando", nullptr };
+static const char* const g27_zh[] = { "（前置词）利用、通过", nullptr };
 static const char* const g28_tp[] = { "kijetesantakalu", nullptr };
 static const char* const g28_en[] = { "raccoon", "procyonid (raccoon-family animal)", nullptr };
 static const char* const g28_es[] = { "mapache", "prociónido (animal de la familia del mapache)", nullptr };
 static const char* const g28_fr[] = { "raton laveur", "procyonidé (animal de la famille du raton laveur)", nullptr };
 static const char* const g28_de[] = { "Waschbär", "Kleinbär (Tier der Waschbärfamilie)", nullptr };
 static const char* const g28_pt[] = { "guaxinim", "procionídeo (animal da família do guaxinim)", nullptr };
+static const char* const g28_zh[] = { "浣熊、蜜熊", "任何浣熊科动物", "任何鼬总科动物", nullptr };
 static const char* const g29_tp[] = { "kili", nullptr };
 static const char* const g29_en[] = { "fruit", "vegetable", "mushroom", nullptr };
 static const char* const g29_es[] = { "fruta", "verdura", "hongo", nullptr };
 static const char* const g29_fr[] = { "fruit", "légume", "champignon", nullptr };
 static const char* const g29_de[] = { "Frucht", "Gemüse", "Pilz", nullptr };
 static const char* const g29_pt[] = { "fruta", "legume", "cogumelo", nullptr };
+static const char* const g29_zh[] = { "水果、蔬菜、蘑菇", nullptr };
 static const char* const g30_tp[] = { "kin", nullptr };
 static const char* const g30_en[] = { "also", "too", "indeed", "really", nullptr };
 static const char* const g30_es[] = { "también", "además", "de hecho", nullptr };
 static const char* const g30_fr[] = { "aussi", "également", "en effet", nullptr };
 static const char* const g30_de[] = { "auch", "ebenfalls", "tatsächlich", nullptr };
 static const char* const g30_pt[] = { "também", "ainda", "de fato", nullptr };
+static const char* const g30_zh[] = { "（助词）[置于短语之后或句首] 也、亦、又、另外", nullptr };
 static const char* const g31_tp[] = { "kipisi", nullptr };
 static const char* const g31_en[] = { "to cut", "to split", "to divide", "section", nullptr };
 static const char* const g31_es[] = { "cortar", "partir", "dividir", "sección", nullptr };
 static const char* const g31_fr[] = { "couper", "fendre", "diviser", "section", nullptr };
 static const char* const g31_de[] = { "schneiden", "spalten", "teilen", "Abschnitt", nullptr };
 static const char* const g31_pt[] = { "cortar", "partir", "dividir", "seção", nullptr };
+static const char* const g31_zh[] = { "分割、切割、割裂", "块、碎片、部分", "锋利的、尖锐的", nullptr };
 static const char* const g32_tp[] = { "kiwen", nullptr };
 static const char* const g32_en[] = { "hard object", "stone", "metal", "rock", nullptr };
 static const char* const g32_es[] = { "objeto duro", "piedra", "metal", "roca", nullptr };
 static const char* const g32_fr[] = { "objet dur", "pierre", "métal", "roche", nullptr };
 static const char* const g32_de[] = { "harter Gegenstand", "Stein", "Metall", "Fels", nullptr };
 static const char* const g32_pt[] = { "objeto duro", "pedra", "metal", "rocha", nullptr };
+static const char* const g32_zh[] = { "坚硬物体，如金属、石头、木材", nullptr };
 static const char* const g33_tp[] = { "ko", nullptr };
 static const char* const g33_en[] = { "semi-solid", "paste", "powder", "clay", nullptr };
 static const char* const g33_es[] = { "semisólido", "pasta", "polvo", "arcilla", nullptr };
 static const char* const g33_fr[] = { "semi-solide", "pâte", "poudre", "argile", nullptr };
 static const char* const g33_de[] = { "halbfest", "Paste", "Pulver", "Ton", nullptr };
 static const char* const g33_pt[] = { "semissólido", "pasta", "pó", "argila", nullptr };
+static const char* const g33_zh[] = { "半固体，如膏状物体、浆糊、沙、泥土、黏土", "柔软的、可塑的", "黏稠的", nullptr };
 static const char* const g34_tp[] = { "kokosila", nullptr };
 static const char* const g34_en[] = { "to speak a non-Toki Pona language among Toki Pona speakers", nullptr };
 static const char* const g34_es[] = { "hablar un idioma que no es toki pona en un entorno de toki pona", nullptr };
 static const char* const g34_fr[] = { "parler une langue autre que le toki pona dans un milieu toki pona", nullptr };
 static const char* const g34_de[] = { "in einer Toki-Pona-Umgebung eine Nicht-Toki-Pona-Sprache sprechen", nullptr };
 static const char* const g34_pt[] = { "falar uma língua que não é toki pona num ambiente de toki pona", nullptr };
+static const char* const g34_zh[] = { "在更适合讲道本语的环境中讲一个不是道本语的语言", nullptr };
 static const char* const g35_tp[] = { "kon", nullptr };
 static const char* const g35_en[] = { "air", "breath", "spirit", "essence", nullptr };
 static const char* const g35_es[] = { "aire", "aliento", "espíritu", "esencia", nullptr };
 static const char* const g35_fr[] = { "air", "souffle", "esprit", "essence", nullptr };
 static const char* const g35_de[] = { "Luft", "Atem", "Geist", "Wesen", nullptr };
 static const char* const g35_pt[] = { "ar", "fôlego", "espírito", "essência", nullptr };
+static const char* const g35_zh[] = { "空气、气息、风", "本质、幽灵、灵魂、鬼魂", "不可看见的主事", nullptr };
 static const char* const g36_tp[] = { "ku", nullptr };
 static const char* const g36_en[] = { "to interact with", "the Toki Pona Dictionary (book)", nullptr };
 static const char* const g36_es[] = { "interactuar con", "el Diccionario de Toki Pona (libro)", nullptr };
 static const char* const g36_fr[] = { "interagir avec", "le Dictionnaire du Toki Pona (livre)", nullptr };
 static const char* const g36_de[] = { "interagieren mit", "das Toki-Pona-Wörterbuch (Buch)", nullptr };
 static const char* const g36_pt[] = { "interagir com", "o Dicionário de Toki Pona (livro)", nullptr };
+static const char* const g36_zh[] = { "与索尼娅·兰的道本语词典（2021 年）互动", nullptr };
 static const char* const g37_tp[] = { "kule", nullptr };
 static const char* const g37_en[] = { "color", "colorful", "category", nullptr };
 static const char* const g37_es[] = { "color", "colorido", "categoría", nullptr };
 static const char* const g37_fr[] = { "couleur", "coloré", "catégorie", nullptr };
 static const char* const g37_de[] = { "Farbe", "farbig", "Kategorie", nullptr };
 static const char* const g37_pt[] = { "cor", "colorido", "categoria", nullptr };
+static const char* const g37_zh[] = { "颜色、色素、颜料", "分类、类别、种类、风格", "五颜六色的、多种多样的", nullptr };
 static const char* const g38_tp[] = { "kulupu", nullptr };
 static const char* const g38_en[] = { "group", "community", "society", nullptr };
 static const char* const g38_es[] = { "grupo", "comunidad", "sociedad", nullptr };
 static const char* const g38_fr[] = { "groupe", "communauté", "société", nullptr };
 static const char* const g38_de[] = { "Gruppe", "Gemeinschaft", "Gesellschaft", nullptr };
 static const char* const g38_pt[] = { "grupo", "comunidade", "sociedade", nullptr };
+static const char* const g38_zh[] = { "群组、社区、社会、公司、国家、组合、集合、队伍、人群、群众", nullptr };
 static const char* const g39_tp[] = { "kute", nullptr };
 static const char* const g39_en[] = { "to hear", "listen", "ear", nullptr };
 static const char* const g39_es[] = { "oír", "escuchar", "oreja", nullptr };
 static const char* const g39_fr[] = { "entendre", "écouter", "oreille", nullptr };
 static const char* const g39_de[] = { "hören", "zuhören", "Ohr", nullptr };
 static const char* const g39_pt[] = { "ouvir", "escutar", "orelha", nullptr };
+static const char* const g39_zh[] = { "耳朵、听觉器官", "听、聆听、倾听、注意、顺从、遵守", nullptr };
 static const char* const g40_tp[] = { "la", nullptr };
 static const char* const g40_en[] = { "(particle: marks context or condition)", nullptr };
 static const char* const g40_es[] = { "partícula de contexto o condición", nullptr };
 static const char* const g40_fr[] = { "particule de contexte ou de condition", nullptr };
 static const char* const g40_de[] = { "Partikel für Kontext oder Bedingung", nullptr };
 static const char* const g40_pt[] = { "partícula de contexto ou condição", nullptr };
+static const char* const g40_zh[] = { "（助词）[表示上一句为下一句的语境片语]", nullptr };
 static const char* const g41_tp[] = { "lanpan", nullptr };
 static const char* const g41_en[] = { "to take", "to seize", "to grab", "to steal", nullptr };
 static const char* const g41_es[] = { "tomar", "agarrar", "apoderarse de", "robar", nullptr };
 static const char* const g41_fr[] = { "prendre", "saisir", "attraper", "voler", nullptr };
 static const char* const g41_de[] = { "nehmen", "ergreifen", "packen", "stehlen", nullptr };
 static const char* const g41_pt[] = { "pegar", "agarrar", "tomar", "roubar", nullptr };
+static const char* const g41_zh[] = { "取走、拿走、偷走", nullptr };
 static const char* const g42_tp[] = { "lape", nullptr };
 static const char* const g42_en[] = { "to sleep", "rest", nullptr };
 static const char* const g42_es[] = { "dormir", "descansar", nullptr };
 static const char* const g42_fr[] = { "dormir", "se reposer", nullptr };
 static const char* const g42_de[] = { "schlafen", "ruhen", nullptr };
 static const char* const g42_pt[] = { "dormir", "descansar", nullptr };
+static const char* const g42_zh[] = { "睡觉、休息、活动或工作之间的休息", nullptr };
 static const char* const g43_tp[] = { "laso", nullptr };
 static const char* const g43_en[] = { "blue", "green", nullptr };
 static const char* const g43_es[] = { "azul", "verde", nullptr };
 static const char* const g43_fr[] = { "bleu", "vert", nullptr };
 static const char* const g43_de[] = { "blau", "grün", nullptr };
 static const char* const g43_pt[] = { "azul", "verde", nullptr };
+static const char* const g43_zh[] = { "青蓝色的、蓝色的、绿色的、靛蓝色的、青绿色的", nullptr };
 static const char* const g44_tp[] = { "lawa", nullptr };
 static const char* const g44_en[] = { "head", "mind", "to lead", "to control", nullptr };
 static const char* const g44_es[] = { "cabeza", "mente", "dirigir", "controlar", nullptr };
 static const char* const g44_fr[] = { "tête", "esprit", "diriger", "contrôler", nullptr };
 static const char* const g44_de[] = { "Kopf", "Verstand", "führen", "kontrollieren", nullptr };
 static const char* const g44_pt[] = { "cabeça", "mente", "liderar", "controlar", nullptr };
+static const char* const g44_zh[] = { "头、脑部、大脑", "控制、领导、指导", "政府、领袖、元首", "法则、法律", nullptr };
 static const char* const g45_tp[] = { "leko", nullptr };
 static const char* const g45_en[] = { "square", "block", "cube", "stairs", nullptr };
 static const char* const g45_es[] = { "cuadrado", "bloque", "cubo", "escalera", nullptr };
 static const char* const g45_fr[] = { "carré", "bloc", "cube", "escalier", nullptr };
 static const char* const g45_de[] = { "Quadrat", "Block", "Würfel", "Treppe", nullptr };
 static const char* const g45_pt[] = { "quadrado", "bloco", "cubo", "escada", nullptr };
+static const char* const g45_zh[] = { "正方形、立方体、方块、方形物体，如砖块、楼梯", nullptr };
 static const char* const g46_tp[] = { "len", nullptr };
 static const char* const g46_en[] = { "cloth", "clothing", "fabric", "layer", nullptr };
 static const char* const g46_es[] = { "tela", "ropa", "tejido", "capa", nullptr };
 static const char* const g46_fr[] = { "tissu", "vêtement", "étoffe", "couche", nullptr };
 static const char* const g46_de[] = { "Stoff", "Kleidung", "Gewebe", "Schicht", nullptr };
 static const char* const g46_pt[] = { "pano", "roupa", "tecido", "camada", nullptr };
+static const char* const g46_zh[] = { "衣服、布料、织物、纺织品", "隐秘的、隐藏的、秘密的、私人的", nullptr };
 static const char* const g47_tp[] = { "lete", nullptr };
 static const char* const g47_en[] = { "cold", "cool", "raw", nullptr };
 static const char* const g47_es[] = { "frío", "fresco", "crudo", nullptr };
 static const char* const g47_fr[] = { "froid", "frais", "cru", nullptr };
 static const char* const g47_de[] = { "kalt", "kühl", "roh", nullptr };
 static const char* const g47_pt[] = { "frio", "fresco", "cru", nullptr };
+static const char* const g47_zh[] = { "冷的、凉的、冰冷的", "冷冻、冻结", "生的、未煮熟的", nullptr };
 static const char* const g48_tp[] = { "li", nullptr };
 static const char* const g48_en[] = { "(particle: separates subject from verb)", nullptr };
 static const char* const g48_es[] = { "partícula de predicado", nullptr };
 static const char* const g48_fr[] = { "particule de prédicat", nullptr };
 static const char* const g48_de[] = { "Prädikatpartikel", nullptr };
 static const char* const g48_pt[] = { "partícula de predicado", nullptr };
+static const char* const g48_zh[] = { "（助词）[标示指示动词（陈述句）的开始]", nullptr };
 static const char* const g49_tp[] = { "lili", nullptr };
 static const char* const g49_en[] = { "small", "little", "few", "young", nullptr };
 static const char* const g49_es[] = { "pequeño", "poco", "joven", nullptr };
 static const char* const g49_fr[] = { "petit", "peu", "jeune", nullptr };
 static const char* const g49_de[] = { "klein", "wenig", "jung", nullptr };
 static const char* const g49_pt[] = { "pequeno", "pouco", "jovem", nullptr };
+static const char* const g49_zh[] = { "小的、短的、矮的、年轻的", "块、碎片、部分", nullptr };
 static const char* const g50_tp[] = { "linja", nullptr };
 static const char* const g50_en[] = { "long flexible thing", "string", "hair", "rope", nullptr };
 static const char* const g50_es[] = { "cosa larga y flexible", "cuerda", "cabello", "soga", nullptr };
 static const char* const g50_fr[] = { "objet long et souple", "ficelle", "cheveu", "corde", nullptr };
 static const char* const g50_de[] = { "langes biegsames Ding", "Schnur", "Haar", "Seil", nullptr };
 static const char* const g50_pt[] = { "coisa longa e flexível", "fio", "cabelo", "corda", nullptr };
+static const char* const g50_zh[] = { "又长又软的物体，如绳、毛线、毛发、丝线", nullptr };
 static const char* const g51_tp[] = { "lipu", nullptr };
 static const char* const g51_en[] = { "flat object", "paper", "document", "book", nullptr };
 static const char* const g51_es[] = { "objeto plano", "papel", "documento", "libro", nullptr };
 static const char* const g51_fr[] = { "objet plat", "papier", "document", "livre", nullptr };
 static const char* const g51_de[] = { "flacher Gegenstand", "Papier", "Dokument", "Buch", nullptr };
 static const char* const g51_pt[] = { "objeto plano", "papel", "documento", "livro", nullptr };
+static const char* const g51_zh[] = { "柔软的平坦物体，如纸张、卡片、叶片", "书写文字或文件，如书、网站、泥板", nullptr };
 static const char* const g52_tp[] = { "loje", nullptr };
 static const char* const g52_en[] = { "red", nullptr };
 static const char* const g52_es[] = { "rojo", nullptr };
 static const char* const g52_fr[] = { "rouge", nullptr };
 static const char* const g52_de[] = { "rot", nullptr };
 static const char* const g52_pt[] = { "vermelho", nullptr };
+static const char* const g52_zh[] = { "红色的、紫红色的、鲜红色的、粉红色的、锈红色的、红橙色的", nullptr };
 static const char* const g53_tp[] = { "lon", nullptr };
 static const char* const g53_en[] = { "to be present", "real", "true", "at", "in", nullptr };
 static const char* const g53_es[] = { "estar presente", "real", "verdadero", "en", nullptr };
 static const char* const g53_fr[] = { "être présent", "réel", "vrai", "à", "dans", nullptr };
 static const char* const g53_de[] = { "anwesend sein", "real", "wahr", "an", "in", nullptr };
 static const char* const g53_pt[] = { "estar presente", "real", "verdadeiro", "em", nullptr };
+static const char* const g53_zh[] = { "现存的、存在的、真实的、真的", "（前置词）位于、在、在……的语境内", nullptr };
 static const char* const g54_tp[] = { "luka", nullptr };
 static const char* const g54_en[] = { "hand", "arm", "five", nullptr };
 static const char* const g54_es[] = { "mano", "brazo", "cinco", nullptr };
 static const char* const g54_fr[] = { "main", "bras", "cinq", nullptr };
 static const char* const g54_de[] = { "Hand", "Arm", "fünf", nullptr };
 static const char* const g54_pt[] = { "mão", "braço", "cinco", nullptr };
+static const char* const g54_zh[] = { "手、手臂、触觉器官、握物器官", "抓住、握住、与……互动、用触觉感受", "（数词）五", nullptr };
 static const char* const g55_tp[] = { "lukin", nullptr };
 static const char* const g55_en[] = { "to see", "look", "eye", "to seek", nullptr };
 static const char* const g55_es[] = { "ver", "mirar", "ojo", "buscar", nullptr };
 static const char* const g55_fr[] = { "voir", "regarder", "œil", "chercher", nullptr };
 static const char* const g55_de[] = { "sehen", "schauen", "Auge", "suchen", nullptr };
 static const char* const g55_pt[] = { "ver", "olhar", "olho", "procurar", nullptr };
+static const char* const g55_zh[] = { "看、见、观察、检视、检查、阅读", "视觉的", "眼睛、视觉器官", "（前动词）尝试、试图", nullptr };
 static const char* const g56_tp[] = { "lupa", nullptr };
 static const char* const g56_en[] = { "hole", "door", "opening", "window", nullptr };
 static const char* const g56_es[] = { "agujero", "puerta", "abertura", "ventana", nullptr };
 static const char* const g56_fr[] = { "trou", "porte", "ouverture", "fenêtre", nullptr };
 static const char* const g56_de[] = { "Loch", "Tür", "Öffnung", "Fenster", nullptr };
 static const char* const g56_pt[] = { "buraco", "porta", "abertura", "janela", nullptr };
+static const char* const g56_zh[] = { "洞、穴、坑、门口、窗户、入口", nullptr };
 static const char* const g57_tp[] = { "ma", nullptr };
 static const char* const g57_en[] = { "land", "earth", "country", "outdoors", nullptr };
 static const char* const g57_es[] = { "tierra", "país", "terreno", "exterior", nullptr };
 static const char* const g57_fr[] = { "terre", "pays", "territoire", "extérieur", nullptr };
 static const char* const g57_de[] = { "Land", "Erde", "Gelände", "draußen", nullptr };
 static const char* const g57_pt[] = { "terra", "país", "terreno", "ar livre", nullptr };
+static const char* const g57_zh[] = { "土地、泥土、土壤", "国家、领土、世界", "户外", nullptr };
 static const char* const g58_tp[] = { "mama", nullptr };
 static const char* const g58_en[] = { "parent", "origin", "caretaker", nullptr };
 static const char* const g58_es[] = { "padre o madre", "origen", "cuidador", nullptr };
 static const char* const g58_fr[] = { "parent", "origine", "soignant", nullptr };
 static const char* const g58_de[] = { "Elternteil", "Ursprung", "Bezugsperson", nullptr };
 static const char* const g58_pt[] = { "pai ou mãe", "origem", "cuidador", nullptr };
+static const char* const g58_zh[] = { "父母、祖先、始祖", "创造者、起源者", "看护者、照顾者、监护人", nullptr };
 static const char* const g59_tp[] = { "mani", nullptr };
 static const char* const g59_en[] = { "money", "wealth", "large domestic animal", nullptr };
 static const char* const g59_es[] = { "dinero", "riqueza", "animal doméstico grande", nullptr };
 static const char* const g59_fr[] = { "argent", "richesse", "grand animal domestique", nullptr };
 static const char* const g59_de[] = { "Geld", "Reichtum", "großes Haustier", nullptr };
 static const char* const g59_pt[] = { "dinheiro", "riqueza", "animal doméstico grande", nullptr };
+static const char* const g59_zh[] = { "金钱、货币", "有价值物体，如黄金、投资品、牲畜", nullptr };
 static const char* const g60_tp[] = { "meli", nullptr };
 static const char* const g60_en[] = { "woman", "female", "wife", nullptr };
 static const char* const g60_es[] = { "mujer", "hembra", "esposa", nullptr };
 static const char* const g60_fr[] = { "femme", "femelle", "épouse", nullptr };
 static const char* const g60_de[] = { "Frau", "weiblich", "Ehefrau", nullptr };
 static const char* const g60_pt[] = { "mulher", "fêmea", "esposa", nullptr };
+static const char* const g60_zh[] = { "女人、妇女、女性、妻子、女朋友", nullptr };
 static const char* const g61_tp[] = { "meso", nullptr };
 static const char* const g61_en[] = { "medium", "average", "middling", "mediocre", nullptr };
 static const char* const g61_es[] = { "medio", "promedio", "mediocre", nullptr };
 static const char* const g61_fr[] = { "moyen", "médian", "médiocre", nullptr };
 static const char* const g61_de[] = { "mittel", "durchschnittlich", "mittelmäßig", nullptr };
 static const char* const g61_pt[] = { "médio", "mediano", "medíocre", nullptr };
+static const char* const g61_zh[] = { "中点、中间、中央、中等的、平庸的", "非此非彼、是和不是之间", nullptr };
 static const char* const g62_tp[] = { "mi", nullptr };
 static const char* const g62_en[] = { "I", "me", "we", "us", nullptr };
 static const char* const g62_es[] = { "yo", "mí", "nosotros", nullptr };
 static const char* const g62_fr[] = { "je", "moi", "nous", nullptr };
 static const char* const g62_de[] = { "ich", "mich", "wir", "uns", nullptr };
 static const char* const g62_pt[] = { "eu", "mim", "nós", nullptr };
+static const char* const g62_zh[] = { "（代词）我、我们", nullptr };
 static const char* const g63_tp[] = { "mije", nullptr };
 static const char* const g63_en[] = { "man", "male", "husband", nullptr };
 static const char* const g63_es[] = { "hombre", "varón", "esposo", nullptr };
 static const char* const g63_fr[] = { "homme", "mâle", "époux", nullptr };
 static const char* const g63_de[] = { "Mann", "männlich", "Ehemann", nullptr };
 static const char* const g63_pt[] = { "homem", "macho", "marido", nullptr };
+static const char* const g63_zh[] = { "男人、男性、丈夫、男朋友", nullptr };
 static const char* const g64_tp[] = { "misikeke", nullptr };
 static const char* const g64_en[] = { "medicine", "medication", "remedy", "cure", nullptr };
 static const char* const g64_es[] = { "medicina", "medicamento", "remedio", "cura", nullptr };
 static const char* const g64_fr[] = { "médicament", "remède", "soin", nullptr };
 static const char* const g64_de[] = { "Medizin", "Medikament", "Heilmittel", nullptr };
 static const char* const g64_pt[] = { "remédio", "medicamento", "cura", nullptr };
+static const char* const g64_zh[] = { "有关医学的物品或行为，如开处方、冥想、运动、绷带、治疗", nullptr };
 static const char* const g65_tp[] = { "moku", nullptr };
 static const char* const g65_en[] = { "food", "to eat", "to drink", nullptr };
 static const char* const g65_es[] = { "comida", "comer", "beber", nullptr };
 static const char* const g65_fr[] = { "nourriture", "manger", "boire", nullptr };
 static const char* const g65_de[] = { "Essen", "essen", "trinken", nullptr };
 static const char* const g65_pt[] = { "comida", "comer", "beber", nullptr };
+static const char* const g65_zh[] = { "吃、喝、进食、咽下、摄入", "食物、可食用物品", nullptr };
 static const char* const g66_tp[] = { "moli", nullptr };
 static const char* const g66_en[] = { "death", "to die", "dead", nullptr };
 static const char* const g66_es[] = { "muerte", "morir", "muerto", nullptr };
 static const char* const g66_fr[] = { "mort", "mourir", "décédé", nullptr };
 static const char* const g66_de[] = { "Tod", "sterben", "tot", nullptr };
 static const char* const g66_pt[] = { "morte", "morrer", "morto", nullptr };
+static const char* const g66_zh[] = { "死亡、死的、死去、濒死的", "杀害、谋杀", nullptr };
 static const char* const g67_tp[] = { "monsi", nullptr };
 static const char* const g67_en[] = { "back", "behind", "rear", nullptr };
 static const char* const g67_es[] = { "espalda", "detrás", "parte trasera", nullptr };
 static const char* const g67_fr[] = { "dos", "derrière", "arrière", nullptr };
 static const char* const g67_de[] = { "Rücken", "hinten", "Rückseite", nullptr };
 static const char* const g67_pt[] = { "costas", "atrás", "parte traseira", nullptr };
+static const char* const g67_zh[] = { "后面、后方、后部", nullptr };
 static const char* const g68_tp[] = { "monsuta", nullptr };
 static const char* const g68_en[] = { "monster", "fear", "scary thing", nullptr };
 static const char* const g68_es[] = { "monstruo", "miedo", "cosa aterradora", nullptr };
 static const char* const g68_fr[] = { "monstre", "peur", "chose effrayante", nullptr };
 static const char* const g68_de[] = { "Monster", "Angst", "Schreckgespenst", nullptr };
 static const char* const g68_pt[] = { "monstro", "medo", "coisa assustadora", nullptr };
+static const char* const g68_zh[] = { "恐惧、紧张、担忧", "可怕的、吓人的", "可怕的物体，如捕食者、威胁、危机", nullptr };
 static const char* const g69_tp[] = { "mu", nullptr };
 static const char* const g69_en[] = { "(animal noise, nonverbal sound)", nullptr };
 static const char* const g69_es[] = { "sonido de animal", "sonido no verbal", nullptr };
 static const char* const g69_fr[] = { "cri d'animal", "son non verbal", nullptr };
 static const char* const g69_de[] = { "Tierlaut", "nonverbaler Laut", nullptr };
 static const char* const g69_pt[] = { "som de animal", "som não verbal", nullptr };
+static const char* const g69_zh[] = { "（动物叫声或沟通、拟声词）", nullptr };
 static const char* const g70_tp[] = { "mun", nullptr };
 static const char* const g70_en[] = { "moon", "star", "night sky object", nullptr };
 static const char* const g70_es[] = { "luna", "estrella", "objeto del cielo nocturno", nullptr };
 static const char* const g70_fr[] = { "lune", "étoile", "objet du ciel nocturne", nullptr };
 static const char* const g70_de[] = { "Mond", "Stern", "Nachthimmelobjekt", nullptr };
 static const char* const g70_pt[] = { "lua", "estrela", "objeto do céu noturno", nullptr };
+static const char* const g70_zh[] = { "月亮、夜空的物体、恒星、天体", nullptr };
 static const char* const g71_tp[] = { "musi", nullptr };
 static const char* const g71_en[] = { "fun", "play", "art", "entertainment", nullptr };
 static const char* const g71_es[] = { "diversión", "juego", "arte", "entretenimiento", nullptr };
 static const char* const g71_fr[] = { "amusement", "jeu", "art", "divertissement", nullptr };
 static const char* const g71_de[] = { "Spaß", "Spiel", "Kunst", "Unterhaltung", nullptr };
 static const char* const g71_pt[] = { "diversão", "jogo", "arte", "entretenimento", nullptr };
+static const char* const g71_zh[] = { "乐趣、欢乐、游戏、娱乐、玩、逗人的、有趣的、滑稽的", nullptr };
 static const char* const g72_tp[] = { "mute", nullptr };
 static const char* const g72_en[] = { "many", "much", "several", "quantity", nullptr };
 static const char* const g72_es[] = { "muchos", "mucho", "varios", "cantidad", nullptr };
 static const char* const g72_fr[] = { "beaucoup", "nombreux", "plusieurs", "quantité", nullptr };
 static const char* const g72_de[] = { "viele", "viel", "mehrere", "Menge", nullptr };
 static const char* const g72_pt[] = { "muitos", "muito", "vários", "quantidade", nullptr };
+static const char* const g72_zh[] = { "许多的、很多的", "数量", "（数词）二十", nullptr };
 static const char* const g73_tp[] = { "n", nullptr };
 static const char* const g73_en[] = { "(interjection: hmm, thinking, hesitation, or agreement)", nullptr };
 static const char* const g73_es[] = { "interjección: mmm, reflexión, duda o acuerdo", nullptr };
 static const char* const g73_fr[] = { "interjection : hmm, réflexion, hésitation ou accord", nullptr };
 static const char* const g73_de[] = { "Interjektion: hmm, Nachdenken, Zögern oder Zustimmung", nullptr };
 static const char* const g73_pt[] = { "interjeição: hmm, reflexão, hesitação ou concordância", nullptr };
+static const char* const g73_zh[] = { "（感叹词）嗯、呃、[表示思考或暂停]", nullptr };
 static const char* const g74_tp[] = { "namako", nullptr };
 static const char* const g74_en[] = { "spice", "flavoring", "extra", "additional", nullptr };
 static const char* const g74_es[] = { "especia", "condimento", "extra", "adicional", nullptr };
 static const char* const g74_fr[] = { "épice", "assaisonnement", "supplément", "additionnel", nullptr };
 static const char* const g74_de[] = { "Gewürz", "Würze", "Zusatz", "zusätzlich", nullptr };
 static const char* const g74_pt[] = { "tempero", "condimento", "extra", "adicional", nullptr };
+static const char* const g74_zh[] = { "香料、装饰物", "额外的、附加的", nullptr };
 static const char* const g75_tp[] = { "nanpa", nullptr };
 static const char* const g75_en[] = { "number", "(ordinal marker)", nullptr };
 static const char* const g75_es[] = { "número", "marcador ordinal", nullptr };
 static const char* const g75_fr[] = { "nombre", "marqueur ordinal", nullptr };
 static const char* const g75_de[] = { "Zahl", "Ordinalzahlmarker", nullptr };
 static const char* const g75_pt[] = { "número", "marcador ordinal", nullptr };
+static const char* const g75_zh[] = { "数字", "（助词）[序数] 第", nullptr };
 static const char* const g76_tp[] = { "nasa", nullptr };
 static const char* const g76_en[] = { "strange", "silly", "drunk", "crazy", nullptr };
 static const char* const g76_es[] = { "extraño", "tonto", "borracho", "loco", nullptr };
 static const char* const g76_fr[] = { "étrange", "idiot", "ivre", "fou", nullptr };
 static const char* const g76_de[] = { "seltsam", "albern", "betrunken", "verrückt", nullptr };
 static const char* const g76_pt[] = { "estranho", "bobo", "bêbado", "louco", nullptr };
+static const char* const g76_zh[] = { "奇怪的、异常的、傻的、不正常的、不如预期的", "喝醉的", nullptr };
 static const char* const g77_tp[] = { "nasin", nullptr };
 static const char* const g77_en[] = { "way", "path", "method", "doctrine", nullptr };
 static const char* const g77_es[] = { "camino", "senda", "método", "doctrina", nullptr };
 static const char* const g77_fr[] = { "chemin", "voie", "méthode", "doctrine", nullptr };
 static const char* const g77_de[] = { "Weg", "Pfad", "Methode", "Lehre", nullptr };
 static const char* const g77_pt[] = { "caminho", "trilha", "método", "doutrina", nullptr };
+static const char* const g77_zh[] = { "方法、办法、信条、传统", "道路、路径、街路", nullptr };
 static const char* const g78_tp[] = { "nena", nullptr };
 static const char* const g78_en[] = { "bump", "hill", "mountain", "button", "nose", nullptr };
 static const char* const g78_es[] = { "bulto", "colina", "montaña", "botón", "nariz", nullptr };
 static const char* const g78_fr[] = { "bosse", "colline", "montagne", "bouton", "nez", nullptr };
 static const char* const g78_de[] = { "Beule", "Hügel", "Berg", "Knopf", "Nase", nullptr };
 static const char* const g78_pt[] = { "protuberância", "colina", "montanha", "botão", "nariz", nullptr };
+static const char* const g78_zh[] = { "凸位，如凸块、按钮、山丘、鼻子", nullptr };
 static const char* const g79_tp[] = { "ni", nullptr };
 static const char* const g79_en[] = { "this", "that", nullptr };
 static const char* const g79_es[] = { "este", "ese", "eso", nullptr };
 static const char* const g79_fr[] = { "ce", "cela", "ceci", nullptr };
 static const char* const g79_de[] = { "dies", "das", "diese", nullptr };
 static const char* const g79_pt[] = { "este", "esse", "isso", nullptr };
+static const char* const g79_zh[] = { "这个、那个、这些、那些", nullptr };
 static const char* const g80_tp[] = { "nimi", nullptr };
 static const char* const g80_en[] = { "name", "word", nullptr };
 static const char* const g80_es[] = { "nombre", "palabra", nullptr };
 static const char* const g80_fr[] = { "nom", "mot", nullptr };
 static const char* const g80_de[] = { "Name", "Wort", nullptr };
 static const char* const g80_pt[] = { "nome", "palavra", nullptr };
+static const char* const g80_zh[] = { "单词、名字", nullptr };
 static const char* const g81_tp[] = { "noka", nullptr };
 static const char* const g81_en[] = { "foot", "leg", "bottom", nullptr };
 static const char* const g81_es[] = { "pie", "pierna", "parte inferior", nullptr };
 static const char* const g81_fr[] = { "pied", "jambe", "bas", nullptr };
 static const char* const g81_de[] = { "Fuß", "Bein", "Unterseite", nullptr };
 static const char* const g81_pt[] = { "pé", "perna", "parte inferior", nullptr };
+static const char* const g81_zh[] = { "脚部、腿、足、运动器官、根底", nullptr };
 static const char* const g82_tp[] = { "o", nullptr };
 static const char* const g82_en[] = { "(particle: vocative or imperative)", nullptr };
 static const char* const g82_es[] = { "partícula vocativa o imperativa", nullptr };
 static const char* const g82_fr[] = { "particule vocative ou impérative", nullptr };
 static const char* const g82_de[] = { "Vokativ- oder Imperativpartikel", nullptr };
 static const char* const g82_pt[] = { "partícula vocativa ou imperativa", nullptr };
+static const char* const g82_zh[] = { "（助词）[标示呼格短语（指代的人）的结尾]、[标示祈使句（命令、愿望、指令）的开始]、应该", nullptr };
 static const char* const g83_tp[] = { "oko", nullptr };
 static const char* const g83_en[] = { "eye", nullptr };
 static const char* const g83_es[] = { "ojo", nullptr };
 static const char* const g83_fr[] = { "œil", nullptr };
 static const char* const g83_de[] = { "Auge", nullptr };
 static const char* const g83_pt[] = { "olho", nullptr };
+static const char* const g83_zh[] = { "看、见、观察、检视、检查、阅读", "视觉的", "眼睛、视觉器官", "（前动词）尝试、试图", nullptr };
 static const char* const g84_tp[] = { "olin", nullptr };
 static const char* const g84_en[] = { "love", "affection", "respect", nullptr };
 static const char* const g84_es[] = { "amor", "cariño", "respeto", nullptr };
 static const char* const g84_fr[] = { "amour", "affection", "respect", nullptr };
 static const char* const g84_de[] = { "Liebe", "Zuneigung", "Respekt", nullptr };
 static const char* const g84_pt[] = { "amor", "carinho", "respeito", nullptr };
+static const char* const g84_zh[] = { "与……有强烈的情感纽带，如喜爱、欣赏、敬爱、同情、怜悯、尊重", "帕拉图式、爱情或亲情关系", nullptr };
 static const char* const g85_tp[] = { "ona", nullptr };
 static const char* const g85_en[] = { "he", "she", "it", "they", nullptr };
 static const char* const g85_es[] = { "él", "ella", "ello", "ellos", nullptr };
 static const char* const g85_fr[] = { "il", "elle", "ils", "elles", nullptr };
 static const char* const g85_de[] = { "er", "sie", "es", nullptr };
 static const char* const g85_pt[] = { "ele", "ela", "eles", nullptr };
+static const char* const g85_zh[] = { "（第三人称代词）他、她、它、他们、她们、它们", nullptr };
 static const char* const g86_tp[] = { "open", nullptr };
 static const char* const g86_en[] = { "to open", "begin", "turn on", nullptr };
 static const char* const g86_es[] = { "abrir", "comenzar", "encender", nullptr };
 static const char* const g86_fr[] = { "ouvrir", "commencer", "allumer", nullptr };
 static const char* const g86_de[] = { "öffnen", "beginnen", "einschalten", nullptr };
 static const char* const g86_pt[] = { "abrir", "começar", "ligar", nullptr };
+static const char* const g86_zh[] = { "开始、打开、开启、启动", "开端、开头", nullptr };
 static const char* const g87_tp[] = { "pakala", nullptr };
 static const char* const g87_en[] = { "mistake", "damage", "broken", nullptr };
 static const char* const g87_es[] = { "error", "daño", "roto", nullptr };
 static const char* const g87_fr[] = { "erreur", "dommage", "cassé", nullptr };
 static const char* const g87_de[] = { "Fehler", "Schaden", "kaputt", nullptr };
 static const char* const g87_pt[] = { "erro", "dano", "quebrado", nullptr };
+static const char* const g87_zh[] = { "损坏的、破损的、受伤的、弄糟的", "错误", nullptr };
 static const char* const g88_tp[] = { "pali", nullptr };
 static const char* const g88_en[] = { "to do", "make", "work", "build", nullptr };
 static const char* const g88_es[] = { "hacer", "trabajar", "construir", nullptr };
 static const char* const g88_fr[] = { "faire", "travailler", "construire", nullptr };
 static const char* const g88_de[] = { "tun", "machen", "arbeiten", "bauen", nullptr };
 static const char* const g88_pt[] = { "fazer", "trabalhar", "construir", nullptr };
+static const char* const g88_zh[] = { "工作、活动", "创建、创造、建筑、建立、设计", "努力做（某件事）、对……采取行动", nullptr };
 static const char* const g89_tp[] = { "palisa", nullptr };
 static const char* const g89_en[] = { "long hard thing", "rod", "stick", "branch", nullptr };
 static const char* const g89_es[] = { "cosa larga y dura", "varilla", "palo", "rama", nullptr };
 static const char* const g89_fr[] = { "objet long et dur", "tige", "bâton", "branche", nullptr };
 static const char* const g89_de[] = { "langes hartes Ding", "Stab", "Stock", "Ast", nullptr };
 static const char* const g89_pt[] = { "coisa longa e dura", "haste", "vara", "galho", nullptr };
+static const char* const g89_zh[] = { "长的坚硬物体，如树枝、杆子、棍、棒、脊椎、船桅", nullptr };
 static const char* const g90_tp[] = { "pan", nullptr };
 static const char* const g90_en[] = { "grain", "bread", "rice", "pasta", nullptr };
 static const char* const g90_es[] = { "grano", "pan", "arroz", "pasta", nullptr };
 static const char* const g90_fr[] = { "céréale", "pain", "riz", "pâtes", nullptr };
 static const char* const g90_de[] = { "Getreide", "Brot", "Reis", "Nudeln", nullptr };
 static const char* const g90_pt[] = { "grão", "pão", "arroz", "massa", nullptr };
+static const char* const g90_zh[] = { "谷物、含淀粉食物、烘焙食物，如大米、高粱、面包、面、面团、粥", nullptr };
 static const char* const g91_tp[] = { "pana", nullptr };
 static const char* const g91_en[] = { "to give", "send", "emit", "provide", nullptr };
 static const char* const g91_es[] = { "dar", "enviar", "emitir", "proporcionar", nullptr };
 static const char* const g91_fr[] = { "donner", "envoyer", "émettre", "fournir", nullptr };
 static const char* const g91_de[] = { "geben", "senden", "ausstoßen", "bereitstellen", nullptr };
 static const char* const g91_pt[] = { "dar", "enviar", "emitir", "fornecer", nullptr };
+static const char* const g91_zh[] = { "给、发送、发出、提供、传递、放、释放、释出", nullptr };
 static const char* const g92_tp[] = { "pi", nullptr };
 static const char* const g92_en[] = { "(particle: regroups modifiers)", nullptr };
 static const char* const g92_es[] = { "partícula que reagrupa modificadores", nullptr };
 static const char* const g92_fr[] = { "particule de regroupement des modificateurs", nullptr };
 static const char* const g92_de[] = { "Partikel zur Gruppierung von Modifikatoren", nullptr };
 static const char* const g92_pt[] = { "partícula que reagrupa modificadores", nullptr };
+static const char* const g92_zh[] = { "（助词）[将以下数个单词组合为上一个单词的单个修饰词]", nullptr };
 static const char* const g93_tp[] = { "pilin", nullptr };
 static const char* const g93_en[] = { "heart", "feeling", "to feel", "to think", nullptr };
 static const char* const g93_es[] = { "corazón", "sentimiento", "sentir", "pensar", nullptr };
 static const char* const g93_fr[] = { "cœur", "sentiment", "ressentir", "penser", nullptr };
 static const char* const g93_de[] = { "Herz", "Gefühl", "fühlen", "denken", nullptr };
 static const char* const g93_pt[] = { "coração", "sentimento", "sentir", "pensar", nullptr };
+static const char* const g93_zh[] = { "体验，如感情、感受、触碰", "心（实体上或情感上）", nullptr };
 static const char* const g94_tp[] = { "pimeja", nullptr };
 static const char* const g94_en[] = { "black", "dark", nullptr };
 static const char* const g94_es[] = { "negro", "oscuro", nullptr };
 static const char* const g94_fr[] = { "noir", "sombre", nullptr };
 static const char* const g94_de[] = { "schwarz", "dunkel", nullptr };
 static const char* const g94_pt[] = { "preto", "escuro", nullptr };
+static const char* const g94_zh[] = { "黑暗的、昏黑的、没有灯光的", "暗色，如黑色、紫色、棕色", nullptr };
 static const char* const g95_tp[] = { "pini", nullptr };
 static const char* const g95_en[] = { "end", "finished", "past", "completed", nullptr };
 static const char* const g95_es[] = { "fin", "terminado", "pasado", "completado", nullptr };
 static const char* const g95_fr[] = { "fin", "fini", "passé", "achevé", nullptr };
 static const char* const g95_de[] = { "Ende", "beendet", "vergangen", "abgeschlossen", nullptr };
 static const char* const g95_pt[] = { "fim", "terminado", "passado", "concluído", nullptr };
+static const char* const g95_zh[] = { "终止、完成、结束、停止、防止", "关闭、关上、关掉", "已结束的、过去的", "边缘、末端、尽头、结尾", nullptr };
 static const char* const g96_tp[] = { "pipi", nullptr };
 static const char* const g96_en[] = { "insect", "bug", "spider", nullptr };
 static const char* const g96_es[] = { "insecto", "bicho", "araña", nullptr };
 static const char* const g96_fr[] = { "insecte", "bestiole", "araignée", nullptr };
 static const char* const g96_de[] = { "Insekt", "Käfer", "Spinne", nullptr };
 static const char* const g96_pt[] = { "inseto", "bicho", "aranha", nullptr };
+static const char* const g96_zh[] = { "昆虫、虫子、蜘蛛、微小攀爬动物", nullptr };
 static const char* const g97_tp[] = { "poka", nullptr };
 static const char* const g97_en[] = { "side", "hip", "next to", "vicinity", nullptr };
 static const char* const g97_es[] = { "lado", "cadera", "junto a", "proximidad", nullptr };
 static const char* const g97_fr[] = { "côté", "hanche", "à côté de", "environs", nullptr };
 static const char* const g97_de[] = { "Seite", "Hüfte", "neben", "Umgebung", nullptr };
 static const char* const g97_pt[] = { "lado", "quadril", "ao lado de", "proximidade", nullptr };
+static const char* const g97_zh[] = { "臀部、侧旁、侧边", "附近、邻近、四周地区", nullptr };
 static const char* const g98_tp[] = { "poki", nullptr };
 static const char* const g98_en[] = { "container", "box", "bowl", "cup", nullptr };
 static const char* const g98_es[] = { "recipiente", "caja", "cuenco", "taza", nullptr };
 static const char* const g98_fr[] = { "récipient", "boîte", "bol", "tasse", nullptr };
 static const char* const g98_de[] = { "Behälter", "Kiste", "Schüssel", "Tasse", nullptr };
 static const char* const g98_pt[] = { "recipiente", "caixa", "tigela", "xícara", nullptr };
+static const char* const g98_zh[] = { "容器，如袋、碗、箱子、杯、橱子、抽屉、文件夹", nullptr };
 static const char* const g99_tp[] = { "pona", nullptr };
 static const char* const g99_en[] = { "good", "simple", "positive", "to fix", nullptr };
 static const char* const g99_es[] = { "bueno", "simple", "positivo", "arreglar", nullptr };
 static const char* const g99_fr[] = { "bon", "simple", "positif", "réparer", nullptr };
 static const char* const g99_de[] = { "gut", "einfach", "positiv", "reparieren", nullptr };
 static const char* const g99_pt[] = { "bom", "simples", "positivo", "consertar", nullptr };
+static const char* const g99_zh[] = { "正面性质，如好的、怡人的、有帮助的、友好的、友善的、和平的", nullptr };
 static const char* const g100_tp[] = { "pu", nullptr };
 static const char* const g100_en[] = { "interacting with the official Toki Pona book", nullptr };
 static const char* const g100_es[] = { "interactuar con el libro oficial de Toki Pona", nullptr };
 static const char* const g100_fr[] = { "interagir avec le livre officiel du Toki Pona", nullptr };
 static const char* const g100_de[] = { "Umgang mit dem offiziellen Toki-Pona-Buch", nullptr };
 static const char* const g100_pt[] = { "interagir com o livro oficial de Toki Pona", nullptr };
+static const char* const g100_zh[] = { "与索尼娅·兰的《道本语：好的语言》互动", nullptr };
 static const char* const g101_tp[] = { "sama", nullptr };
 static const char* const g101_en[] = { "same", "similar", "as", "like", nullptr };
 static const char* const g101_es[] = { "mismo", "similar", "como", nullptr };
 static const char* const g101_fr[] = { "même", "semblable", "comme", nullptr };
 static const char* const g101_de[] = { "gleich", "ähnlich", "wie", nullptr };
 static const char* const g101_pt[] = { "mesmo", "semelhante", "como", nullptr };
+static const char* const g101_zh[] = { "相同的、相似的、类似的", "（形容词）同辈的、同事的、互相的", "（前置词）与……相同、相似", nullptr };
 static const char* const g102_tp[] = { "seli", nullptr };
 static const char* const g102_en[] = { "fire", "heat", "warmth", "cooking", nullptr };
 static const char* const g102_es[] = { "fuego", "calor", "calidez", "cocción", nullptr };
 static const char* const g102_fr[] = { "feu", "chaleur", "tiédeur", "cuisson", nullptr };
 static const char* const g102_de[] = { "Feuer", "Hitze", "Wärme", "Kochen", nullptr };
 static const char* const g102_pt[] = { "fogo", "calor", "aquecimento", "cozimento", nullptr };
+static const char* const g102_zh[] = { "热的、温暖的", "热、火、火焰", "燃烧", nullptr };
 static const char* const g103_tp[] = { "selo", nullptr };
 static const char* const g103_en[] = { "outer form", "skin", "shell", "bark", nullptr };
 static const char* const g103_es[] = { "forma exterior", "piel", "caparazón", "corteza", nullptr };
 static const char* const g103_fr[] = { "forme extérieure", "peau", "coquille", "écorce", nullptr };
 static const char* const g103_de[] = { "äußere Form", "Haut", "Schale", "Rinde", nullptr };
 static const char* const g103_pt[] = { "forma exterior", "pele", "casca", "carapaça", nullptr };
+static const char* const g103_zh[] = { "外层，如皮肤、果皮、外壳、树皮", "外框、外形、边界", nullptr };
 static const char* const g104_tp[] = { "seme", nullptr };
 static const char* const g104_en[] = { "what", "which (question word)", nullptr };
 static const char* const g104_es[] = { "qué", "cuál", "palabra interrogativa", nullptr };
 static const char* const g104_fr[] = { "quoi", "quel", "mot interrogatif", nullptr };
 static const char* const g104_de[] = { "was", "welcher", "Fragewort", nullptr };
 static const char* const g104_pt[] = { "o quê", "qual", "palavra interrogativa", nullptr };
+static const char* const g104_zh[] = { "（助词）[替代句中要求的资料，标示问句]", "什么、哪个、谁", nullptr };
 static const char* const g105_tp[] = { "sewi", nullptr };
 static const char* const g105_en[] = { "high", "up", "above", "sky", "divine", "sacred", nullptr };
 static const char* const g105_es[] = { "alto", "arriba", "cielo", "divino", "sagrado", nullptr };
 static const char* const g105_fr[] = { "haut", "dessus", "ciel", "divin", "sacré", nullptr };
 static const char* const g105_de[] = { "hoch", "oben", "Himmel", "göttlich", "heilig", nullptr };
 static const char* const g105_pt[] = { "alto", "acima", "céu", "divino", "sagrado", nullptr };
+static const char* const g105_zh[] = { "上部、顶部、上面、最高点", "神的、神圣的、超自然的", "棒极的、启发他人的、令人惊叹的", nullptr };
 static const char* const g106_tp[] = { "sijelo", nullptr };
 static const char* const g106_en[] = { "body", "physical state", "torso", nullptr };
 static const char* const g106_es[] = { "cuerpo", "estado físico", "torso", nullptr };
 static const char* const g106_fr[] = { "corps", "état physique", "torse", nullptr };
 static const char* const g106_de[] = { "Körper", "körperlicher Zustand", "Rumpf", nullptr };
 static const char* const g106_pt[] = { "corpo", "estado físico", "torso", nullptr };
+static const char* const g106_zh[] = { "身体、外形、身体状态、躯体、物质、形态", nullptr };
 static const char* const g107_tp[] = { "sike", nullptr };
 static const char* const g107_en[] = { "circle", "round thing", "ball", "cycle", nullptr };
 static const char* const g107_es[] = { "círculo", "cosa redonda", "bola", "ciclo", nullptr };
 static const char* const g107_fr[] = { "cercle", "objet rond", "balle", "cycle", nullptr };
 static const char* const g107_de[] = { "Kreis", "rundes Ding", "Ball", "Zyklus", nullptr };
 static const char* const g107_pt[] = { "círculo", "coisa redonda", "bola", "ciclo", nullptr };
+static const char* const g107_zh[] = { "圆形、球体、螺旋、圆形物体，如球、轮子", "循环物体，如周期、（行星）轨道", nullptr };
 static const char* const g108_tp[] = { "sin", nullptr };
 static const char* const g108_en[] = { "new", "fresh", "additional", "another", nullptr };
 static const char* const g108_es[] = { "nuevo", "fresco", "adicional", "otro", nullptr };
 static const char* const g108_fr[] = { "nouveau", "frais", "supplémentaire", "autre", nullptr };
 static const char* const g108_de[] = { "neu", "frisch", "zusätzlich", "noch ein", nullptr };
 static const char* const g108_pt[] = { "novo", "fresco", "adicional", "outro", nullptr };
+static const char* const g108_zh[] = { "新的、新鲜的、更新", "重复、再做", nullptr };
 static const char* const g109_tp[] = { "sina", nullptr };
 static const char* const g109_en[] = { "you", nullptr };
 static const char* const g109_es[] = { "tú", "usted", nullptr };
 static const char* const g109_fr[] = { "tu", "vous", nullptr };
 static const char* const g109_de[] = { "du", "Sie", nullptr };
 static const char* const g109_pt[] = { "você", "tu", nullptr };
+static const char* const g109_zh[] = { "（代词）你、你们", nullptr };
 static const char* const g110_tp[] = { "sinpin", nullptr };
 static const char* const g110_en[] = { "front", "face", "wall", nullptr };
 static const char* const g110_es[] = { "frente", "cara", "pared", nullptr };
 static const char* const g110_fr[] = { "devant", "visage", "mur", nullptr };
 static const char* const g110_de[] = { "Vorderseite", "Gesicht", "Wand", nullptr };
 static const char* const g110_pt[] = { "frente", "rosto", "parede", nullptr };
+static const char* const g110_zh[] = { "垂直平面，如墙壁、牌子", "某物体的前面，如脸", nullptr };
 static const char* const g111_tp[] = { "sitelen", nullptr };
 static const char* const g111_en[] = { "image", "picture", "writing", "symbol", "to write", nullptr };
 static const char* const g111_es[] = { "imagen", "dibujo", "escritura", "símbolo", "escribir", nullptr };
 static const char* const g111_fr[] = { "image", "dessin", "écriture", "symbole", "écrire", nullptr };
 static const char* const g111_de[] = { "Bild", "Zeichnung", "Schrift", "Symbol", "schreiben", nullptr };
 static const char* const g111_pt[] = { "imagem", "desenho", "escrita", "símbolo", "escrever", nullptr };
+static const char* const g111_zh[] = { "图片、图像、表现、描述、符号、记号、标记、文字", nullptr };
 static const char* const g112_tp[] = { "soko", nullptr };
 static const char* const g112_en[] = { "mushroom", "fungus", nullptr };
 static const char* const g112_es[] = { "hongo", "seta", nullptr };
 static const char* const g112_fr[] = { "champignon", nullptr };
 static const char* const g112_de[] = { "Pilz", nullptr };
 static const char* const g112_pt[] = { "cogumelo", "fungo", nullptr };
+static const char* const g112_zh[] = { "蘑菇、真菌、地衣", nullptr };
 static const char* const g113_tp[] = { "sona", nullptr };
 static const char* const g113_en[] = { "knowledge", "to know", "wisdom", nullptr };
 static const char* const g113_es[] = { "conocimiento", "saber", "sabiduría", nullptr };
 static const char* const g113_fr[] = { "connaissance", "savoir", "sagesse", nullptr };
 static const char* const g113_de[] = { "Wissen", "wissen", "Weisheit", nullptr };
 static const char* const g113_pt[] = { "conhecimento", "saber", "sabedoria", nullptr };
+static const char* const g113_zh[] = { "知识、信息、资料、数据", "知道、知晓、擅长、对……有智慧", "（前动词）知道如何", nullptr };
 static const char* const g114_tp[] = { "soweli", nullptr };
 static const char* const g114_en[] = { "animal", "land mammal", nullptr };
 static const char* const g114_es[] = { "animal", "mamífero terrestre", nullptr };
 static const char* const g114_fr[] = { "animal", "mammifère terrestre", nullptr };
 static const char* const g114_de[] = { "Tier", "Landsäugetier", nullptr };
 static const char* const g114_pt[] = { "animal", "mamífero terrestre", nullptr };
+static const char* const g114_zh[] = { "毛茸茸的动物、陆上动物、野兽", nullptr };
 static const char* const g115_tp[] = { "suli", nullptr };
 static const char* const g115_en[] = { "big", "large", "important", "tall", "long", nullptr };
 static const char* const g115_es[] = { "grande", "importante", "alto", "largo", nullptr };
 static const char* const g115_fr[] = { "grand", "important", "haut", "long", nullptr };
 static const char* const g115_de[] = { "groß", "wichtig", "hoch", "lang", nullptr };
 static const char* const g115_pt[] = { "grande", "importante", "alto", "longo", nullptr };
+static const char* const g115_zh[] = { "大的、重的、长的、高的、宽的", "重要的、有关的", nullptr };
 static const char* const g116_tp[] = { "suno", nullptr };
 static const char* const g116_en[] = { "sun", "light", "brightness", nullptr };
 static const char* const g116_es[] = { "sol", "luz", "brillo", nullptr };
 static const char* const g116_fr[] = { "soleil", "lumière", "luminosité", nullptr };
 static const char* const g116_de[] = { "Sonne", "Licht", "Helligkeit", nullptr };
 static const char* const g116_pt[] = { "sol", "luz", "brilho", nullptr };
+static const char* const g116_zh[] = { "光、光照、光耀、光辉", "太阳、光源", "光亮", nullptr };
 static const char* const g117_tp[] = { "supa", nullptr };
 static const char* const g117_en[] = { "horizontal surface", "table", "floor", nullptr };
 static const char* const g117_es[] = { "superficie horizontal", "mesa", "suelo", nullptr };
 static const char* const g117_fr[] = { "surface horizontale", "table", "sol", nullptr };
 static const char* const g117_de[] = { "waagerechte Fläche", "Tisch", "Boden", nullptr };
 static const char* const g117_pt[] = { "superfície horizontal", "mesa", "chão", nullptr };
+static const char* const g117_zh[] = { "平坦水平平面，尤其可以摆放物品的平面，如床、地面、桌子、茶几、盘子、平台、舞台", nullptr };
 static const char* const g118_tp[] = { "suwi", nullptr };
 static const char* const g118_en[] = { "sweet", "cute", "adorable", nullptr };
 static const char* const g118_es[] = { "dulce", "lindo", "adorable", nullptr };
 static const char* const g118_fr[] = { "doux", "mignon", "adorable", nullptr };
 static const char* const g118_de[] = { "süß", "niedlich", "liebenswert", nullptr };
 static const char* const g118_pt[] = { "doce", "fofo", "adorável", nullptr };
+static const char* const g118_zh[] = { "甜的、香的", "可爱的、讨人喜爱的", nullptr };
 static const char* const g119_tp[] = { "tan", nullptr };
 static const char* const g119_en[] = { "from", "because of", "origin", "cause", nullptr };
 static const char* const g119_es[] = { "de", "a causa de", "origen", "causa", nullptr };
 static const char* const g119_fr[] = { "de", "à cause de", "origine", "cause", nullptr };
 static const char* const g119_de[] = { "von", "wegen", "Ursprung", "Ursache", nullptr };
 static const char* const g119_pt[] = { "de", "por causa de", "origem", "causa", nullptr };
+static const char* const g119_zh[] = { "（前置词）从、因为、由于", "缘故、原因、来源、起源", nullptr };
 static const char* const g120_tp[] = { "taso", nullptr };
 static const char* const g120_en[] = { "but", "however", "only", nullptr };
 static const char* const g120_es[] = { "pero", "sin embargo", "solo", nullptr };
 static const char* const g120_fr[] = { "mais", "cependant", "seulement", nullptr };
 static const char* const g120_de[] = { "aber", "jedoch", "nur", nullptr };
 static const char* const g120_pt[] = { "mas", "porém", "apenas", nullptr };
+static const char* const g120_zh[] = { "只、仅、唯", "（助词）[表示某一句为附加条件或矛盾句]、但是、可是、然而", nullptr };
 static const char* const g121_tp[] = { "tawa", nullptr };
 static const char* const g121_en[] = { "to", "toward", "moving", "for", nullptr };
 static const char* const g121_es[] = { "a", "hacia", "moverse", "para", nullptr };
 static const char* const g121_fr[] = { "à", "vers", "en mouvement", "pour", nullptr };
 static const char* const g121_de[] = { "zu", "hin", "sich bewegen", "für", nullptr };
 static const char* const g121_pt[] = { "a", "em direção a", "mover-se", "para", nullptr };
+static const char* const g121_zh[] = { "移动，如走路、振动、飞行、旅行", "（前置词）至、到、往、向、从……的观点/角度", nullptr };
 static const char* const g122_tp[] = { "telo", nullptr };
 static const char* const g122_en[] = { "water", "liquid", "fluid", nullptr };
 static const char* const g122_es[] = { "agua", "líquido", "fluido", nullptr };
 static const char* const g122_fr[] = { "eau", "liquide", "fluide", nullptr };
 static const char* const g122_de[] = { "Wasser", "Flüssigkeit", "Fluid", nullptr };
 static const char* const g122_pt[] = { "água", "líquido", "fluido", nullptr };
+static const char* const g122_zh[] = { "液体，如水、汽油、汽水、熔岩、汤、油、墨水", nullptr };
 static const char* const g123_tp[] = { "tenpo", nullptr };
 static const char* const g123_en[] = { "time", "moment", "period", "duration", nullptr };
 static const char* const g123_es[] = { "tiempo", "momento", "período", "duración", nullptr };
 static const char* const g123_fr[] = { "temps", "moment", "période", "durée", nullptr };
 static const char* const g123_de[] = { "Zeit", "Moment", "Zeitraum", "Dauer", nullptr };
 static const char* const g123_pt[] = { "tempo", "momento", "período", "duração", nullptr };
+static const char* const g123_zh[] = { "时间、事件、情况、时刻、时期、时长", nullptr };
 static const char* const g124_tp[] = { "toki", nullptr };
 static const char* const g124_en[] = { "to talk", "speak", "language", "hello", nullptr };
 static const char* const g124_es[] = { "hablar", "idioma", "lenguaje", "hola", nullptr };
 static const char* const g124_fr[] = { "parler", "langue", "langage", "bonjour", nullptr };
 static const char* const g124_de[] = { "sprechen", "Sprache", "hallo", nullptr };
 static const char* const g124_pt[] = { "falar", "língua", "linguagem", "olá", nullptr };
+static const char* const g124_zh[] = { "沟通、说、讲、想、思考", "对话、故事", "语言", nullptr };
 static const char* const g125_tp[] = { "tomo", nullptr };
 static const char* const g125_en[] = { "house", "building", "room", "home", nullptr };
 static const char* const g125_es[] = { "casa", "edificio", "habitación", "hogar", nullptr };
 static const char* const g125_fr[] = { "maison", "bâtiment", "pièce", "foyer", nullptr };
 static const char* const g125_de[] = { "Haus", "Gebäude", "Zimmer", "Zuhause", nullptr };
 static const char* const g125_pt[] = { "casa", "edifício", "quarto", "lar", nullptr };
+static const char* const g125_zh[] = { "室内空间或居住处，如房间、建筑物、家、帐篷、棚屋", nullptr };
 static const char* const g126_tp[] = { "tonsi", nullptr };
 static const char* const g126_en[] = { "non-binary", "genderqueer", "transgender", nullptr };
 static const char* const g126_es[] = { "persona no binaria", "de género no conforme", "transgénero", nullptr };
 static const char* const g126_fr[] = { "personne non binaire", "de genre non conforme", "transgenre", nullptr };
 static const char* const g126_de[] = { "nichtbinär", "genderqueer", "transgender", nullptr };
 static const char* const g126_pt[] = { "pessoa não binária", "de gênero não conforme", "transgênero", nullptr };
+static const char* const g126_zh[] = { "非二元的、非常规性别的、性别酷儿的、跨性别的*", nullptr };
 static const char* const g127_tp[] = { "tu", nullptr };
 static const char* const g127_en[] = { "two", nullptr };
 static const char* const g127_es[] = { "dos", nullptr };
 static const char* const g127_fr[] = { "deux", nullptr };
 static const char* const g127_de[] = { "zwei", nullptr };
 static const char* const g127_pt[] = { "dois", nullptr };
+static const char* const g127_zh[] = { "（数词）二", "分裂、分割、分开", nullptr };
 static const char* const g128_tp[] = { "unpa", nullptr };
 static const char* const g128_en[] = { "sex", "sexual", "to have sex", nullptr };
 static const char* const g128_es[] = { "sexo", "sexual", "tener sexo", nullptr };
 static const char* const g128_fr[] = { "sexe", "sexuel", "avoir des rapports sexuels", nullptr };
 static const char* const g128_de[] = { "Sex", "sexuell", "Sex haben", nullptr };
 static const char* const g128_pt[] = { "sexo", "sexual", "fazer sexo", nullptr };
+static const char* const g128_zh[] = { "性交、和……性交", nullptr };
 static const char* const g129_tp[] = { "uta", nullptr };
 static const char* const g129_en[] = { "mouth", "lips", nullptr };
 static const char* const g129_es[] = { "boca", "labios", nullptr };
 static const char* const g129_fr[] = { "bouche", "lèvres", nullptr };
 static const char* const g129_de[] = { "Mund", "Lippen", nullptr };
 static const char* const g129_pt[] = { "boca", "lábios", nullptr };
+static const char* const g129_zh[] = { "口、嘴巴、嘴唇、喉咙、吞食管道", nullptr };
 static const char* const g130_tp[] = { "utala", nullptr };
 static const char* const g130_en[] = { "to fight", "battle", "struggle", "conflict", nullptr };
 static const char* const g130_es[] = { "luchar", "batalla", "lucha", "conflicto", nullptr };
 static const char* const g130_fr[] = { "combattre", "bataille", "lutte", "conflit", nullptr };
 static const char* const g130_de[] = { "kämpfen", "Schlacht", "Kampf", "Konflikt", nullptr };
 static const char* const g130_pt[] = { "lutar", "batalha", "luta", "conflito", nullptr };
+static const char* const g130_zh[] = { "打架、斗争、战斗", "比赛、挑战", "奋斗、努力", nullptr };
 static const char* const g131_tp[] = { "walo", nullptr };
 static const char* const g131_en[] = { "white", "light-colored", "pale", nullptr };
 static const char* const g131_es[] = { "blanco", "claro", "pálido", nullptr };
 static const char* const g131_fr[] = { "blanc", "clair", "pâle", nullptr };
 static const char* const g131_de[] = { "weiß", "hell", "blass", nullptr };
 static const char* const g131_pt[] = { "branco", "claro", "pálido", nullptr };
+static const char* const g131_zh[] = { "浅色的、白色的、淡色的、浅灰色的、奶油色的", nullptr };
 static const char* const g132_tp[] = { "wan", nullptr };
 static const char* const g132_en[] = { "one", "united", "single", nullptr };
 static const char* const g132_es[] = { "uno", "unido", "único", nullptr };
 static const char* const g132_fr[] = { "un", "uni", "seul", nullptr };
 static const char* const g132_de[] = { "eins", "vereint", "einzeln", nullptr };
 static const char* const g132_pt[] = { "um", "unido", "único", nullptr };
+static const char* const g132_zh[] = { "（数词）一", "单个", "结合、连接、混合、聚合", nullptr };
 static const char* const g133_tp[] = { "waso", nullptr };
 static const char* const g133_en[] = { "bird", "flying creature", nullptr };
 static const char* const g133_es[] = { "pájaro", "ave", "criatura voladora", nullptr };
 static const char* const g133_fr[] = { "oiseau", "créature volante", nullptr };
 static const char* const g133_de[] = { "Vogel", "fliegendes Wesen", nullptr };
 static const char* const g133_pt[] = { "pássaro", "ave", "criatura voadora", nullptr };
+static const char* const g133_zh[] = { "鸟、能飞的动物", "有翼动物", nullptr };
 static const char* const g134_tp[] = { "wawa", nullptr };
 static const char* const g134_en[] = { "strong", "powerful", "energy", "intense", nullptr };
 static const char* const g134_es[] = { "fuerte", "poderoso", "energía", "intenso", nullptr };
 static const char* const g134_fr[] = { "fort", "puissant", "énergie", "intense", nullptr };
 static const char* const g134_de[] = { "stark", "mächtig", "Energie", "intensiv", nullptr };
 static const char* const g134_pt[] = { "forte", "poderoso", "energia", "intenso", nullptr };
+static const char* const g134_zh[] = { "力量、能量、能力、体力", "自信的、强烈的、有力的", "惊奇的、令人惊叹的", nullptr };
 static const char* const g135_tp[] = { "weka", nullptr };
 static const char* const g135_en[] = { "away", "absent", "far", "to remove", nullptr };
 static const char* const g135_es[] = { "lejos", "ausente", "quitar", nullptr };
 static const char* const g135_fr[] = { "loin", "absent", "enlever", nullptr };
 static const char* const g135_de[] = { "weg", "abwesend", "fern", "entfernen", nullptr };
 static const char* const g135_pt[] = { "longe", "ausente", "remover", nullptr };
+static const char* const g135_zh[] = { "不在场的、缺席的、偏远的", "去除、弄除", nullptr };
 static const char* const g136_tp[] = { "wile", nullptr };
 static const char* const g136_en[] = { "to want", "need", "must", "desire", nullptr };
 static const char* const g136_es[] = { "querer", "necesitar", "deber", "desear", nullptr };
 static const char* const g136_fr[] = { "vouloir", "avoir besoin de", "devoir", "désirer", nullptr };
 static const char* const g136_de[] = { "wollen", "brauchen", "müssen", "begehren", nullptr };
 static const char* const g136_pt[] = { "querer", "precisar", "dever", "desejar", nullptr };
+static const char* const g136_zh[] = { "想要、渴望、欲望、愿望、需要", "（前动词）需要", nullptr };
 
 const Entry ENTRIES[] = {
-  { "a", "a", { g0_tp, g0_en, g0_es, g0_fr, g0_de, g0_pt } },
-  { "akesi", "akesi", { g1_tp, g1_en, g1_es, g1_fr, g1_de, g1_pt } },
-  { "ala", "ala", { g2_tp, g2_en, g2_es, g2_fr, g2_de, g2_pt } },
-  { "alasa", "alasa", { g3_tp, g3_en, g3_es, g3_fr, g3_de, g3_pt } },
-  { "ale", "ale", { g4_tp, g4_en, g4_es, g4_fr, g4_de, g4_pt } },
-  { "anpa", "anpa", { g5_tp, g5_en, g5_es, g5_fr, g5_de, g5_pt } },
-  { "ante", "ante", { g6_tp, g6_en, g6_es, g6_fr, g6_de, g6_pt } },
-  { "anu", "anu", { g7_tp, g7_en, g7_es, g7_fr, g7_de, g7_pt } },
-  { "awen", "awen", { g8_tp, g8_en, g8_es, g8_fr, g8_de, g8_pt } },
-  { "e", "e", { g9_tp, g9_en, g9_es, g9_fr, g9_de, g9_pt } },
-  { "en", "en", { g10_tp, g10_en, g10_es, g10_fr, g10_de, g10_pt } },
-  { "epiku", "epiku", { g11_tp, g11_en, g11_es, g11_fr, g11_de, g11_pt } },
-  { "esun", "esun", { g12_tp, g12_en, g12_es, g12_fr, g12_de, g12_pt } },
-  { "ijo", "ijo", { g13_tp, g13_en, g13_es, g13_fr, g13_de, g13_pt } },
-  { "ike", "ike", { g14_tp, g14_en, g14_es, g14_fr, g14_de, g14_pt } },
-  { "ilo", "ilo", { g15_tp, g15_en, g15_es, g15_fr, g15_de, g15_pt } },
-  { "insa", "insa", { g16_tp, g16_en, g16_es, g16_fr, g16_de, g16_pt } },
-  { "jaki", "jaki", { g17_tp, g17_en, g17_es, g17_fr, g17_de, g17_pt } },
-  { "jan", "jan", { g18_tp, g18_en, g18_es, g18_fr, g18_de, g18_pt } },
-  { "jasima", "jasima", { g19_tp, g19_en, g19_es, g19_fr, g19_de, g19_pt } },
-  { "jelo", "jelo", { g20_tp, g20_en, g20_es, g20_fr, g20_de, g20_pt } },
-  { "jo", "jo", { g21_tp, g21_en, g21_es, g21_fr, g21_de, g21_pt } },
-  { "kala", "kala", { g22_tp, g22_en, g22_es, g22_fr, g22_de, g22_pt } },
-  { "kalama", "kalama", { g23_tp, g23_en, g23_es, g23_fr, g23_de, g23_pt } },
-  { "kama", "kama", { g24_tp, g24_en, g24_es, g24_fr, g24_de, g24_pt } },
-  { "kasi", "kasi", { g25_tp, g25_en, g25_es, g25_fr, g25_de, g25_pt } },
-  { "ken", "ken", { g26_tp, g26_en, g26_es, g26_fr, g26_de, g26_pt } },
-  { "kepeken", "kepeken", { g27_tp, g27_en, g27_es, g27_fr, g27_de, g27_pt } },
-  { "kijetesantakalu", "kijetesantakalu", { g28_tp, g28_en, g28_es, g28_fr, g28_de, g28_pt } },
-  { "kili", "kili", { g29_tp, g29_en, g29_es, g29_fr, g29_de, g29_pt } },
-  { "kin", "kin", { g30_tp, g30_en, g30_es, g30_fr, g30_de, g30_pt } },
-  { "kipisi", "kipisi", { g31_tp, g31_en, g31_es, g31_fr, g31_de, g31_pt } },
-  { "kiwen", "kiwen", { g32_tp, g32_en, g32_es, g32_fr, g32_de, g32_pt } },
-  { "ko", "ko", { g33_tp, g33_en, g33_es, g33_fr, g33_de, g33_pt } },
-  { "kokosila", "kokosila", { g34_tp, g34_en, g34_es, g34_fr, g34_de, g34_pt } },
-  { "kon", "kon", { g35_tp, g35_en, g35_es, g35_fr, g35_de, g35_pt } },
-  { "ku", "ku", { g36_tp, g36_en, g36_es, g36_fr, g36_de, g36_pt } },
-  { "kule", "kule", { g37_tp, g37_en, g37_es, g37_fr, g37_de, g37_pt } },
-  { "kulupu", "kulupu", { g38_tp, g38_en, g38_es, g38_fr, g38_de, g38_pt } },
-  { "kute", "kute", { g39_tp, g39_en, g39_es, g39_fr, g39_de, g39_pt } },
-  { "la", "la", { g40_tp, g40_en, g40_es, g40_fr, g40_de, g40_pt } },
-  { "lanpan", "lanpan", { g41_tp, g41_en, g41_es, g41_fr, g41_de, g41_pt } },
-  { "lape", "lape", { g42_tp, g42_en, g42_es, g42_fr, g42_de, g42_pt } },
-  { "laso", "laso", { g43_tp, g43_en, g43_es, g43_fr, g43_de, g43_pt } },
-  { "lawa", "lawa", { g44_tp, g44_en, g44_es, g44_fr, g44_de, g44_pt } },
-  { "leko", "leko", { g45_tp, g45_en, g45_es, g45_fr, g45_de, g45_pt } },
-  { "len", "len", { g46_tp, g46_en, g46_es, g46_fr, g46_de, g46_pt } },
-  { "lete", "lete", { g47_tp, g47_en, g47_es, g47_fr, g47_de, g47_pt } },
-  { "li", "li", { g48_tp, g48_en, g48_es, g48_fr, g48_de, g48_pt } },
-  { "lili", "lili", { g49_tp, g49_en, g49_es, g49_fr, g49_de, g49_pt } },
-  { "linja", "linja", { g50_tp, g50_en, g50_es, g50_fr, g50_de, g50_pt } },
-  { "lipu", "lipu", { g51_tp, g51_en, g51_es, g51_fr, g51_de, g51_pt } },
-  { "loje", "loje", { g52_tp, g52_en, g52_es, g52_fr, g52_de, g52_pt } },
-  { "lon", "lon", { g53_tp, g53_en, g53_es, g53_fr, g53_de, g53_pt } },
-  { "luka", "luka", { g54_tp, g54_en, g54_es, g54_fr, g54_de, g54_pt } },
-  { "lukin", "lukin", { g55_tp, g55_en, g55_es, g55_fr, g55_de, g55_pt } },
-  { "lupa", "lupa", { g56_tp, g56_en, g56_es, g56_fr, g56_de, g56_pt } },
-  { "ma", "ma", { g57_tp, g57_en, g57_es, g57_fr, g57_de, g57_pt } },
-  { "mama", "mama", { g58_tp, g58_en, g58_es, g58_fr, g58_de, g58_pt } },
-  { "mani", "mani", { g59_tp, g59_en, g59_es, g59_fr, g59_de, g59_pt } },
-  { "meli", "meli", { g60_tp, g60_en, g60_es, g60_fr, g60_de, g60_pt } },
-  { "meso", "meso", { g61_tp, g61_en, g61_es, g61_fr, g61_de, g61_pt } },
-  { "mi", "mi", { g62_tp, g62_en, g62_es, g62_fr, g62_de, g62_pt } },
-  { "mije", "mije", { g63_tp, g63_en, g63_es, g63_fr, g63_de, g63_pt } },
-  { "misikeke", "misikeke", { g64_tp, g64_en, g64_es, g64_fr, g64_de, g64_pt } },
-  { "moku", "moku", { g65_tp, g65_en, g65_es, g65_fr, g65_de, g65_pt } },
-  { "moli", "moli", { g66_tp, g66_en, g66_es, g66_fr, g66_de, g66_pt } },
-  { "monsi", "monsi", { g67_tp, g67_en, g67_es, g67_fr, g67_de, g67_pt } },
-  { "monsuta", "monsuta", { g68_tp, g68_en, g68_es, g68_fr, g68_de, g68_pt } },
-  { "mu", "mu", { g69_tp, g69_en, g69_es, g69_fr, g69_de, g69_pt } },
-  { "mun", "mun", { g70_tp, g70_en, g70_es, g70_fr, g70_de, g70_pt } },
-  { "musi", "musi", { g71_tp, g71_en, g71_es, g71_fr, g71_de, g71_pt } },
-  { "mute", "mute", { g72_tp, g72_en, g72_es, g72_fr, g72_de, g72_pt } },
-  { "n", "n", { g73_tp, g73_en, g73_es, g73_fr, g73_de, g73_pt } },
-  { "namako", "namako", { g74_tp, g74_en, g74_es, g74_fr, g74_de, g74_pt } },
-  { "nanpa", "nanpa", { g75_tp, g75_en, g75_es, g75_fr, g75_de, g75_pt } },
-  { "nasa", "nasa", { g76_tp, g76_en, g76_es, g76_fr, g76_de, g76_pt } },
-  { "nasin", "nasin", { g77_tp, g77_en, g77_es, g77_fr, g77_de, g77_pt } },
-  { "nena", "nena", { g78_tp, g78_en, g78_es, g78_fr, g78_de, g78_pt } },
-  { "ni", "ni", { g79_tp, g79_en, g79_es, g79_fr, g79_de, g79_pt } },
-  { "nimi", "nimi", { g80_tp, g80_en, g80_es, g80_fr, g80_de, g80_pt } },
-  { "noka", "noka", { g81_tp, g81_en, g81_es, g81_fr, g81_de, g81_pt } },
-  { "o", "o", { g82_tp, g82_en, g82_es, g82_fr, g82_de, g82_pt } },
-  { "oko", "oko", { g83_tp, g83_en, g83_es, g83_fr, g83_de, g83_pt } },
-  { "olin", "olin", { g84_tp, g84_en, g84_es, g84_fr, g84_de, g84_pt } },
-  { "ona", "ona", { g85_tp, g85_en, g85_es, g85_fr, g85_de, g85_pt } },
-  { "open", "open", { g86_tp, g86_en, g86_es, g86_fr, g86_de, g86_pt } },
-  { "pakala", "pakala", { g87_tp, g87_en, g87_es, g87_fr, g87_de, g87_pt } },
-  { "pali", "pali", { g88_tp, g88_en, g88_es, g88_fr, g88_de, g88_pt } },
-  { "palisa", "palisa", { g89_tp, g89_en, g89_es, g89_fr, g89_de, g89_pt } },
-  { "pan", "pan", { g90_tp, g90_en, g90_es, g90_fr, g90_de, g90_pt } },
-  { "pana", "pana", { g91_tp, g91_en, g91_es, g91_fr, g91_de, g91_pt } },
-  { "pi", "pi", { g92_tp, g92_en, g92_es, g92_fr, g92_de, g92_pt } },
-  { "pilin", "pilin", { g93_tp, g93_en, g93_es, g93_fr, g93_de, g93_pt } },
-  { "pimeja", "pimeja", { g94_tp, g94_en, g94_es, g94_fr, g94_de, g94_pt } },
-  { "pini", "pini", { g95_tp, g95_en, g95_es, g95_fr, g95_de, g95_pt } },
-  { "pipi", "pipi", { g96_tp, g96_en, g96_es, g96_fr, g96_de, g96_pt } },
-  { "poka", "poka", { g97_tp, g97_en, g97_es, g97_fr, g97_de, g97_pt } },
-  { "poki", "poki", { g98_tp, g98_en, g98_es, g98_fr, g98_de, g98_pt } },
-  { "pona", "pona", { g99_tp, g99_en, g99_es, g99_fr, g99_de, g99_pt } },
-  { "pu", "pu", { g100_tp, g100_en, g100_es, g100_fr, g100_de, g100_pt } },
-  { "sama", "sama", { g101_tp, g101_en, g101_es, g101_fr, g101_de, g101_pt } },
-  { "seli", "seli", { g102_tp, g102_en, g102_es, g102_fr, g102_de, g102_pt } },
-  { "selo", "selo", { g103_tp, g103_en, g103_es, g103_fr, g103_de, g103_pt } },
-  { "seme", "seme", { g104_tp, g104_en, g104_es, g104_fr, g104_de, g104_pt } },
-  { "sewi", "sewi", { g105_tp, g105_en, g105_es, g105_fr, g105_de, g105_pt } },
-  { "sijelo", "sijelo", { g106_tp, g106_en, g106_es, g106_fr, g106_de, g106_pt } },
-  { "sike", "sike", { g107_tp, g107_en, g107_es, g107_fr, g107_de, g107_pt } },
-  { "sin", "sin", { g108_tp, g108_en, g108_es, g108_fr, g108_de, g108_pt } },
-  { "sina", "sina", { g109_tp, g109_en, g109_es, g109_fr, g109_de, g109_pt } },
-  { "sinpin", "sinpin", { g110_tp, g110_en, g110_es, g110_fr, g110_de, g110_pt } },
-  { "sitelen", "sitelen", { g111_tp, g111_en, g111_es, g111_fr, g111_de, g111_pt } },
-  { "soko", "soko", { g112_tp, g112_en, g112_es, g112_fr, g112_de, g112_pt } },
-  { "sona", "sona", { g113_tp, g113_en, g113_es, g113_fr, g113_de, g113_pt } },
-  { "soweli", "soweli", { g114_tp, g114_en, g114_es, g114_fr, g114_de, g114_pt } },
-  { "suli", "suli", { g115_tp, g115_en, g115_es, g115_fr, g115_de, g115_pt } },
-  { "suno", "suno", { g116_tp, g116_en, g116_es, g116_fr, g116_de, g116_pt } },
-  { "supa", "supa", { g117_tp, g117_en, g117_es, g117_fr, g117_de, g117_pt } },
-  { "suwi", "suwi", { g118_tp, g118_en, g118_es, g118_fr, g118_de, g118_pt } },
-  { "tan", "tan", { g119_tp, g119_en, g119_es, g119_fr, g119_de, g119_pt } },
-  { "taso", "taso", { g120_tp, g120_en, g120_es, g120_fr, g120_de, g120_pt } },
-  { "tawa", "tawa", { g121_tp, g121_en, g121_es, g121_fr, g121_de, g121_pt } },
-  { "telo", "telo", { g122_tp, g122_en, g122_es, g122_fr, g122_de, g122_pt } },
-  { "tenpo", "tenpo", { g123_tp, g123_en, g123_es, g123_fr, g123_de, g123_pt } },
-  { "toki", "toki", { g124_tp, g124_en, g124_es, g124_fr, g124_de, g124_pt } },
-  { "tomo", "tomo", { g125_tp, g125_en, g125_es, g125_fr, g125_de, g125_pt } },
-  { "tonsi", "tonsi", { g126_tp, g126_en, g126_es, g126_fr, g126_de, g126_pt } },
-  { "tu", "tu", { g127_tp, g127_en, g127_es, g127_fr, g127_de, g127_pt } },
-  { "unpa", "unpa", { g128_tp, g128_en, g128_es, g128_fr, g128_de, g128_pt } },
-  { "uta", "uta", { g129_tp, g129_en, g129_es, g129_fr, g129_de, g129_pt } },
-  { "utala", "utala", { g130_tp, g130_en, g130_es, g130_fr, g130_de, g130_pt } },
-  { "walo", "walo", { g131_tp, g131_en, g131_es, g131_fr, g131_de, g131_pt } },
-  { "wan", "wan", { g132_tp, g132_en, g132_es, g132_fr, g132_de, g132_pt } },
-  { "waso", "waso", { g133_tp, g133_en, g133_es, g133_fr, g133_de, g133_pt } },
-  { "wawa", "wawa", { g134_tp, g134_en, g134_es, g134_fr, g134_de, g134_pt } },
-  { "weka", "weka", { g135_tp, g135_en, g135_es, g135_fr, g135_de, g135_pt } },
-  { "wile", "wile", { g136_tp, g136_en, g136_es, g136_fr, g136_de, g136_pt } },
+  { "a", "a", { g0_tp, g0_en, g0_es, g0_fr, g0_de, g0_pt, g0_zh } },
+  { "akesi", "akesi", { g1_tp, g1_en, g1_es, g1_fr, g1_de, g1_pt, g1_zh } },
+  { "ala", "ala", { g2_tp, g2_en, g2_es, g2_fr, g2_de, g2_pt, g2_zh } },
+  { "alasa", "alasa", { g3_tp, g3_en, g3_es, g3_fr, g3_de, g3_pt, g3_zh } },
+  { "ale", "ale", { g4_tp, g4_en, g4_es, g4_fr, g4_de, g4_pt, g4_zh } },
+  { "anpa", "anpa", { g5_tp, g5_en, g5_es, g5_fr, g5_de, g5_pt, g5_zh } },
+  { "ante", "ante", { g6_tp, g6_en, g6_es, g6_fr, g6_de, g6_pt, g6_zh } },
+  { "anu", "anu", { g7_tp, g7_en, g7_es, g7_fr, g7_de, g7_pt, g7_zh } },
+  { "awen", "awen", { g8_tp, g8_en, g8_es, g8_fr, g8_de, g8_pt, g8_zh } },
+  { "e", "e", { g9_tp, g9_en, g9_es, g9_fr, g9_de, g9_pt, g9_zh } },
+  { "en", "en", { g10_tp, g10_en, g10_es, g10_fr, g10_de, g10_pt, g10_zh } },
+  { "epiku", "epiku", { g11_tp, g11_en, g11_es, g11_fr, g11_de, g11_pt, g11_zh } },
+  { "esun", "esun", { g12_tp, g12_en, g12_es, g12_fr, g12_de, g12_pt, g12_zh } },
+  { "ijo", "ijo", { g13_tp, g13_en, g13_es, g13_fr, g13_de, g13_pt, g13_zh } },
+  { "ike", "ike", { g14_tp, g14_en, g14_es, g14_fr, g14_de, g14_pt, g14_zh } },
+  { "ilo", "ilo", { g15_tp, g15_en, g15_es, g15_fr, g15_de, g15_pt, g15_zh } },
+  { "insa", "insa", { g16_tp, g16_en, g16_es, g16_fr, g16_de, g16_pt, g16_zh } },
+  { "jaki", "jaki", { g17_tp, g17_en, g17_es, g17_fr, g17_de, g17_pt, g17_zh } },
+  { "jan", "jan", { g18_tp, g18_en, g18_es, g18_fr, g18_de, g18_pt, g18_zh } },
+  { "jasima", "jasima", { g19_tp, g19_en, g19_es, g19_fr, g19_de, g19_pt, g19_zh } },
+  { "jelo", "jelo", { g20_tp, g20_en, g20_es, g20_fr, g20_de, g20_pt, g20_zh } },
+  { "jo", "jo", { g21_tp, g21_en, g21_es, g21_fr, g21_de, g21_pt, g21_zh } },
+  { "kala", "kala", { g22_tp, g22_en, g22_es, g22_fr, g22_de, g22_pt, g22_zh } },
+  { "kalama", "kalama", { g23_tp, g23_en, g23_es, g23_fr, g23_de, g23_pt, g23_zh } },
+  { "kama", "kama", { g24_tp, g24_en, g24_es, g24_fr, g24_de, g24_pt, g24_zh } },
+  { "kasi", "kasi", { g25_tp, g25_en, g25_es, g25_fr, g25_de, g25_pt, g25_zh } },
+  { "ken", "ken", { g26_tp, g26_en, g26_es, g26_fr, g26_de, g26_pt, g26_zh } },
+  { "kepeken", "kepeken", { g27_tp, g27_en, g27_es, g27_fr, g27_de, g27_pt, g27_zh } },
+  { "kijetesantakalu", "kijetesantakalu", { g28_tp, g28_en, g28_es, g28_fr, g28_de, g28_pt, g28_zh } },
+  { "kili", "kili", { g29_tp, g29_en, g29_es, g29_fr, g29_de, g29_pt, g29_zh } },
+  { "kin", "kin", { g30_tp, g30_en, g30_es, g30_fr, g30_de, g30_pt, g30_zh } },
+  { "kipisi", "kipisi", { g31_tp, g31_en, g31_es, g31_fr, g31_de, g31_pt, g31_zh } },
+  { "kiwen", "kiwen", { g32_tp, g32_en, g32_es, g32_fr, g32_de, g32_pt, g32_zh } },
+  { "ko", "ko", { g33_tp, g33_en, g33_es, g33_fr, g33_de, g33_pt, g33_zh } },
+  { "kokosila", "kokosila", { g34_tp, g34_en, g34_es, g34_fr, g34_de, g34_pt, g34_zh } },
+  { "kon", "kon", { g35_tp, g35_en, g35_es, g35_fr, g35_de, g35_pt, g35_zh } },
+  { "ku", "ku", { g36_tp, g36_en, g36_es, g36_fr, g36_de, g36_pt, g36_zh } },
+  { "kule", "kule", { g37_tp, g37_en, g37_es, g37_fr, g37_de, g37_pt, g37_zh } },
+  { "kulupu", "kulupu", { g38_tp, g38_en, g38_es, g38_fr, g38_de, g38_pt, g38_zh } },
+  { "kute", "kute", { g39_tp, g39_en, g39_es, g39_fr, g39_de, g39_pt, g39_zh } },
+  { "la", "la", { g40_tp, g40_en, g40_es, g40_fr, g40_de, g40_pt, g40_zh } },
+  { "lanpan", "lanpan", { g41_tp, g41_en, g41_es, g41_fr, g41_de, g41_pt, g41_zh } },
+  { "lape", "lape", { g42_tp, g42_en, g42_es, g42_fr, g42_de, g42_pt, g42_zh } },
+  { "laso", "laso", { g43_tp, g43_en, g43_es, g43_fr, g43_de, g43_pt, g43_zh } },
+  { "lawa", "lawa", { g44_tp, g44_en, g44_es, g44_fr, g44_de, g44_pt, g44_zh } },
+  { "leko", "leko", { g45_tp, g45_en, g45_es, g45_fr, g45_de, g45_pt, g45_zh } },
+  { "len", "len", { g46_tp, g46_en, g46_es, g46_fr, g46_de, g46_pt, g46_zh } },
+  { "lete", "lete", { g47_tp, g47_en, g47_es, g47_fr, g47_de, g47_pt, g47_zh } },
+  { "li", "li", { g48_tp, g48_en, g48_es, g48_fr, g48_de, g48_pt, g48_zh } },
+  { "lili", "lili", { g49_tp, g49_en, g49_es, g49_fr, g49_de, g49_pt, g49_zh } },
+  { "linja", "linja", { g50_tp, g50_en, g50_es, g50_fr, g50_de, g50_pt, g50_zh } },
+  { "lipu", "lipu", { g51_tp, g51_en, g51_es, g51_fr, g51_de, g51_pt, g51_zh } },
+  { "loje", "loje", { g52_tp, g52_en, g52_es, g52_fr, g52_de, g52_pt, g52_zh } },
+  { "lon", "lon", { g53_tp, g53_en, g53_es, g53_fr, g53_de, g53_pt, g53_zh } },
+  { "luka", "luka", { g54_tp, g54_en, g54_es, g54_fr, g54_de, g54_pt, g54_zh } },
+  { "lukin", "lukin", { g55_tp, g55_en, g55_es, g55_fr, g55_de, g55_pt, g55_zh } },
+  { "lupa", "lupa", { g56_tp, g56_en, g56_es, g56_fr, g56_de, g56_pt, g56_zh } },
+  { "ma", "ma", { g57_tp, g57_en, g57_es, g57_fr, g57_de, g57_pt, g57_zh } },
+  { "mama", "mama", { g58_tp, g58_en, g58_es, g58_fr, g58_de, g58_pt, g58_zh } },
+  { "mani", "mani", { g59_tp, g59_en, g59_es, g59_fr, g59_de, g59_pt, g59_zh } },
+  { "meli", "meli", { g60_tp, g60_en, g60_es, g60_fr, g60_de, g60_pt, g60_zh } },
+  { "meso", "meso", { g61_tp, g61_en, g61_es, g61_fr, g61_de, g61_pt, g61_zh } },
+  { "mi", "mi", { g62_tp, g62_en, g62_es, g62_fr, g62_de, g62_pt, g62_zh } },
+  { "mije", "mije", { g63_tp, g63_en, g63_es, g63_fr, g63_de, g63_pt, g63_zh } },
+  { "misikeke", "misikeke", { g64_tp, g64_en, g64_es, g64_fr, g64_de, g64_pt, g64_zh } },
+  { "moku", "moku", { g65_tp, g65_en, g65_es, g65_fr, g65_de, g65_pt, g65_zh } },
+  { "moli", "moli", { g66_tp, g66_en, g66_es, g66_fr, g66_de, g66_pt, g66_zh } },
+  { "monsi", "monsi", { g67_tp, g67_en, g67_es, g67_fr, g67_de, g67_pt, g67_zh } },
+  { "monsuta", "monsuta", { g68_tp, g68_en, g68_es, g68_fr, g68_de, g68_pt, g68_zh } },
+  { "mu", "mu", { g69_tp, g69_en, g69_es, g69_fr, g69_de, g69_pt, g69_zh } },
+  { "mun", "mun", { g70_tp, g70_en, g70_es, g70_fr, g70_de, g70_pt, g70_zh } },
+  { "musi", "musi", { g71_tp, g71_en, g71_es, g71_fr, g71_de, g71_pt, g71_zh } },
+  { "mute", "mute", { g72_tp, g72_en, g72_es, g72_fr, g72_de, g72_pt, g72_zh } },
+  { "n", "n", { g73_tp, g73_en, g73_es, g73_fr, g73_de, g73_pt, g73_zh } },
+  { "namako", "namako", { g74_tp, g74_en, g74_es, g74_fr, g74_de, g74_pt, g74_zh } },
+  { "nanpa", "nanpa", { g75_tp, g75_en, g75_es, g75_fr, g75_de, g75_pt, g75_zh } },
+  { "nasa", "nasa", { g76_tp, g76_en, g76_es, g76_fr, g76_de, g76_pt, g76_zh } },
+  { "nasin", "nasin", { g77_tp, g77_en, g77_es, g77_fr, g77_de, g77_pt, g77_zh } },
+  { "nena", "nena", { g78_tp, g78_en, g78_es, g78_fr, g78_de, g78_pt, g78_zh } },
+  { "ni", "ni", { g79_tp, g79_en, g79_es, g79_fr, g79_de, g79_pt, g79_zh } },
+  { "nimi", "nimi", { g80_tp, g80_en, g80_es, g80_fr, g80_de, g80_pt, g80_zh } },
+  { "noka", "noka", { g81_tp, g81_en, g81_es, g81_fr, g81_de, g81_pt, g81_zh } },
+  { "o", "o", { g82_tp, g82_en, g82_es, g82_fr, g82_de, g82_pt, g82_zh } },
+  { "oko", "oko", { g83_tp, g83_en, g83_es, g83_fr, g83_de, g83_pt, g83_zh } },
+  { "olin", "olin", { g84_tp, g84_en, g84_es, g84_fr, g84_de, g84_pt, g84_zh } },
+  { "ona", "ona", { g85_tp, g85_en, g85_es, g85_fr, g85_de, g85_pt, g85_zh } },
+  { "open", "open", { g86_tp, g86_en, g86_es, g86_fr, g86_de, g86_pt, g86_zh } },
+  { "pakala", "pakala", { g87_tp, g87_en, g87_es, g87_fr, g87_de, g87_pt, g87_zh } },
+  { "pali", "pali", { g88_tp, g88_en, g88_es, g88_fr, g88_de, g88_pt, g88_zh } },
+  { "palisa", "palisa", { g89_tp, g89_en, g89_es, g89_fr, g89_de, g89_pt, g89_zh } },
+  { "pan", "pan", { g90_tp, g90_en, g90_es, g90_fr, g90_de, g90_pt, g90_zh } },
+  { "pana", "pana", { g91_tp, g91_en, g91_es, g91_fr, g91_de, g91_pt, g91_zh } },
+  { "pi", "pi", { g92_tp, g92_en, g92_es, g92_fr, g92_de, g92_pt, g92_zh } },
+  { "pilin", "pilin", { g93_tp, g93_en, g93_es, g93_fr, g93_de, g93_pt, g93_zh } },
+  { "pimeja", "pimeja", { g94_tp, g94_en, g94_es, g94_fr, g94_de, g94_pt, g94_zh } },
+  { "pini", "pini", { g95_tp, g95_en, g95_es, g95_fr, g95_de, g95_pt, g95_zh } },
+  { "pipi", "pipi", { g96_tp, g96_en, g96_es, g96_fr, g96_de, g96_pt, g96_zh } },
+  { "poka", "poka", { g97_tp, g97_en, g97_es, g97_fr, g97_de, g97_pt, g97_zh } },
+  { "poki", "poki", { g98_tp, g98_en, g98_es, g98_fr, g98_de, g98_pt, g98_zh } },
+  { "pona", "pona", { g99_tp, g99_en, g99_es, g99_fr, g99_de, g99_pt, g99_zh } },
+  { "pu", "pu", { g100_tp, g100_en, g100_es, g100_fr, g100_de, g100_pt, g100_zh } },
+  { "sama", "sama", { g101_tp, g101_en, g101_es, g101_fr, g101_de, g101_pt, g101_zh } },
+  { "seli", "seli", { g102_tp, g102_en, g102_es, g102_fr, g102_de, g102_pt, g102_zh } },
+  { "selo", "selo", { g103_tp, g103_en, g103_es, g103_fr, g103_de, g103_pt, g103_zh } },
+  { "seme", "seme", { g104_tp, g104_en, g104_es, g104_fr, g104_de, g104_pt, g104_zh } },
+  { "sewi", "sewi", { g105_tp, g105_en, g105_es, g105_fr, g105_de, g105_pt, g105_zh } },
+  { "sijelo", "sijelo", { g106_tp, g106_en, g106_es, g106_fr, g106_de, g106_pt, g106_zh } },
+  { "sike", "sike", { g107_tp, g107_en, g107_es, g107_fr, g107_de, g107_pt, g107_zh } },
+  { "sin", "sin", { g108_tp, g108_en, g108_es, g108_fr, g108_de, g108_pt, g108_zh } },
+  { "sina", "sina", { g109_tp, g109_en, g109_es, g109_fr, g109_de, g109_pt, g109_zh } },
+  { "sinpin", "sinpin", { g110_tp, g110_en, g110_es, g110_fr, g110_de, g110_pt, g110_zh } },
+  { "sitelen", "sitelen", { g111_tp, g111_en, g111_es, g111_fr, g111_de, g111_pt, g111_zh } },
+  { "soko", "soko", { g112_tp, g112_en, g112_es, g112_fr, g112_de, g112_pt, g112_zh } },
+  { "sona", "sona", { g113_tp, g113_en, g113_es, g113_fr, g113_de, g113_pt, g113_zh } },
+  { "soweli", "soweli", { g114_tp, g114_en, g114_es, g114_fr, g114_de, g114_pt, g114_zh } },
+  { "suli", "suli", { g115_tp, g115_en, g115_es, g115_fr, g115_de, g115_pt, g115_zh } },
+  { "suno", "suno", { g116_tp, g116_en, g116_es, g116_fr, g116_de, g116_pt, g116_zh } },
+  { "supa", "supa", { g117_tp, g117_en, g117_es, g117_fr, g117_de, g117_pt, g117_zh } },
+  { "suwi", "suwi", { g118_tp, g118_en, g118_es, g118_fr, g118_de, g118_pt, g118_zh } },
+  { "tan", "tan", { g119_tp, g119_en, g119_es, g119_fr, g119_de, g119_pt, g119_zh } },
+  { "taso", "taso", { g120_tp, g120_en, g120_es, g120_fr, g120_de, g120_pt, g120_zh } },
+  { "tawa", "tawa", { g121_tp, g121_en, g121_es, g121_fr, g121_de, g121_pt, g121_zh } },
+  { "telo", "telo", { g122_tp, g122_en, g122_es, g122_fr, g122_de, g122_pt, g122_zh } },
+  { "tenpo", "tenpo", { g123_tp, g123_en, g123_es, g123_fr, g123_de, g123_pt, g123_zh } },
+  { "toki", "toki", { g124_tp, g124_en, g124_es, g124_fr, g124_de, g124_pt, g124_zh } },
+  { "tomo", "tomo", { g125_tp, g125_en, g125_es, g125_fr, g125_de, g125_pt, g125_zh } },
+  { "tonsi", "tonsi", { g126_tp, g126_en, g126_es, g126_fr, g126_de, g126_pt, g126_zh } },
+  { "tu", "tu", { g127_tp, g127_en, g127_es, g127_fr, g127_de, g127_pt, g127_zh } },
+  { "unpa", "unpa", { g128_tp, g128_en, g128_es, g128_fr, g128_de, g128_pt, g128_zh } },
+  { "uta", "uta", { g129_tp, g129_en, g129_es, g129_fr, g129_de, g129_pt, g129_zh } },
+  { "utala", "utala", { g130_tp, g130_en, g130_es, g130_fr, g130_de, g130_pt, g130_zh } },
+  { "walo", "walo", { g131_tp, g131_en, g131_es, g131_fr, g131_de, g131_pt, g131_zh } },
+  { "wan", "wan", { g132_tp, g132_en, g132_es, g132_fr, g132_de, g132_pt, g132_zh } },
+  { "waso", "waso", { g133_tp, g133_en, g133_es, g133_fr, g133_de, g133_pt, g133_zh } },
+  { "wawa", "wawa", { g134_tp, g134_en, g134_es, g134_fr, g134_de, g134_pt, g134_zh } },
+  { "weka", "weka", { g135_tp, g135_en, g135_es, g135_fr, g135_de, g135_pt, g135_zh } },
+  { "wile", "wile", { g136_tp, g136_en, g136_es, g136_fr, g136_de, g136_pt, g136_zh } },
 };
 const uint16_t ENTRY_COUNT = 137;
 
@@ -3252,8 +3389,8 @@ static const IndexRow idx_pt[] = {
   { "zero", 2 },
 };
 
-const IndexRow* const INDEX_BY_LANG[LangCount] = { idx_tp, idx_en, idx_es, idx_fr, idx_de, idx_pt };
-const uint16_t INDEX_SIZE_BY_LANG[LangCount] = { 137, 434, 427, 425, 425, 424 };
-const char* const LANG_LABEL[LangCount] = { "toki pona", "English", "Español", "Français", "Deutsch", "Português" };
+const IndexRow* const INDEX_BY_LANG[LangCount] = { idx_tp, idx_en, idx_es, idx_fr, idx_de, idx_pt, nullptr };
+const uint16_t INDEX_SIZE_BY_LANG[LangCount] = { 137, 434, 427, 425, 425, 424, 0 };
+const char* const LANG_LABEL[LangCount] = { "toki pona", "English", "Español", "Français", "Deutsch", "Português", "中文" };
 
 }  // namespace tp

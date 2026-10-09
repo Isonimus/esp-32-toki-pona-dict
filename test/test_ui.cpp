@@ -149,10 +149,12 @@ int main() {
     ui.handle(InputEvent::navigate(NavDir::Down));
     CHECK(ui.state().detailLang == static_cast<uint8_t>(Lang::Pt));
     ui.handle(InputEvent::navigate(NavDir::Down));
+    CHECK(ui.state().detailLang == static_cast<uint8_t>(Lang::Zh));  // display-only still cycles (ADR-0017)
+    ui.handle(InputEvent::navigate(NavDir::Down));
     CHECK(ui.state().detailLang == static_cast<uint8_t>(Lang::En));  // wrapped past the end
 
     ui.handle(InputEvent::navigate(NavDir::Up));
-    CHECK(ui.state().detailLang == static_cast<uint8_t>(Lang::Pt));  // wrapped past the start
+    CHECK(ui.state().detailLang == static_cast<uint8_t>(Lang::Zh));  // wrapped past the start
 
     // A fresh open resets to the first language (not "remember last"); Back still leaves.
     ui.handle(InputEvent::back());
@@ -231,6 +233,22 @@ int main() {
     CHECK(detail.fills == 1 && detail.presents == 1);
     CHECK(detail.texts >= 2);   // headword + gloss lines
     CHECK(detail.glyphs == 1);  // telo's sitelen glyph is blitted into the detail accent (ADR-0003)
+  }
+
+  // Renderer: a display-only language's detail (ADR-0017/0018) draws its label and glosses as CJK
+  // cells, not Latin text — only the Toki Pona headword stays a drawText. Cycling the detail to
+  // Chinese moves the label + glosses from text to glyphs, the observable mark of the CJK path.
+  {
+    UiController ui = atSearch();
+    type(ui, "telo");
+    ui.handle(InputEvent::select());
+    for (int i = 0; i < 5; ++i) ui.handle(InputEvent::navigate(NavDir::Down));  // En -> ... -> Zh
+    CHECK(ui.state().detailLang == static_cast<uint8_t>(Lang::Zh));
+    FakeDisplay zh;
+    render(ui.state(), zh);
+    CHECK(zh.fills == 1 && zh.presents == 1);
+    CHECK(zh.texts == 1);    // only the Toki Pona headword draws as Latin text
+    CHECK(zh.glyphs >= 3);   // sitelen accent + CJK cells for the label and the gloss
   }
 
   // Renderer: the empty search root draws the type-to-search prompt — the lukin icon plus the

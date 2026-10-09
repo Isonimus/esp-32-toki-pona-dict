@@ -14,7 +14,14 @@ Facts about *decisions* go in `adr/`, not here.
       About colophon frame into `docs/bringup/cardputer-adv/`. The boot splash (`08-splash.png`,
       ADR-0015 logo) and empty-root prompt (`09-empty-prompt.png`, ADR-0014) frames are done;
       About remains, and it still draws left-aligned (not centered), which is fine for a dense
-      colophon.
+      colophon. (The colophon was condensed to two courtesy credits + a notices pointer in
+      ADR-0016, so the frame differs from the pre-ADR-0016 layout.)
+- [ ] Bring-up proof for the Chinese detail view (ADR-0017/0018): capture a `zh` detail frame
+      (Enter on a word, cycle to `< 中文 6/6 >`) into `docs/bringup/cardputer-adv/`, confirming the
+      14px CJK cells are legible on the real panel and the fixed-cell punctuation/label read
+      acceptably. 14px is the shipped size; 16px is the recorded fallback if the panel proves it
+      too dense (ADR-0018). Long glosses are clipped at the right edge, not wrapped — note whether
+      any real gloss overflows and needs wrapping or a smaller cell.
 - [ ] Original Cardputer: implement the 74HC138 matrix scan in `CardputerKeyboard` (today a
       fail-loud stub; its decode is specified in ADR-0005) and add its bring-up proof. No new
       env or app change — one image already serves both variants by runtime detection. (The ADV
@@ -36,8 +43,6 @@ Facts about *decisions* go in `adr/`, not here.
       query with zero results.
 
 ## Project
-- [ ] Confirm the five-language set with the operator (currently en/es/fr/de/pt in
-      `data/languages.json`); swapping one is a data change.
 - [ ] Declare the **firmware code** license. ADR-0016 licenses the dictionary *data* CC BY-SA 4.0,
       but the code (`core/` logic, `hal/`, `app/`, `main/`) has no `LICENSE` file and no declared
       license yet. Pick one and add a top-level `LICENSE`, keeping the data's BY-SA distinct.
