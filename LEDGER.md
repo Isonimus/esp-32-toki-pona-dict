@@ -22,13 +22,11 @@ Facts about *decisions* go in `adr/`, not here.
       (three-button cyclic, ADR-0005), **and** a new ADR amending ADR-0004 for a
       browse-the-whole-corpus mode + cyclic (wrapping) Nav, so a keyboard-less board can reach a
       word (an empty query yields nothing today).
-- [ ] No-results affordance: when a *non-empty* query matches nothing, show the `ala`
-      ("none/zero/not") sitelen glyph (or a short TP phrase) in grey as a "nothing found" state,
-      instead of today's blank result area (`renderSearch` falls through to an empty list by
-      design). Distinct from the empty-root prompt (ADR-0010/0014), which is for an *empty* query.
-      Needs a small ADR amending ADR-0010 (new render state + a grey palette entry, the first
-      beyond black/white/yellow) and a host test asserting the glyph draws only for a non-empty
-      query with zero results.
+- [ ] Bring-up proof for the no-results affordance (ADR-0019): capture a no-match frame (type a
+      word with no result, e.g. `zzzz`) into `docs/bringup/cardputer-adv/`, confirming the grey
+      `ala` icon + `nimi li weka` sentence read as "nothing found" on the real panel and the grey
+      (`kColorMuted = 0x8410`) is legible against black. The grey constant is the only thing that
+      changes if the shade reads too dark or too light; the 44px glyphs are inherited from ADR-0013.
 
 ## Project
 - [ ] Declare the **firmware code** license. ADR-0016 licenses the dictionary *data* CC BY-SA 4.0,

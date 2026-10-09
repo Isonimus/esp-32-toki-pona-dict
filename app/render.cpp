@@ -16,6 +16,7 @@ namespace {
 constexpr uint16_t kColorBackground = 0x0000;  // black
 constexpr uint16_t kColorText = 0xFFFF;         // white
 constexpr uint16_t kColorAccent = 0xFFE0;       // yellow — focused row, headword
+constexpr uint16_t kColorMuted = 0x8410;        // grey (~50%) — de-emphasised no-results affordance (ADR-0019)
 
 // Layout metrics in pixels at text size 1. Tuned per board at bring-up; the values here are
 // a sane default for a ~240x135 panel and do not affect host tests.
@@ -44,6 +45,13 @@ constexpr const char* kPromptIcon[] = {"lukin"};
 constexpr const char* kPromptSentence[] = {"o", "alasa", "e", "nimi"};
 constexpr int kPromptIconGlyphs = 1;
 constexpr int kPromptSentenceGlyphs = 4;
+
+// No-results affordance (ADR-0019): the `ala` ("none") icon over the sitelen sentence
+// `nimi li weka` ("the word is absent"), shown when a non-empty query matches nothing. `weka`
+// (not a second `ala`) keeps the hero the sole negation mark — see the ADR.
+constexpr const char* kNoResultIcon[] = {"ala"};
+constexpr const char* kNoResultSentence[] = {"nimi", "li", "weka"};
+constexpr int kNoResultSentenceGlyphs = 3;
 
 // Draw a row of sitelen glyphs centred horizontally across the display at `top`, each
 // kSitelenWidth wide, separated by kWordmarkGap. A glyph the font lacks is skipped but still
@@ -110,12 +118,24 @@ void renderEmptyPrompt(DisplaySurface& display) {
                        kPromptSentenceGlyphs, kColorText);
 }
 
+// The no-results affordance (ADR-0019): a non-empty query that matched nothing draws the `ala`
+// ("none") icon above the "nimi li weka" ("the word is absent") sentence, both muted grey, centred
+// in the result area below the query line. Distinct from the empty-root prompt (renderEmptyPrompt,
+// ADR-0010), which teaches the *empty* query; this states that a *search* returned nothing.
+void renderNoResults(DisplaySurface& display) {
+  const int areaTop = kMargin + kLineHeight + kMargin;  // below the '>' query line (renderSearch)
+  const int areaHeight = static_cast<int>(display.height()) - areaTop;
+  const int blockHeight = kSitelenHeight * 2 + kMargin;  // icon row + gap + sentence row
+  const int iconTop = areaTop + (areaHeight - blockHeight) / 2;
+  drawGlyphRowCentered(display, iconTop, kNoResultIcon, 1, kColorMuted);
+  drawGlyphRowCentered(display, iconTop + kSitelenHeight + kMargin, kNoResultSentence,
+                       kNoResultSentenceGlyphs, kColorMuted);
+}
+
 void renderSearch(const UiState& state, DisplaySurface& display) {
   // The empty root teaches type-to-search with a centred sitelen prompt instead of a bare screen
   // (ADR-0010). The '>' edit line is suppressed while the query is empty (ADR-0014), so no lonely
-  // caret floats in the corner beside the centred prompt; the first keystroke brings it back
-  // below. A non-empty query that finds nothing falls through to an empty list — the prompt is for
-  // the root, not a "no results" message.
+  // caret floats in the corner beside the centred prompt; the first keystroke brings it back below.
   if (state.queryLen == 0) {
     renderEmptyPrompt(display);
     return;
@@ -126,6 +146,13 @@ void renderSearch(const UiState& state, DisplaySurface& display) {
   prompt[0] = '>';
   std::strcpy(prompt + 1, state.query);
   display.drawText(kMargin, kMargin, prompt, kColorText, TextRole::Body);
+
+  // A non-empty query that matched nothing draws the no-results affordance (ADR-0019), not a blank
+  // area; this is distinct from the empty-root prompt above. A query with results draws the list.
+  if (state.resultCount == 0) {
+    renderNoResults(display);
+    return;
+  }
 
   // Result rows below, each the Toki Pona headword (the pivot, ADR-0004). The focused row
   // is drawn in the accent colour — no fill primitive needed on the seam.

@@ -235,6 +235,22 @@ int main() {
     CHECK(detail.glyphs == 1);  // telo's sitelen glyph is blitted into the detail accent (ADR-0003)
   }
 
+  // Renderer: a non-empty query that matches nothing draws the no-results affordance (ADR-0019) —
+  // the grey `ala` icon plus the `nimi li weka` sentence, four glyphs — in place of the result
+  // list, with the '>' query line still the only text. Before ADR-0019 the area fell blank (zero
+  // glyphs); the empty-root prompt and a query with results are asserted separately below/above.
+  {
+    UiController ui = atSearch();
+    type(ui, "zzzz");  // normalizes intact, prefixes/matches no gloss in any language
+    CHECK(ui.state().queryLen > 0);
+    CHECK(ui.state().resultCount == 0);
+    FakeDisplay noResults;
+    render(ui.state(), noResults);
+    CHECK(noResults.fills == 1 && noResults.presents == 1);
+    CHECK(noResults.texts == 1);   // only the '>' query line
+    CHECK(noResults.glyphs == 4);  // 1 ala icon + 3 sentence glyphs (nimi li weka)
+  }
+
   // Renderer: a display-only language's detail (ADR-0017/0018) draws its label and glosses as CJK
   // cells, not Latin text — only the Toki Pona headword stays a drawText. Cycling the detail to
   // Chinese moves the label + glosses from text to glyphs, the observable mark of the CJK path.
