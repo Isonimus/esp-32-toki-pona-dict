@@ -77,3 +77,28 @@ jobs:
       # together under the real toolchain; the on-device render/input proof is tracked in LEDGER.
       - name: Build firmware
         run: pio run -e tp_cardputer
+
+      # Surface the image size in the CI log so a flash-size regression is visible on the runner,
+      # not only when flashing a board.
+      - name: Report firmware size
+        run: ls -l .pio/build/tp_cardputer/firmware.bin
+
+  cppcheck:
+    name: cppcheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install cppcheck
+        run: sudo apt-get update && sudo apt-get install -y cppcheck
+
+      # Static analysis of the code we own, complementing the host compile's -Wall -Wextra. Scoped
+      # to core/ and app/: those are pure/host-analyzable C++17, whereas the hal device drivers and
+      # main/ pull in <Arduino.h>/LovyanGFX that cppcheck cannot resolve — those are covered by the
+      # device build job above. missingIncludeSystem is suppressed (system headers are not present
+      # on the analyzer); a real warning/performance/portability finding fails the job.
+      - name: Run cppcheck
+        run: >
+          cppcheck --enable=warning,performance,portability --std=c++17 --language=c++
+          --error-exitcode=1 --inline-suppr --suppress=missingIncludeSystem
+          -I core -I hal -I app core app
