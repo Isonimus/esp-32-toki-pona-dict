@@ -64,7 +64,7 @@ jobs:
       # build fetches hundreds of MB; later ones reuse it. Keyed on platformio.ini so a platform
       # or lib_deps bump busts the cache.
       - name: Cache PlatformIO
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.platformio
           key: pio-${{ runner.os }}-${{ hashFiles('platformio.ini') }}
