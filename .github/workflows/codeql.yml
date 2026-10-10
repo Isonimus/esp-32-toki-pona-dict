@@ -33,7 +33,7 @@ jobs:
       # CodeQL for c-cpp traces a real compilation, so build the firmware between init and analyze —
       # autobuild cannot drive PlatformIO. Cache the platform/toolchain as ci.yml does.
       - name: Cache PlatformIO
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: |
             ~/.platformio
