@@ -1,0 +1,43 @@
+Scope of this license (ADR-0021)
+=================================
+
+The MIT License below covers the firmware source code of this project: the
+original code we authored under `core/` (except the generated files noted
+next), `hal/`, `app/`, `main/`, the build tooling under `tools/`, and the
+tests under `test/`.
+
+It does NOT cover, each of which keeps its own terms:
+
+- The dictionary **data** — `data/*.json` and the generated
+  `core/dictionary_gen.*` that mechanically transforms it — licensed
+  CC BY-SA 4.0 (ADR-0016; see `THIRD_PARTY_NOTICES.md` and the `_license`
+  field in `data/dictionary.json`).
+- The build-time-generated asset files (`core/sitelen_gen.cpp`,
+  `core/cjk_gen.cpp`, `core/logo_gen.cpp`) and the embedded fonts, which are
+  derivatives of their upstream assets and follow those assets' licenses
+  (MIT / OFL 1.1 / Adobe; see `THIRD_PARTY_NOTICES.md`).
+- Third-party libraries linked at build time (e.g. LovyanGFX), under their
+  own licenses.
+
+
+MIT License
+
+Copyright (c) 2026 Isonimus
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

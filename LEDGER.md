@@ -20,6 +20,4 @@ Facts about *decisions* go in `adr/`, not here.
       that variant lands, so both decodes feed the host-tested `applyKey` through a tested boundary.
 
 ## Project
-- [ ] Declare the **firmware code** license. ADR-0016 licenses the dictionary *data* CC BY-SA 4.0,
-      but the code (`core/` logic, `hal/`, `app/`, `main/`) has no `LICENSE` file and no declared
-      license yet. Pick one and add a top-level `LICENSE`, keeping the data's BY-SA distinct.
+_(none open)_

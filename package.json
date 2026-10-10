@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "description": "Toki Pona <-> five-language dictionary for ESP32, with sitelen pona glyphs.",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "generate": "node tools/generate.mjs",
