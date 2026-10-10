@@ -1,0 +1,27 @@
+name: Feature request
+description: Suggest a new board, language, or capability
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: The need or use case, not just a proposed solution.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: |
+        What you'd like to see. For a new board, note the display controller and input hardware;
+        for a new language, note the gloss source (and its license — glosses here are CC BY-SA 4.0
+        from lipu Linku).
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+    validations:
+      required: false

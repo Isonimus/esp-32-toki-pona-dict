@@ -5,3 +5,15 @@
 __pycache__/
 # Raw framebuffer dumps fb_capture.py writes beside each bring-up .png; only the .png is committed.
 *.ppm
+
+# Maintainer-only material — kept on disk, never published (ADR-0022).
+# The operator's Claude Code / "Stele" kit: operator config, hooks, and the *.mjs machinery that
+# maintains the ADR/slice records. A public clone needs none of it and must not fail on its absence.
+.claude/
+.agent/
+.stele-vendored.json
+# The open-work list is a maintainer worklist, not a public roadmap (ADR-0022; a public roadmap
+# would move to GitHub Issues as a separate decision).
+/LEDGER.md
+# Session scratch space.
+/scratchpad/

@@ -1,0 +1,25 @@
+version: 2
+updates:
+  # Keep the CI/release Action versions current (the `uses:` pins in .github/workflows).
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "ci"
+
+  # The sitelen/CJK rasterizer's build-time dependencies (fontTools, Pillow).
+  - package-ecosystem: pip
+    directory: /tools
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "build"
+
+  # The build tooling's npm dependencies, if any are added to package.json.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "build"

@@ -1,0 +1,54 @@
+name: Bug report
+description: Something renders, searches, or behaves incorrectly on a board or in the host tests
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. For a **security** issue, do not file here — see
+        [SECURITY.md](https://github.com/Isonimus/esp-32-toki-pona-dict/blob/main/SECURITY.md).
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What did you see, and what did you expect instead?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: The exact sequence — the word or query, which keys/buttons, which view.
+      placeholder: |
+        1. Boot the board
+        2. Type "jasima"
+        3. Press Enter
+        4. ...
+    validations:
+      required: true
+  - type: dropdown
+    id: board
+    attributes:
+      label: Board
+      options:
+        - M5Cardputer (ADV)
+        - M5StickC Plus2
+        - M5Cardputer (original)
+        - Host tests only (no hardware)
+        - Other / not sure
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Firmware version or commit
+      description: The release tag, or `git rev-parse --short HEAD` of the build.
+    validations:
+      required: false
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+      description: Serial log, a photo of the screen, etc.
+    validations:
+      required: false

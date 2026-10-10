@@ -1,0 +1,52 @@
+name: Release
+
+# Cutting a release is a tagged push: `git tag v0.1.0 && git push --tags`. This builds every board
+# firmware and attaches the images to a GitHub Release. It never runs on a normal push, so day-to-day
+# CI (ci.yml) is untouched. No release exists yet; this simply makes the first one a `git tag` away.
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write  # needed to create the Release and upload assets
+
+jobs:
+  release:
+    name: build firmware and publish release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Cache PlatformIO
+        uses: actions/cache@v4
+        with:
+          path: ~/.platformio
+          key: pio-${{ runner.os }}-${{ hashFiles('platformio.ini') }}
+
+      - name: Install PlatformIO
+        run: pip install platformio
+
+      # Build each board and collect its image under a board-named, version-tagged file so a
+      # release page lists one unambiguous .bin per board.
+      - name: Build firmware images
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          version="${GITHUB_REF_NAME}"
+          for env in tp_cardputer tp_stickc_plus2; do
+            pio run -e "$env"
+            cp ".pio/build/$env/firmware.bin" "dist/${env}-${version}.bin"
+          done
+          ls -l dist
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.bin
+          generate_release_notes: true
