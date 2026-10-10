@@ -30,9 +30,10 @@ import time
 # Must match main/main.cpp kScreenshotCommand (ADR-0006).
 SCREENSHOT_COMMAND = b"\x10"
 BEGIN_MARKER = b"--TP-PPM-BEGIN--"
-# A full frame is serial-bound (~100 KB); 10 s is comfortably above the transfer time while
-# still failing rather than hanging if the firmware lacks the debug flag or is unresponsive.
-TIMEOUT_SECONDS = 10.0
+# A full frame is serial-bound (~100 KB). On a real UART bridge at 115200 baud that is ~8.5 s to
+# transfer (a native-USB CDC board does it in well under a second), so the window must clear that
+# with margin while still failing rather than hanging if the firmware lacks the debug flag.
+TIMEOUT_SECONDS = 15.0
 # "P6", width, height, maxval, then exactly one whitespace before the binary raster (PPM spec).
 PPM_HEADER = re.compile(rb"^\s*P6\s+(\d+)\s+(\d+)\s+(\d+)\s")
 
@@ -75,9 +76,13 @@ class FrameReader:
 class SerialReader(FrameReader):
     """Reads a raw tty device file directly (no pyserial)."""
 
-    def __init__(self, path):
+    def __init__(self, path, baud):
         super().__init__()
-        subprocess.run(["stty", "-F", path, "raw", "-echo"], check=True)
+        # Set the line baud explicitly: a real UART bridge (e.g. the StickC Plus2's CH9102) runs at
+        # this rate, so a wrong baud yields garbage and the marker never syncs. A native-USB CDC
+        # board (the Cardputer) ignores baud, which is why early captures worked without setting it.
+        # Must match the firmware's Serial.begin / platformio monitor_speed.
+        subprocess.run(["stty", "-F", path, str(baud), "raw", "-echo"], check=True)
         self._fd = os.open(path, os.O_RDWR | os.O_NOCTTY)
 
     def close(self):
@@ -106,10 +111,10 @@ def decode_frame(reader, deadline):
     return width, height, raster
 
 
-def capture(port_path, out_path):
+def capture(port_path, out_path, baud):
     from PIL import Image  # deferred so --selftest needs only the standard library
 
-    reader = SerialReader(port_path)
+    reader = SerialReader(port_path, baud)
     try:
         reader.request_frame()
         width, height, raster = decode_frame(reader, time.monotonic() + TIMEOUT_SECONDS)
@@ -163,6 +168,9 @@ def selftest():
 def main():
     parser = argparse.ArgumentParser(description="Capture the device framebuffer as a PNG (ADR-0006).")
     parser.add_argument("--port", default="/dev/ttyACM0", help="serial device (default: /dev/ttyACM0)")
+    parser.add_argument("--baud", type=int, default=115200,
+                        help="line baud (default: 115200; match the firmware's Serial.begin / "
+                             "monitor_speed — required for UART-bridge boards, ignored by USB CDC)")
     parser.add_argument("--out", help="output PNG path (a .ppm is written beside it)")
     parser.add_argument("--selftest", action="store_true", help="run the host-only parser test and exit")
     args = parser.parse_args()
@@ -172,7 +180,7 @@ def main():
         return
     if not args.out:
         parser.error("--out is required unless --selftest")
-    capture(args.port, args.out)
+    capture(args.port, args.out, args.baud)
 
 
 if __name__ == "__main__":
