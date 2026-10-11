@@ -7,6 +7,7 @@
 #include <Wire.h>
 
 #include "input/cardputer_keymap.hpp"  // pure keymap + key policy (ADR-0011)
+#include "input/cardputer_tca8418.hpp"  // pure ADV FIFO decode (ADR-0025)
 
 namespace tp {
 namespace {
@@ -34,8 +35,8 @@ constexpr uint8_t kMatrixColsMask = 0xFF;
 constexpr int kFifoDrainLimit = 16;
 
 // The key grid and the key→InputEvent policy (ADR-0008) now live in the pure cardputer_keymap
-// unit (ADR-0011), host-tested; this file keeps only the TCA8418 I/O and its raw-byte→cell
-// decode.
+// unit (ADR-0011), host-tested; the ADV raw-byte→cell decode is also pure (ADR-0025).
+// This file keeps the TCA8418 I/O and event queue.
 
 bool writeRegister(uint8_t reg, uint8_t value) {
   Wire.beginTransmission(kTca8418Address);
@@ -106,21 +107,8 @@ void CardputerKeyboard::drainTca8418() {
     if (rawEvent == 0) break;  // FIFO empty.
     any = true;
 
-    const bool pressed = (rawEvent & 0x80) != 0;
-    const uint8_t keyNumber = rawEvent & 0x7f;  // 1-based; 0 is "no key".
-    if (keyNumber == 0) continue;
-
-    // The TCA8418's own 7x8 (Tr,Tc) matrix maps to the 4x14 silkscreen grid (espp, ADR-0005):
-    //   col = Tr*2 + (Tc > 3 ? 1 : 0);  row = Tc % 4
-    // This raw-byte→cell decode is ADV-I/O-specific and stays here; the keymap + fn/arrow policy
-    // (grid-bounds, modifier tracking, mapPress) is the pure applyKey unit (ADR-0011).
-    const uint8_t n = keyNumber - 1;
-    const uint8_t tr = n / 10;
-    const uint8_t tc = n % 10;
-    const int col = tr * 2 + (tc > 3 ? 1 : 0);
-    const int row = tc % 4;
-
-    const KeyOutcome outcome = applyKey(row, col, pressed, fnHeld_);
+    const CardputerKeyCell key = decodeTca8418Event(rawEvent);
+    const KeyOutcome outcome = applyKey(key.row, key.col, key.pressed, fnHeld_);
     fnHeld_ = outcome.fnHeld;  // applyKey tracks the fn modifier (both edges) for us.
     if (!outcome.event.isNone()) enqueue(outcome.event);
   }

@@ -4,6 +4,7 @@
 #include <cstdio>
 
 #include "input/cardputer_keymap.hpp"
+#include "input/cardputer_tca8418.hpp"
 
 using namespace tp;
 
@@ -44,6 +45,46 @@ static bool isNav(const KeyOutcome& o, NavDir dir) {
 static bool isKind(const KeyOutcome& o, InputKind kind) { return o.event.kind == kind; }
 
 int main() {
+  // Raw key numbers laid out by silkscreen cell, independent of the decoder's arithmetic.
+  // The gaps between 8/11, 18/21, ... guard the controller's ten-column numbering stride.
+  constexpr uint8_t kRawKeyNumbers[kCardputerKeyRows][kCardputerKeyCols] = {
+      {1, 5, 11, 15, 21, 25, 31, 35, 41, 45, 51, 55, 61, 65},
+      {2, 6, 12, 16, 22, 26, 32, 36, 42, 46, 52, 56, 62, 66},
+      {3, 7, 13, 17, 23, 27, 33, 37, 43, 47, 53, 57, 63, 67},
+      {4, 8, 14, 18, 24, 28, 34, 38, 44, 48, 54, 58, 64, 68},
+  };
+  for (int row = 0; row < kCardputerKeyRows; ++row) {
+    for (int col = 0; col < kCardputerKeyCols; ++col) {
+      const CardputerKeyCell released = decodeTca8418Event(kRawKeyNumbers[row][col]);
+      const CardputerKeyCell pressed = decodeTca8418Event(kRawKeyNumbers[row][col] | 0x80);
+      CHECK(released.row == row && released.col == col && !released.pressed);
+      CHECK(pressed.row == row && pressed.col == col && pressed.pressed);
+    }
+  }
+  const uint8_t absentEvents[] = {0x00, 0x80};
+  for (uint8_t raw : absentEvents) {
+    const CardputerKeyCell absent = decodeTca8418Event(raw);
+    CHECK(absent.row == -1 && absent.col == -1);
+    CHECK(applyKey(absent.row, absent.col, absent.pressed, kFnHeld).fnHeld == kFnHeld);
+    CHECK(applyKey(absent.row, absent.col, absent.pressed, kFnHeld).event.isNone());
+  }
+
+  // Replay FIFO bytes through the same decode -> applyKey seam used by the driver: fn down,
+  // ; down/up, fn up, then q. Neither releases nor an absent key may leave fn stuck.
+  bool fnHeld = false;
+  const uint8_t script[] = {0x83, 0xb9, 0x39, 0x03, 0x86};
+  KeyOutcome outcomes[5];
+  for (int i = 0; i < 5; ++i) {
+    const CardputerKeyCell key = decodeTca8418Event(script[i]);
+    outcomes[i] = applyKey(key.row, key.col, key.pressed, fnHeld);
+    fnHeld = outcomes[i].fnHeld;
+  }
+  CHECK(outcomes[0].event.isNone() && outcomes[0].fnHeld);
+  CHECK(isNav(outcomes[1], NavDir::Up) && outcomes[1].fnHeld);
+  CHECK(outcomes[2].event.isNone() && outcomes[2].fnHeld);
+  CHECK(outcomes[3].event.isNone() && !outcomes[3].fnHeld);
+  CHECK(isChar(outcomes[4], 'q') && !outcomes[4].fnHeld);
+
   // Bare arrow keys navigate whether or not fn is held (ADR-0008 — the regression this test
   // exists to guard). ; is Up, . is Down; fn changes nothing for them.
   CHECK(isNav(applyKey(kSemicolonRow, kSemicolonCol, kPress, kNoFn), NavDir::Up));
