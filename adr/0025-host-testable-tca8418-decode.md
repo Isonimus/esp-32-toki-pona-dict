@@ -1,7 +1,7 @@
 ---
 id: 0025
 title: Host-testable ADV FIFO decode alongside the shared keymap
-status: proposed
+status: accepted
 date: 2026-10-11
 amends: ADR-0011 (the ADV-specific raw-byte decode also joins the host lane)
 ---
