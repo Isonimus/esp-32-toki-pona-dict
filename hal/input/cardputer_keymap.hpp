@@ -5,7 +5,7 @@
 //
 // This translation unit is pure: no Arduino, no Wire, no GPIO — it compiles on the host lane and
 // is NOT behind the UNIT_TEST guard. The device shell (cardputer_keyboard.cpp) owns the I2C/GPIO
-// and the hardware-specific decode of a raw event to a grid cell; it feeds that cell in here.
+// and feeds grid cells in here; a separate pure ADV decoder resolves its FIFO bytes (ADR-0025).
 //
 // The seam is grid coordinates, not a raw hardware byte, because that is the variant-agnostic
 // boundary (ADR-0011): both the ADV's TCA8418 FIFO decode and the original Cardputer's future
