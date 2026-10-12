@@ -1,8 +1,13 @@
 name: Release
 
 # Cutting a release is a tagged push: `git tag v0.1.0 && git push --tags`. This builds every board
-# firmware and attaches the images to a GitHub Release. It never runs on a normal push, so day-to-day
-# CI (ci.yml) is untouched. No release exists yet; this simply makes the first one a `git tag` away.
+# firmware and attaches installable images to a GitHub Release. It never runs on a normal push, so
+# day-to-day CI (ci.yml) is untouched.
+#
+# Two images per board, because there are two install paths (ADR-0026):
+#   <env>-<tag>-app.bin      firmware.bin unmodified — the OTA app image (app slot at 0x10000)
+#   <env>-<tag>-factory.bin  merged bootloader+partitions+boot_app0+app — a full flash image for a
+#                            fresh install at 0x0 (what M5Burner, esptool, and web flashers consume)
 on:
   push:
     tags:
@@ -20,7 +25,7 @@ jobs:
 
       - uses: actions/setup-python@v7
         with:
-          python-version: "3.13"
+          python-version: "3.13"  # pioarduino rejects Python > 3.13
 
       - name: Cache PlatformIO
         uses: actions/cache@v6
@@ -28,24 +33,64 @@ jobs:
           path: ~/.platformio
           key: pio-${{ runner.os }}-${{ hashFiles('platformio.ini') }}
 
-      - name: Install PlatformIO
-        run: pip install platformio
+      # esptool is pinned so the merge-bin CLI is deterministic (5.x non-deprecated spelling).
+      - name: Install PlatformIO and esptool
+        run: pip install platformio esptool==5.2.0
 
-      # Build each board and collect its image under a board-named, version-tagged file so a
-      # release page lists one unambiguous .bin per board.
-      - name: Build firmware images
+      - name: Build firmware and package release artifacts
         run: |
           set -euo pipefail
-          mkdir -p dist
           version="${GITHUB_REF_NAME}"
-          for env in tp_cardputer tp_stickc_plus2; do
-            pio run -e "$env"
-            cp ".pio/build/$env/firmware.bin" "dist/${env}-${version}.bin"
-          done
-          ls -l dist
+          # boot_app0.bin lives inside a versioned framework package; locate it rather than hardcode.
+          boot_app0="$(find "$HOME/.platformio/packages" -name boot_app0.bin | head -1)"
+          test -n "$boot_app0"
+          mkdir -p dist
 
+          # env : chip : second-stage bootloader offset. The S3 bootloader sits at 0x0, the classic
+          # ESP32 at 0x1000; everything else is the shared default OTA layout.
+          for row in "tp_cardputer:esp32s3:0x0" "tp_stickc_plus2:esp32:0x1000"; do
+            env="${row%%:*}"; rest="${row#*:}"; chip="${rest%%:*}"; bl_off="${rest##*:}"
+            pio run -e "$env"
+            build=".pio/build/$env"
+
+            # OTA app image: firmware.bin unmodified, written to the app slot at 0x10000.
+            cp "$build/firmware.bin" "dist/${env}-${version}-app.bin"
+
+            # Factory image for a fresh install at 0x0. flash-mode MUST be dio, never qio: the ROM
+            # reads the 2nd-stage bootloader with the header mode BEFORE quad mode is enabled, so a
+            # qio header hard-bricks the chip into a TG0WDT loop that esptool image-info does NOT
+            # catch (ADR-0026, adversary slice-0014). Images are built dio; qio is runtime only.
+            esptool --chip "$chip" merge-bin \
+              -o "dist/${env}-${version}-factory.bin" \
+              --flash-mode dio --flash-freq 80m --flash-size 8MB \
+              "$bl_off" "$build/bootloader.bin" \
+              0x8000 "$build/partitions.bin" \
+              0xe000 "$boot_app0" \
+              0x10000 "$build/firmware.bin"
+
+            # Refuse to publish a bricking image: assert the factory bootloader header is dio (0x02)
+            # at its real offset in the merged file (bootloader offset + 2 for the flash-mode byte).
+            guard_off=$(( bl_off + 2 ))
+            mode="$(od -An -tx1 -j "$guard_off" -N1 "dist/${env}-${version}-factory.bin" | tr -d ' ')"
+            echo "$env factory bootloader flash-mode byte: 0x${mode} (want 0x02 = dio)"
+            test "$mode" = "02" || { echo "ERROR: $env factory bootloader is not dio; refusing to publish a brick"; exit 1; }
+          done
+
+          ( cd dist && sha256sum *.bin > SHA256SUMS.txt )
+          ls -la dist
+
+      # Publish with gh (preinstalled, built-in token) rather than a third-party action, adding
+      # nothing to the supply chain (ADR-0026). --prerelease while the project is v0.x; dropping it
+      # is a prerequisite for a web flasher's releases/latest/ URL (ADR-0026 caveat).
       - name: Publish release
-        uses: softprops/action-gh-release@v3
-        with:
-          files: dist/*.bin
-          generate_release_notes: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          version="${GITHUB_REF_NAME}"
+          gh release create "$version" \
+            --title "esp-32-toki-pona $version" \
+            --prerelease \
+            --generate-notes \
+            dist/*.bin \
+            dist/SHA256SUMS.txt
