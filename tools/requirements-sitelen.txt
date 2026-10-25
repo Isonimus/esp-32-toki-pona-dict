@@ -7,5 +7,5 @@
 #   npm run generate:sitelen
 #
 # Pillow carries its own FreeType, so no system font engine is required.
-fonttools==4.66.1   # font cmap introspection (headword -> UCSUR codepoint)
+fonttools==4.67.0   # font cmap introspection (headword -> UCSUR codepoint)
 Pillow==12.3.0      # glyph rasterization (antialiased grayscale, then 50% threshold)
